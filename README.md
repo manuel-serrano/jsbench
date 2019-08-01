@@ -118,11 +118,3 @@ hopstone.sh in the shield.
   ./hopstoneshield.sh --hopc=/tmp/HOP/bin/hopc -m "a message"
   ./hopstoneshield.sh --hopc=/tmp/HOP/bin/hopc -O /tmp/HOPSTONE
 
-
-Old
-===
-
-To run hop with patching
-
- ./hopstone.sh --hopc=/tmp/HOP/bin/hopc -e hoppatch -O /tmp/HOPSTONE
-
