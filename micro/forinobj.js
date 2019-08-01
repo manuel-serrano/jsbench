@@ -1,13 +1,10 @@
 "use strict"
 
-let k = 0;
-
 // test for-in used with arrays
 function dyn( a, keys ) {
    let r = 0;
    for( let i = keys.length - 1; i >= 0; i-- ) {
-      k++;
-      r += a[ keys[ i ] ];
+      r = a[ keys[ i ] ];
    }
    return r;
 }
@@ -15,14 +12,13 @@ function dyn( a, keys ) {
 function swt( a, keys ) {
    let r = 0;
    for( let i = keys.length - 1; i >= 0; i-- ) {
-      k++;
       switch( keys[ i ] ) {
-	 case "a": r += a.a; break;
-	 case "b": r += a.b; break;
-	 case "c": r += a.c; break;
-	 case "z": r += a.z; break;
-	 case "w": r += a.w; break;
-	 case "x": r += a.x; break;
+	 case "a": r = a.a; break;
+	 case "b": r = a.b; break;
+	 case "c": r = a.c; break;
+	 case "z": r = a.z; break;
+	 case "w": r = a.w; break;
+	 case "x": r = a.x; break;
 	 default: throw( "Illegal prop" );
       }
    }
