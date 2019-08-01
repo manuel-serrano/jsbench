@@ -29,15 +29,23 @@ function swt( a, keys ) {
    return r;
 }
 
-function myloop( n, fun, a, b, ka, kb, acc ) {
+function loopDyn( n, a, b, ka, kb, acc ) {
    if( n > 0 ) {
-      myloop( n - 1, fun, a, b, ka, kb, acc + fun( a, ka ) - fun( b, kb ) );
+      return loopDyn( n - 1, a, b, ka, kb, acc + dyn( a, ka ) - dyn( b, kb ) );
    } else {
       return acc;
    }
 }
 
-function test( n, fun ) { 
+function loopSwt( n, a, b, ka, kb, acc ) {
+   if( n > 0 ) {
+      return loopSwt( n - 1, a, b, ka, kb, acc + swt( a, ka ) - swt( b, kb ) );
+   } else {
+      return acc;
+   }
+}
+
+function test( n, loop ) { 
    let r = 0;
    const k = n / 10;
    const a = {b: 3, c: 4, a: 1, z: 10, w: -1};
@@ -47,11 +55,11 @@ function test( n, fun ) {
    
    for( let i = 0; i < n; i++ ) {
       if( i % k === 0 ) console.log( i );
-      r = myloop( 1000, fun, a, b, ka, kb, 0 );
+      r = loop( 1000, a, b, ka, kb, 0 );
    }
    return r;
 }
 
-test( 30000,  process.argv[ 2 ] === "dyn" ? dyn : swt );
+test( 30000,  process.argv[ 2 ] === "dyn" ? loopDyn : loopSwt );
 //console.log( "run=", t() );
    
