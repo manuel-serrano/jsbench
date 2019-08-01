@@ -1,0 +1,112 @@
+[
+  {
+    "name": "set",
+    "subtitle": false,
+    "path": "micro/set.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/set -",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [3300,3280,5070],
+              "rtimes": [3220,3220,5020]
+            },
+            "time": 3280
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs micro/set.js",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [1720,1740,1750],
+              "rtimes": [1730,1740,1760]
+            },
+            "time": 1720
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/set-jsc.js --",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [1740,1840,1820],
+              "rtimes": [1740,1850,1820]
+            },
+            "time": 1740
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/set-js52.js",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [1710,1710,1700],
+              "rtimes": [1710,1710,1710]
+            },
+            "time": 1700
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/set-chakra.js -args",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [1870,1860,1850],
+              "rtimes": [1880,1870,1870]
+            },
+            "time": 1850
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node micro/set.js",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [5620,5690,5580],
+              "rtimes": [5220,5250,5200]
+            },
+            "time": 5580
+          }
+        ]
+      }
+    ]
+  }
+]

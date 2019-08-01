@@ -1,0 +1,25 @@
+[
+  {
+    "name": "callprotohit",
+    "path": "micro/callprotohit.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/callprotohit.js -o /tmp/callprotohit ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [1560,1580,1580],
+              "rtimes": [1560,1560,1560]
+            },
+            "time": 1560
+          }
+        ]
+      }
+    ]
+  }
+]

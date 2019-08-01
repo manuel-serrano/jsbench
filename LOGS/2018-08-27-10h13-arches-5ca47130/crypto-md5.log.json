@@ -1,0 +1,93 @@
+[
+  {
+    "name": "crypto-md5",
+    "path": "jetstream/crypto-md5.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "hopc -Ox jetstream/crypto-md5.js -o /tmp/crypto-md5 ",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [32840,32980,32830],
+              "rtimes": [23840,23860,23800]
+            },
+            "time": 32830
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs jetstream/crypto-md5.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [1760,1750,1770],
+              "rtimes": [1720,1720,1710]
+            },
+            "time": 1750
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/crypto-md5-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [990,960,950],
+              "rtimes": [1000,980,970]
+            },
+            "time": 950
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js24 /tmp/crypto-md5-js24.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [910,900,920],
+              "rtimes": [930,920,920]
+            },
+            "time": 900
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "ch /tmp/crypto-md5-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

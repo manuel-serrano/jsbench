@@ -1,0 +1,93 @@
+[
+  {
+    "name": "fib42",
+    "path": "bglstone/fib42.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "hopc -Ox bglstone/fib42.js -o /tmp/fib42 ",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [6570,7210,7050],
+              "rtimes": [6530,7160,7000]
+            },
+            "time": 6570
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/fib42.js",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [16980,16900,16730],
+              "rtimes": [16990,16900,16750]
+            },
+            "time": 16730
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "jsc /tmp/fib42-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [11390,10920,10900],
+              "rtimes": [11400,10930,10900]
+            },
+            "time": 10900
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "js52 /tmp/fib42-js52.js",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [10740,10750,10740],
+              "rtimes": [10750,10750,10750]
+            },
+            "time": 10740
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "ch /tmp/fib42-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

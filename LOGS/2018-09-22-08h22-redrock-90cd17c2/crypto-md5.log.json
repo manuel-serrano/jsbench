@@ -1,0 +1,93 @@
+[
+  {
+    "name": "crypto-md5",
+    "path": "jetstream/crypto-md5.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "hopc -Ox jetstream/crypto-md5.js -o /tmp/crypto-md5 ",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [860,870,930],
+              "rtimes": [580,580,650]
+            },
+            "time": 860
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs jetstream/crypto-md5.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [610,620,600],
+              "rtimes": [600,580,580]
+            },
+            "time": 600
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/crypto-md5-jsc.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [820,820,820],
+              "rtimes": [460,460,460]
+            },
+            "time": 820
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/crypto-md5-js52.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [390,390,390],
+              "rtimes": [370,370,370]
+            },
+            "time": 390
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/crypto-md5-chakra.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [670,670,650],
+              "rtimes": [730,740,740]
+            },
+            "time": 650
+          }
+        ]
+      }
+    ]
+  }
+]

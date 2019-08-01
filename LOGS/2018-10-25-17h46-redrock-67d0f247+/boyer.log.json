@@ -1,0 +1,112 @@
+[
+  {
+    "name": "boyer",
+    "subtitle": false,
+    "path": "octane/boyer.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/boyer -",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [8100,8290,8180],
+              "rtimes": [3840,3900,3860]
+            },
+            "time": 8100
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs octane/boyer.js",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [2840,2740,2740],
+              "rtimes": [2580,2510,2530]
+            },
+            "time": 2740
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/boyer-jsc.js --",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [1340,1340,1300],
+              "rtimes": [1010,1040,1000]
+            },
+            "time": 1300
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/boyer-js52.js",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [1710,1730,1780],
+              "rtimes": [1720,1750,1770]
+            },
+            "time": 1710
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/boyer-chakra.js -args",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [2370,2340,2390],
+              "rtimes": [2260,2220,2220]
+            },
+            "time": 2340
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node octane/boyer.js",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [7410,7290,7310],
+              "rtimes": [5010,4910,4960]
+            },
+            "time": 7290
+          }
+        ]
+      }
+    ]
+  }
+]

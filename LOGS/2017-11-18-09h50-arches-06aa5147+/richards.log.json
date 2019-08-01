@@ -1,0 +1,36 @@
+[
+  {
+    "name": "richards",
+    "path": "octane/richards.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox octane/richards.js -o /tmp/richards ",
+        "logs": [
+          {
+            "date": "2017-11-18T08:50:16.000Z",
+            "time": 6140,
+            "message": "Inline"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.4",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs octane/richards.js",
+        "logs": [
+          {
+            "date": "2017-11-18T08:50:16.000Z",
+            "time": 3280,
+            "message": "Inline"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,73 @@
+[
+  {
+    "name": "bague",
+    "path": "bglstone/bague.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/HOP2/bin/hopc -Ox bglstone/bague.js -o /tmp/bague ",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 570
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/bague.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 400
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/bague-jsc.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 450
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js24 /tmp/bague-js24.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 7840
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/bague-chakra.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 1060
+          }
+        ]
+      }
+    ]
+  }
+]

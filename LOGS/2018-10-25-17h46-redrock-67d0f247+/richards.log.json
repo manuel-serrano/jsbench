@@ -1,0 +1,112 @@
+[
+  {
+    "name": "richards",
+    "subtitle": false,
+    "path": "octane/richards.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/richards -",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [17170,17370,17400],
+              "rtimes": [16870,17030,17040]
+            },
+            "time": 17170
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs octane/richards.js",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [4960,4900,4920],
+              "rtimes": [4930,4890,4890]
+            },
+            "time": 4900
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/richards-jsc.js --",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [3240,3320,3250],
+              "rtimes": [3140,3210,3150]
+            },
+            "time": 3240
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/richards-js52.js",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [3830,3800,3830],
+              "rtimes": [3800,3800,3800]
+            },
+            "time": 3800
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/richards-chakra.js -args",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [5730,5710,5580],
+              "rtimes": [5670,5640,5530]
+            },
+            "time": 5580
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node octane/richards.js",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [11520,11660,11530],
+              "rtimes": [10430,10580,10500]
+            },
+            "time": 11520
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "name": "base64",
+    "path": "sunspider/base64.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "hopc -Ox sunspider/base64.js -o /tmp/base64 ",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [4420,4420,4430],
+              "rtimes": [4280,4270,4270]
+            },
+            "time": 4420
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "nodejs sunspider/base64.js",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [5890,5580,5770],
+              "rtimes": [5680,5520,5610]
+            },
+            "time": 5580
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "jsc /tmp/base64-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [1900,1970,2010],
+              "rtimes": [1720,1810,1830]
+            },
+            "time": 1900
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "js52 /tmp/base64-js52.js",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [1910,1850,1920],
+              "rtimes": [1950,1930,2040]
+            },
+            "time": 1850
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "ch /tmp/base64-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

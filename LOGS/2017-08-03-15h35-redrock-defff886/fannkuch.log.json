@@ -1,0 +1,36 @@
+[
+  {
+    "name": "fannkuch",
+    "path": "shootout/fannkuch.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-st",
+        "host": "redrock.inria.fr",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox shootout/fannkuch.js -o /tmp/fannkuch -m64",
+        "logs": [
+          {
+            "date": "2017-08-03T13:39:02.856Z",
+            "time": 2850,
+            "message": "New"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.3",
+        "host": "redrock.inria.fr",
+        "platform": "linux",
+        "cmd": "nodejs shootout/fannkuch.js",
+        "logs": [
+          {
+            "date": "2017-08-03T13:39:02.856Z",
+            "time": 1770,
+            "message": "New"
+          }
+        ]
+      }
+    ]
+  }
+]

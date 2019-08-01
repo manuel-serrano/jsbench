@@ -1,0 +1,93 @@
+[
+  {
+    "name": "bague",
+    "path": "bglstone/bague.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "hopc -Ox bglstone/bague.js -o /tmp/bague ",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [570,550,580],
+              "rtimes": [520,500,500]
+            },
+            "time": 550
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/bague.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [420,400,420],
+              "rtimes": [420,400,410]
+            },
+            "time": 400
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/bague-jsc.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [470,480,490],
+              "rtimes": [450,430,460]
+            },
+            "time": 470
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/bague-js52.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [390,370,350],
+              "rtimes": [380,360,360]
+            },
+            "time": 350
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/bague-chakra.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [1110,1080,1070],
+              "rtimes": [1090,1080,1060]
+            },
+            "time": 1070
+          }
+        ]
+      }
+    ]
+  }
+]

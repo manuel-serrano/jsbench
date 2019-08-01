@@ -1,0 +1,73 @@
+[
+  {
+    "name": "string",
+    "path": "micro/string.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/string.js -o /tmp/string ",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 8590
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "nodejs micro/string.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 1700
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "jsc /tmp/string-jsc.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 23170
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "js24 /tmp/string-js24.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 13480
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "ch /tmp/string-ch.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

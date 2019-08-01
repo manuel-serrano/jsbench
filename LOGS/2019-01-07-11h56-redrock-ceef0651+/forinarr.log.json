@@ -1,0 +1,112 @@
+[
+  {
+    "name": "forinarr",
+    "subtitle": false,
+    "path": "micro/forinarr.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/forinarr -",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [193600,193020,192780],
+              "rtimes": [163790,163680,163650]
+            },
+            "time": 192780
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs micro/forinarr.js",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [4430,4450,4450],
+              "rtimes": [4440,4460,4450]
+            },
+            "time": 4430
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/forinarr-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [6020,6270,6130],
+              "rtimes": [5920,6250,6000]
+            },
+            "time": 6020
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/forinarr-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [12330,12080,12080],
+              "rtimes": [12370,12190,12160]
+            },
+            "time": 12080
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/forinarr-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [9210,9210,9240],
+              "rtimes": [9210,9200,9210]
+            },
+            "time": 9210
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node micro/forinarr.js",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [48230,47650,48230],
+              "rtimes": [48260,47680,48250]
+            },
+            "time": 47650
+          }
+        ]
+      }
+    ]
+  }
+]

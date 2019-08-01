@@ -1,0 +1,112 @@
+[
+  {
+    "name": "poly",
+    "subtitle": false,
+    "path": "micro/poly.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/poly -",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [920,900,900],
+              "rtimes": [910,890,900]
+            },
+            "time": 900
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs micro/poly.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [160,150,150],
+              "rtimes": [170,160,160]
+            },
+            "time": 150
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/poly-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [50,70,60],
+              "rtimes": [50,60,60]
+            },
+            "time": 50
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/poly-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [60,60,60],
+              "rtimes": [60,60,70]
+            },
+            "time": 60
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/poly-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [560,610,540],
+              "rtimes": [570,620,560]
+            },
+            "time": 540
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node micro/poly.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [1850,1850,1820],
+              "rtimes": [1520,1540,1520]
+            },
+            "time": 1820
+          }
+        ]
+      }
+    ]
+  }
+]

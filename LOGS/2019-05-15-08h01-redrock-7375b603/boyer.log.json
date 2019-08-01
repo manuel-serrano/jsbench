@@ -1,0 +1,27 @@
+[
+  {
+    "name": "boyer",
+    "subtitle": false,
+    "path": "octane/boyer.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/boyer -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [7600,7620,7500],
+              "rtimes": [3510,3520,3480]
+            },
+            "time": 7500
+          }
+        ]
+      }
+    ]
+  }
+]

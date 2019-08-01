@@ -1,0 +1,112 @@
+[
+  {
+    "name": "deltablue",
+    "subtitle": false,
+    "path": "octane/deltablue.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/deltablue -",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [60710,61020,61320],
+              "rtimes": [33340,33600,33880]
+            },
+            "time": 60710
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs octane/deltablue.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [5660,5550,5550],
+              "rtimes": [5560,5400,5420]
+            },
+            "time": 5550
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/deltablue-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [6480,6510,6430],
+              "rtimes": [6030,6010,5910]
+            },
+            "time": 6430
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/deltablue-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [3500,3500,4070],
+              "rtimes": [3490,3500,4030]
+            },
+            "time": 3500
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/deltablue-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [12370,12910,12400],
+              "rtimes": [11050,11500,11150]
+            },
+            "time": 12370
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node octane/deltablue.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [23590,23460,23480],
+              "rtimes": [16960,16830,16840]
+            },
+            "time": 23460
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "name": "binary-tree",
+    "path": "shootout/binary-tree.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox shootout/binary-tree.js -o /tmp/binary-tree ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [50580,50440,50400],
+              "rtimes": [29190,29080,29080]
+            },
+            "time": 50400
+          }
+        ]
+      }
+    ]
+  }
+]

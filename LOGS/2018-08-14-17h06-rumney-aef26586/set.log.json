@@ -1,0 +1,25 @@
+[
+  {
+    "name": "set",
+    "path": "micro/set.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/set.js -o /tmp/set ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [4250,4230,4240],
+              "rtimes": [4230,4220,4210]
+            },
+            "time": 4230
+          }
+        ]
+      }
+    ]
+  }
+]

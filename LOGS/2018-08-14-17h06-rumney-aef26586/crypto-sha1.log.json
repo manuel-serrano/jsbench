@@ -1,0 +1,25 @@
+[
+  {
+    "name": "crypto-sha1",
+    "path": "jetstream/crypto-sha1.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox jetstream/crypto-sha1.js -o /tmp/crypto-sha1 ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [950,960,970],
+              "rtimes": [850,850,860]
+            },
+            "time": 950
+          }
+        ]
+      }
+    ]
+  }
+]

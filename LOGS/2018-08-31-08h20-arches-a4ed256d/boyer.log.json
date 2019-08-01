@@ -1,0 +1,93 @@
+[
+  {
+    "name": "boyer",
+    "path": "octane/boyer.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "hopc -Ox octane/boyer.js -o /tmp/boyer ",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [8600,8670,8640],
+              "rtimes": [5510,5520,5520]
+            },
+            "time": 8600
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs octane/boyer.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [4030,4100,4040],
+              "rtimes": [3430,3470,3430]
+            },
+            "time": 4030
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/boyer-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [1930,1930,1950],
+              "rtimes": [1890,1900,1910]
+            },
+            "time": 1930
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js52 /tmp/boyer-js52.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [1480,1490,1490],
+              "rtimes": [1480,1500,1490]
+            },
+            "time": 1480
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "ch /tmp/boyer-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "name": "fib42",
+    "subtitle": false,
+    "path": "bglstone/fib42.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/fib42 -",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [6440,6430,6420],
+              "rtimes": [6420,6420,6400]
+            },
+            "time": 6420
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/fib42.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [15010,14990,15000],
+              "rtimes": [15010,15010,15000]
+            },
+            "time": 14990
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/fib42-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [10370,9980,9990],
+              "rtimes": [10360,9980,10000]
+            },
+            "time": 9980
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/fib42-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [9890,9900,9900],
+              "rtimes": [9900,9900,9910]
+            },
+            "time": 9890
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/fib42-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [15640,15320,15670],
+              "rtimes": [15640,15330,15680]
+            },
+            "time": 15320
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node bglstone/fib42.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:56:45.000Z",
+            "times": {
+              "ustimes": [26030,25980,25980],
+              "rtimes": [25890,25800,25840]
+            },
+            "time": 25980
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "name": "boyer",
+    "path": "octane/boyer.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-mt",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "hopc -Ox octane/boyer.js -o /tmp/boyer ",
+        "logs": [
+          {
+            "date": "2017-05-26T08:15:53.490Z",
+            "time": 19250,
+            "message": "vtable"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.2",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "nodejs octane/boyer.js",
+        "logs": [
+          {
+            "date": "2017-05-26T08:16:20.516Z",
+            "time": 9000,
+            "message": "vtable"
+          }
+        ]
+      }
+    ]
+  }
+]

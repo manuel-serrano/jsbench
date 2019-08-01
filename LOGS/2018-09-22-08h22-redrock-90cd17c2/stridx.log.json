@@ -1,0 +1,93 @@
+[
+  {
+    "name": "stridx",
+    "path": "micro/stridx.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/stridx.js -o /tmp/stridx ",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [25890,25890,25940],
+              "rtimes": [25720,25780,25750]
+            },
+            "time": 25890
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs micro/stridx.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [7460,7460,7460],
+              "rtimes": [7480,7460,7470]
+            },
+            "time": 7460
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/stridx-jsc.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [23020,22870,23000],
+              "rtimes": [23030,22880,23020]
+            },
+            "time": 22870
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/stridx-js52.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [52650,52540,52670],
+              "rtimes": [52670,52540,52700]
+            },
+            "time": 52540
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/stridx-chakra.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [22440,22460,22440],
+              "rtimes": [22460,22480,22450]
+            },
+            "time": 22440
+          }
+        ]
+      }
+    ]
+  }
+]

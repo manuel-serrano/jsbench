@@ -1,0 +1,112 @@
+[
+  {
+    "name": "puzzle",
+    "subtitle": false,
+    "path": "bglstone/puzzle.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/puzzle -",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [2730,2700,2710],
+              "rtimes": [2710,2690,2700]
+            },
+            "time": 2700
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/puzzle.js",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [1060,1070,980],
+              "rtimes": [1040,1030,960]
+            },
+            "time": 980
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/puzzle-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [910,890,890],
+              "rtimes": [870,880,870]
+            },
+            "time": 890
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/puzzle-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [710,710,680],
+              "rtimes": [700,690,680]
+            },
+            "time": 680
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/puzzle-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [1260,1270,1260],
+              "rtimes": [1310,1250,1260]
+            },
+            "time": 1260
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node bglstone/puzzle.js",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [7320,7350,7340],
+              "rtimes": [5530,5550,5540]
+            },
+            "time": 7320
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "name": "incop",
+    "path": "micro/incop.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/incop.js -o /tmp/incop ",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [1350,1330,1300],
+              "rtimes": [1280,1280,1270]
+            },
+            "time": 1300
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "nodejs micro/incop.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [790,680,660],
+              "rtimes": [780,690,670]
+            },
+            "time": 660
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "jsc /tmp/incop-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [180,410,490],
+              "rtimes": [180,410,490]
+            },
+            "time": 180
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "js52 /tmp/incop-js52.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [240,230,240],
+              "rtimes": [240,230,240]
+            },
+            "time": 230
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "ch /tmp/incop-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

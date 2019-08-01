@@ -1,0 +1,129 @@
+[
+  {
+    "name": "stridx",
+    "subtitle": false,
+    "path": "micro/stridx.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/stridx -",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [25730,25760,25770],
+              "rtimes": [25600,25660,25660]
+            },
+            "time": 25730
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs micro/stridx.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [7460,7440,7440],
+              "rtimes": [7460,7460,7440]
+            },
+            "time": 7440
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/stridx-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [22850,22840,23130],
+              "rtimes": [22860,22860,23120]
+            },
+            "time": 22840
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/stridx-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [52060,52070,52280],
+              "rtimes": [52090,52080,52300]
+            },
+            "time": 52060
+          }
+        ]
+      },
+      {
+        "name": "js60",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js60 /tmp/stridx-js60.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [52040,52040,52040],
+              "rtimes": [52050,52050,52050]
+            },
+            "time": 52040
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/stridx-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [22360,22390,22340],
+              "rtimes": [22380,22410,22360]
+            },
+            "time": 22340
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node micro/stridx.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [47180,47310,47190],
+              "rtimes": [47220,47310,47240]
+            },
+            "time": 47180
+          }
+        ]
+      }
+    ]
+  }
+]

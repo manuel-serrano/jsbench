@@ -1,0 +1,27 @@
+[
+  {
+    "name": "binary-tree",
+    "subtitle": false,
+    "path": "shootout/binary-tree.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/binary-tree -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [48840,48620,48650],
+              "rtimes": [17030,17000,16910]
+            },
+            "time": 48620
+          }
+        ]
+      }
+    ]
+  }
+]

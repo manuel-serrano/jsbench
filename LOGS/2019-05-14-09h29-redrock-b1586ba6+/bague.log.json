@@ -1,0 +1,27 @@
+[
+  {
+    "name": "bague",
+    "subtitle": false,
+    "path": "bglstone/bague.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/bague -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [510,500,490],
+              "rtimes": [500,490,480]
+            },
+            "time": 490
+          }
+        ]
+      }
+    ]
+  }
+]

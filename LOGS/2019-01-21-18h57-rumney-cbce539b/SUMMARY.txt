@@ -1,0 +1,210 @@
+chakra  (2019-01-21:18h57) [rumney]
+===================================
+
+             assigop: Infinity real  -0.00 usr+sys
+               bague: Infinity real  -0.00 usr+sys
+              base64: Infinity real  -0.00 usr+sys
+         binary-tree: Infinity real  -0.00 usr+sys
+               boyer: Infinity real  -0.00 usr+sys
+          callobjhit: Infinity real  -0.00 usr+sys
+        callprotohit: Infinity real  -0.00 usr+sys
+              crypto: Infinity real  -0.00 usr+sys
+          crypto-aes: Infinity real  -0.00 usr+sys
+          crypto-md5: Infinity real  -0.00 usr+sys
+         crypto-sha1: Infinity real  -0.00 usr+sys
+                ctor: Infinity real  -0.00 usr+sys
+           deltablue: Infinity real  -0.00 usr+sys
+              earley: Infinity real  -0.00 usr+sys
+            fannkuch: Infinity real  -0.00 usr+sys
+                 fib: Infinity real  -0.00 usr+sys
+               fib42: Infinity real  -0.00 usr+sys
+          foreacharr: Infinity real  -0.00 usr+sys
+            forinarr: Infinity real  -0.00 usr+sys
+               incop: Infinity real  -0.00 usr+sys
+                maze: Infinity real  -0.00 usr+sys
+                poly: Infinity real  -0.00 usr+sys
+              puzzle: Infinity real  -0.00 usr+sys
+               qsort: Infinity real  -0.00 usr+sys
+            richards: Infinity real  -0.00 usr+sys
+                 set: Infinity real  -0.00 usr+sys
+               sieve: Infinity real  -0.00 usr+sys
+               splay: Infinity real  -0.00 usr+sys
+              stridx: Infinity real  -0.00 usr+sys
+              string: Infinity real  -0.00 usr+sys
+              switch: Infinity real  -0.00 usr+sys
+
+graal  (2019-01-21:18h57) [rumney]
+==================================
+
+             assigop: Infinity real  -0.00 usr+sys
+               bague: Infinity real  -0.00 usr+sys
+              base64: Infinity real  -0.00 usr+sys
+         binary-tree: Infinity real  -0.00 usr+sys
+               boyer: Infinity real  -0.00 usr+sys
+          callobjhit: Infinity real  -0.00 usr+sys
+        callprotohit: Infinity real  -0.00 usr+sys
+              crypto: Infinity real  -0.00 usr+sys
+          crypto-aes: Infinity real  -0.00 usr+sys
+          crypto-md5: Infinity real  -0.00 usr+sys
+         crypto-sha1: Infinity real  -0.00 usr+sys
+                ctor: Infinity real  -0.00 usr+sys
+           deltablue: Infinity real  -0.00 usr+sys
+              earley: Infinity real  -0.00 usr+sys
+            fannkuch: Infinity real  -0.00 usr+sys
+                 fib: Infinity real  -0.00 usr+sys
+               fib42: Infinity real  -0.00 usr+sys
+          foreacharr: Infinity real  -0.00 usr+sys
+            forinarr: Infinity real  -0.00 usr+sys
+               incop: Infinity real  -0.00 usr+sys
+                maze: Infinity real  -0.00 usr+sys
+                poly: Infinity real  -0.00 usr+sys
+              puzzle: Infinity real  -0.00 usr+sys
+               qsort: Infinity real  -0.00 usr+sys
+            richards: Infinity real  -0.00 usr+sys
+                 set: Infinity real  -0.00 usr+sys
+               sieve: Infinity real  -0.00 usr+sys
+               splay: Infinity real  -0.00 usr+sys
+              stridx: Infinity real  -0.00 usr+sys
+              string: Infinity real  -0.00 usr+sys
+              switch: Infinity real  -0.00 usr+sys
+
+hop 3.2.0-mt (2019-01-21:18h57) [rumney]
+========================================
+
+             assigop: 18.28 real  18.28 usr+sys
+               bague:  0.59 real   0.59 usr+sys
+              base64:  3.82 real   3.77 usr+sys
+         binary-tree: 23.23 real  43.92 usr+sys
+               boyer:  4.48 real   6.16 usr+sys
+          callobjhit:  0.62 real   0.61 usr+sys
+        callprotohit:  1.50 real   1.50 usr+sys
+              crypto: 10.10 real  10.28 usr+sys
+          crypto-aes:  3.11 real   3.56 usr+sys
+          crypto-md5:  0.76 real   0.83 usr+sys
+         crypto-sha1:  0.60 real   0.65 usr+sys
+                ctor:  7.50 real  14.31 usr+sys
+           deltablue: 42.47 real  52.80 usr+sys
+              earley:  1.91 real   2.96 usr+sys
+            fannkuch:  4.83 real   4.82 usr+sys
+                 fib:  0.32 real   0.33 usr+sys
+               fib42:  3.71 real   3.71 usr+sys
+          foreacharr:  7.53 real  12.56 usr+sys
+            forinarr: 242.87 real 253.03 usr+sys
+               incop:  1.12 real   1.12 usr+sys
+                maze:  1.62 real   2.38 usr+sys
+                poly:  1.38 real   1.38 usr+sys
+              puzzle:  2.78 real   2.78 usr+sys
+               qsort:  0.93 real   0.96 usr+sys
+            richards: 21.36 real  21.45 usr+sys
+                 set:  4.45 real   4.45 usr+sys
+               sieve:  2.71 real   4.25 usr+sys
+               splay: 11.50 real  17.66 usr+sys
+              stridx: 26.50 real  26.52 usr+sys
+              string:  8.48 real   8.48 usr+sys
+              switch:  0.61 real   0.61 usr+sys
+
+js52  (2019-01-21:18h57) [rumney]
+=================================
+
+             assigop: Infinity real  -0.00 usr+sys
+               bague: Infinity real  -0.00 usr+sys
+              base64: Infinity real  -0.00 usr+sys
+         binary-tree: Infinity real  -0.00 usr+sys
+               boyer: Infinity real  -0.00 usr+sys
+          callobjhit: Infinity real  -0.00 usr+sys
+        callprotohit: Infinity real  -0.00 usr+sys
+              crypto: Infinity real  -0.00 usr+sys
+          crypto-aes: Infinity real  -0.00 usr+sys
+          crypto-md5: Infinity real  -0.00 usr+sys
+         crypto-sha1: Infinity real  -0.00 usr+sys
+                ctor: Infinity real  -0.00 usr+sys
+           deltablue: Infinity real  -0.00 usr+sys
+              earley: Infinity real  -0.00 usr+sys
+            fannkuch: Infinity real  -0.00 usr+sys
+                 fib: Infinity real  -0.00 usr+sys
+               fib42: Infinity real  -0.00 usr+sys
+          foreacharr: Infinity real  -0.00 usr+sys
+            forinarr: Infinity real  -0.00 usr+sys
+               incop: Infinity real  -0.00 usr+sys
+                maze: Infinity real  -0.00 usr+sys
+                poly: Infinity real  -0.00 usr+sys
+              puzzle: Infinity real  -0.00 usr+sys
+               qsort: Infinity real  -0.00 usr+sys
+            richards: Infinity real  -0.00 usr+sys
+                 set: Infinity real  -0.00 usr+sys
+               sieve: Infinity real  -0.00 usr+sys
+               splay: Infinity real  -0.00 usr+sys
+              stridx: Infinity real  -0.00 usr+sys
+              string: Infinity real  -0.00 usr+sys
+              switch: Infinity real  -0.00 usr+sys
+
+jsc  (2019-01-21:18h57) [rumney]
+================================
+
+             assigop: 13.25 real  13.26 usr+sys
+               bague:  0.50 real   0.51 usr+sys
+              base64:  1.72 real   1.85 usr+sys
+         binary-tree:  7.14 real  10.35 usr+sys
+               boyer:  1.22 real   1.38 usr+sys
+          callobjhit:  0.46 real   0.46 usr+sys
+        callprotohit:  0.46 real   0.46 usr+sys
+              crypto:  1.49 real   1.69 usr+sys
+          crypto-aes:  1.11 real   1.21 usr+sys
+          crypto-md5:  0.62 real   1.05 usr+sys
+         crypto-sha1:  0.37 real   0.41 usr+sys
+                ctor:  0.67 real   0.68 usr+sys
+           deltablue:  5.89 real   6.19 usr+sys
+              earley:  0.13 real   0.22 usr+sys
+            fannkuch:  2.01 real   2.02 usr+sys
+                 fib:  0.96 real   0.96 usr+sys
+               fib42: 12.39 real  12.38 usr+sys
+          foreacharr:  1.71 real   1.72 usr+sys
+            forinarr:  1.47 real   1.47 usr+sys
+               incop:  0.64 real   0.64 usr+sys
+                maze:  0.80 real   1.15 usr+sys
+                poly:  0.08 real   0.08 usr+sys
+              puzzle:  0.95 real   0.97 usr+sys
+               qsort:  0.66 real   0.66 usr+sys
+            richards:  3.91 real   3.98 usr+sys
+                 set:  2.12 real   2.12 usr+sys
+               sieve:  0.55 real   0.56 usr+sys
+               splay:  4.99 real  13.08 usr+sys
+              stridx: 28.43 real  28.42 usr+sys
+              string: 18.99 real  18.98 usr+sys
+              switch:  0.32 real   0.34 usr+sys
+
+nodejs v4.8.2 (2019-01-21:18h57) [rumney]
+=========================================
+
+             assigop: 19.44 real  19.42 usr+sys
+               bague:  0.88 real   0.87 usr+sys
+              base64:  3.83 real   3.40 usr+sys
+         binary-tree: 11.16 real  10.24 usr+sys
+               boyer:  1.77 real   1.76 usr+sys
+          callobjhit:  1.13 real   1.12 usr+sys
+        callprotohit:  2.44 real   2.44 usr+sys
+              crypto:  2.12 real   2.15 usr+sys
+          crypto-aes:  1.31 real   1.30 usr+sys
+          crypto-md5:  0.58 real   0.57 usr+sys
+         crypto-sha1:  0.44 real   0.43 usr+sys
+                ctor:  4.12 real   4.10 usr+sys
+           deltablue:  5.39 real   5.41 usr+sys
+              earley:  0.22 real   0.21 usr+sys
+            fannkuch:  2.24 real   2.23 usr+sys
+                 fib:  1.51 real   1.50 usr+sys
+               fib42: 19.16 real  19.14 usr+sys
+          foreacharr: 10.28 real  10.28 usr+sys
+            forinarr: 15.82 real  15.81 usr+sys
+               incop:  0.85 real   0.85 usr+sys
+                maze: Infinity real  -0.00 usr+sys
+                poly:  1.72 real   1.70 usr+sys
+              puzzle:  1.59 real   1.59 usr+sys
+               qsort:  1.00 real   1.00 usr+sys
+            richards:  5.88 real   5.88 usr+sys
+                 set:  2.15 real   2.15 usr+sys
+               sieve:  0.68 real   0.68 usr+sys
+               splay:  5.39 real   5.00 usr+sys
+              stridx: 34.70 real  34.70 usr+sys
+              string:  9.35 real   9.34 usr+sys
+              switch:  2.19 real   2.18 usr+sys
+

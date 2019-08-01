@@ -1,0 +1,36 @@
+[
+  {
+    "name": "incop",
+    "path": "micro/incop.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-st",
+        "host": "redrock.inria.fr",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/incop.js -o /tmp/incop ",
+        "logs": [
+          {
+            "date": "2017-08-01T09:36:38.371Z",
+            "time": 930,
+            "message": "New"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.3",
+        "host": "redrock.inria.fr",
+        "platform": "linux",
+        "cmd": "nodejs micro/incop.js",
+        "logs": [
+          {
+            "date": "2017-08-01T09:36:38.371Z",
+            "time": 790,
+            "message": "New"
+          }
+        ]
+      }
+    ]
+  }
+]

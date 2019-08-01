@@ -1,0 +1,4 @@
+{ 
+   "cmd": "@COMPILER@ --libs-dir @TMP@/@NAME@.libs-dir -Ox @PATH@ -o @TMP@/@NAME@ @EXTRAOPTS@",
+   "compiler": "hopaot"
+}

@@ -1,0 +1,73 @@
+[
+  {
+    "name": "fib42",
+    "path": "bglstone/fib42.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/HOP2/bin/hopc -Ox bglstone/fib42.js -o /tmp/fib42 ",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 4460
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/fib42.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 15170
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/fib42-jsc.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 10160
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js24 /tmp/fib42-js24.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 13260
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/fib42-chakra.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 15530
+          }
+        ]
+      }
+    ]
+  }
+]

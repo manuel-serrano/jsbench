@@ -1,0 +1,27 @@
+[
+  {
+    "name": "fannkuch",
+    "subtitle": false,
+    "path": "shootout/fannkuch.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/fannkuch -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [3800,3790,3800],
+              "rtimes": [3800,3780,3780]
+            },
+            "time": 3790
+          }
+        ]
+      }
+    ]
+  }
+]

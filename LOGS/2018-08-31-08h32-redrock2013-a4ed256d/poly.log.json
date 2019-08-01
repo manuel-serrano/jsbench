@@ -1,0 +1,93 @@
+[
+  {
+    "name": "poly",
+    "path": "micro/poly.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/poly.js -o /tmp/poly ",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [1300,1310,1330],
+              "rtimes": [1290,1270,1270]
+            },
+            "time": 1300
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "nodejs micro/poly.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [610,610,520],
+              "rtimes": [620,620,550]
+            },
+            "time": 520
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "jsc /tmp/poly-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [220,210,210],
+              "rtimes": [200,200,210]
+            },
+            "time": 210
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "js52 /tmp/poly-js52.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [80,80,80],
+              "rtimes": [90,80,80]
+            },
+            "time": 80
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "ch /tmp/poly-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

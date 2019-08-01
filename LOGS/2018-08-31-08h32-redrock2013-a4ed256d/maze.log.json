@@ -1,0 +1,93 @@
+[
+  {
+    "name": "maze",
+    "path": "bglstone/maze.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "hopc -Ox bglstone/maze.js -o /tmp/maze ",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [2390,2390,2380],
+              "rtimes": [1500,1480,1480]
+            },
+            "time": 2380
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/maze.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [2150,2150,1900],
+              "rtimes": [1770,1770,1620]
+            },
+            "time": 1900
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "jsc /tmp/maze-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [1210,1240,1240],
+              "rtimes": [780,810,790]
+            },
+            "time": 1210
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "js52 /tmp/maze-js52.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [3400,3240,3190],
+              "rtimes": [3390,3230,3190]
+            },
+            "time": 3190
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "ch /tmp/maze-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

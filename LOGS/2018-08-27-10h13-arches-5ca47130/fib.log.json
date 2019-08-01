@@ -1,0 +1,93 @@
+[
+  {
+    "name": "fib",
+    "path": "bglstone/fib.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "hopc -Ox bglstone/fib.js -o /tmp/fib ",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [730,710,730],
+              "rtimes": [720,690,730]
+            },
+            "time": 710
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/fib.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [1660,1640,1650],
+              "rtimes": [1660,1650,1660]
+            },
+            "time": 1640
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/fib-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [1140,1150,1150],
+              "rtimes": [1150,1150,1160]
+            },
+            "time": 1140
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js24 /tmp/fib-js24.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [780,770,780],
+              "rtimes": [780,780,770]
+            },
+            "time": 770
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "ch /tmp/fib-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

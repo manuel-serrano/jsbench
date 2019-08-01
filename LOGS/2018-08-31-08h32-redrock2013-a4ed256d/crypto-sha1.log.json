@@ -1,0 +1,93 @@
+[
+  {
+    "name": "crypto-sha1",
+    "path": "jetstream/crypto-sha1.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "hopc -Ox jetstream/crypto-sha1.js -o /tmp/crypto-sha1 ",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [1080,1120,1110],
+              "rtimes": [930,950,920]
+            },
+            "time": 1080
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "nodejs jetstream/crypto-sha1.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [870,770,740],
+              "rtimes": [890,780,760]
+            },
+            "time": 740
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "jsc /tmp/crypto-sha1-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [450,500,500],
+              "rtimes": [400,430,430]
+            },
+            "time": 450
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "js52 /tmp/crypto-sha1-js52.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [440,430,410],
+              "rtimes": [440,430,430]
+            },
+            "time": 410
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "ch /tmp/crypto-sha1-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:32:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

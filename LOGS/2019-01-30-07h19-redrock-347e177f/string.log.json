@@ -1,0 +1,129 @@
+[
+  {
+    "name": "string",
+    "subtitle": false,
+    "path": "micro/string.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/string -",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [8120,8160,8160],
+              "rtimes": [8050,8090,8090]
+            },
+            "time": 8120
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs micro/string.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [1860,1870,1870],
+              "rtimes": [1880,1890,1880]
+            },
+            "time": 1860
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/string-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [15230,15250,15250],
+              "rtimes": [15230,15260,15270]
+            },
+            "time": 15230
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/string-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [17060,16910,16960],
+              "rtimes": [17070,16910,16980]
+            },
+            "time": 16910
+          }
+        ]
+      },
+      {
+        "name": "js60",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js60 /tmp/string-js60.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [16960,16950,16920],
+              "rtimes": [16970,16960,16920]
+            },
+            "time": 16920
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/string-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [14170,14180,14190],
+              "rtimes": [14190,14200,14210]
+            },
+            "time": 14170
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node micro/string.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [24360,24450,24490],
+              "rtimes": [24390,24470,24480]
+            },
+            "time": 24360
+          }
+        ]
+      }
+    ]
+  }
+]

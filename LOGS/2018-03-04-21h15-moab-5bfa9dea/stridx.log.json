@@ -1,0 +1,73 @@
+[
+  {
+    "name": "stridx",
+    "path": "micro/stridx.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/stridx.js -o /tmp/stridx ",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 27120
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "nodejs micro/stridx.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 8830
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "jsc /tmp/stridx-jsc.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 34750
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "js24 /tmp/stridx-js24.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 27370
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "ch /tmp/stridx-ch.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

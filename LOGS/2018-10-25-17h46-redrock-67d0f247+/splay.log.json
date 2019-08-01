@@ -1,0 +1,112 @@
+[
+  {
+    "name": "splay",
+    "subtitle": false,
+    "path": "octane/splay.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/splay -",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [15260,15520,15310],
+              "rtimes": [8510,8470,8510]
+            },
+            "time": 15260
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs octane/splay.js",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [8600,21560,8360],
+              "rtimes": [7320,20240,7230]
+            },
+            "time": 8360
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/splay-jsc.js --",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [11030,10290,10470],
+              "rtimes": [2810,2680,2710]
+            },
+            "time": 10290
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/splay-js52.js",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [4570,4850,4690],
+              "rtimes": [4930,5110,5010]
+            },
+            "time": 4570
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/splay-chakra.js -args",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [6060,6650,6550],
+              "rtimes": [5010,5480,5230]
+            },
+            "time": 6060
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node octane/splay.js",
+        "logs": [
+          {
+            "date": "2018-10-25T15:46:02.000Z",
+            "times": {
+              "ustimes": [29160,31110,29780],
+              "rtimes": [27040,27550,26940]
+            },
+            "time": 29160
+          }
+        ]
+      }
+    ]
+  }
+]

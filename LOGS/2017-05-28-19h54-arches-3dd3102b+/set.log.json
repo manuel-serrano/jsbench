@@ -1,0 +1,36 @@
+[
+  {
+    "name": "set",
+    "path": "micro/set.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-mt",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/set.js -o /tmp/set ",
+        "logs": [
+          {
+            "date": "2017-06-28T18:06:30.508Z",
+            "time": 4420,
+            "message": "Method"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.2",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs micro/set.js",
+        "logs": [
+          {
+            "date": "2017-06-28T18:06:30.508Z",
+            "time": 2800,
+            "message": "Method"
+          }
+        ]
+      }
+    ]
+  }
+]

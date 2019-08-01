@@ -1,0 +1,112 @@
+[
+  {
+    "name": "stridx",
+    "subtitle": false,
+    "path": "micro/stridx.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/stridx -",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [25690,25710,25730],
+              "rtimes": [25610,25590,25620]
+            },
+            "time": 25690
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs micro/stridx.js",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [7410,7390,7390],
+              "rtimes": [7420,7400,7410]
+            },
+            "time": 7390
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/stridx-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [22760,22840,22780],
+              "rtimes": [22780,22850,22800]
+            },
+            "time": 22760
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/stridx-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [52410,52090,52280],
+              "rtimes": [52440,52090,52280]
+            },
+            "time": 52090
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/stridx-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [22310,22320,22310],
+              "rtimes": [22340,22320,22340]
+            },
+            "time": 22310
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node micro/stridx.js",
+        "logs": [
+          {
+            "date": "2019-01-07T10:56:03.000Z",
+            "times": {
+              "ustimes": [47280,47140,47240],
+              "rtimes": [47300,47190,47280]
+            },
+            "time": 47140
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,8 @@
+{
+   "name": "jsc",
+   "version": "",
+   "cmd": "@INTERPRETER@ @TMP@/@NAME@-jsc.js --",
+   "interpreter": "jsc",
+   "iteration": 3,
+   "prelude": "jsc-prelude.js"
+}

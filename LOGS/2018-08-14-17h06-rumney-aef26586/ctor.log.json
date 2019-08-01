@@ -1,0 +1,25 @@
+[
+  {
+    "name": "ctor",
+    "path": "micro/ctor.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/ctor.js -o /tmp/ctor ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [16120,15990,15820],
+              "rtimes": [8370,8380,8230]
+            },
+            "time": 15820
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "name": "fannkuch",
+    "path": "shootout/fannkuch.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "hopc -Ox shootout/fannkuch.js -o /tmp/fannkuch ",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [3730,3680,3710],
+              "rtimes": [3660,3630,3630]
+            },
+            "time": 3680
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs shootout/fannkuch.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [1900,1900,1880],
+              "rtimes": [1920,1890,1890]
+            },
+            "time": 1880
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/fannkuch-jsc.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [1780,1810,1780],
+              "rtimes": [1760,1780,1750]
+            },
+            "time": 1780
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/fannkuch-js52.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [1690,1710,1690],
+              "rtimes": [1690,1700,1710]
+            },
+            "time": 1690
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/fannkuch-chakra.js",
+        "logs": [
+          {
+            "date": "2018-09-22T06:22:42.000Z",
+            "times": {
+              "ustimes": [1900,1930,1900],
+              "rtimes": [1900,1930,1900]
+            },
+            "time": 1900
+          }
+        ]
+      }
+    ]
+  }
+]

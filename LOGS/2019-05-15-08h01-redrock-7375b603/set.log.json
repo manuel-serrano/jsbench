@@ -1,0 +1,27 @@
+[
+  {
+    "name": "set",
+    "subtitle": false,
+    "path": "micro/set.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/set -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [4700,4710,4710],
+              "rtimes": [4690,4690,4700]
+            },
+            "time": 4700
+          }
+        ]
+      }
+    ]
+  }
+]

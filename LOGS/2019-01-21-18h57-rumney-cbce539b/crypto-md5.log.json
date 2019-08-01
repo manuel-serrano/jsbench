@@ -1,0 +1,112 @@
+[
+  {
+    "name": "crypto-md5",
+    "subtitle": false,
+    "path": "jetstream/crypto-md5.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "/tmp/crypto-md5 -",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [830,830,830],
+              "rtimes": [770,760,760]
+            },
+            "time": 830
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.2",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "nodejs jetstream/crypto-md5.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [570,600,590],
+              "rtimes": [580,580,590]
+            },
+            "time": 570
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "jsc /tmp/crypto-md5-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [1080,1050,1050],
+              "rtimes": [630,620,620]
+            },
+            "time": 1050
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "js52 /tmp/crypto-md5-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "ch /tmp/crypto-md5-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node jetstream/crypto-md5.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

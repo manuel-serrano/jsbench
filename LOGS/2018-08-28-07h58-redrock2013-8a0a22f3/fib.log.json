@@ -1,0 +1,93 @@
+[
+  {
+    "name": "fib",
+    "path": "bglstone/fib.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "hopc -Ox bglstone/fib.js -o /tmp/fib ",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [800,800,810],
+              "rtimes": [760,760,760]
+            },
+            "time": 800
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/fib.js",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [1710,1580,1580],
+              "rtimes": [1710,1580,1580]
+            },
+            "time": 1580
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "jsc /tmp/fib-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [890,890,880],
+              "rtimes": [890,890,880]
+            },
+            "time": 880
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "js52 /tmp/fib-js52.js",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [860,840,840],
+              "rtimes": [870,850,840]
+            },
+            "time": 840
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock2013",
+        "platform": "linux",
+        "cmd": "ch /tmp/fib-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-28T05:58:35.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

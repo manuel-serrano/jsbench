@@ -1,0 +1,27 @@
+[
+  {
+    "name": "assigop",
+    "subtitle": false,
+    "path": "micro/assigop.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/assigop -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [14680,14660,14680],
+              "rtimes": [14680,14650,14660]
+            },
+            "time": 14660
+          }
+        ]
+      }
+    ]
+  }
+]

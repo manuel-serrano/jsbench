@@ -1,0 +1,93 @@
+[
+  {
+    "name": "assigop",
+    "path": "micro/assigop.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/assigop.js -o /tmp/assigop ",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [12710,12700,12700],
+              "rtimes": [12700,12680,12680]
+            },
+            "time": 12700
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs micro/assigop.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [6570,6560,6580],
+              "rtimes": [6560,6570,6610]
+            },
+            "time": 6560
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/assigop-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [32110,32030,32010],
+              "rtimes": [32110,32050,32010]
+            },
+            "time": 32010
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js52 /tmp/assigop-js52.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [6060,6070,6070],
+              "rtimes": [6070,6080,6070]
+            },
+            "time": 6060
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "ch /tmp/assigop-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

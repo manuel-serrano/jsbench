@@ -1,0 +1,25 @@
+[
+  {
+    "name": "stridx",
+    "path": "micro/stridx.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/stridx.js -o /tmp/stridx ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [26510,26520,26680],
+              "rtimes": [26470,26480,26640]
+            },
+            "time": 26510
+          }
+        ]
+      }
+    ]
+  }
+]

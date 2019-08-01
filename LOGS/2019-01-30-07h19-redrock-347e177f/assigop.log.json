@@ -1,0 +1,129 @@
+[
+  {
+    "name": "assigop",
+    "subtitle": false,
+    "path": "micro/assigop.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/assigop -",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [14260,14240,14240],
+              "rtimes": [14250,14230,14230]
+            },
+            "time": 14240
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs micro/assigop.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [10230,10230,10230],
+              "rtimes": [10230,10240,10230]
+            },
+            "time": 10230
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/assigop-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [10190,10170,10160],
+              "rtimes": [10190,10160,10140]
+            },
+            "time": 10160
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/assigop-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [5150,5120,5130],
+              "rtimes": [5160,5120,5140]
+            },
+            "time": 5120
+          }
+        ]
+      },
+      {
+        "name": "js60",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js60 /tmp/assigop-js60.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [5150,5160,5160],
+              "rtimes": [5160,5170,5160]
+            },
+            "time": 5150
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/assigop-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [34860,34060,35880],
+              "rtimes": [34870,34070,35880]
+            },
+            "time": 34060
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node micro/assigop.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [18040,18060,18060],
+              "rtimes": [18110,18090,18100]
+            },
+            "time": 18040
+          }
+        ]
+      }
+    ]
+  }
+]

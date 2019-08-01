@@ -1,0 +1,129 @@
+[
+  {
+    "name": "switch",
+    "subtitle": false,
+    "path": "micro/switch.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/switch -",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [530,530,550],
+              "rtimes": [510,530,520]
+            },
+            "time": 530
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs micro/switch.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [280,280,270],
+              "rtimes": [280,300,270]
+            },
+            "time": 270
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/switch-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [310,300,310],
+              "rtimes": [270,280,290]
+            },
+            "time": 300
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/switch-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [280,260,250],
+              "rtimes": [280,260,270]
+            },
+            "time": 250
+          }
+        ]
+      },
+      {
+        "name": "js60",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js60 /tmp/switch-js60.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [280,260,260],
+              "rtimes": [270,260,260]
+            },
+            "time": 260
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/switch-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [1110,1150,1090],
+              "rtimes": [1140,1160,1100]
+            },
+            "time": 1090
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.9.0",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node micro/switch.js",
+        "logs": [
+          {
+            "date": "2019-01-30T06:19:15.000Z",
+            "times": {
+              "ustimes": [2090,2070,2080],
+              "rtimes": [2100,2040,2070]
+            },
+            "time": 2070
+          }
+        ]
+      }
+    ]
+  }
+]

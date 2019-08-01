@@ -1,0 +1,36 @@
+[
+  {
+    "name": "assigop",
+    "path": "micro/assigop.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-st",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/assigop.js -o /tmp/assigop ",
+        "logs": [
+          {
+            "date": "2017-05-28T06:56:53.759Z",
+            "time": 2000,
+            "message": "vtable"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.2",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "nodejs micro/assigop.js",
+        "logs": [
+          {
+            "date": "2017-05-28T06:56:53.759Z",
+            "time": 2000,
+            "message": "vtable"
+          }
+        ]
+      }
+    ]
+  }
+]

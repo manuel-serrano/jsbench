@@ -1,0 +1,36 @@
+[
+  {
+    "name": "splay",
+    "path": "octane/splay.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-mt",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "hopc -Ox octane/splay.js -o /tmp/splay ",
+        "logs": [
+          {
+            "date": "2017-06-28T17:57:38.973Z",
+            "time": 20880,
+            "message": "Method"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.2",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs octane/splay.js",
+        "logs": [
+          {
+            "date": "2017-06-28T17:57:38.973Z",
+            "time": 10290,
+            "message": "Method"
+          }
+        ]
+      }
+    ]
+  }
+]

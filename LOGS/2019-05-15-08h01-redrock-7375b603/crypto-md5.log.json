@@ -1,0 +1,27 @@
+[
+  {
+    "name": "crypto-md5",
+    "subtitle": false,
+    "path": "jetstream/crypto-md5.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/crypto-md5 -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [840,850,840],
+              "rtimes": [640,630,650]
+            },
+            "time": 840
+          }
+        ]
+      }
+    ]
+  }
+]

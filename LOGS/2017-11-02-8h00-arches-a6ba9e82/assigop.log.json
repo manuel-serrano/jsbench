@@ -1,0 +1,34 @@
+[
+  {
+    "name": "assigop",
+    "path": "micro/assigop.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/assigop.js -o /tmp/assigop ",
+        "logs": [
+          {
+            "date": "2017-11-02T07:44:43.356Z",
+            "time": 830
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.4",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs micro/assigop.js",
+        "logs": [
+          {
+            "date": "2017-11-02T07:44:43.356Z",
+            "time": 2140
+          }
+        ]
+      }
+    ]
+  }
+]

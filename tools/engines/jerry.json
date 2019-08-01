@@ -1,0 +1,10 @@
+{
+   "name": "jerry",
+   "version": "echo \"c3c0bb8ddc4a160488487ddbf49a45bd4c46217a\"",
+   "cmd": "@INTERPRETER@ @TMP@/@NAME@-jerry.js",
+   "interpreter": "/opt/JS/jerryscript/build/bin/jerry",
+   "iteration": 1,
+   "maxIteration": 1,
+   "prelude": "jerry-prelude.js",
+   "ecmascript": 5
+}

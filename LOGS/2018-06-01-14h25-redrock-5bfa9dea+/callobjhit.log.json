@@ -1,0 +1,73 @@
+[
+  {
+    "name": "callobjhit",
+    "path": "micro/callobjhit.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/HOP2/bin/hopc -Ox micro/callobjhit.js -o /tmp/callobjhit ",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 580
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs micro/callobjhit.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 270
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/callobjhit-jsc.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 450
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js24 /tmp/callobjhit-js24.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 4210
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/callobjhit-chakra.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 260
+          }
+        ]
+      }
+    ]
+  }
+]

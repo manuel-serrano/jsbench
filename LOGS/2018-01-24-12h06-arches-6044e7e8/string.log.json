@@ -1,0 +1,60 @@
+[
+  {
+    "name": "string",
+    "path": "micro/string.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/string.js -o /tmp/string ",
+        "logs": [
+          {
+            "date": "2018-01-24T11:06:50.000Z",
+            "time": 7920
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs micro/string.js",
+        "logs": [
+          {
+            "date": "2018-01-24T11:06:50.000Z",
+            "time": 1900
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/string-jsc.js",
+        "logs": [
+          {
+            "date": "2018-01-24T11:06:50.000Z",
+            "time": 22740
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js24 /tmp/string-js24.js",
+        "logs": [
+          {
+            "date": "2018-01-24T11:06:50.000Z",
+            "time": 9960
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "name": "bague",
+    "path": "bglstone/bague.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-mt",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "hopc -Ox bglstone/bague.js -o /tmp/bague ",
+        "logs": [
+          {
+            "date": "2017-05-21T07:39:10.988Z",
+            "time": 5090,
+            "message": "Hidden"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.2",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/bague.js",
+        "logs": [
+          {
+            "date": "2017-05-21T07:39:26.817Z",
+            "time": 5260,
+            "message": "Hidden"
+          }
+        ]
+      }
+    ]
+  }
+]

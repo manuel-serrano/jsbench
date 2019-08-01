@@ -1,0 +1,36 @@
+[
+  {
+    "name": "ctor",
+    "path": "micro/ctor.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-st",
+        "host": "redrock.inria.fr",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/ctor.js -o /tmp/ctor ",
+        "logs": [
+          {
+            "date": "2017-08-03T13:40:44.447Z",
+            "time": 9510,
+            "message": "New"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.3",
+        "host": "redrock.inria.fr",
+        "platform": "linux",
+        "cmd": "nodejs micro/ctor.js",
+        "logs": [
+          {
+            "date": "2017-08-03T13:40:44.447Z",
+            "time": 3260,
+            "message": "New"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+{
+   "name": "jjs",
+   "version": "echo 'exit(0)' | @INTERPRETER@ -version | head -n 1 | awk '{ print $2 }'",
+   "cmd": "@INTERPRETER@ @TMP@/@NAME@-jjs.js",
+   "interpreter": "jjs --language=es6",
+   "iteration": 2,
+   "maxIteration": 10,
+   "prelude": "jjs-prelude.js"
+}

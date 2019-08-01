@@ -1,0 +1,179 @@
+
+var dateNow = dateNow || (function () { return +Date.now(); });
+
+var f = function (objs, outer, inner) {
+    for (var i = 0; i < outer; ++i) {
+        var obj = objs[i % objs.length];
+        for (var j = 0; j < inner; ++j) {
+            var res = obj.b7;
+            obj.b7 = obj.b6;
+            obj.b6 = obj.b5;
+            obj.b5 = obj.b4;
+            obj.b4 = obj.b3;
+            obj.b3 = obj.b2;
+            obj.b2 = obj.b1;
+            obj.b1 = obj.b0;
+            obj.b0 = !res;
+        }
+    }
+};
+
+var fClone = function () { eval("f = " + f.toString()); return f; };
+
+// factor and names.length must have a gcd of 1 to iterate over all names. This
+// does not produce a combination of all posibilities, but this is good enough
+// for this test case.
+var genObject = function (obj, nbSlots, names, factor, offset, skipUnder) {
+    var n = 0;
+    for (var i = 0; n < nbSlots; ++i) {
+        if ((i * factor + offset) % names.length < skipUnder)
+            continue;
+        obj[names[(i * factor + offset) % names.length]] = false;
+        ++n;
+    }
+};
+
+var defaultNames = ["b0", "b1", "b2", "b3", "b4", "b5", "b6", "b7"];
+var defaultFactor = 3;
+var defaultOffset = 1;
+
+var allNames = (function() {
+  var arr = [];
+  for (var i = 0; i < 32; ++i)
+     arr[i] = "b" + i;
+  return arr;
+})();
+
+var diffAlloc = function () {
+    return {};
+};
+
+function build_commonParent_sameAlloc(n, extra) {
+    var res = [];
+    for (var i = 0; i < n; ++i) {
+        var tmp = {};
+        genObject(tmp, defaultNames.length, defaultNames, defaultFactor, defaultOffset, 0);
+        genObject(tmp, extra, allNames, 2 * i + 13, i, defaultNames.length);
+        res.push(tmp);
+    }
+    return res;
+}
+
+function build_commonParent_diffAlloc(n, extra) {
+    var res = [];
+    for (var i = 0; i < n; ++i) {
+        var tmp; eval("tmp = {}");
+        genObject(tmp, defaultNames.length, defaultNames, defaultFactor, defaultOffset, 0);
+        genObject(tmp, extra, allNames, 2 * i + 13, i, defaultNames.length);
+        res.push(tmp);
+    }
+    return res;
+}
+
+function build_noCommonParent_sameAlloc(n, extra) {
+    var res = [];
+    for (var i = 0; i < n; ++i) {
+        var tmp = {};
+        genObject(tmp, defaultNames.length, defaultNames, 2 * i + 1, i, 0);
+        genObject(tmp, extra, allNames, 2 * i + 13, i, defaultNames.length);
+        res.push(tmp);
+    }
+    return res;
+}
+
+function build_noCommonParent_diffAlloc(n, extra) {
+    var res = [];
+    for (var i = 0; i < n; ++i) {
+        var tmp; eval("tmp = {}");
+        genObject(tmp, defaultNames.length, defaultNames, 2 * i + 1, i, 0);
+        genObject(tmp, extra, allNames, 2 * i + 13, i, defaultNames.length);
+        res.push(tmp);
+    }
+    return res;
+}
+
+var runner = function (fun, objs, freq) {
+    var nbIter = 1000000; // for 10000, we will iterate over 100 objects.
+    var inner = freq;
+    var outer = nbIter / freq;
+    var start = dateNow();
+    fun(objs, outer, inner);
+    return dateNow() - start;
+};
+
+function build_testInputs(n, commonParent, sameAlloc, extra) {
+    var objs;
+    if (commonParent && sameAlloc) {
+        objs = build_commonParent_sameAlloc(n, extra);
+    } else if (commonParent && !sameAlloc) {
+        objs = build_commonParent_diffAlloc(n, extra);
+    } else if (!commonParent && sameAlloc) {
+        objs = build_noCommonParent_sameAlloc(n, extra);
+    } else if (!commonParent && !sameAlloc) {
+        objs = build_noCommonParent_diffAlloc(n, extra);
+    }
+
+    return {
+        run: (function () { eval("runner = " + runner.toString()); return runner; })(),
+        fun: fClone(),
+        objs: objs
+    };
+};
+
+
+var commonParent = ["C", "c"];
+var sameAlloc = ["a", "A"];
+var numberOfObjects = [1, 2, 4, 6, 8, 12, 16, 24, 32];
+var numberOfExtraProperties = [10];
+
+if (false) {
+    commonParent = ["C"];
+    sameAlloc = ["A"];
+    numberOfObjects = [1];
+}
+
+var inputs;
+
+print(' ext | num |  Caf  |  Car  |  Cam  |  CAf  |  CAr  |  CAm  |  caf  |  car  |  cam  |  cAf  |  cAr  |  cAm  |');
+
+function padString(v, n) {
+    var s = v.toString().slice(0, n - 2);
+    while (s.length < n) {
+        if (s.length % 2 == 1)
+            s = " " + s;
+        else
+            s += " ";
+    }
+    return s;
+}
+
+for (var ne in numberOfExtraProperties) {
+    var neLine = padString(numberOfExtraProperties[ne], 5);
+    for (var no in numberOfObjects) {
+        var line = neLine + '|' + padString(numberOfObjects[no], 5);
+        for (var cp in commonParent) {
+            for (var sa in sameAlloc) {
+                var numObjs = numberOfObjects[no];
+                // print("case: " + numObjs + " " + commonParent[cp] + sameAlloc[sa]);
+
+                inputs = build_testInputs(numObjs, commonParent[cp] === "C", sameAlloc[sa] === "a", numberOfExtraProperties[ne]);
+                var freq = inputs.run(inputs.fun, inputs.objs, 100);
+                // print("  case: " + numObjs + " " + commonParent[cp] + sameAlloc[sa] + "f : " + freq + " ms");
+
+                inputs = build_testInputs(numObjs, commonParent[cp] === "C", sameAlloc[sa] === "a", numberOfExtraProperties[ne]);
+                var rare = inputs.run(inputs.fun, inputs.objs, 1000);
+                // print("  case: " + numObjs + " " + commonParent[cp] + sameAlloc[sa] + "r : " + rare + " ms");
+
+                inputs = build_testInputs(numObjs, commonParent[cp] === "C", sameAlloc[sa] === "a", numberOfExtraProperties[ne]);
+                var mostly = inputs.run(inputs.fun, inputs.objs, 20000);
+                // print("  case: " + numObjs + " " + commonParent[cp] + sameAlloc[sa] + "m : " + mostly + " ms");
+
+                line += '|' + padString(freq, 7) +
+                        '|' + padString(rare, 7) +
+                        '|' + padString(mostly, 7);
+            }
+        }
+        line += '|';
+        print(line);
+    }
+}

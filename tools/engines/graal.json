@@ -1,0 +1,7 @@
+{
+   "name": "graal",
+   "version": "@INTERPRETER@ -e \"console.log( process.version )\"",
+   "cmd": "@INTERPRETER@ @PATH@",
+   "interpreter": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node",
+   "iteration": 3
+}

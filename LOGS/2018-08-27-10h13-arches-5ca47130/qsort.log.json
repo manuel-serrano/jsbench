@@ -1,0 +1,93 @@
+[
+  {
+    "name": "qsort",
+    "path": "bglstone/qsort.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "hopc -Ox bglstone/qsort.js -o /tmp/qsort ",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [1060,1030,1020],
+              "rtimes": [980,970,960]
+            },
+            "time": 1020
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/qsort.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [1340,1330,1330],
+              "rtimes": [1340,1350,1350]
+            },
+            "time": 1330
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/qsort-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [970,970,980],
+              "rtimes": [990,1000,1000]
+            },
+            "time": 970
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js24 /tmp/qsort-js24.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [23530,23880,23610],
+              "rtimes": [23590,23890,23630]
+            },
+            "time": 23530
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "ch /tmp/qsort-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "name": "fib42",
+    "subtitle": false,
+    "path": "bglstone/fib42.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "/tmp/fib42 -",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [3720,3730,3710],
+              "rtimes": [3730,3730,3710]
+            },
+            "time": 3710
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.2",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/fib42.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [19210,19140,19200],
+              "rtimes": [19220,19160,19210]
+            },
+            "time": 19140
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "jsc /tmp/fib42-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [12380,12520,12420],
+              "rtimes": [12390,12530,12420]
+            },
+            "time": 12380
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "js52 /tmp/fib42-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "ch /tmp/fib42-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node bglstone/fib42.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

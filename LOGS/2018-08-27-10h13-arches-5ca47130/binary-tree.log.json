@@ -1,0 +1,93 @@
+[
+  {
+    "name": "binary-tree",
+    "path": "shootout/binary-tree.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "hopc -Ox shootout/binary-tree.js -o /tmp/binary-tree ",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [69150,69270,69420],
+              "rtimes": [37120,37210,37260]
+            },
+            "time": 69150
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs shootout/binary-tree.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [23370,23300,23220],
+              "rtimes": [11120,11140,11120]
+            },
+            "time": 23220
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/binary-tree-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [9970,9930,9840],
+              "rtimes": [7520,7500,7450]
+            },
+            "time": 9840
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js24 /tmp/binary-tree-js24.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [10740,10870,10890],
+              "rtimes": [8990,9070,9070]
+            },
+            "time": 10740
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "ch /tmp/binary-tree-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-27T08:13:54.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

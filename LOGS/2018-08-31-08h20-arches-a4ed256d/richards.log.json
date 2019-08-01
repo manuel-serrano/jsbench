@@ -1,0 +1,93 @@
+[
+  {
+    "name": "richards",
+    "path": "octane/richards.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "hopc -Ox octane/richards.js -o /tmp/richards ",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [23480,23560,25260],
+              "rtimes": [23460,23490,25200]
+            },
+            "time": 23480
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs octane/richards.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [6170,6590,6490],
+              "rtimes": [6150,6570,6460]
+            },
+            "time": 6170
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/richards-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [8270,8090,8620],
+              "rtimes": [8410,8110,8610]
+            },
+            "time": 8090
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js52 /tmp/richards-js52.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [4980,5000,5020],
+              "rtimes": [5010,4970,4990]
+            },
+            "time": 4980
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "ch /tmp/richards-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

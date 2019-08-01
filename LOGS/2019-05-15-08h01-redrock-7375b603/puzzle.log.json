@@ -1,0 +1,27 @@
+[
+  {
+    "name": "puzzle",
+    "subtitle": false,
+    "path": "bglstone/puzzle.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/puzzle -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [2560,2540,2530],
+              "rtimes": [2550,2540,2520]
+            },
+            "time": 2530
+          }
+        ]
+      }
+    ]
+  }
+]

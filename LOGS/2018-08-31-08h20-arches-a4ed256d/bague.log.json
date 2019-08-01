@@ -1,0 +1,93 @@
+[
+  {
+    "name": "bague",
+    "path": "bglstone/bague.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "hopc -Ox bglstone/bague.js -o /tmp/bague ",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [580,590,600],
+              "rtimes": [570,560,580]
+            },
+            "time": 580
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.11.2",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/bague.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [880,910,850],
+              "rtimes": [880,890,850]
+            },
+            "time": 850
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/bague-jsc.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [680,700,680],
+              "rtimes": [690,690,690]
+            },
+            "time": 680
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js52 /tmp/bague-js52.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [380,350,380],
+              "rtimes": [370,350,360]
+            },
+            "time": 350
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "ch /tmp/bague-chakra.js",
+        "logs": [
+          {
+            "date": "2018-08-31T06:20:10.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

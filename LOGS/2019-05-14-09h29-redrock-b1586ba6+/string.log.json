@@ -1,0 +1,27 @@
+[
+  {
+    "name": "string",
+    "subtitle": false,
+    "path": "micro/string.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/string -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [8160,8120,8150],
+              "rtimes": [8110,8050,8080]
+            },
+            "time": 8120
+          }
+        ]
+      }
+    ]
+  }
+]

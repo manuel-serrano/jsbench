@@ -1,0 +1,41 @@
+hop 3.3.0-mt (2019-05-14:09h29) [redrock]
+=========================================
+
+             assigop: 14.65 real  14.66 usr+sys
+               bague:  0.48 real   0.49 usr+sys
+              base64:  3.41 real   3.65 usr+sys
+         binary-tree: 16.91 real  48.62 usr+sys
+               boyer:  3.40 real   7.36 usr+sys
+          callobjhit:  0.59 real   0.61 usr+sys
+        callprotohit:  0.57 real   0.58 usr+sys
+              crypto:  7.96 real   8.29 usr+sys
+          crypto-aes:  2.56 real   4.12 usr+sys
+          crypto-md5:  0.64 real   0.86 usr+sys
+         crypto-sha1:  0.50 real   0.68 usr+sys
+                ctor:  6.80 real  25.24 usr+sys
+           deltablue: 34.16 real  58.99 usr+sys
+     deltablue-proxy:  5.84 real   8.50 usr+sys
+              earley:  0.95 real   3.48 usr+sys
+        earley-proxy:  2.48 real   6.89 usr+sys
+            fannkuch:  3.78 real   3.79 usr+sys
+                 fib:  0.55 real   0.52 usr+sys
+               fib42:  6.14 real   6.15 usr+sys
+          foreacharr:  6.49 real  20.66 usr+sys
+            forinarr:  3.21 real   4.06 usr+sys
+            hash-map:  1.04 real   1.39 usr+sys
+      hash-map-proxy:  2.52 real   3.35 usr+sys
+               incop:  0.92 real   0.94 usr+sys
+                maze:  0.86 real   1.55 usr+sys
+          maze-proxy:  3.63 real   5.69 usr+sys
+                poly:  0.89 real   0.89 usr+sys
+              puzzle:  2.54 real   2.55 usr+sys
+               qsort:  0.83 real   0.96 usr+sys
+            richards: 15.77 real  16.11 usr+sys
+                 set:  4.69 real   4.71 usr+sys
+               sieve:  2.25 real   6.56 usr+sys
+               splay: 10.49 real  17.99 usr+sys
+         splay-proxy: 17.28 real  30.42 usr+sys
+              stridx: 25.73 real  25.83 usr+sys
+              string:  8.05 real   8.12 usr+sys
+              switch:  0.49 real   0.50 usr+sys
+

@@ -1,0 +1,8 @@
+{
+   "name": "chakra",
+   "version": "",
+   "cmd": "@INTERPRETER@ @TMP@/@NAME@-chakra.js -args",
+   "interpreter": "ch",
+   "iteration": 3,
+   "prelude": "chakra-prelude.js"
+}

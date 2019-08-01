@@ -1,0 +1,64 @@
+[
+  {
+    "name": "boyer",
+    "path": "octane/boyer.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox octane/boyer.js -o /tmp/boyer ",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 7200,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs octane/boyer.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 3320,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/boyer-jsc.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 1750,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js24 /tmp/boyer-js24.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 1900,
+            "message": "Instance"
+          }
+        ]
+      }
+    ]
+  }
+]

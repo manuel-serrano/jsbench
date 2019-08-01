@@ -1,0 +1,73 @@
+[
+  {
+    "name": "earley",
+    "path": "octane/earley.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/HOP2/bin/hopc -Ox octane/earley.js -o /tmp/earley ",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 5990
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs octane/earley.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 330
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/earley-jsc.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 260
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js24 /tmp/earley-js24.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 280
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/earley-chakra.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 240
+          }
+        ]
+      }
+    ]
+  }
+]

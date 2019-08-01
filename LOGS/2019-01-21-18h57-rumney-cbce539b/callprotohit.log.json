@@ -1,0 +1,112 @@
+[
+  {
+    "name": "callprotohit",
+    "subtitle": false,
+    "path": "micro/callprotohit.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "/tmp/callprotohit -",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [1520,1500,1500],
+              "rtimes": [1510,1500,1500]
+            },
+            "time": 1500
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.2",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "nodejs micro/callprotohit.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [2440,2450,2460],
+              "rtimes": [2440,2460,2470]
+            },
+            "time": 2440
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "jsc /tmp/callprotohit-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [490,480,460],
+              "rtimes": [480,480,460]
+            },
+            "time": 460
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "js52 /tmp/callprotohit-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "ch /tmp/callprotohit-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node micro/callprotohit.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

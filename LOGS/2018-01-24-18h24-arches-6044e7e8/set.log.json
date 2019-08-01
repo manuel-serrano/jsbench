@@ -1,0 +1,64 @@
+[
+  {
+    "name": "set",
+    "path": "micro/set.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/set.js -o /tmp/set ",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 3760,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs micro/set.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 2010,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/set-jsc.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 4330,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js24 /tmp/set-js24.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 42420,
+            "message": "Instance"
+          }
+        ]
+      }
+    ]
+  }
+]

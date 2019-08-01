@@ -1,0 +1,64 @@
+[
+  {
+    "name": "richards",
+    "path": "octane/richards.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox octane/richards.js -o /tmp/richards ",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 4800,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs octane/richards.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 1240,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/richards-jsc.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 1620,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js24 /tmp/richards-js24.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 1150,
+            "message": "Instance"
+          }
+        ]
+      }
+    ]
+  }
+]

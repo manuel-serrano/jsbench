@@ -1,0 +1,25 @@
+[
+  {
+    "name": "callobjhit",
+    "path": "micro/callobjhit.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/callobjhit.js -o /tmp/callobjhit ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [680,700,680],
+              "rtimes": [670,670,680]
+            },
+            "time": 680
+          }
+        ]
+      }
+    ]
+  }
+]

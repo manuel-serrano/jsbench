@@ -1,0 +1,25 @@
+[
+  {
+    "name": "incop",
+    "path": "micro/incop.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/incop.js -o /tmp/incop ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [1230,1210,1210],
+              "rtimes": [1200,1190,1200]
+            },
+            "time": 1210
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "maze",
+    "subtitle": false,
+    "path": "bglstone/maze.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/maze -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [1570,2620,1550],
+              "rtimes": [860,970,870]
+            },
+            "time": 1550
+          }
+        ]
+      }
+    ]
+  }
+]

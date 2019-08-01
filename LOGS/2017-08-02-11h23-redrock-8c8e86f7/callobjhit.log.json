@@ -1,0 +1,36 @@
+[
+  {
+    "name": "callobjhit",
+    "path": "micro/callobjhit.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-st",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/callobjhit.js -o /tmp/callobjhit ",
+        "logs": [
+          {
+            "date": "2017-08-02T09:36:30.085Z",
+            "time": 1760,
+            "message": "Int"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.4",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "nodejs micro/callobjhit.js",
+        "logs": [
+          {
+            "date": "2017-08-02T09:36:30.085Z",
+            "time": 8490,
+            "message": "Int"
+          }
+        ]
+      }
+    ]
+  }
+]

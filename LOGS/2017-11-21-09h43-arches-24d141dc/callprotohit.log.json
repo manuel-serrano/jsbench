@@ -1,0 +1,34 @@
+[
+  {
+    "name": "callprotohit",
+    "path": "micro/callprotohit.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/callprotohit.js -o /tmp/callprotohit ",
+        "logs": [
+          {
+            "date": "2017-11-21T08:43:36.000Z",
+            "time": 1770
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.4",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs micro/callprotohit.js",
+        "logs": [
+          {
+            "date": "2017-11-21T08:43:36.000Z",
+            "time": 17170
+          }
+        ]
+      }
+    ]
+  }
+]

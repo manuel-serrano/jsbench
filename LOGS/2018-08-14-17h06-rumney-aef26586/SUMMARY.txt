@@ -1,0 +1,62 @@
+hop 3.2.0-mt (2018-08-14:17h06) [rumney]
+========================================
+
+        assigop: 19.10 real
+ 19.11 usr+sys
+          bague:  0.66 real
+  0.67 usr+sys
+         base64:  3.88 real
+  3.83 usr+sys
+    binary-tree: 29.08 real
+ 50.40 usr+sys
+          boyer:  4.98 real
+  6.78 usr+sys
+     callobjhit:  0.67 real
+  0.68 usr+sys
+   callprotohit:  1.56 real
+  1.56 usr+sys
+         crypto: 12.26 real
+ 12.46 usr+sys
+     crypto-aes:  4.00 real
+  4.58 usr+sys
+     crypto-md5:  1.21 real
+  1.28 usr+sys
+    crypto-sha1:  0.85 real
+  0.95 usr+sys
+           ctor:  8.23 real
+ 15.82 usr+sys
+      deltablue:  5.90 real
+  7.08 usr+sys
+         earley:  2.49 real
+  4.19 usr+sys
+       fannkuch:  5.01 real
+  5.02 usr+sys
+            fib:  0.40 real
+  0.41 usr+sys
+          fib42:  4.87 real
+  4.88 usr+sys
+          incop:  1.19 real
+  1.21 usr+sys
+           maze:  1.67 real
+  2.30 usr+sys
+           poly:  1.35 real
+  1.37 usr+sys
+         puzzle:  2.98 real
+  3.00 usr+sys
+          qsort:  0.95 real
+  1.01 usr+sys
+       richards:  4.67 real
+  4.69 usr+sys
+            set:  4.21 real
+  4.23 usr+sys
+          sieve:  2.75 real
+  4.43 usr+sys
+          splay: 12.47 real
+ 21.00 usr+sys
+         stridx: 26.47 real
+ 26.51 usr+sys
+         string:  8.51 real
+  8.56 usr+sys
+         switch:  0.98 real
+  0.99 usr+sys
+

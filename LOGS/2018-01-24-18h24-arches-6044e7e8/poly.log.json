@@ -1,0 +1,64 @@
+[
+  {
+    "name": "poly",
+    "path": "micro/poly.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/poly.js -o /tmp/poly ",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 2160,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs micro/poly.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 230,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/poly-jsc.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 320,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js24 /tmp/poly-js24.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 4370,
+            "message": "Instance"
+          }
+        ]
+      }
+    ]
+  }
+]

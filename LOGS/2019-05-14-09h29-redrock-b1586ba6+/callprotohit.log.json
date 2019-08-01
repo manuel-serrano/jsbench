@@ -1,0 +1,27 @@
+[
+  {
+    "name": "callprotohit",
+    "subtitle": false,
+    "path": "micro/callprotohit.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/callprotohit -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [580,590,600],
+              "rtimes": [580,570,590]
+            },
+            "time": 580
+          }
+        ]
+      }
+    ]
+  }
+]

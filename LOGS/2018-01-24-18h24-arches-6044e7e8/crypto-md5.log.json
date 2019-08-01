@@ -1,0 +1,64 @@
+[
+  {
+    "name": "crypto-md5",
+    "path": "jetstream/crypto-md5.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox jetstream/crypto-md5.js -o /tmp/crypto-md5 ",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 43340,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs jetstream/crypto-md5.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 1370,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/crypto-md5-jsc.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 1170,
+            "message": "Instance"
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js24 /tmp/crypto-md5-js24.js",
+        "logs": [
+          {
+            "date": "2018-01-24T17:24:38.000Z",
+            "time": 910,
+            "message": "Instance"
+          }
+        ]
+      }
+    ]
+  }
+]

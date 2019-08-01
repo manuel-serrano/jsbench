@@ -1,0 +1,145 @@
+chakra  (2018-03-04:21h15) [moab]
+=================================
+
+        assigop: -0.00 sec
+          bague: -0.00 sec
+         base64: -0.00 sec
+          boyer: -0.00 sec
+     callobjhit: -0.00 sec
+   callprotohit: -0.00 sec
+     crypto-aes: -0.00 sec
+     crypto-md5: -0.00 sec
+    crypto-sha1: -0.00 sec
+           ctor: -0.00 sec
+      deltablue: -0.00 sec
+       fannkuch: -0.00 sec
+            fib: -0.00 sec
+          fib42: -0.00 sec
+          incop: -0.00 sec
+           poly: -0.00 sec
+         puzzle: -0.00 sec
+          qsort: -0.00 sec
+       richards: -0.00 sec
+            set: -0.00 sec
+          sieve: -0.00 sec
+          splay: -0.00 sec
+         stridx: -0.00 sec
+         string: -0.00 sec
+         switch: -0.00 sec
+
+hop 3.2.0-st (2018-03-04:21h15) [moab]
+======================================
+
+        assigop: 12.14 sec
+          bague:  0.51 sec
+         base64:  5.34 sec
+          boyer:  7.23 sec
+     callobjhit:  0.95 sec
+   callprotohit:  2.24 sec
+     crypto-aes:  4.76 sec
+     crypto-md5: 42.96 sec
+    crypto-sha1: 43.82 sec
+           ctor: 12.20 sec
+      deltablue:  6.90 sec
+       fannkuch:  4.10 sec
+            fib:  0.70 sec
+          fib42:  6.07 sec
+          incop:  0.80 sec
+           poly:  2.10 sec
+         puzzle:  3.24 sec
+          qsort:  1.21 sec
+       richards:  5.14 sec
+            set:  4.44 sec
+          sieve:  3.35 sec
+          splay: 11.03 sec
+         stridx: 27.12 sec
+         string:  8.59 sec
+         switch:  2.89 sec
+
+js24  (2018-03-04:21h15) [moab]
+===============================
+
+        assigop: 142.81 sec
+          bague: 10.36 sec
+         base64:  1.52 sec
+          boyer:  1.96 sec
+     callobjhit:  4.78 sec
+   callprotohit: 16.25 sec
+     crypto-aes:  2.14 sec
+     crypto-md5:  0.95 sec
+    crypto-sha1:  0.38 sec
+           ctor: 83.67 sec
+      deltablue:  1.16 sec
+       fannkuch:  2.50 sec
+            fib:  0.75 sec
+          fib42:  9.74 sec
+          incop:  9.62 sec
+           poly:  4.79 sec
+         puzzle:  4.76 sec
+          qsort: 24.42 sec
+       richards:  1.25 sec
+            set: 43.27 sec
+          sieve: 13.40 sec
+          splay:  6.43 sec
+         stridx: 27.37 sec
+         string: 13.48 sec
+         switch:  3.85 sec
+
+jsc  (2018-03-04:21h15) [moab]
+==============================
+
+        assigop: 30.99 sec
+          bague:  0.62 sec
+         base64:  2.27 sec
+          boyer:  1.73 sec
+     callobjhit:  0.63 sec
+   callprotohit:  0.59 sec
+     crypto-aes:  1.97 sec
+     crypto-md5:  1.20 sec
+    crypto-sha1:  0.98 sec
+           ctor:  2.17 sec
+      deltablue:  1.53 sec
+       fannkuch:  3.52 sec
+            fib:  0.98 sec
+          fib42: 12.74 sec
+          incop:  0.43 sec
+           poly:  0.36 sec
+         puzzle:  1.84 sec
+          qsort:  0.91 sec
+       richards:  1.58 sec
+            set:  3.87 sec
+          sieve:  0.59 sec
+          splay: 14.12 sec
+         stridx: 34.75 sec
+         string: 23.17 sec
+         switch:  0.64 sec
+
+nodejs v8.9.1 (2018-03-04:21h15) [moab]
+=======================================
+
+        assigop: 16.48 sec
+          bague:  0.47 sec
+         base64:  7.39 sec
+          boyer:  3.48 sec
+     callobjhit:  0.53 sec
+   callprotohit:  0.53 sec
+     crypto-aes:  1.54 sec
+     crypto-md5:  1.34 sec
+    crypto-sha1:  0.83 sec
+           ctor:  1.28 sec
+      deltablue:  1.02 sec
+       fannkuch:  2.51 sec
+            fib:  1.30 sec
+          fib42: 16.41 sec
+          incop:  0.68 sec
+           poly:  0.28 sec
+         puzzle:  1.51 sec
+          qsort:  0.99 sec
+       richards:  1.24 sec
+            set:  1.81 sec
+          sieve:  0.53 sec
+          splay: 10.82 sec
+         stridx:  8.83 sec
+         string:  1.70 sec
+         switch:  0.92 sec
+

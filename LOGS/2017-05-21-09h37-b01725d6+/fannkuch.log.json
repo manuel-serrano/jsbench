@@ -1,0 +1,36 @@
+[
+  {
+    "name": "fannkuch",
+    "path": "shootout/fannkuch.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-mt",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "hopc -Ox shootout/fannkuch.js -o /tmp/fannkuch -m64",
+        "logs": [
+          {
+            "date": "2017-05-21T07:38:41.820Z",
+            "time": 4030,
+            "message": "Hidden"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.2",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "nodejs shootout/fannkuch.js",
+        "logs": [
+          {
+            "date": "2017-05-21T07:38:51.523Z",
+            "time": 3220,
+            "message": "Hidden"
+          }
+        ]
+      }
+    ]
+  }
+]

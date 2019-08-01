@@ -1,0 +1,27 @@
+[
+  {
+    "name": "hash-map",
+    "subtitle": false,
+    "path": "jetstream/hash-map.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/hash-map -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [1430,1420,1440],
+              "rtimes": [1050,1050,1060]
+            },
+            "time": 1420
+          }
+        ]
+      }
+    ]
+  }
+]

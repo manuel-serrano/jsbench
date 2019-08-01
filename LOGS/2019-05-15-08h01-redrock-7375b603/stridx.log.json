@@ -1,0 +1,27 @@
+[
+  {
+    "name": "stridx",
+    "subtitle": false,
+    "path": "micro/stridx.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/stridx -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [25760,25700,25710],
+              "rtimes": [25660,25600,25610]
+            },
+            "time": 25700
+          }
+        ]
+      }
+    ]
+  }
+]

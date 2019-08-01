@@ -1,0 +1,36 @@
+[
+  {
+    "name": "puzzle",
+    "path": "bglstone/puzzle.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-mt",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "hopc -Ox bglstone/puzzle.js -o /tmp/puzzle ",
+        "logs": [
+          {
+            "date": "2017-06-28T18:02:17.359Z",
+            "time": 7430,
+            "message": "Method"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.2",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/puzzle.js",
+        "logs": [
+          {
+            "date": "2017-06-28T18:02:17.359Z",
+            "time": 2530,
+            "message": "Method"
+          }
+        ]
+      }
+    ]
+  }
+]

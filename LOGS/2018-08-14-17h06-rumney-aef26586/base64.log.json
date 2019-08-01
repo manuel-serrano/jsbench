@@ -1,0 +1,25 @@
+[
+  {
+    "name": "base64",
+    "path": "sunspider/base64.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox sunspider/base64.js -o /tmp/base64 ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [3840,3870,3830],
+              "rtimes": [3900,3880,3890]
+            },
+            "time": 3830
+          }
+        ]
+      }
+    ]
+  }
+]

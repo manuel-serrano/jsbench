@@ -1,0 +1,73 @@
+[
+  {
+    "name": "crypto-sha1",
+    "path": "jetstream/crypto-sha1.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/HOP2/bin/hopc -Ox jetstream/crypto-sha1.js -o /tmp/crypto-sha1 ",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 3030
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs jetstream/crypto-sha1.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 390
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/crypto-sha1-jsc.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 430
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js24 /tmp/crypto-sha1-js24.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 320
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/crypto-sha1-chakra.js",
+        "logs": [
+          {
+            "date": "2018-06-01T12:25:57.000Z",
+            "time": 390
+          }
+        ]
+      }
+    ]
+  }
+]

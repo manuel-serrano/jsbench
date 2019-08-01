@@ -1,0 +1,8 @@
+{
+   "name": "xsr6",
+   "version": "701879d37e7fe5001420e0053cd60df6b91e4553",
+   "cmd": "@INTERPRETER@ -p @TMP@/@NAME@-xsr6.js",
+   "interpreter": "/opt/JS/kinomajs/xs6/bin/linux/i686/Release/xsr6",
+   "iteration": 1,
+   "prelude": "xsr6-prelude.js"
+}

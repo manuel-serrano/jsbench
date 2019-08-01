@@ -1,0 +1,73 @@
+[
+  {
+    "name": "crypto-sha1",
+    "path": "jetstream/crypto-sha1.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox jetstream/crypto-sha1.js -o /tmp/crypto-sha1 ",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 43820
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "nodejs jetstream/crypto-sha1.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 830
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "jsc /tmp/crypto-sha1-jsc.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 980
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "js24 /tmp/crypto-sha1-js24.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 380
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "ch /tmp/crypto-sha1-ch.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

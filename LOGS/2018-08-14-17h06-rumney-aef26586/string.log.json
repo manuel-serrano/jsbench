@@ -1,0 +1,25 @@
+[
+  {
+    "name": "string",
+    "path": "micro/string.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/string.js -o /tmp/string ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [8560,8590,8570],
+              "rtimes": [8530,8550,8510]
+            },
+            "time": 8560
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,7 @@
+{
+   "name": "nodejs",
+   "version": "@INTERPRETER@ -e \"console.log( process.version )\"",
+   "cmd": "@INTERPRETER@ @PATH@",
+   "interpreter": "nodejs",
+   "iteration": 3
+}

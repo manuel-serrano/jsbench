@@ -1,0 +1,27 @@
+[
+  {
+    "name": "crypto-sha1",
+    "subtitle": false,
+    "path": "jetstream/crypto-sha1.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/crypto-sha1 -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [720,680,710],
+              "rtimes": [520,510,500]
+            },
+            "time": 680
+          }
+        ]
+      }
+    ]
+  }
+]

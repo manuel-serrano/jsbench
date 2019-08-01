@@ -1,0 +1,27 @@
+[
+  {
+    "name": "maze-proxy",
+    "subtitle": false,
+    "path": "proxy/maze-proxy.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/maze-proxy -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [5630,5680,5650],
+              "rtimes": [3620,3610,3610]
+            },
+            "time": 5630
+          }
+        ]
+      }
+    ]
+  }
+]

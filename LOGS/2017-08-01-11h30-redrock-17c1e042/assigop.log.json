@@ -1,0 +1,36 @@
+[
+  {
+    "name": "assigop",
+    "path": "micro/assigop.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-st",
+        "host": "redrock.inria.fr",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/assigop.js -o /tmp/assigop ",
+        "logs": [
+          {
+            "date": "2017-08-01T09:35:42.900Z",
+            "time": 1080,
+            "message": "New"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.3",
+        "host": "redrock.inria.fr",
+        "platform": "linux",
+        "cmd": "nodejs micro/assigop.js",
+        "logs": [
+          {
+            "date": "2017-08-01T09:35:42.900Z",
+            "time": 990,
+            "message": "New"
+          }
+        ]
+      }
+    ]
+  }
+]

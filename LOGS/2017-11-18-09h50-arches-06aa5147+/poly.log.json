@@ -1,0 +1,36 @@
+[
+  {
+    "name": "poly",
+    "path": "micro/poly.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/poly.js -o /tmp/poly ",
+        "logs": [
+          {
+            "date": "2017-11-18T08:50:16.000Z",
+            "time": 2260,
+            "message": "Inline"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.4",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs micro/poly.js",
+        "logs": [
+          {
+            "date": "2017-11-18T08:50:16.000Z",
+            "time": 18080,
+            "message": "Inline"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "ctor",
+    "subtitle": false,
+    "path": "micro/ctor.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/ctor -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [25790,25930,25920],
+              "rtimes": [6920,7060,7060]
+            },
+            "time": 25790
+          }
+        ]
+      }
+    ]
+  }
+]

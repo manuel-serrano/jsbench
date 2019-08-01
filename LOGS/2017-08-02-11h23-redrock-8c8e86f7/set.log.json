@@ -1,0 +1,36 @@
+[
+  {
+    "name": "set",
+    "path": "micro/set.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-st",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox micro/set.js -o /tmp/set ",
+        "logs": [
+          {
+            "date": "2017-08-02T09:35:58.951Z",
+            "time": 4970,
+            "message": "Int"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.4",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "nodejs micro/set.js",
+        "logs": [
+          {
+            "date": "2017-08-02T09:35:58.951Z",
+            "time": 3880,
+            "message": "Int"
+          }
+        ]
+      }
+    ]
+  }
+]

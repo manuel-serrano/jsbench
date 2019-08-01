@@ -1,0 +1,36 @@
+[
+  {
+    "name": "fib",
+    "path": "bglstone/fib.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-mt",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "hopc -Ox bglstone/fib.js -o /tmp/fib ",
+        "logs": [
+          {
+            "date": "2017-05-21T07:39:32.810Z",
+            "time": 560,
+            "message": "Hidden"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.2",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/fib.js",
+        "logs": [
+          {
+            "date": "2017-05-21T07:40:46.998Z",
+            "time": 24550,
+            "message": "Hidden"
+          }
+        ]
+      }
+    ]
+  }
+]

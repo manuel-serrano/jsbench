@@ -1,0 +1,27 @@
+[
+  {
+    "name": "fib",
+    "subtitle": false,
+    "path": "bglstone/fib.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/fib -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [550,550,580],
+              "rtimes": [540,550,570]
+            },
+            "time": 550
+          }
+        ]
+      }
+    ]
+  }
+]

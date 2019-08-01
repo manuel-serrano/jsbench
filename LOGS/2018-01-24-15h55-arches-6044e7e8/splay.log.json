@@ -1,0 +1,61 @@
+[
+  {
+    "name": "splay",
+    "path": "octane/splay.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox octane/splay.js -o /tmp/splay ",
+        "logs": [
+          {
+	    "message": "Imethod",
+            "date": "2018-01-24T14:55:32.000Z",
+            "time": 11880
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs octane/splay.js",
+        "logs": [
+          {
+            "date": "2018-01-24T14:55:32.000Z",
+            "time": 10500
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/splay-jsc.js",
+        "logs": [
+          {
+            "date": "2018-01-24T14:55:32.000Z",
+            "time": 14840
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js24 /tmp/splay-js24.js",
+        "logs": [
+          {
+            "date": "2018-01-24T14:55:32.000Z",
+            "time": 6480
+          }
+        ]
+      }
+    ]
+  }
+]

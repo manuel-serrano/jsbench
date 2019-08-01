@@ -1,0 +1,27 @@
+[
+  {
+    "name": "deltablue",
+    "subtitle": false,
+    "path": "octane/deltablue.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/deltablue -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [58120,58050,57870],
+              "rtimes": [32300,32380,32230]
+            },
+            "time": 57870
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,46 @@
+hop 3.2.0-st (2017-11-11:07h37) [moab.claus.fr]
+===============================================
+
+        assigop:  0.88 sec
+          bague:  4.89 sec
+         base64:  4.71 sec
+          boyer:  9.27 sec
+     callobjhit:  1.71 sec
+   callprotohit:  1.90 sec
+     crypto-aes: 12.19 sec
+           ctor: 11.45 sec
+      deltablue:  8.83 sec
+       fannkuch:  3.67 sec
+            fib:  0.55 sec
+          incop:  0.74 sec
+           poly:  2.82 sec
+         puzzle:  8.86 sec
+          qsort:  1.95 sec
+       richards:  6.64 sec
+            set:  5.69 sec
+          sieve:  4.11 sec
+          splay: 16.57 sec
+
+nodejs v4.8.4 (2017-11-11:07h37) [moab.claus.fr]
+================================================
+
+        assigop:  2.03 sec
+          bague:  5.29 sec
+         base64:  5.89 sec
+          boyer:  9.06 sec
+     callobjhit:  8.42 sec
+   callprotohit: 15.25 sec
+     crypto-aes:  2.70 sec
+           ctor: 13.68 sec
+      deltablue:  2.19 sec
+       fannkuch:  3.27 sec
+            fib: 24.72 sec
+          incop:  0.99 sec
+           poly: 15.93 sec
+         puzzle:  3.18 sec
+          qsort:  2.19 sec
+       richards:  3.10 sec
+            set:  3.78 sec
+          sieve:  4.53 sec
+          splay:  9.99 sec
+

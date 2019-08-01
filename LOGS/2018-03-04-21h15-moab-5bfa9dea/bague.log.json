@@ -1,0 +1,73 @@
+[
+  {
+    "name": "bague",
+    "path": "bglstone/bague.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox bglstone/bague.js -o /tmp/bague ",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 510
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/bague.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 470
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "jsc /tmp/bague-jsc.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 620
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "js24 /tmp/bague-js24.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 10360
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "ch /tmp/bague-ch.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

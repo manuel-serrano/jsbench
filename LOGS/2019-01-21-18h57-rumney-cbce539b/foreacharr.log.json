@@ -1,0 +1,112 @@
+[
+  {
+    "name": "foreacharr",
+    "subtitle": false,
+    "path": "micro/foreacharr.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "/tmp/foreacharr -",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [12620,12660,12560],
+              "rtimes": [7530,7540,7530]
+            },
+            "time": 12560
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.2",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "nodejs micro/foreacharr.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [10280,10490,10450],
+              "rtimes": [10280,10480,10460]
+            },
+            "time": 10280
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "jsc /tmp/foreacharr-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [1720,1750,1740],
+              "rtimes": [1710,1730,1720]
+            },
+            "time": 1720
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "js52 /tmp/foreacharr-js52.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "ch /tmp/foreacharr-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-1.0.0-rc8/bin/node micro/foreacharr.js",
+        "logs": [
+          {
+            "date": "2019-01-21T17:57:15.000Z",
+            "times": {
+              "ustimes": [],
+              "rtimes": []
+            },
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

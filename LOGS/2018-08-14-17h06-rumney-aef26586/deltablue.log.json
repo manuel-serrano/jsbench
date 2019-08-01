@@ -1,0 +1,25 @@
+[
+  {
+    "name": "deltablue",
+    "path": "octane/deltablue.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox octane/deltablue.js -o /tmp/deltablue ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [7120,7080,7150],
+              "rtimes": [5920,5900,5940]
+            },
+            "time": 7080
+          }
+        ]
+      }
+    ]
+  }
+]

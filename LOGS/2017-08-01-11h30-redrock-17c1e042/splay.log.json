@@ -1,0 +1,36 @@
+[
+  {
+    "name": "splay",
+    "path": "octane/splay.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-st",
+        "host": "redrock.inria.fr",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox octane/splay.js -o /tmp/splay ",
+        "logs": [
+          {
+            "date": "2017-08-01T09:32:44.128Z",
+            "time": 11640,
+            "message": "New"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.3",
+        "host": "redrock.inria.fr",
+        "platform": "linux",
+        "cmd": "nodejs octane/splay.js",
+        "logs": [
+          {
+            "date": "2017-08-01T09:32:44.128Z",
+            "time": 4950,
+            "message": "New"
+          }
+        ]
+      }
+    ]
+  }
+]

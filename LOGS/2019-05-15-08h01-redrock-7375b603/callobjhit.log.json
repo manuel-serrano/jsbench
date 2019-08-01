@@ -1,0 +1,27 @@
+[
+  {
+    "name": "callobjhit",
+    "subtitle": false,
+    "path": "micro/callobjhit.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/callobjhit -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [600,620,570],
+              "rtimes": [600,600,580]
+            },
+            "time": 570
+          }
+        ]
+      }
+    ]
+  }
+]

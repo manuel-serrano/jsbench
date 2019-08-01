@@ -1,0 +1,73 @@
+[
+  {
+    "name": "splay",
+    "path": "octane/splay.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox octane/splay.js -o /tmp/splay ",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 11030
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "nodejs octane/splay.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 10820
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "jsc /tmp/splay-jsc.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 14120
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "js24 /tmp/splay-js24.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": 6430
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "moab",
+        "platform": "linux",
+        "cmd": "ch /tmp/splay-ch.js",
+        "logs": [
+          {
+            "date": "2018-03-04T20:15:15.000Z",
+            "time": -1
+          }
+        ]
+      }
+    ]
+  }
+]

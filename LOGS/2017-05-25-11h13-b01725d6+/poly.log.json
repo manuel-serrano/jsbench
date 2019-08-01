@@ -1,0 +1,36 @@
+[
+  {
+    "name": "poly",
+    "path": "micro/poly.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-mt",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/poly.js -o /tmp/poly ",
+        "logs": [
+          {
+            "date": "2017-05-26T04:56:48.774Z",
+            "time": 3410,
+            "message": "vtable"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.2",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "nodejs micro/poly.js",
+        "logs": [
+          {
+            "date": "2017-05-26T04:57:36.632Z",
+            "time": 15920,
+            "message": "vtable"
+          }
+        ]
+      }
+    ]
+  }
+]

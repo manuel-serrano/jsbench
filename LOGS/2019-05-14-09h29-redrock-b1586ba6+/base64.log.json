@@ -1,0 +1,27 @@
+[
+  {
+    "name": "base64",
+    "subtitle": false,
+    "path": "sunspider/base64.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/base64 -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [3650,3800,3810],
+              "rtimes": [3410,3570,3540]
+            },
+            "time": 3650
+          }
+        ]
+      }
+    ]
+  }
+]

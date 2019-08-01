@@ -1,0 +1,36 @@
+[
+  {
+    "name": "splay",
+    "path": "octane/splay.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.1.0-st",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox octane/splay.js -o /tmp/splay ",
+        "logs": [
+          {
+            "date": "2017-08-02T09:26:55.961Z",
+            "time": 19730,
+            "message": "Int"
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v4.8.4",
+        "host": "moab.claus.fr",
+        "platform": "linux",
+        "cmd": "nodejs octane/splay.js",
+        "logs": [
+          {
+            "date": "2017-08-02T09:26:55.961Z",
+            "time": 9680,
+            "message": "Int"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "deltablue-proxy",
+    "subtitle": false,
+    "path": "proxy/deltablue-proxy.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/deltablue-proxy -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [8510,8500,8850],
+              "rtimes": [5850,5840,6210]
+            },
+            "time": 8500
+          }
+        ]
+      }
+    ]
+  }
+]

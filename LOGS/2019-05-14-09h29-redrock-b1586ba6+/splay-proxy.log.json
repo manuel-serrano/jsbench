@@ -1,0 +1,27 @@
+[
+  {
+    "name": "splay-proxy",
+    "subtitle": false,
+    "path": "proxy/splay-proxy.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/splay-proxy -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [31060,30810,30420],
+              "rtimes": [17810,17620,17280]
+            },
+            "time": 30420
+          }
+        ]
+      }
+    ]
+  }
+]

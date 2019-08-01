@@ -1,0 +1,8 @@
+{
+   "name": "hopfp",
+   "version": "@COMPILER@ --eval \"(begin (print (hop-version) (if (=fx (hop-max-threads) 1) \\\"-st\\\" \\\"-mt\\\")) (exit 0))\"",
+   "cmd": "@COMPILER@ -Ox --profile @PATH@ -o @TMP@/@NAME@ @EXTRAOPTS@ && HOPTRACE=\"hopscript:cache format:fprofile\" @TMP@/@NAME@ 2> @TMP@/@NAME@.prof.json && @COMPILER@ -Ox -fprofile @TMP@/@NAME@.prof.json @PATH@ -o @TMP@/@NAME@ @EXTRAOPTS@",
+   "run": "@TMP@/@NAME@",
+   "compiler": "hopc",
+   "iteration": 3
+}

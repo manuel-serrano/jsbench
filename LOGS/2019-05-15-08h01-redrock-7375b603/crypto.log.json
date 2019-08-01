@@ -1,0 +1,27 @@
+[
+  {
+    "name": "crypto",
+    "subtitle": false,
+    "path": "octane/crypto.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/crypto -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [8290,8340,8350],
+              "rtimes": [7970,8020,8060]
+            },
+            "time": 8290
+          }
+        ]
+      }
+    ]
+  }
+]

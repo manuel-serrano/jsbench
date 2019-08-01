@@ -1,0 +1,8 @@
+{
+   "name": "hop",
+   "version": "@COMPILER@ --eval \"(begin (print (hop-version) (if (=fx (hop-max-threads) 1) \\\"-st\\\" \\\"-mt\\\")) (exit 0))\"",
+   "cmd": "@COMPILER@ -Ox --js-patch @PATH@ -o @TMP@/@NAME@ @EXTRAOPTS@",
+   "run": "@TMP@/@NAME@",
+   "compiler": "hopc",
+   "iteration": 3
+}

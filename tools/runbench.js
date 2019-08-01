@@ -1,0 +1,506 @@
+/*=====================================================================*/
+/*    serrano/prgm/project/hop/jsbench/tools/runbench.js               */
+/*    -------------------------------------------------------------    */
+/*    Author      :  Manuel Serrano                                    */
+/*    Creation    :  Fri Apr 14 05:59:26 2017                          */
+/*    Last change :  Fri Jul 12 14:39:44 2019 (serrano)                */
+/*    Copyright   :  2017-19 Manuel Serrano                            */
+/*    -------------------------------------------------------------    */
+/*    Run benchmarks                                                   */
+/*=====================================================================*/
+"use hopscript";
+
+/*---------------------------------------------------------------------*/
+/*    module imports                                                   */
+/*---------------------------------------------------------------------*/
+const path = require( "path" );
+const fs = require( "fs" );
+const rc = require( "./rc.js" );
+const format = require( "util" ).format;
+const exec = require( "child_process" ).exec;
+const time = require( hop.systime ).time;
+const engine = require( "./engine.js" );
+const system = require( "./exec.hop" );
+
+const argsparse = require( "minimist" );
+const jsonformat = require( "json-format" );
+
+let dt = new Date();
+
+/*---------------------------------------------------------------------*/
+/*    compatibility                                                    */
+/*---------------------------------------------------------------------*/
+if( !("isAbsolute" in path) ) {
+   path.isAbsolute = function( p ) {
+      return p[ 0 ] == '/';
+   }
+}
+      
+/*---------------------------------------------------------------------*/
+/*    normalizeCwd ...                                                 */
+/*---------------------------------------------------------------------*/
+function normalizeCwd( file ) {
+   if( path.isAbsolute( file ) ) {
+      return file;
+   } else {
+      return path.join( process.cwd(), file );
+   }
+}
+
+/*---------------------------------------------------------------------*/
+/*    global variables                                                 */
+/*---------------------------------------------------------------------*/
+let config;
+
+/*---------------------------------------------------------------------*/
+/*    forEachAsync ...                                                 */
+/*---------------------------------------------------------------------*/
+Array.prototype.forEachAsync = function( proc ) {
+   const arr = this;
+   
+   function loop( i ) {
+      if( i < arr.length ) {
+	 return proc( arr[ i ] )
+	    .then( sec => loop( i + 1 ), err => console.error( err ) );
+      } else {
+	 return new Promise( (resolve, reject ) => resolve( true ) );
+      }
+   }
+
+   return loop( 0 );
+}
+
+/*---------------------------------------------------------------------*/
+/*    JSON.format ...                                                  */
+/*---------------------------------------------------------------------*/
+JSON.format = function( o ) {
+   return jsonformat( o, {
+      type: 'space',
+      size: 2
+   } );
+}
+
+/*---------------------------------------------------------------------*/
+/*    execPromise ...                                                  */
+/*---------------------------------------------------------------------*/
+function execPromise( cmd, action ) {
+   if( config.verbose >= 3 ) {
+      process.stdout.write( "    " + action + ": " + cmd + "\n" );
+   }
+   
+   return new Promise( (resolve, reject) => {
+      const proc = exec( cmd, (error, stdout, stderr) => {
+	 if( error ) {
+	    reject( error );
+	 }
+      } );
+
+      proc.on( "exit", (code, signal) => {
+	 if( code === 0 ) {
+	    resolve( code );
+	 } else {
+	    reject( code );
+	 }
+      } );
+      
+      proc.on( "error", (code, signal) => {
+	 reject( code );
+      } );
+   } );
+}
+
+/*---------------------------------------------------------------------*/
+/*    execSync ...                                                     */
+/*---------------------------------------------------------------------*/
+function execSync( cmd, action ) {
+   if( config.verbose >= 3 ) {
+      process.stdout.write( "." );
+   }
+
+   return system.system( cmd );
+}
+
+/*---------------------------------------------------------------------*/
+/*    benchLog ...                                                     */
+/*---------------------------------------------------------------------*/
+function benchLog( bench, engine, cmd, times, subtitle, args ) {
+
+   function mkBenchLogEngineEntry( times ) {
+      const e = {
+	 date: dt,
+	 times: times,
+	 time: times.ustimes.length > 0 ? Math.min.apply( null, times.ustimes ) : -1
+      };
+      
+      if( config.message ) {
+	 e.message = config.message;
+      }
+      
+      return e;
+   }
+   
+   function mkBenchLogEngine( engine, cmd, times ) {
+      return {
+	 name: engine.name,
+	 version: engine.version,
+	 host: config.host.replace( /[.].*$/, "" ),
+	 platform: config.platform,
+	 cmd: cmd,
+	 logs: [ mkBenchLogEngineEntry( times ) ]
+      };
+   }
+
+   function mkBenchLog( bench, elog ) {
+      return {
+	 name: bench.name + (subtitle ? "-" + subtitle : ""),
+	 subtitle: subtitle,
+	 path: bench.path,
+	 args: args, 
+	 engines: [ elog ]
+      }
+   }
+
+   function isEngine( e ) {
+      return e.name === engine.name
+	 && e.version === engine.version
+	 && e.host === config.host
+	 && e.platform === config.platform;
+   }
+   
+   function readLogs( json ) {
+      if( fs.existsSync( json ) ) {
+	 try { 
+	    const log = require( normalizeCwd( json ) );
+	    
+	    if( log instanceof Array ) {
+	       return log;
+	    } else {
+	       return false;
+	    }
+	 } catch( _ ) {
+	    return false;
+	 }
+      } else {
+	 return false;
+      }
+   }
+      
+   function mkBenchLogs( json ) {
+      const logs = readLogs( json );
+      
+      if( logs ) {
+	 const old = logs.find( e => e.name === bench.name );
+
+	 if( old ) {
+	    const eng = old.engines.find( isEngine );
+	    if( eng ) {
+	       eng.logs.push( mkBenchLogEngineEntry( times ) );
+	    } else {
+	       old.engines.push( mkBenchLogEngine( engine, cmd, times ) );
+	    }
+	 } else {
+	    logs.push( mkBenchLog( bench, mkBenchLogEngine( engine, cmd, times ) ) );
+	 }
+	 return logs;
+      } else {
+	 return [ mkBenchLog( bench, mkBenchLogEngine( engine, cmd, times ) ) ];
+      }
+   }
+   
+   return new Promise( (resolve, reject) => {
+      if( config.log ) {
+	 let json = bench.path.replace( /[.]js$/, "" ) 
+	     + (subtitle ? "-" + subtitle : "")
+	     + ".log.json"
+
+	 if( config.directory ) {
+	    json = path.join( config.directory, path.basename( json ) );
+	 }
+	 
+	 fs.writeFile( json,
+		       JSON.format( mkBenchLogs( json ) ),
+		       err => err ? reject( err ) : resolve( 0 ) );
+      } else {
+	 resolve( 0 );
+      }
+   } );
+}
+   
+
+/*---------------------------------------------------------------------*/
+/*    runBench ...                                                     */
+/*---------------------------------------------------------------------*/
+function runBench( bench, engine ) {
+
+   function sec( ms ) {
+      let sec = ms / 1000;
+
+      return sec.toFixed( 2 );
+   }
+
+   function chrono( cmd ) {
+      const iteration = Math.min( config.iteration || engine.iteration,
+				  engine.maxIteration || config.iteration || engine.iteration );
+      const ustimes = new Array( iteration ), rtimes = new Array( iteration );
+      
+      if( config.verbose >= 3 ) {
+	 process.stdout.write( "    run ["
+			       + (iteration || config.run) + "]: "
+			       + "\"" + cmd + "\" " );
+      }
+
+      for( let i = 0; i < (iteration || config.run); i++ ) {
+	 const { res, rtime, stime, utime } = time( () => execSync( cmd, "." ) );
+
+	 if( res != 0 ) {
+	    process.stdout.write( " " + -1 + "\n" );
+	    return { ustimes: [], rtimes: [] };
+	 }
+
+	 ustimes[ i ] = (stime + utime);
+	 rtimes[ i ] = rtime;
+      }
+
+      process.stdout.write(
+	 " real: " + sec( Math.min.apply( null, rtimes ) ) + 
+	 ", usr+sys: " + sec( Math.min.apply( null, ustimes ) ) + "\n" );
+
+      return { ustimes, rtimes };
+   }
+   
+   function benchCmd( args ) {
+      return engine.cmd
+	 .replace( /@PATH@/g, bench.path )
+	 .replace( /@TMP@/g, config.tmp )
+	 .replace( /@NAME@/g, bench.name )
+	 .replace( /@COMPILER@/g, engine.compiler || "" )
+	 .replace( /@INTERPRETER@/g, engine.interpreter || "" )
+	 .replace( /@EXTRAOPTS@/g, engine.extraopts || "" )
+	 + (args ? " " + args : "");
+   }
+
+   function compile( args ) {
+      return execPromise( benchCmd( args ), "compile" )
+	 .then( v => v,
+		(err) => {
+		   console.error( bench.name, "compilation failed with message", err );
+		} );
+   }
+
+   function runCompile( subtitle, args ) {
+      const run = engine.run
+	    .replace( /@TMP@/g, config.tmp )
+	    .replace( /@NAME@/g, bench.name )
+	    .replace( /@INTERPRETER@/g, engine.interpreter || "" )
+	    + (args ? " " + args : "");
+      return benchLog( bench, engine, run, chrono( run ), subtitle, args );
+   }
+
+   function runInterpret( subtitle, args ) {
+      const run = benchCmd( args );
+
+      return benchLog( bench, engine, run, chrono( run ), subtitle, args );
+   }
+   
+   function run( k = false, args = false ) {
+      if( engine.compiler ) {
+	 return compile( args ).then( () => runCompile( k, args ) );
+      } else {
+	 return runInterpret( k, args );
+      }
+   }
+
+   if( config.verbose >= 1 ) {
+      process.stdout.write( "  " + engine.name + "\n" );
+   }
+
+   // check for test specific engine options
+   const dir = path.dirname( bench.path );
+   const ejson = engine.name + ".json";
+   
+   if( fs.existsSync( path.join( dir, ejson ) ) ) {
+      engine = 
+	 Object.assign( engine, 
+	    require( normalizeCwd( path.join( dir, ejson ) ) ) );
+   } else { 
+      const name = path.basename( bench.path ).replace( /.js$/, "" ); 
+      if( fs.existsSync( path.join( dir, name + "." + ejson ) ) ) {
+      	 engine = 
+	    Object.assign( engine, 
+	       require( normalizeCwd( path.join( dir, name + "." + ejson ) ) ) );
+      }
+   }
+   
+   if( engine.prelude ) {
+      // need to build the temporary source file
+      const pld = engine.prelude
+	    .replace( /@PATH@/g, bench.path )
+	    .replace( /@TMP@/g, config.tmp )
+	    .replace( /@NAME@/g, bench.name );
+      const p = path.join( config.tmp, bench.name + "-" + engine.name + ".js" );
+      let b = fs.readFileSync( bench.path );
+
+      fs.writeFileSync( p, pld );
+
+      if( engine.ecmascript === 5 ) {
+	 b = b.replace( /(let|const) /g, "var " );
+      }
+      
+      fs.appendFileSync( p, b );
+   }
+
+   if( !engine.disable ) {
+      const argspath = 
+	    path.join( path.dirname( bench.path ), 
+		       path.basename( bench.path, ".js" ) )
+	    + ".args.json";
+      
+      if( fs.existsSync( argspath ) ) {
+	 const args = require( normalizeCwd( argspath ) );
+	 
+	 if( engine.compiler ) {
+	    return compile( false )
+	       .then( () => Promise.all( 
+		  Object.keys( args ).map( k => runCompile( k, args[ k ] ) ) ) );
+	 } else {
+	    return Promise.all( 
+	       Object.keys( args ).map( k => runInterpret( k, args[ k ] ) ) );
+	 }
+      } else {
+	 return run();
+      }
+   } else {
+      return new Promise( function( resolve, reject ) {
+	 resolve( -1 )
+      } );
+   }
+}
+
+/*---------------------------------------------------------------------*/
+/*    runBenchmark ...                                                 */
+/*---------------------------------------------------------------------*/
+function runBenchmark( p ) {
+   
+   function loadBench( p ) {
+      const json = p.replace( /[.]js$/, "" ) + ".log.json";
+      const name = path.basename( p ).replace( /.js$/, "" );
+
+      const bench = fs.existsSync( json ) ?
+	    require( normalizeCwd( json ) ) : {};
+
+      bench.name = name;
+      bench.path = p;
+
+      if( !("extraopts" in bench) ) {
+	 bench.extraopts = "";
+      }
+      
+      return bench;
+   }
+
+   const bench = loadBench( p );
+
+   if( config.verbose >= 1 ) {
+      process.stdout.write( bench.name + "...\n" );
+   }
+
+   return config.engines.forEachAsync( e => runBench( bench, e ) )
+      .then( () => {
+	 if( config.verbose >= 1 ) {
+	    process.stdout.write( "\n" );
+	 }
+      } );
+}
+
+/*---------------------------------------------------------------------*/
+/*    main ...                                                         */
+/*---------------------------------------------------------------------*/
+function main() {
+   
+   function usage() {
+      console.log( "runbench v" + require( "./configure.js" ).version );
+      console.log( "usage: runbench [options] path1 path2 ..." );
+      console.log( "" );
+      console.log( "Options:" );
+      console.log( "  -h|--help            This message" );
+      console.log( "  -q                   No configuration file" );
+      console.log( "  -c|--config path     Configuration file" );
+      console.log( "  -D,--dir directory   Directory to store log files" );
+      console.log( "  -v[level]            Verbosity" );
+      console.log( "  -d,--dry             Do not log" );
+      console.log( "  -e engine            Execution engine" );
+      console.log( "  --name command       Execution command" );
+      console.log( "  -m|--message message Log message" );
+      console.log( "  --hopc compiler      Hopc compiler" );
+      console.log( "  --hopcflags flags    Hopc optional extra flags" );
+      console.log( "  --date string        Set the log date" );
+      console.log( "  --iteration n        Forced iteration number" );
+      console.log( "" );
+      console.log( "Examples: " );
+      console.log( "  hop --no-server -- runbench.js -v3 -e hop ../micro/poly.js" );
+      console.log( "  hop --no-server -- runbench.js -e hop ../micro/poly.js ../micro/ctor.js" );
+      console.log( "  hop --no-server -- runbench.js -v3 -e hop -e nodejs -e jsc ../octane" );
+      console.log( "  hop --no-server -- runbench.js -v3 -e hop -e nodejs -e jsc ../octane --hopc /usr/local/bin/hopc" );
+      
+      process.exit( 1 );
+   }
+
+   // cmdline parsing
+   if( process.argv.length == 1 ) {
+      usage();
+   }
+
+   const argv = process.argv.slice( hop.standalone ? 1 : 2 );
+   const args = argsparse( argv, { names: ["-v", "-X"] });
+
+   // configuration
+   if( args.h || args.help ) {
+      usage();
+   }
+
+   if( args.date ) {
+      dt = new Date( Date.parse( args.date ) );
+   }
+
+   config = ("q" in args)
+      ? rc.defaultConfig()
+      : rc.loadConfig( args.config || args.c );
+
+   if( "v" in args ) {
+      config.verbose = typeof args.v === "number" ? args.v : 1;
+   }
+
+   if( args.m || args.message ) {
+      config.message = args.m || args.message;
+   }
+   
+   if( args.d || args.dry ) {
+      config.log = false;
+   }
+
+   config.directory = args.D || args.dir;
+   
+   // load the engine plugins
+   config.engines = engine.loadEngines( args.e, args );
+   if( !config.iteration && args.iteration )
+      config.iteration = parseInt( args.iteration );
+
+   // collect all program files
+   let benchmarks = [];
+
+   for( let i = 0; i < args._.length; i++ ) {
+      if( fs.existsSync( args._[ i ] ) ) {
+	 if( fs.statSync( args._[ i ] ).isDirectory() ) {
+	    let files = fs.readdirSync( args._[ i ] )
+		.filter( e => e.match( /[.]js$/ ) )
+		.map( f => path.join( args._[ i ], f ) )
+	    benchmarks = benchmarks.concat( files );
+	 } else 
+	    benchmarks.push( args._[ i ] );
+      }
+   }
+
+   benchmarks.forEachAsync( runBenchmark );
+}
+
+main();

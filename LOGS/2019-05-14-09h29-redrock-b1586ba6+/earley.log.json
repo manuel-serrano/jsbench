@@ -1,0 +1,27 @@
+[
+  {
+    "name": "earley",
+    "subtitle": false,
+    "path": "octane/earley.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/earley -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [3540,3600,3480],
+              "rtimes": [950,950,950]
+            },
+            "time": 3480
+          }
+        ]
+      }
+    ]
+  }
+]

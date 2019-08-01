@@ -1,0 +1,8 @@
+{
+   "name": "js52",
+   "version": "",
+   "cmd": "@INTERPRETER@ @TMP@/@NAME@-js52.js",
+   "interpreter": "js52",
+   "iteration": 3,
+   "prelude": "js52-prelude.js"
+}

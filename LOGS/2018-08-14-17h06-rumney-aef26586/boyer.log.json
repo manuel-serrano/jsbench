@@ -1,0 +1,25 @@
+[
+  {
+    "name": "boyer",
+    "path": "octane/boyer.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox octane/boyer.js -o /tmp/boyer ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [6820,6780,6840],
+              "rtimes": [5080,4980,5020]
+            },
+            "time": 6780
+          }
+        ]
+      }
+    ]
+  }
+]

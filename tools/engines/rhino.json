@@ -1,0 +1,9 @@
+{
+   "name": "rhino",
+   "version": "@INTERPRETER@ -e \"print( org.mozilla.javascript.Context.getCurrentContext().getImplementationVersion() )\"",
+   "cmd": "@INTERPRETER@ @TMP@/@NAME@-rhino.js",
+   "interpreter": "rhino -opt 9",
+   "iteration": 2,
+   "maxIteration": 10,
+   "prelude": "rhino-prelude.js"
+}

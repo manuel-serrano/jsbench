@@ -1,0 +1,11 @@
+{
+   "name": "sjs",
+   "version": "SJS-DCO-1.0",
+   "cmd": "@COMPILER@ @TMP@/@NAME@-sjs.js -o @TMP@/@NAME@-sjs",
+   "run": "@INTERPRETER@ @TMP@/@NAME@-sjs",
+   "compiler": "sjscc",
+   "interpreter": "sjs",
+   "prelude": "sjs-prelude.js",
+   "ecmascript": 5,
+   "iteration": 3
+}

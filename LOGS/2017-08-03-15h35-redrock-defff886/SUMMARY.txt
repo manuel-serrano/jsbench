@@ -1,0 +1,44 @@
+hop 3.1.0-st (2017-08-03:15h39) [redrock.inria.fr]
+==================================================
+
+        assigop:  1.19 sec
+          bague:  2.76 sec
+         base64:  4.48 sec
+          boyer:  9.02 sec
+     callobjhit:  0.98 sec
+   callprotohit:  0.80 sec
+           ctor:  9.51 sec
+      deltablue:  6.30 sec
+       fannkuch:  2.85 sec
+            fib:  0.28 sec
+          incop:  0.91 sec
+           poly:  2.02 sec
+         puzzle:  4.07 sec
+          qsort:  0.94 sec
+       richards:  5.07 sec
+            set:  3.14 sec
+          sieve:  3.88 sec
+          splay: 10.58 sec
+
+nodejs v4.8.3 (2017-08-03:15h39) [redrock.inria.fr]
+===================================================
+
+        assigop:  1.13 sec
+          bague:  0.71 sec
+         base64:  2.86 sec
+          boyer:  1.58 sec
+     callobjhit:  0.90 sec
+   callprotohit:  2.08 sec
+           ctor:  3.26 sec
+      deltablue:  0.59 sec
+       fannkuch:  1.77 sec
+            fib:  1.17 sec
+          incop:  0.70 sec
+           poly:  1.47 sec
+         puzzle:  1.38 sec
+          qsort:  0.81 sec
+       richards:  0.97 sec
+            set:  1.68 sec
+          sieve:  0.54 sec
+          splay:  4.94 sec
+

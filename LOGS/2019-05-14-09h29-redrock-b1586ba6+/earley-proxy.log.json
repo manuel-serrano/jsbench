@@ -1,0 +1,27 @@
+[
+  {
+    "name": "earley-proxy",
+    "subtitle": false,
+    "path": "proxy/earley-proxy.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/earley-proxy -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [6900,6890,6930],
+              "rtimes": [2480,2510,2480]
+            },
+            "time": 6890
+          }
+        ]
+      }
+    ]
+  }
+]

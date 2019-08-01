@@ -1,0 +1,160 @@
+chakra  (2018-06-01:14h25) [redrock]
+====================================
+
+        assigop: 35.23 sec
+          bague:  1.06 sec
+         base64:  0.45 sec
+    binary-tree: 10.04 sec
+          boyer:  2.31 sec
+     callobjhit:  0.26 sec
+   callprotohit:  0.26 sec
+     crypto-aes:  2.11 sec
+     crypto-md5:  0.64 sec
+    crypto-sha1:  0.39 sec
+           ctor:  8.95 sec
+      deltablue:  1.77 sec
+         earley:  0.24 sec
+       fannkuch:  1.96 sec
+            fib:  1.21 sec
+          fib42: 15.53 sec
+          incop:  0.62 sec
+           maze:  2.09 sec
+           poly:  0.57 sec
+         puzzle:  1.27 sec
+          qsort:  0.73 sec
+       richards:  1.16 sec
+            set:  1.85 sec
+          sieve:  0.95 sec
+          splay:  6.30 sec
+         stridx: 22.63 sec
+         string: 14.28 sec
+         switch:  1.09 sec
+
+hop 3.2.0-mt (2018-06-01:14h25) [redrock]
+=========================================
+
+        assigop: 15.50 sec
+          bague:  0.57 sec
+         base64:  3.56 sec
+    binary-tree: 47.80 sec
+          boyer: 12.46 sec
+     callobjhit:  0.58 sec
+   callprotohit:  1.24 sec
+     crypto-aes:  6.15 sec
+     crypto-md5:  4.45 sec
+    crypto-sha1:  3.03 sec
+           ctor: 25.65 sec
+      deltablue:  7.77 sec
+         earley:  5.99 sec
+       fannkuch:  3.57 sec
+            fib:  0.51 sec
+          fib42:  4.46 sec
+          incop:  1.03 sec
+           maze:   NaN sec
+           poly:  1.40 sec
+         puzzle:  2.60 sec
+          qsort:  1.14 sec
+       richards:  3.42 sec
+            set:  3.75 sec
+          sieve:  7.01 sec
+          splay: 11.28 sec
+         stridx: 25.99 sec
+         string:  8.31 sec
+         switch:  0.87 sec
+
+js24  (2018-06-01:14h25) [redrock]
+==================================
+
+        assigop: 125.60 sec
+          bague:  7.84 sec
+         base64:  1.40 sec
+    binary-tree: 11.81 sec
+          boyer:  2.28 sec
+     callobjhit:  4.21 sec
+   callprotohit: 12.94 sec
+     crypto-aes:  1.94 sec
+     crypto-md5:  0.80 sec
+    crypto-sha1:  0.32 sec
+           ctor: 56.92 sec
+      deltablue:  1.34 sec
+         earley:  0.28 sec
+       fannkuch:  2.01 sec
+            fib:  1.01 sec
+          fib42: 13.26 sec
+          incop:  6.59 sec
+           maze: -0.00 sec
+           poly:  4.41 sec
+         puzzle:  4.75 sec
+          qsort: 17.51 sec
+       richards:  1.36 sec
+            set: 38.66 sec
+          sieve:  9.84 sec
+          splay:  7.10 sec
+         stridx: 20.75 sec
+         string:  8.69 sec
+         switch:  3.72 sec
+
+jsc  (2018-06-01:14h25) [redrock]
+=================================
+
+        assigop: 19.01 sec
+          bague:  0.45 sec
+         base64:  1.72 sec
+    binary-tree: 10.25 sec
+          boyer:  1.87 sec
+     callobjhit:  0.45 sec
+   callprotohit:  0.46 sec
+     crypto-aes:  1.30 sec
+     crypto-md5:  0.85 sec
+    crypto-sha1:  0.43 sec
+           ctor:  0.58 sec
+      deltablue:  0.90 sec
+         earley:  0.26 sec
+       fannkuch:  1.81 sec
+            fib:  0.78 sec
+          fib42: 10.16 sec
+          incop:  0.10 sec
+           maze:  1.26 sec
+           poly:  0.15 sec
+         puzzle:  0.99 sec
+          qsort:  0.58 sec
+       richards:  0.77 sec
+            set:  1.77 sec
+          sieve:  0.66 sec
+          splay: 11.81 sec
+         stridx: 25.99 sec
+         string: 17.56 sec
+         switch:  0.31 sec
+
+nodejs v8.9.1 (2018-06-01:14h25) [redrock]
+==========================================
+
+        assigop: 10.32 sec
+          bague:  0.40 sec
+         base64:  4.64 sec
+    binary-tree: 10.83 sec
+          boyer:  2.75 sec
+     callobjhit:  0.27 sec
+   callprotohit:  0.32 sec
+     crypto-aes:  1.10 sec
+     crypto-md5:  0.60 sec
+    crypto-sha1:  0.39 sec
+           ctor:  1.27 sec
+      deltablue:  0.81 sec
+         earley:  0.33 sec
+       fannkuch:  1.90 sec
+            fib:  1.19 sec
+          fib42: 15.17 sec
+          incop:  0.49 sec
+           maze:  1.75 sec
+           poly:  0.14 sec
+         puzzle:  0.99 sec
+          qsort:  0.71 sec
+       richards:  1.07 sec
+            set:  1.73 sec
+          sieve:  0.53 sec
+          splay:  8.21 sec
+         stridx:  7.75 sec
+         string:  1.90 sec
+         switch:  0.29 sec
+

@@ -1,0 +1,112 @@
+hop 3.2.0-st (2018-01-24:18h24) [arches]
+========================================
+
+        assigop: 12.40 sec
+          bague:  0.52 sec
+         base64:  5.66 sec
+          boyer:  7.20 sec
+     callobjhit:  1.09 sec
+   callprotohit:  1.81 sec
+     crypto-aes:  4.71 sec
+     crypto-md5: 43.34 sec
+    crypto-sha1: 56.01 sec
+           ctor: 13.02 sec
+      deltablue:  5.67 sec
+       fannkuch:  3.87 sec
+            fib:  0.67 sec
+          fib42:  5.70 sec
+          incop:  0.82 sec
+           poly:  2.16 sec
+         puzzle:  3.23 sec
+          qsort:  0.97 sec
+       richards:  4.80 sec
+            set:  3.76 sec
+          sieve:  3.48 sec
+          splay: 13.02 sec
+         string:  7.92 sec
+         switch:  2.76 sec
+
+js24  (2018-01-24:18h24) [arches]
+=================================
+
+        assigop: 128.98 sec
+          bague: 11.51 sec
+         base64:  1.60 sec
+          boyer:  1.90 sec
+     callobjhit:  5.01 sec
+   callprotohit: 16.53 sec
+     crypto-aes:  2.08 sec
+     crypto-md5:  0.91 sec
+    crypto-sha1:  0.38 sec
+           ctor: 82.23 sec
+      deltablue:  1.09 sec
+       fannkuch:  2.46 sec
+            fib:  0.77 sec
+          fib42:  9.94 sec
+          incop:  6.36 sec
+           poly:  4.37 sec
+         puzzle:  4.88 sec
+          qsort: 23.51 sec
+       richards:  1.15 sec
+            set: 42.42 sec
+          sieve: 12.33 sec
+          splay:  6.51 sec
+         string:  9.94 sec
+         switch:  4.00 sec
+
+jsc  (2018-01-24:18h24) [arches]
+================================
+
+        assigop: 31.98 sec
+          bague:  0.62 sec
+         base64:  2.25 sec
+          boyer:  1.75 sec
+     callobjhit:  0.64 sec
+   callprotohit:  0.58 sec
+     crypto-aes:  1.86 sec
+     crypto-md5:  1.17 sec
+    crypto-sha1:  1.08 sec
+           ctor:  2.44 sec
+      deltablue:  1.58 sec
+       fannkuch:  3.47 sec
+            fib:  1.06 sec
+          fib42: 14.00 sec
+          incop:  0.49 sec
+           poly:  0.32 sec
+         puzzle:  1.68 sec
+          qsort:  0.96 sec
+       richards:  1.62 sec
+            set:  4.33 sec
+          sieve:  0.61 sec
+          splay: 14.70 sec
+         string: 22.71 sec
+         switch:  0.51 sec
+
+nodejs v8.9.1 (2018-01-24:18h24) [arches]
+=========================================
+
+        assigop: 19.08 sec
+          bague:  0.45 sec
+         base64:  7.78 sec
+          boyer:  3.32 sec
+     callobjhit:  0.46 sec
+   callprotohit:  0.43 sec
+     crypto-aes:  1.49 sec
+     crypto-md5:  1.37 sec
+    crypto-sha1:  0.83 sec
+           ctor:  1.28 sec
+      deltablue:  0.99 sec
+       fannkuch:  2.45 sec
+            fib:  1.32 sec
+          fib42: 16.62 sec
+          incop:  0.76 sec
+           poly:  0.23 sec
+         puzzle:  1.34 sec
+          qsort:  0.91 sec
+       richards:  1.24 sec
+            set:  2.01 sec
+          sieve:  0.53 sec
+          splay: 10.33 sec
+         string:  1.90 sec
+         switch:  0.33 sec
+

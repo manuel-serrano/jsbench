@@ -1,0 +1,25 @@
+[
+  {
+    "name": "splay",
+    "path": "octane/splay.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox octane/splay.js -o /tmp/splay ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [21430,21200,21000],
+              "rtimes": [12640,12790,12470]
+            },
+            "time": 21000
+          }
+        ]
+      }
+    ]
+  }
+]

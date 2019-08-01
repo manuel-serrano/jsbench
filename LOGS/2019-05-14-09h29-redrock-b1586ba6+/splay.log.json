@@ -1,0 +1,27 @@
+[
+  {
+    "name": "splay",
+    "subtitle": false,
+    "path": "octane/splay.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/splay -",
+        "logs": [
+          {
+            "date": "2019-05-14T07:29:47.000Z",
+            "times": {
+              "ustimes": [18170,17990,18110],
+              "rtimes": [10490,10720,10960]
+            },
+            "time": 17990
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "hash-map-proxy",
+    "subtitle": false,
+    "path": "proxy/hash-map-proxy.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/hash-map-proxy -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [3430,3350,3350],
+              "rtimes": [2570,2510,2520]
+            },
+            "time": 3350
+          }
+        ]
+      }
+    ]
+  }
+]

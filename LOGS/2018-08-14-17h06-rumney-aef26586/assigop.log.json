@@ -1,0 +1,25 @@
+[
+  {
+    "name": "assigop",
+    "path": "micro/assigop.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox micro/assigop.js -o /tmp/assigop ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [19200,19190,19110],
+              "rtimes": [19180,19180,19100]
+            },
+            "time": 19110
+          }
+        ]
+      }
+    ]
+  }
+]

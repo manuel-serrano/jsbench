@@ -1,0 +1,61 @@
+[
+  {
+    "name": "fib42",
+    "path": "bglstone/fib42.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-st",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "/tmp/HOP/bin/hopc -Ox bglstone/fib42.js -o /tmp/fib42 ",
+        "logs": [
+          {
+	    "message": "Imethod",
+            "date": "2018-01-24T14:55:32.000Z",
+            "time": 5720
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v8.9.1",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "nodejs bglstone/fib42.js",
+        "logs": [
+          {
+            "date": "2018-01-24T14:55:32.000Z",
+            "time": 16650
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "jsc /tmp/fib42-jsc.js",
+        "logs": [
+          {
+            "date": "2018-01-24T14:55:32.000Z",
+            "time": 14060
+          }
+        ]
+      },
+      {
+        "name": "js24",
+        "version": "",
+        "host": "arches",
+        "platform": "linux",
+        "cmd": "js24 /tmp/fib42-js24.js",
+        "logs": [
+          {
+            "date": "2018-01-24T14:55:32.000Z",
+            "time": 9940
+          }
+        ]
+      }
+    ]
+  }
+]

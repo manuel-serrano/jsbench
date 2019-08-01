@@ -1,0 +1,27 @@
+[
+  {
+    "name": "richards",
+    "subtitle": false,
+    "path": "octane/richards.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/richards -",
+        "logs": [
+          {
+            "date": "2019-05-15T06:01:18.000Z",
+            "times": {
+              "ustimes": [25230,15970,16070],
+              "rtimes": [15790,15680,15790]
+            },
+            "time": 15970
+          }
+        ]
+      }
+    ]
+  }
+]

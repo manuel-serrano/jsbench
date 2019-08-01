@@ -1,0 +1,204 @@
+chakra  (2019-01-07:11h56) [redrock]
+====================================
+
+             assigop: 33.92 real  33.91 usr+sys
+               bague:  1.07 real   1.08 usr+sys
+              base64:  0.48 real   0.43 usr+sys
+         binary-tree:  8.62 real   9.91 usr+sys
+               boyer:  2.27 real   2.38 usr+sys
+          callobjhit:  0.26 real   0.25 usr+sys
+        callprotohit:  0.27 real   0.26 usr+sys
+              crypto:  1.57 real   1.66 usr+sys
+          crypto-aes:  1.82 real   2.13 usr+sys
+          crypto-md5:  0.73 real   0.63 usr+sys
+         crypto-sha1:  0.46 real   0.39 usr+sys
+                ctor:  7.85 real   8.74 usr+sys
+           deltablue: 10.81 real  12.08 usr+sys
+              earley:  0.29 real   0.28 usr+sys
+            fannkuch:  1.91 real   1.92 usr+sys
+                 fib:  1.18 real   1.17 usr+sys
+               fib42: 15.10 real  15.09 usr+sys
+            forinarr:  9.20 real   9.21 usr+sys
+               incop:  0.70 real   0.68 usr+sys
+                maze:  2.01 real   2.10 usr+sys
+                poly:  0.55 real   0.54 usr+sys
+              puzzle:  1.25 real   1.26 usr+sys
+               qsort:  0.76 real   0.75 usr+sys
+            richards:  5.46 real   5.53 usr+sys
+                 set:  1.84 real   1.83 usr+sys
+               sieve:  0.98 real   0.98 usr+sys
+               splay:  4.85 real   6.01 usr+sys
+              stridx: 22.32 real  22.31 usr+sys
+              string: 14.17 real  14.16 usr+sys
+              switch:  1.06 real   1.06 usr+sys
+
+graal v10.9.0 (2019-01-07:11h56) [redrock]
+==========================================
+
+             assigop: 18.05 real  17.98 usr+sys
+               bague:  2.23 real   2.53 usr+sys
+              base64:  6.55 real   6.57 usr+sys
+         binary-tree: 23.34 real  21.07 usr+sys
+               boyer:  4.86 real   7.16 usr+sys
+          callobjhit:  1.48 real   1.77 usr+sys
+        callprotohit:  1.44 real   1.73 usr+sys
+              crypto:  7.79 real  18.05 usr+sys
+          crypto-aes:  7.80 real  12.11 usr+sys
+          crypto-md5:  5.85 real   8.87 usr+sys
+         crypto-sha1:  1.97 real   2.30 usr+sys
+                ctor:  2.71 real   3.26 usr+sys
+           deltablue: 16.81 real  23.41 usr+sys
+              earley:  3.06 real   6.68 usr+sys
+            fannkuch:  3.27 real   3.56 usr+sys
+                 fib:  2.48 real   2.61 usr+sys
+               fib42: 25.82 real  25.99 usr+sys
+            forinarr: 47.68 real  47.65 usr+sys
+               incop:  0.36 real   0.34 usr+sys
+                maze: Infinity real  -0.00 usr+sys
+                poly:  1.49 real   1.81 usr+sys
+              puzzle:  5.53 real   7.32 usr+sys
+               qsort: 65.97 real  66.46 usr+sys
+            richards: 10.05 real  11.08 usr+sys
+                 set:  5.12 real   5.53 usr+sys
+               sieve: Infinity real  -0.00 usr+sys
+               splay: 27.24 real  30.04 usr+sys
+              stridx: 47.19 real  47.14 usr+sys
+              string: 24.51 real  24.51 usr+sys
+              switch:  2.07 real   2.03 usr+sys
+
+hop 3.2.0-mt (2019-01-07:11h56) [redrock]
+=========================================
+
+             assigop: 14.25 real  14.25 usr+sys
+               bague:  0.47 real   0.48 usr+sys
+              base64:  3.09 real   3.33 usr+sys
+         binary-tree: 16.63 real  48.68 usr+sys
+               boyer:  3.72 real   7.95 usr+sys
+          callobjhit:  0.51 real   0.52 usr+sys
+        callprotohit:  1.31 real   1.30 usr+sys
+              crypto:  7.52 real   8.09 usr+sys
+          crypto-aes:  2.48 real   3.89 usr+sys
+          crypto-md5:  0.63 real   0.84 usr+sys
+         crypto-sha1:  0.49 real   0.70 usr+sys
+                ctor:  6.58 real  25.52 usr+sys
+           deltablue: 34.67 real  63.96 usr+sys
+              earley:  2.16 real   6.37 usr+sys
+            fannkuch:  3.62 real   3.62 usr+sys
+                 fib:  0.65 real   0.65 usr+sys
+               fib42:  7.88 real   7.88 usr+sys
+            forinarr: 163.65 real 192.78 usr+sys
+               incop:  0.91 real   0.93 usr+sys
+                maze:  1.27 real   2.97 usr+sys
+                poly:  0.88 real   0.88 usr+sys
+              puzzle:  2.69 real   2.70 usr+sys
+               qsort:  0.78 real   0.91 usr+sys
+            richards: 16.01 real  16.31 usr+sys
+                 set:  3.14 real   3.15 usr+sys
+               sieve:  2.34 real   6.95 usr+sys
+               splay:  8.77 real  20.77 usr+sys
+              stridx: 25.59 real  25.69 usr+sys
+              string:  8.07 real   8.14 usr+sys
+              switch:  0.61 real   0.62 usr+sys
+
+js52  (2019-01-07:11h56) [redrock]
+==================================
+
+             assigop:  5.12 real   5.11 usr+sys
+               bague:  0.35 real   0.37 usr+sys
+              base64:  1.46 real   1.49 usr+sys
+         binary-tree: 11.69 real  11.71 usr+sys
+               boyer:  1.79 real   1.78 usr+sys
+          callobjhit:  0.21 real   0.21 usr+sys
+        callprotohit:  0.60 real   0.59 usr+sys
+              crypto:  1.64 real   2.07 usr+sys
+          crypto-aes:  1.02 real   1.09 usr+sys
+          crypto-md5:  0.38 real   0.40 usr+sys
+         crypto-sha1:  0.33 real   0.33 usr+sys
+                ctor:  3.36 real   3.35 usr+sys
+           deltablue:  3.41 real   3.43 usr+sys
+              earley:  0.17 real   0.25 usr+sys
+            fannkuch:  1.68 real   1.68 usr+sys
+                 fib:  0.78 real   0.77 usr+sys
+               fib42:  9.88 real   9.87 usr+sys
+            forinarr: 12.16 real  12.08 usr+sys
+               incop:  0.14 real   0.14 usr+sys
+                maze:  2.93 real   3.02 usr+sys
+                poly:  0.06 real   0.05 usr+sys
+              puzzle:  0.68 real   0.68 usr+sys
+               qsort:  4.13 real   4.11 usr+sys
+            richards:  3.79 real   3.81 usr+sys
+                 set:  1.69 real   1.68 usr+sys
+               sieve:  0.36 real   0.34 usr+sys
+               splay:  4.78 real   4.41 usr+sys
+              stridx: 52.09 real  52.09 usr+sys
+              string: 16.88 real  16.88 usr+sys
+              switch:  0.27 real   0.27 usr+sys
+
+jsc  (2019-01-07:11h56) [redrock]
+=================================
+
+             assigop: 10.12 real  10.13 usr+sys
+               bague:  0.39 real   0.41 usr+sys
+              base64:  1.36 real   1.68 usr+sys
+         binary-tree:  5.07 real  10.20 usr+sys
+               boyer:  1.02 real   1.29 usr+sys
+          callobjhit:  0.39 real   0.40 usr+sys
+        callprotohit:  0.37 real   0.37 usr+sys
+              crypto:  1.22 real   1.52 usr+sys
+          crypto-aes:  0.98 real   1.14 usr+sys
+          crypto-md5:  0.40 real   0.49 usr+sys
+         crypto-sha1:  0.31 real   0.35 usr+sys
+                ctor:  0.61 real   0.62 usr+sys
+           deltablue:  4.88 real   5.21 usr+sys
+              earley:  0.13 real   0.19 usr+sys
+            fannkuch:  1.59 real   1.63 usr+sys
+                 fib:  0.78 real   0.78 usr+sys
+               fib42: 10.03 real  10.03 usr+sys
+            forinarr:  5.92 real   6.02 usr+sys
+               incop:  0.08 real   0.09 usr+sys
+                maze:  0.67 real   1.16 usr+sys
+                poly:  0.05 real   0.06 usr+sys
+              puzzle:  0.87 real   0.89 usr+sys
+               qsort:  0.54 real   0.55 usr+sys
+            richards:  3.17 real   3.24 usr+sys
+                 set:  1.69 real   1.69 usr+sys
+               sieve:  0.45 real   0.49 usr+sys
+               splay:  2.79 real  11.02 usr+sys
+              stridx: 22.78 real  22.76 usr+sys
+              string: 15.16 real  15.16 usr+sys
+              switch:  0.27 real   0.29 usr+sys
+
+nodejs v8.9.1 (2019-01-07:11h56) [redrock]
+==========================================
+
+             assigop: 10.21 real  10.19 usr+sys
+               bague:  0.40 real   0.40 usr+sys
+              base64:  4.45 real   4.63 usr+sys
+         binary-tree: 10.42 real  10.72 usr+sys
+               boyer:  2.56 real   2.78 usr+sys
+          callobjhit:  0.29 real   0.28 usr+sys
+        callprotohit:  0.32 real   0.31 usr+sys
+              crypto:  1.64 real   1.82 usr+sys
+          crypto-aes:  1.03 real   1.09 usr+sys
+          crypto-md5:  0.57 real   0.59 usr+sys
+         crypto-sha1:  0.39 real   0.37 usr+sys
+                ctor:  1.25 real   1.25 usr+sys
+           deltablue:  5.44 real   5.58 usr+sys
+              earley:  0.23 real   0.32 usr+sys
+            fannkuch:  1.88 real   1.87 usr+sys
+                 fib:  1.19 real   1.18 usr+sys
+               fib42: 14.97 real  14.96 usr+sys
+            forinarr:  4.44 real   4.43 usr+sys
+               incop:  0.48 real   0.46 usr+sys
+                maze:  1.38 real   1.76 usr+sys
+                poly:  0.16 real   0.15 usr+sys
+              puzzle:  0.96 real   0.98 usr+sys
+               qsort:  0.75 real   0.72 usr+sys
+            richards:  4.84 real   4.86 usr+sys
+                 set:  1.70 real   1.70 usr+sys
+               sieve:  0.52 real   0.53 usr+sys
+               splay:  7.19 real   8.30 usr+sys
+              stridx:  7.40 real   7.39 usr+sys
+              string:  1.87 real   1.87 usr+sys
+              switch:  0.28 real   0.27 usr+sys
+

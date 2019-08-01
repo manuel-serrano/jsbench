@@ -1,0 +1,25 @@
+[
+  {
+    "name": "maze",
+    "path": "bglstone/maze.js",
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.2.0-mt",
+        "host": "rumney",
+        "platform": "linux",
+        "cmd": "hopc -Ox bglstone/maze.js -o /tmp/maze ",
+        "logs": [
+          {
+            "date": "2018-08-14T15:06:21.000Z",
+            "times": {
+              "ustimes": [2300,2420,2390],
+              "rtimes": [1670,1740,1720]
+            },
+            "time": 2300
+          }
+        ]
+      }
+    ]
+  }
+]
