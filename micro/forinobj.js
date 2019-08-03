@@ -19,6 +19,12 @@ function swt( a, keys ) {
 	 case "z": r = a.z; break;
 	 case "w": r = a.w; break;
 	 case "x": r = a.x; break;
+	 case "o": r = a.o; break;
+	 case "p": r = a.p; break;
+	 case "q": r = a.q; break;
+	 case "r": r = a.r; break;
+	 case "s": r = a.s; break;
+	 case "t": r = a.t; break;
 	 default: throw( "Illegal prop" );
       }
    }
@@ -45,8 +51,8 @@ function test( n, name ) {
    console.log( "testing", name );
    let r = 0;
    const k = n / 10;
-   const a = {b: 3, c: 4, a: 1, z: 10, w: -1};
-   const b = {b: 35, c: 47, x: -19, z: -1};
+   const a = {b: 3, c: 4, a: 1, z: 10, w: -1, o: 1, p: -1, q: 1, r: -1, s: 1};
+   const b = {b: 35, c: 47, x: -19, z: -1, o: 1, p: -1, q: 1, r: -1, s: 1};
    const na = Object.keys( a );
    const nb = Object.keys( b );
    
