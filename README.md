@@ -27,6 +27,7 @@ To run hop profile guided optimization
  ./hopstone.sh --hopc=/tmp/HOP/bin/hopc -e hopfp -O /tmp/HOPSTONE
  ./hopstoneshield.sh --hopc=/tmp/HOP/bin/hopc -e hopfp -O /tmp/HOPSTONE
 
+
 Visualization
 =============
 
@@ -68,6 +69,13 @@ LaTeX relative
  hop --no-server -- tools/logbench.js latexrel.js micro
 
 
+Gnuplot
+-------
+
+ hop --no-server -- tools/logbench.js gnuplothistogram.js *.log.json
+ hop --no-server -- tools/logbench.js gnuplothistogram.js --logscale=y *.log.json
+ 
+ 
 CPU Shield under Linux
 ======================
 
