@@ -52,6 +52,26 @@ function buildObjects( test, N ) {
 	       { z: 46, g: 8, y: 16, x: 12 } ];
    }
    
+   if( test === "miss" ) {
+      return [ { xx: 21, y: 1 },
+	       { xx: 21, y: 2 },
+	       { xx: 21, y: 3 },
+	       { xx: 21, y: 4 },
+	       { xx: 21, y: 5 },
+	       { xx: 21, y: 6 },
+	       { xx: 21, y: 7 },
+	       { xx: 21, y: 8 },
+	       { xx: 21, y: 9 },
+	       { xx: 21, y: 10 },
+	       { xx: 21, y: 11 },
+	       { xx: 21, y: 12 },
+	       { xx: 21, y: 12 },
+	       { xx: 21, y: 13 },
+	       { xx: 21, y: 14 },
+	       { xx: 21, y: 15 },
+	       { xx: 21, y: 16 } ];
+   }
+   
    if( test === "proto" ) {
       const arr = new Array( N );
       let proto = { a: 1, b: 3, x: 12345, d: 3 };

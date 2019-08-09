@@ -3,12 +3,12 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Fri Aug  9 09:10:31 2019 (serrano)                */
+/*    Last change :  Fri Aug  9 10:07:23 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
 /*    This plugin was implemented for the jsdynprop paper.             */
-/*    the .dat file is generated on stdout, the .plot on stderr        */
+/*    the .csv file is generated on stderr, the .plot on stdout        */
 /*=====================================================================*/
 "use hopscript";
 
@@ -44,6 +44,12 @@ const defaultBoxwidth = 0.9;
 const defaultFont = "Verdana,18";
 
 /*---------------------------------------------------------------------*/
+/*    ports                                                            */
+/*---------------------------------------------------------------------*/
+const csvport = process.stderr;
+const plotport = process.stdout;
+
+/*---------------------------------------------------------------------*/
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
 module.exports = function( logfiles, engines, args ) {
@@ -70,13 +76,14 @@ module.exports = function( logfiles, engines, args ) {
    enginepad += (deviation > 0 ? 8 : 4);
    
    // plot data
-   process.stdout.write( '#    ' );
-   enames.forEach( n => process.stdout.write( utils.padding( n, enginepad ) ) );
-   process.stdout.write( "\n" );
+   csvport.write( '#                  ' );
+   enames.forEach( n => csvport.write( utils.padding( n, enginepad ) ) );
+   csvport.write( "\n" );
    
    for( let i = start; i < logs.length; i++ ) {
       const log = logs[ i ];
-      process.stdout.write( utils.padding( (i+1) + "," , 5 ) );
+      csvport.write( utils.padding( log.name, 19 ) );
+      csvport.write( " " );
       
       for( let j = 0; j < enames.length; j++ ) {
 	 const entry = log.engines.find( e => e.name === enames[ j ] );
@@ -101,119 +108,129 @@ module.exports = function( logfiles, engines, args ) {
 	    str += ",";
 	 }
 	 
-	 process.stdout.write( utils.padding( str, enginepad ) );
+	 csvport.write( utils.padding( str, enginepad ) );
       }
-      process.stdout.write( "\n" );
+      csvport.write( "\n" );
    }
-   process.stdout.write( "\n" );
+   csvport.write( "\n" );
    
    // output format
    switch( format ) {
       case "pdf": 
-	 process.stderr.write( "set terminal pdf\n" );
+	 plotport.write( "set terminal pdf\n" );
 	 break;
 	 
       case "svg":
-	 process.stderr.write( "set terminal svg" );
+	 plotport.write( "set terminal svg" );
 	 if( args.size ) {
-	    process.stderr.write( ` size ${args.size}` );
+	    plotport.write( ` size ${args.size}` );
 	 }
-	 process.stderr.write( ` font "${args.font || defaultFont}"` );
-	 process.stderr.write( "\n" );
+	 plotport.write( ` font "${args.font || defaultFont}"` );
+	 plotport.write( "\n" );
    }
-   process.stderr.write( `set output '${output}'` );
-   process.stderr.write( "\n\n" );
+   plotport.write( `set output '${output}'` );
+   plotport.write( "\n\n" );
    
    // plot file
-   process.stderr.write( `set title '${title}'` );
-   process.stderr.write( "\n\n" );
+   plotport.write( `set title '${title}'` );
+   plotport.write( "\n" );
+   if( args.ylabel ) {
+      plotport.write( `set ylabel "${args.ylabel}"` );
+      plotport.write( "\n" );
+   }
+   plotport.write( "\n" );
    
-   process.stderr.write( "set auto x\n\n" );
-   process.stderr.write( "set style data histogram\n" );
-   process.stderr.write( "set style histogram cluster gap 1\n" );
+   plotport.write( "set auto x\n\n" );
+   plotport.write( "set style data histogram\n" );
+   plotport.write( "set style histogram cluster gap 1\n" );
    if( args.xtics === "no" ) {
-      process.stderr.write( "unset xtics\n\n" );
+      plotport.write( "unset xtics\n\n" );
+   } else if( args.xtics === "auto" ) {
+      plotport.write( "set xtics rotate by -45 scale 0\n\n" );
    } else {
-      process.stderr.write( "set xtic rotate by -45 scale 0\n\n" );
+      plotport.write( `set xtics ${args.xtics}` );
+      plotport.write( "\n" );
    }
    
-   process.stderr.write( `set boxwidth ${args.boxwidth || defaultBoxwidth}` );
-   process.stderr.write( "\n" );
-   process.stderr.write( "set style fill solid\n" );
+   plotport.write( `set boxwidth ${args.boxwidth || defaultBoxwidth}` );
+   plotport.write( "\n" );
+   plotport.write( "set style fill solid\n" );
    for( let i = 0; i < enames.length; i++ ) {
-      process.stderr.write( `set style line ${i+1} linecolor rgb '${colors[ i ]}' linetype 1 linewidth 1` );
-      process.stderr.write( "\n" );
+      plotport.write( `set style line ${i+1} linecolor rgb '${colors[ i ]}' linetype 1 linewidth 1` );
+      plotport.write( "\n" );
    }
-   process.stderr.write( "\n" );
-   process.stderr.write( "set grid\n\n" );
+   plotport.write( "\n" );
+   plotport.write( "set grid ytics\n" );
+   plotport.write( "set xtics scale 0\n" );
+   plotport.write( "\n" );
 
    switch( args.legend ) {
       case "top-right":
-	 process.stderr.write( "set key top right\n\n" );
+	 plotport.write( "set key top right\n\n" );
 	 break;
 	 
       case "bottom-right":
-	 process.stderr.write( "set key bottom right\n\n" );
+	 plotport.write( "set key bottom right\n\n" );
 	 break;
 	 
       case "bottom-left":
-	 process.stderr.write( "set key bottom left\n\n" );
+	 plotport.write( "set key bottom left\n\n" );
 	 break;
 	 
       case "top-left":
-	 process.stderr.write( "set key top left\n\n" );
+	 plotport.write( "set key top left\n\n" );
 	 break;
 	 
       default:
-	 process.stderr.write( "set key under nobox\n" );
+	 plotport.write( "set key under nobox\n" );
    }
    
    switch( args.logscale ) {
-      case "y": process.stderr.write( "set logscale y\n" ); break;
-      case "x": process.stderr.write( "set logscale x\n" ); break;
-      case "xy": process.stderr.write( "set logscale xy\n" ); break;
+      case "y": plotport.write( "set logscale y\n" ); break;
+      case "x": plotport.write( "set logscale x\n" ); break;
+      case "xy": plotport.write( "set logscale xy\n" ); break;
    }
    
    if( args.xlabel ) {
-      process.stderr.write( `set xlabel '${args.xlabel}'` );
-      process.stderr.write( "\n" );
+      plotport.write( `set xlabel '${args.xlabel}'` );
+      plotport.write( "\n" );
    }
    if( args.ylabel ) {
-      process.stderr.write( `set ylabel '${args.ylabel}'` );
-      process.stderr.write( "\n" );
+      plotport.write( `set ylabel '${args.ylabel}'` );
+      plotport.write( "\n" );
    }
       
    if( start > 0 ) {
-      process.stderr.write( `set xrange [${start}:${logs.length}]` );
-      process.stderr.write( "\n\n" );
+      plotport.write( `set xrange [${start}:${logs.length}]` );
+      plotport.write( "\n\n" );
    }
 
-   process.stderr.write( "\n" );
-   process.stderr.write( `plot` );
-   process.stderr.write( " \\\n" );
+   plotport.write( "\n" );
+   plotport.write( `plot` );
+   plotport.write( " \\\n" );
    
    if( args.deviation > 0 ) {
       for( let i = 0; i < enames.length; i++ ) {
-      	 process.stderr.write( `  '${base}.csv' u 1:${(i*2)+2} w linespoints title '${enames[ i ]}' ls ${i+1}` );
-	 process.stderr.write( ", \\\n" );
+      	 plotport.write( `  '${base}.csv' u 1:${(i*2)+2} w linespoints title '${enames[ i ]}' ls ${i+1}` );
+	 plotport.write( ", \\\n" );
 	 
-      	 process.stderr.write( `  '${base}.csv' u 1:${(i*2)+2}:${(i*2)+3} w yerrorbars notitle ls ${i+1}` );
+      	 plotport.write( `  '${base}.csv' u 1:${(i*2)+2}:${(i*2)+3} w yerrorbars notitle ls ${i+1}` );
       	 if( i < enames.length - 1 ) {
-	    process.stderr.write( ", \\\n" );
+	    plotport.write( ", \\\n" );
       	 } else {
-	    process.stderr.write( "\n" );
+	    plotport.write( "\n" );
       	 }
       }
    } else {
       for( let i = 0; i < enames.length; i++ ) {
-      	 process.stderr.write( `  '${base}.csv' u ${i+2} title '${enames[ i ]}' ls ${i+1}` );
+      	 plotport.write( `  '${base}.csv' u ${i+2}:xtic(1) title '${enames[ i ]}' ls ${i+1}` );
       	 if( i < enames.length - 1 ) {
-	    process.stderr.write( ", \\\n" );
+	    plotport.write( ", \\\n" );
       	 }
       }
    }
    
-   process.stderr.write( "\n\n" );
+   plotport.write( "\n\n" );
 }
 
 
