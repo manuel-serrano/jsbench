@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Mon Aug 12 08:53:46 2019 (serrano)                */
+/*    Last change :  Wed Aug 14 15:51:44 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -61,6 +61,7 @@ module.exports = function( logfiles, engines, args ) {
 	 ? engines.map( e => e.name )
 	 : collectEngines( logs );
    let enginepad = 6;
+   const linestyle = args.lineStyle || 1;
    
    if( logs.length === 0 ) {
       throw TypeError( "no logs found" );
@@ -244,7 +245,7 @@ module.exports = function( logfiles, engines, args ) {
    
    if( args.deviation > 0 ) {
       for( let i = 0; i < enames.length; i++ ) {
-      	 plotport.write( `  '${base}.csv' u ${(i*2)+2}:${(i*2)+3}:xtic(1) title '${enames[ i ]}' ls ${i+1} ` );
+      	 plotport.write( `  '${base}.csv' u ${(i*2)+2}:${(i*2)+3}:xtic(1) title '${enames[ i ]}' ls ${i+linestyle} ` );
       	 if( i < enames.length - 1 ) {
 	    plotport.write( ", \\\n" );
       	 } else {
@@ -253,7 +254,7 @@ module.exports = function( logfiles, engines, args ) {
       }
    } else {
       for( let i = 0; i < enames.length; i++ ) {
-      	 plotport.write( `  '${base}.csv' u ${i+2}:xtic(1) title '${enames[ i ]}' ls ${i+1}` );
+      	 plotport.write( `  '${base}.csv' u ${i+2}:xtic(1) title '${enames[ i ]}' ls ${i+linestyle}` );
       	 if( i < enames.length - 1 ) {
 	    plotport.write( ", \\\n" );
       	 }

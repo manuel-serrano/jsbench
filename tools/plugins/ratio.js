@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Mon Aug 12 10:15:42 2019                          */
-/*    Last change :  Mon Aug 12 10:54:07 2019 (serrano)                */
+/*    Last change :  Wed Aug 14 15:39:20 2019 (serrano)                */
 /*    Copyright   :  2019 Manuel Serrano                               */
 /*    -------------------------------------------------------------    */
 /*    Generate a new log file that is the ratio of two log files.      */
@@ -48,7 +48,7 @@ function ratioEngine( e, log0, log1 ) {
       l0[ i ].time = l0[ i ].time / l1[ i ].time;
       
       for( let j in l0[ i ].times.ustimes ) {
-	 l0[ i ].times.ustimes[ j ] = l0[ i ].times.ustimes[ i ] / l1[ i ].times.ustimes[ j ];
+	 l0[ i ].times.ustimes[ j ] = l0[ i ].times.ustimes[ j ] / l1[ i ].times.ustimes[ j ];
       }
       
       for( let j in l0[ i ].times.rtimes ) {
