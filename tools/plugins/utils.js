@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Mon Oct  8 17:59:02 2018                          */
-/*    Last change :  Mon Oct 22 18:29:01 2018 (serrano)                */
-/*    Copyright   :  2018 Manuel Serrano                               */
+/*    Last change :  Mon Aug 12 08:30:54 2019 (serrano)                */
+/*    Copyright   :  2018-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Common utility functions                                         */
 /*=====================================================================*/
@@ -27,26 +27,38 @@ function padding( str, pad ) {
 /*    mean ...                                                         */
 /*---------------------------------------------------------------------*/
 function mean( times ) {
-   return times.reduce( (a, b) => a + b ) / times.length;
+   if( times.length === 0 ) {
+      return -1;
+   } else {
+      return times.reduce( (a, b) => a + b ) / times.length;
+   }
 }
 
 /*---------------------------------------------------------------------*/
 /*    median ...                                                       */
 /*---------------------------------------------------------------------*/
 function median( times ) {
-   times.sort( (a, b) => a >= b );
-   let tm = times[ times.length / 2 >> 0 ];
-   return { tm, min: times[ 0 ], max: times[ times.length - 1 ] };
+   if( times.length === 0 ) {
+      return -1;
+   } else {
+      times.sort( (a, b) => a >= b );
+      let tm = times[ times.length / 2 >> 0 ];
+      return { tm, min: times[ 0 ], max: times[ times.length - 1 ] };
+   }
 }
 
 /*---------------------------------------------------------------------*/
 /*    deviation ...                                                    */
 /*---------------------------------------------------------------------*/
 function deviation( times ) {
-   const m = mean( times );
-   const c = times.map( v => (v-m) * (v-m) ).reduce( (a, b) => a + b );
+   if( times.length === 0 ) {
+      return -1;
+   } else {
+      const m = mean( times );
+      const c = times.map( v => (v-m) * (v-m) ).reduce( (a, b) => a + b );
 
-   return Math.sqrt( c / times.length );
+      return Math.sqrt( c / times.length );
+   }
 }
    
 /*---------------------------------------------------------------------*/

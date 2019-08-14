@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Fri Aug  9 10:07:23 2019 (serrano)                */
+/*    Last change :  Mon Aug 12 08:53:46 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -42,6 +42,7 @@ function collectEngines( logs ) {
 const colors = [ '#3264c8', '#d83812', '#fa9600', '#109318', '#960096', '#0096c2' ];
 const defaultBoxwidth = 0.9;
 const defaultFont = "Verdana,18";
+const unitRatio = 1000;
 
 /*---------------------------------------------------------------------*/
 /*    ports                                                            */
@@ -71,6 +72,7 @@ module.exports = function( logfiles, engines, args ) {
    const base = output.replace( /.[^.]+$/, '' );
    const start = args.start ? parseInt( args.start ) : 0;
    const deviation = args.deviation ? parseFloat( args.deviation ) : 0;
+   const uratio = args.unitRatio || unitRatio;
    
    enames.forEach( n => { if( n.length > enginepad ) enginepad = n.length } );
    enginepad += (deviation > 0 ? 8 : 4);
@@ -90,7 +92,8 @@ module.exports = function( logfiles, engines, args ) {
 	 const times = entry.logs[ 0 ].times;
 	 const { tm, min, max } = utils.median( times.rtimes )
 	 const mn = utils.mean( times.rtimes );
-	 let str = (tm/1000).toFixed( 2 );
+	 const val = (tm/uratio);
+	 let str = (isNaN( val ) ? 0 : val).toFixed( 2 );
 	 
 	 if( deviation > 0 ) {
 	    str += ", ";
@@ -135,18 +138,26 @@ module.exports = function( logfiles, engines, args ) {
    plotport.write( `set title '${title}'` );
    plotport.write( "\n" );
    if( args.ylabel ) {
-      plotport.write( `set ylabel "${args.ylabel}"` );
+      plotport.write( `set ylabel "${args.ylabel}" ${args.ylabelopt || ""}` );
       plotport.write( "\n" );
    }
    plotport.write( "\n" );
    
    plotport.write( "set auto x\n\n" );
    plotport.write( "set style data histogram\n" );
-   plotport.write( "set style histogram cluster gap 1\n" );
+   
+   if( args.deviation ) {
+      plotport.write( "set style histogram gap 1 errorbars lw 1\n" );
+   } else {
+      plotport.write( "set style histogram cluster gap 1\n" );
+   }
+   
    if( args.xtics === "no" ) {
       plotport.write( "unset xtics\n\n" );
-   } else if( args.xtics === "auto" ) {
-      plotport.write( "set xtics rotate by -45 scale 0\n\n" );
+   } else if( args.xtics === "rotate" ) {
+      plotport.write( "set xtics rotate by 45 scale 0\n\n" );
+   } else if( args.xtics === "rotater" ) {
+      plotport.write( "set xtics rotate by 45 right\n\n" );
    } else {
       plotport.write( `set xtics ${args.xtics}` );
       plotport.write( "\n" );
@@ -159,11 +170,33 @@ module.exports = function( logfiles, engines, args ) {
       plotport.write( `set style line ${i+1} linecolor rgb '${colors[ i ]}' linetype 1 linewidth 1` );
       plotport.write( "\n" );
    }
+   
+   if( args.deviation > 0 ) {
+      plotport.write( "set style line 100 linecolor rgb '#000000' linetype 1 linewidth 1\n" );
+   }
+   
    plotport.write( "\n" );
    plotport.write( "set grid ytics\n" );
    plotport.write( "set xtics scale 0\n" );
    plotport.write( "\n" );
 
+   if( args.lmargin ) {
+      plotport.write( `set lmargin ${args.lmargin}` );
+      plotport.write( "\n" );
+   }
+   if( args.rmargin ) {
+      plotport.write( `set rmargin ${args.rmargin}` );
+      plotport.write( "\n" );
+   }
+   if( args.bmargin ) {
+      plotport.write( `set bmargin ${args.bmargin}` );
+      plotport.write( "\n" );
+   }
+   if( args.tmargin ) {
+      plotport.write( `set tmargin ${args.tmargin}` );
+      plotport.write( "\n" );
+   }
+      
    switch( args.legend ) {
       case "top-right":
 	 plotport.write( "set key top right\n\n" );
@@ -211,10 +244,7 @@ module.exports = function( logfiles, engines, args ) {
    
    if( args.deviation > 0 ) {
       for( let i = 0; i < enames.length; i++ ) {
-      	 plotport.write( `  '${base}.csv' u 1:${(i*2)+2} w linespoints title '${enames[ i ]}' ls ${i+1}` );
-	 plotport.write( ", \\\n" );
-	 
-      	 plotport.write( `  '${base}.csv' u 1:${(i*2)+2}:${(i*2)+3} w yerrorbars notitle ls ${i+1}` );
+      	 plotport.write( `  '${base}.csv' u ${(i*2)+2}:${(i*2)+3}:xtic(1) title '${enames[ i ]}' ls ${i+1} ` );
       	 if( i < enames.length - 1 ) {
 	    plotport.write( ", \\\n" );
       	 } else {

@@ -12,22 +12,35 @@ function dyn( a, keys ) {
 function swt( a, keys ) {
    let r = 0;
    for( let i = keys.length - 1; i >= 0; i-- ) {
-      switch( keys[ i ] ) {
-	 case "a": r = a.a; break;
-	 case "b": r = a.b; break;
-	 case "c": r = a.c; break;
-	 case "z": r = a.z; break;
-	 case "w": r = a.w; break;
-	 case "x": r = a.x; break;
-	 case "o": r = a.o; break;
-	 case "p": r = a.p; break;
-	 case "q": r = a.q; break;
-	 case "r": r = a.r; break;
-	 case "s": r = a.s; break;
-	 case "t": r = a.t; break;
-	 case "u": r = a.u; break;
-	 case "v": r = a.v; break;
-	 case "g": r = a.w; break;
+      const k = keys[ i ];
+      
+      switch( k ) {
+	 case "a": r += a.a; break;
+	 case "b": r += a.b; break;
+	 case "c": r += a.c; break;
+	 case "d": r += a.d; break;
+	 case "e": r += a.e; break;
+	 case "f": r += a.f; break;
+	 case "g": r += a.g; break;
+	 case "h": r += a.h; break;
+	 case "i": r += a.i; break;
+	 case "j": r += a.j; break;
+	 case "k": r += a.k; break;
+	 case "l": r += a.l; break;
+ 	 case "m": r += a.m; break;
+  	 case "n": r += a.n; break;
+ 	 case "o": r += a.o; break;
+	 case "p": r += a.p; break;
+	 case "q": r += a.q; break;
+	 case "r": r += a.r; break;
+	 case "s": r += a.s; break;
+	 case "t": r += a.t; break;
+	 case "u": r += a.u; break;
+	 case "v": r += a.v; break;
+	 case "w": r += a.w; break;
+	 case "x": r += a.x; break;
+	 case "y": r += a.y; break;
+	 case "z": r += a.z; break;
 	 default: throw( "Illegal prop" );
       }
    }
@@ -36,7 +49,8 @@ function swt( a, keys ) {
 
 function loopDyn( n, a, b, ka, kb, acc ) {
    if( n > 0 ) {
-      return loopDyn( n - 1, a, b, ka, kb, acc + dyn( a, ka ) - dyn( b, kb ) );
+      a[ ka[ 0 ] ] = b[ kb[ 0 ] ];
+      return loopDyn( n - 1, a, b, ka, kb, acc + dyn( a, ka ) + dyn( b, kb ) );
    } else {
       return acc;
    }
@@ -44,7 +58,7 @@ function loopDyn( n, a, b, ka, kb, acc ) {
 
 function loopSwt( n, a, b, ka, kb, acc ) {
    if( n > 0 ) {
-      return loopSwt( n - 1, a, b, ka, kb, acc + swt( a, ka ) - swt( b, kb ) );
+      return loopSwt( n - 1, b, a, kb, ka, acc + swt( a, ka ) + swt( b, kb ) );
    } else {
       return acc;
    }
@@ -53,9 +67,23 @@ function loopSwt( n, a, b, ka, kb, acc ) {
 function test( n, name ) { 
    console.log( "testing", name );
    let r = 0;
+   let v = 1;
    const k = n / 10;
-   const a = {b: 3, c: 4, a: 1, z: 10, w: -1, o: 1, p: -1, q: 1, r: -1, s: 1, t:1, u: -1, v: 1, g: -1};
-   const b = {b: 35, c: 47, x: -19, z: -1, o: 1, p: -1, q: 1, r: -1, s: 1, t: 1, u: -1, v: 1, g: -1};
+   const ka = "abcdefghijkl";
+   const kb = "jklmnopqrstuvwxyz"
+   const a = {};
+   const b = {};
+   
+   for( let i = 0; i < ka.length; i++ ) {
+      a[ ka.charAt( i ) ] = v;
+      v = -v;
+   }
+   
+   for( let i = 0; i < kb.length; i++ ) {
+      b[ kb.charAt( i ) ] = v;
+      v = -v;
+   }
+   
    const na = Object.keys( a );
    const nb = Object.keys( b );
    
@@ -70,6 +98,6 @@ function test( n, name ) {
    return r;
 }
 
-test( 30000,  process.argv[ 2 ] || "dyn" );
+console.log( "r=", test( 30000,  process.argv[ 2 ] || "switch" ) );
 //console.log( "run=", t() );
    
