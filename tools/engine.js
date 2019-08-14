@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:55:49 2017                          */
-/*    Last change :  Wed Aug 14 15:57:27 2019 (serrano)                */
+/*    Last change :  Wed Aug 14 15:58:44 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Engine management                                                */
@@ -24,7 +24,7 @@ function loadEngines( arr, args ) {
    
    function loadEngine( name, path ) {
       const o = require( path );
-      if( !("name" in o ) )o.name = name;
+      if( !("name" in o ) ) o.name = name;
 
       if( o.compiler in args )
 	 o.compiler = args[ o.compiler ];
