@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Wed Aug 14 15:51:44 2019 (serrano)                */
+/*    Last change :  Wed Aug 14 16:14:15 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -67,7 +67,8 @@ module.exports = function( logfiles, engines, args ) {
       throw TypeError( "no logs found" );
    }
    
-   const title = args.t || args.title || logs[ 0 ].name;
+   const title = args.t || args.title || 
+      ((!"title" in args) ? logs[ 0 ].name : "");
    const format = args.format || args.f || "svg";
    const output = args.o || args.output || (logs[ 0 ].name + "." + format);
    const base = output.replace( /.[^.]+$/, '' );

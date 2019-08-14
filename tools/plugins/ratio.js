@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Mon Aug 12 10:15:42 2019                          */
-/*    Last change :  Wed Aug 14 15:39:20 2019 (serrano)                */
+/*    Last change :  Wed Aug 14 16:02:50 2019 (serrano)                */
 /*    Copyright   :  2019 Manuel Serrano                               */
 /*    -------------------------------------------------------------    */
 /*    Generate a new log file that is the ratio of two log files.      */
@@ -45,15 +45,36 @@ function ratioEngine( e, log0, log1 ) {
    const l = [];
    
    for( let i in l0 ) {
+      let us0 = 0;
+      let us1 = 0;
+      let rt0 = 0;
+      let rt1 = 0;
+      
       l0[ i ].time = l0[ i ].time / l1[ i ].time;
       
       for( let j in l0[ i ].times.ustimes ) {
-	 l0[ i ].times.ustimes[ j ] = l0[ i ].times.ustimes[ j ] / l1[ i ].times.ustimes[ j ];
+	 us0 += l0[ i ].times.ustimes[ j ];
+	 us1 += l1[ i ].times.ustimes[ j ];
       }
       
-      for( let j in l0[ i ].times.rtimes ) {
-	 l0[ i ].times.rtimes[ j ] = l0[ i ].times.rtimes[ j ] / l1[ i ].times.rtimes[ j ];
+      if( isNaN( us0 ) || isNaN( us1 ) || us1 === 0 ) {
+      	 l0[ i ].times.ustimes[ 0 ] = 0
+      } else {
+      	 l0[ i ].times.ustimes[ 0 ] = us0 / us1;
       }
+      l0[ i ].times.ustimes.length = 1;
+      
+      for( let j in l0[ i ].times.rtimes ) {
+	 rt0 += l0[ i ].times.rtimes[ j ];
+	 rt1 += l1[ i ].times.rtimes[ j ];
+      }
+
+      if( isNaN( rt0 ) || isNaN( rt1 ) || rt1 === 0 ) {
+      	 l0[ i ].times.rtimes[ 0 ] = 0;
+      } else {
+      	 l0[ i ].times.rtimes[ 0 ] = rt0 / rt1;
+      }
+      l0[ i ].times.rtimes.length = 1;
    }
 }   
    
