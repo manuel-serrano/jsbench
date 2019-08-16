@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Pierre Weis                                       */
 /*    Creation    :  Fri Apr  1 10:00:21 1994                          */
-/*    Last change :  Mon Jul 29 06:46:31 2019 (serrano)                */
+/*    Last change :  Fri Aug 16 07:33:30 2019 (serrano)                */
 /*    -------------------------------------------------------------    */
 /*    Resolution recursive du Baguenaudier: bench les appels de        */
 /*    fonctions et les acces aux vecteurs                              */
@@ -24,7 +24,7 @@ const handler = {
    set: function( target, key, val ) { target[ key ] = val; return true }
 }
 
-const jeu = new Proxy( new Array( nombre_de_pierres, une_pierre ), handler );
+const jeu = new Proxy( new Array( nombre_de_pierres ), handler );
 
 function init_jeu() {
    nombre_de_coups = 0;
