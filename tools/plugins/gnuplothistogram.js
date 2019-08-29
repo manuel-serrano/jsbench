@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Wed Aug 14 16:14:15 2019 (serrano)                */
+/*    Last change :  Thu Aug 29 08:47:19 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -122,7 +122,12 @@ module.exports = function( logfiles, engines, args ) {
    // output format
    switch( format ) {
       case "pdf": 
-	 plotport.write( "set terminal pdf\n" );
+	 plotport.write( "set terminal pdf" );
+	 if( args.size ) {
+	    plotport.write( ` size ${args.size}` );
+	 }
+	 plotport.write( ` font "${args.font || defaultFont}"` );
+	 plotport.write( "\n" );
 	 break;
 	 
       case "svg":
