@@ -1,0 +1,7 @@
+{
+   "name": "d8",
+   "version": "@INTERPRETER@ -e \"print(version()); quit()\"",
+   "cmd": "@INTERPRETER@ --jitless @PATH@",
+   "interpreter": "/opt/JS/V8/v8/out/x64.release/d8",
+   "iteration": 3
+}
