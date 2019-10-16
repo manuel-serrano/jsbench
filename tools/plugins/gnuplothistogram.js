@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Thu Aug 29 08:47:19 2019 (serrano)                */
+/*    Last change :  Wed Oct 16 08:21:17 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -174,7 +174,7 @@ module.exports = function( logfiles, engines, args ) {
    plotport.write( "\n" );
    plotport.write( "set style fill solid\n" );
    for( let i = 0; i < enames.length; i++ ) {
-      plotport.write( `set style line ${i+1} linecolor rgb '${colors[ i ]}' linetype 1 linewidth 1` );
+      plotport.write( `set style line ${i+1} linecolor rgb '${colors[ (i + linestyle - 1) % colors.length ]}' linetype 1 linewidth 1` );
       plotport.write( "\n" );
    }
    
@@ -251,7 +251,7 @@ module.exports = function( logfiles, engines, args ) {
    
    if( args.deviation > 0 ) {
       for( let i = 0; i < enames.length; i++ ) {
-      	 plotport.write( `  '${base}.csv' u ${(i*2)+2}:${(i*2)+3}:xtic(1) title '${enames[ i ]}' ls ${i+linestyle} ` );
+      	 plotport.write( `  '${base}.csv' u ${(i*2)+2}:${(i*2)+3}:xtic(1) title '${enames[ i ]}' ls ${i + 1} ` );
       	 if( i < enames.length - 1 ) {
 	    plotport.write( ", \\\n" );
       	 } else {
@@ -260,7 +260,7 @@ module.exports = function( logfiles, engines, args ) {
       }
    } else {
       for( let i = 0; i < enames.length; i++ ) {
-      	 plotport.write( `  '${base}.csv' u ${i+2}:xtic(1) title '${enames[ i ]}' ls ${i+linestyle}` );
+      	 plotport.write( `  '${base}.csv' u ${i+2}:xtic(1) title '${enames[ i ]}' ls ${i + 1}` );
       	 if( i < enames.length - 1 ) {
 	    plotport.write( ", \\\n" );
       	 }

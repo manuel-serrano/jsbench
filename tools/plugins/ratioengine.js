@@ -76,6 +76,10 @@ function ratioEngine( es, log ) {
       }
       l0[ i ].times.rtimes.length = 1;
    }
+   
+   // remove extra engines
+   log.engines = 
+      log.engines.filter( f => f.name === es[ 0 ].name );
 }   
    
 /*---------------------------------------------------------------------*/
