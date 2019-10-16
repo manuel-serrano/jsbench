@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Mon Aug 12 10:15:42 2019                          */
-/*    Last change :  Tue Oct 15 16:14:40 2019 (serrano)                */
+/*    Last change :  Tue Oct 15 18:20:47 2019 (serrano)                */
 /*    Copyright   :  2019 Manuel Serrano                               */
 /*    -------------------------------------------------------------    */
 /*    Generate a new log file that is the ratio of two engines.        */
@@ -76,6 +76,10 @@ function ratioEngine( es, log ) {
       }
       l0[ i ].times.rtimes.length = 1;
    }
+   
+   // remove extra engines
+   log.engines = 
+      log.engines.filter( f => f.name === es[ 0 ].name );
 }   
    
 /*---------------------------------------------------------------------*/
@@ -84,7 +88,6 @@ function ratioEngine( es, log ) {
 module.exports = function( logfiles, engines, args ) {
    const logs = require( common.normalizeCwd( logfiles[ 0 ] ) );
    
-   console.log( "ES=", engines );
    for( let i in logs ) {
       ratioEngine( engines, logs[ i ] );
    }
