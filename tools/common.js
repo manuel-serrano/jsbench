@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu Jan  4 14:17:43 2018                          */
-/*    Last change :  Fri Oct 12 15:35:56 2018 (serrano)                */
-/*    Copyright   :  2018 Manuel Serrano                               */
+/*    Last change :  Thu Oct 17 08:45:09 2019 (serrano)                */
+/*    Copyright   :  2018-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Common utilities                                                 */
 /*=====================================================================*/
@@ -38,8 +38,9 @@ function normalizeCwd( file ) {
 /*---------------------------------------------------------------------*/
 /*    mergeLogs ...                                                    */
 /*---------------------------------------------------------------------*/
-function mergeLogs( logfiles, sortp = true ) {
+function mergeLogs( logfiles, args ) {
    const logs = [];
+   const sortp = !args.nosort;
    let stamp = 0;
    let allengines = {};
 
@@ -116,7 +117,29 @@ function mergeLogs( logfiles, sortp = true ) {
    } );
 
    // sort the logs
-   return sortp ? logs.sort( (e1, e2) => e1.name.naturalCompare( e2.name ) >= 0) : logs;
+   if( !sortp ) {
+      return logs;
+   } else if( !args.sortalias ) {
+      return logs.sort( (e1, e2) => e1.name.naturalCompare( e2.name ) >= 0);
+   } else {
+      const alias = {};
+      
+      for( let e of logs ) {
+	 alias[ e.name ] = e.name;
+      }
+      
+      if( typeof args.sortalias === "string" ) {
+      	 const s = args.sortalias.split( ":" );
+      	 alias[ s[ 0 ] ] = s[ 1 ];
+      } else {
+	 args.sortalias.forEach( a => {
+      	       const s = a.sortalias.split( ":" );
+      	       alias[ s[ 0 ] ] = s[ 1 ];
+	    } );
+      }
+      
+      return logs.sort( (e1, e2) => alias[ e1.name ].naturalCompare( alias[ e2.name ] ) >= 0);
+   }
 }
 
 exports.normalizeCwd = normalizeCwd;

@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Mon Oct  8 18:05:27 2018 (serrano)                */
-/*    Copyright   :  2017-18 Manuel Serrano                            */
+/*    Last change :  Thu Oct 17 08:45:43 2019 (serrano)                */
+/*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a latex table from logs. The table shows relative       */
 /*    measures compared to the first column. Arithmetic means are      */
@@ -82,7 +82,7 @@ function collectEngines( logs ) {
 module.exports = function( logfiles, engines, args ) {
    const alogs = logfiles.map( l => require( common.normalizeCwd( l ) ) );
 
-   const logs = common.mergeLogs( logfiles, !args.nosort );
+   const logs = common.mergeLogs( logfiles, args );
    const enames = engines.length > 0
 	 ? engines.map( e => e.name )
 	 : collectEngines( logs );

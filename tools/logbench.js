@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:16:47 2017                          */
-/*    Last change :  Fri Oct 12 14:13:58 2018 (serrano)                */
-/*    Copyright   :  2017-18 Manuel Serrano                            */
+/*    Last change :  Thu Oct 17 08:42:00 2019 (serrano)                */
+/*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Output bench log                                                 */
 /*=====================================================================*/
@@ -33,7 +33,7 @@ function main() {
    
    function usage() {
       console.log( "logbench v" + require( "./configure.js" ).version );
-      console.log( "usage: runbench [options] plugin path1 path2 ..." );
+      console.log( "usage: logbench [options] plugin path1 path2 ..." );
       console.log( "" );
       console.log( "Options:" );
       console.log( "  -h|--help       This message" );
@@ -42,6 +42,7 @@ function main() {
       console.log( "  -e              Execution engine" );
       console.log( "  --acceptmissing Accept missing engines" );
       console.log( "  --nosort        Don't sort benchmarks" );
+      console.log( "  --sortalias     Use alias name when sorting" );
       console.log( "" );
       console.log( "Examples: " );
       console.log( "  hop -g --no-server -- logbench.js xgraph.js ../micro/poly.log.json | xgraph" );

@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:21:57 2017                          */
-/*    Last change :  Fri Oct 12 11:43:46 2018 (serrano)                */
-/*    Copyright   :  2017-18 Manuel Serrano                            */
+/*    Last change :  Thu Oct 17 08:45:50 2019 (serrano)                */
+/*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Summary plugin.                                                  */
 /*=====================================================================*/
@@ -145,7 +145,7 @@ function logText( logs, e ) {
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
 module.exports = function( logfiles, engines, args ) {
-   let logs = common.mergeLogs( logfiles, !args.nosort );
+   let logs = common.mergeLogs( logfiles, args );
    let queue = [];
 
    if( engines.length == 0 ) {

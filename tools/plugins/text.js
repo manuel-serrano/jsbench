@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:21:57 2017                          */
-/*    Last change :  Mon Jul  1 10:58:15 2019 (serrano)                */
+/*    Last change :  Thu Oct 17 08:45:57 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    text plugin                                                      */
@@ -198,7 +198,7 @@ function logText( logs, enames ) {
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
 module.exports = function( logfiles, engines, args ) {
-   let logs = common.mergeLogs( logfiles, !args.nosort );
+   let logs = common.mergeLogs( logfiles, args );
    let queue = [];
    
    if( engines.length == 0 ) {

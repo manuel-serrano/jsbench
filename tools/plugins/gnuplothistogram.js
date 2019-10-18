@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Wed Oct 16 08:21:17 2019 (serrano)                */
+/*    Last change :  Thu Oct 17 08:45:25 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -56,7 +56,7 @@ const plotport = process.stdout;
 module.exports = function( logfiles, engines, args ) {
    const alogs = logfiles.map( l => require( common.normalizeCwd( l ) ) );
 
-   const logs = common.mergeLogs( logfiles, !args.nosort );
+   const logs = common.mergeLogs( logfiles, args );
    const enames = engines.length > 0
 	 ? engines.map( e => e.name )
 	 : collectEngines( logs );

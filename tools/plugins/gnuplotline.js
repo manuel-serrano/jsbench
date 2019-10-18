@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Fri Jan  4 07:11:39 2019 (serrano)                */
+/*    Last change :  Thu Oct 17 08:45:35 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot line, each horizontal tick is a benchmark.    */
@@ -47,7 +47,7 @@ const colors = [ '#3264c8', '#d83812', '#fa9600', '#109318', '#960096', '#0096c2
 module.exports = function( logfiles, engines, args ) {
    const alogs = logfiles.map( l => require( common.normalizeCwd( l ) ) );
 
-   const logs = common.mergeLogs( logfiles, !args.nosort );
+   const logs = common.mergeLogs( logfiles, args );
    const enames = engines.length > 0
 	 ? engines.map( e => e.name )
 	 : collectEngines( logs );

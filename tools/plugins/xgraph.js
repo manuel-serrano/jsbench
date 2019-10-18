@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:21:57 2017                          */
-/*    Last change :  Sun Apr  1 16:24:21 2018 (serrano)                */
-/*    Copyright   :  2017-18 Manuel Serrano                            */
+/*    Last change :  Thu Oct 17 08:46:04 2019 (serrano)                */
+/*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    xgraph plugin                                                    */
 /*=====================================================================*/
@@ -80,7 +80,7 @@ function logXgraph( logs, engines ) {
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
 module.exports = function( logfiles, engines, args ) {
-   const logs = common.mergeLogs( logfiles, !args.nosort );
+   const logs = common.mergeLogs( logfiles, args );
    logXgraph( logs, engines.map( e => e.name ) );
 }
 
