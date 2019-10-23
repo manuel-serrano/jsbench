@@ -37,34 +37,23 @@
 // scrambled to exercise the regexp engine on different input strings.
 
 
-var RegExpSuite = new BenchmarkSuite('RegExp', [910985], [
-  new Benchmark("RegExp", true, false, 50,
-    RegExpRun, RegExpSetup, RegExpTearDown, null, 16)
-]);
-
-var regExpBenchmark = null;
-
-function RegExpSetup() {
-  regExpBenchmark = new RegExpBenchmark();
-  RegExpRun(); // run once to get system initialized
-}
-
-function RegExpRun() {
-  regExpBenchmark.run();
-}
-
-function RegExpTearDown() {
-  regExpBenchmark = null;
-}
-
 // Returns an array of n different variants of the input string str.
 // The variants are computed by randomly rotating one random
 // character.
+
+function Math_random() {
+   return 0.6;
+}
+
+function Math_random2() {
+   return 0.3;
+}
+
 function computeInputVariants(str, n) {
   var variants = [ str ];
   for (var i = 1; i < n; i++) {
-    var pos = Math.floor(Math.random() * str.length);
-    var chr = String.fromCharCode((str.charCodeAt(pos) + Math.floor(Math.random() * 128)) % 128);
+    var pos = Math.floor(Math_random() * str.length);
+    var chr = String.fromCharCode((str.charCodeAt(pos) + Math.floor(Math_random2() * 128)) % 128);
     variants[i] = str.substring(0, pos) + chr + str.substring(pos + 1, str.length);
   }
   return variants;
@@ -1797,9 +1786,23 @@ function RegExpBenchmark() {
       sum += runBlock9();
       sum += runBlock10();
       sum += runBlock11();
-      if (sum != 1666109) throw new Error("Wrong checksum.");
+      if (sum != 1675623) throw new Error("Wrong checksum.");
     }
   }
 
   this.run = run;
 }
+
+function BenchmarkSuite( name ) {
+   var num = 100;
+   var n = Math.round( num / 10 ), i = 1;
+   const b = new RegExpBenchmark();
+
+   console.log( name );
+   while( num-- > 0 ) {
+      if( num % n == 0 ) { console.log( i++ ); }
+      b.run();
+   }
+}
+
+BenchmarkSuite( "regexp" );
