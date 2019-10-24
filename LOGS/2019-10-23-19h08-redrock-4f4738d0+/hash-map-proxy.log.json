@@ -1,0 +1,129 @@
+[
+  {
+    "name": "hash-map-proxy",
+    "subtitle": false,
+    "path": "proxy/hash-map-proxy.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/hash-map-proxy -",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [1600,1630,1630],
+              "rtimes": [1200,1200,1200]
+            },
+            "time": 1600
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs proxy/hash-map-proxy.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [2970,3020,3070],
+              "rtimes": [2820,2850,2890]
+            },
+            "time": 2970
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/hash-map-proxy-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [11000,11050,11590],
+              "rtimes": [10790,10870,11380]
+            },
+            "time": 11000
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/hash-map-proxy-js52.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [14750,14920,14780],
+              "rtimes": [14710,14870,14760]
+            },
+            "time": 14750
+          }
+        ]
+      },
+      {
+        "name": "js60",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js60 /tmp/hash-map-proxy-js60.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [10150,9890,9940],
+              "rtimes": [10140,9880,9920]
+            },
+            "time": 9890
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/hash-map-proxy-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [10700,9230,9040],
+              "rtimes": [10590,9180,8970]
+            },
+            "time": 9040
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-19.1.1/bin/node proxy/hash-map-proxy.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [9210,9100,9320],
+              "rtimes": [5350,5260,5390]
+            },
+            "time": 9100
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,248 @@
+[
+  {
+    "name": "splay-proxy",
+    "subtitle": false,
+    "path": "proxy/splay-proxy.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/splay-proxy -",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [21150,20960,21430],
+              "rtimes": [13810,13790,14180]
+            },
+            "time": 20960
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs proxy/splay-proxy.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [26650,26940,26920],
+              "rtimes": [15740,15860,15960]
+            },
+            "time": 26650
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/splay-proxy-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [69590,70320,70860],
+              "rtimes": [51780,52020,52640]
+            },
+            "time": 69590
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/splay-proxy-js52.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [67770,67320,67330],
+              "rtimes": [67320,66940,67040]
+            },
+            "time": 67320
+          }
+        ]
+      },
+      {
+        "name": "js60",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js60 /tmp/splay-proxy-js60.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [51270,51540,51310],
+              "rtimes": [50610,50900,50750]
+            },
+            "time": 51270
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/splay-proxy-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [58980,52150,51640],
+              "rtimes": [55900,48910,48410]
+            },
+            "time": 51640
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-19.1.1/bin/node proxy/splay-proxy.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [49930,50420,56240],
+              "rtimes": [43440,42760,46370]
+            },
+            "time": 49930
+          }
+        ]
+      },
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/splay-proxy -",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [21150,21050,21300],
+              "rtimes": [14010,13820,14100]
+            },
+            "time": 21050
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs proxy/splay-proxy.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [26710,27190,26950],
+              "rtimes": [15920,16120,15930]
+            },
+            "time": 26710
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/splay-proxy-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [66520,67230,69100],
+              "rtimes": [48730,49540,51460]
+            },
+            "time": 66520
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/splay-proxy-js52.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [66750,67340,67160],
+              "rtimes": [66510,67170,66860]
+            },
+            "time": 66750
+          }
+        ]
+      },
+      {
+        "name": "js60",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js60 /tmp/splay-proxy-js60.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [51660,50770,51330],
+              "rtimes": [50990,50230,50660]
+            },
+            "time": 50770
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/splay-proxy-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [51770,55360,52160],
+              "rtimes": [48340,52230,48980]
+            },
+            "time": 51770
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-19.1.1/bin/node proxy/splay-proxy.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [57730,51140,52250],
+              "rtimes": [47670,44100,44690]
+            },
+            "time": 51140
+          }
+        ]
+      }
+    ]
+  }
+]

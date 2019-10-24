@@ -1,0 +1,129 @@
+[
+  {
+    "name": "deltablue-proxy",
+    "subtitle": false,
+    "path": "proxy/deltablue-proxy.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/deltablue-proxy -",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [6410,6380,6440],
+              "rtimes": [4840,4810,4880]
+            },
+            "time": 6380
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs proxy/deltablue-proxy.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [7570,7610,7620],
+              "rtimes": [7360,7370,7410]
+            },
+            "time": 7570
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/deltablue-proxy-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [36880,36700,34910],
+              "rtimes": [36440,36260,34540]
+            },
+            "time": 34910
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/deltablue-proxy-js52.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [46980,46810,46990],
+              "rtimes": [46810,46640,46830]
+            },
+            "time": 46810
+          }
+        ]
+      },
+      {
+        "name": "js60",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js60 /tmp/deltablue-proxy-js60.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [34570,38030,34760],
+              "rtimes": [34400,37870,34590]
+            },
+            "time": 34570
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/deltablue-proxy-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [28780,27020,30140],
+              "rtimes": [28410,26670,29760]
+            },
+            "time": 27020
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-19.1.1/bin/node proxy/deltablue-proxy.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [58330,58430,58820],
+              "rtimes": [26590,26710,26850]
+            },
+            "time": 58330
+          }
+        ]
+      }
+    ]
+  }
+]

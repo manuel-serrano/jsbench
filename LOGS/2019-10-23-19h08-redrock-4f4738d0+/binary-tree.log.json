@@ -1,0 +1,129 @@
+[
+  {
+    "name": "binary-tree",
+    "subtitle": false,
+    "path": "shootout/binary-tree.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/binary-tree -",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [50390,50810,50240],
+              "rtimes": [17300,17340,17300]
+            },
+            "time": 50240
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs shootout/binary-tree.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [16210,15900,15910],
+              "rtimes": [8350,8080,8220]
+            },
+            "time": 15900
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/binary-tree-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [11080,11410,11860],
+              "rtimes": [5530,5600,5710]
+            },
+            "time": 11080
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/binary-tree-js52.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [12110,11580,11650],
+              "rtimes": [12370,11870,11820]
+            },
+            "time": 11580
+          }
+        ]
+      },
+      {
+        "name": "js60",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js60 /tmp/binary-tree-js60.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [12040,11630,11690],
+              "rtimes": [12390,12140,12120]
+            },
+            "time": 11630
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/binary-tree-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [11180,11220,11330],
+              "rtimes": [9410,9600,9600]
+            },
+            "time": 11180
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-19.1.1/bin/node shootout/binary-tree.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [18650,18250,18340],
+              "rtimes": [20060,20010,19880]
+            },
+            "time": 18250
+          }
+        ]
+      }
+    ]
+  }
+]

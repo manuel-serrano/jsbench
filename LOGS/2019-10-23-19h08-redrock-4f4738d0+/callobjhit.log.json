@@ -1,0 +1,129 @@
+[
+  {
+    "name": "callobjhit",
+    "subtitle": false,
+    "path": "micro/callobjhit.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/callobjhit -",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [560,560,570],
+              "rtimes": [540,530,540]
+            },
+            "time": 560
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs micro/callobjhit.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [590,600,570],
+              "rtimes": [610,610,590]
+            },
+            "time": 570
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/callobjhit-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [460,440,450],
+              "rtimes": [460,420,430]
+            },
+            "time": 440
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/callobjhit-js52.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [210,210,210],
+              "rtimes": [220,220,210]
+            },
+            "time": 210
+          }
+        ]
+      },
+      {
+        "name": "js60",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js60 /tmp/callobjhit-js60.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [240,250,230],
+              "rtimes": [240,260,240]
+            },
+            "time": 230
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/callobjhit-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [860,870,850],
+              "rtimes": [870,870,860]
+            },
+            "time": 850
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-19.1.1/bin/node micro/callobjhit.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [2070,2140,2140],
+              "rtimes": [1790,1810,1820]
+            },
+            "time": 2070
+          }
+        ]
+      }
+    ]
+  }
+]

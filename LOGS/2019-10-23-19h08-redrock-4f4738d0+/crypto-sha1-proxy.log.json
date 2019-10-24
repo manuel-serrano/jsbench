@@ -1,0 +1,129 @@
+[
+  {
+    "name": "crypto-sha1-proxy",
+    "subtitle": false,
+    "path": "proxy/crypto-sha1-proxy.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/crypto-sha1-proxy -",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [1060,1070,1070],
+              "rtimes": [990,990,990]
+            },
+            "time": 1060
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs proxy/crypto-sha1-proxy.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [6230,6270,6220],
+              "rtimes": [6250,6280,6240]
+            },
+            "time": 6220
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/crypto-sha1-proxy-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [5760,5810,6010],
+              "rtimes": [5730,5790,5980]
+            },
+            "time": 5760
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/crypto-sha1-proxy-js52.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [8580,8830,8580],
+              "rtimes": [8560,8850,8590]
+            },
+            "time": 8580
+          }
+        ]
+      },
+      {
+        "name": "js60",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js60 /tmp/crypto-sha1-proxy-js60.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [4770,4710,4830],
+              "rtimes": [4780,4730,4840]
+            },
+            "time": 4710
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/crypto-sha1-proxy-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [7220,6850,7350],
+              "rtimes": [7190,6810,7320]
+            },
+            "time": 6850
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-19.1.1/bin/node proxy/crypto-sha1-proxy.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [5570,5560,5520],
+              "rtimes": [4530,4500,4450]
+            },
+            "time": 5520
+          }
+        ]
+      }
+    ]
+  }
+]

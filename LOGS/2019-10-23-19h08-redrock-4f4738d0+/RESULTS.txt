@@ -1,0 +1,528 @@
+assigop
+=======
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   55.79 real     55.25 usr+sys    20.34 real     20.26 usr+sys    14.97 real     14.97 usr+sys     5.12 real     5.11 usr+sys      5.14 real     5.14 usr+sys      6.73 real     6.73 usr+sys      5.54 real     5.53 usr+sys    ;; 2019-10-23:19h08
+
+
+bague
+=====
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    1.19 real     1.18 usr+sys      2.27 real     2.58 usr+sys      0.52 real     0.54 usr+sys      0.36 real     0.36 usr+sys      0.40 real     0.41 usr+sys      0.56 real     0.57 usr+sys      0.78 real     0.78 usr+sys    ;; 2019-10-23:19h08
+
+
+bague-proxy
+===========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    3.96 real     3.88 usr+sys      2.21 real     3.04 usr+sys      0.62 real     0.64 usr+sys      5.10 real      5.1 usr+sys      2.60 real      2.6 usr+sys      3.27 real     3.19 usr+sys      4.04 real     3.93 usr+sys    ;; 2019-10-23:19h08
+
+
+base64
+======
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    0.61 real     0.53 usr+sys      4.75 real     4.75 usr+sys      2.99 real      3.3 usr+sys      1.48 real     1.45 usr+sys      1.77 real     1.85 usr+sys      1.56 real      1.6 usr+sys      5.41 real     5.81 usr+sys    ;; 2019-10-23:19h08
+
+
+base64-proxy
+============
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   11.56 real     11.3 usr+sys     11.52 real     11.76 usr+sys     4.80 real     5.21 usr+sys     14.33 real     13.79 usr+sys    10.89 real     10.71 usr+sys    10.85 real     11.53 usr+sys    17.09 real     17.58 usr+sys   ;; 2019-10-23:19h08
+
+
+binary-tree
+===========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    9.54 real     11.18 usr+sys    19.98 real     18.25 usr+sys    17.31 real     50.24 usr+sys    12.02 real     11.58 usr+sys    12.22 real     11.63 usr+sys     5.61 real     11.08 usr+sys     8.22 real     15.9 usr+sys    ;; 2019-10-23:19h08
+
+
+binary-tree-proxy
+=================
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   38.37 real     36.61 usr+sys     9.45 real     10.42 usr+sys    10.12 real     27.16 usr+sys    65.82 real     66.81 usr+sys    42.43 real     41.75 usr+sys    42.60 real     46.28 usr+sys    10.50 real     13.22 usr+sys   ;; 2019-10-23:19h08
+
+
+boyer
+=====
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    2.14 real     2.36 usr+sys      5.97 real     9.62 usr+sys      3.95 real     12.2 usr+sys      1.73 real     1.68 usr+sys      1.73 real     1.68 usr+sys      1.07 real     1.38 usr+sys      1.77 real     2.49 usr+sys    ;; 2019-10-23:19h08
+
+
+boyer-proxy
+===========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   52.04 real     49.04 usr+sys    19.23 real     30.95 usr+sys     8.37 real     20.54 usr+sys    90.22 real     90.78 usr+sys    52.60 real     52.69 usr+sys    48.87 real     49.91 usr+sys    14.49 real     15.4 usr+sys    ;; 2019-10-23:19h08
+
+
+callobjhit
+==========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    0.87 real     0.85 usr+sys      1.81 real     2.07 usr+sys      0.54 real     0.56 usr+sys      0.22 real     0.21 usr+sys      0.25 real     0.23 usr+sys      0.44 real     0.44 usr+sys      0.60 real     0.57 usr+sys    ;; 2019-10-23:19h08
+
+
+callprotohit
+============
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    0.87 real     0.85 usr+sys      1.75 real     2.04 usr+sys      0.60 real     0.62 usr+sys      0.60 real     0.59 usr+sys      0.25 real     0.24 usr+sys      0.38 real     0.37 usr+sys      0.59 real     0.56 usr+sys    ;; 2019-10-23:19h08
+
+
+crypto
+======
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    2.04 real     2.22 usr+sys      7.77 real     17.35 usr+sys     7.88 real      8.4 usr+sys      1.66 real     2.12 usr+sys      1.86 real     2.15 usr+sys      1.39 real     1.66 usr+sys      1.92 real     2.15 usr+sys    ;; 2019-10-23:19h08
+
+
+crypto-aes
+==========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    2.48 real     2.85 usr+sys      9.07 real     13.61 usr+sys     2.57 real     4.89 usr+sys      1.05 real     1.08 usr+sys      1.21 real     1.28 usr+sys      1.04 real     1.17 usr+sys      1.37 real     1.44 usr+sys    ;; 2019-10-23:19h08
+
+
+crypto-aes-proxy
+================
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    6.20 real     5.93 usr+sys      6.57 real     14.2 usr+sys      1.08 real     1.79 usr+sys      6.94 real     7.01 usr+sys      4.28 real     4.34 usr+sys      4.50 real     4.44 usr+sys      5.54 real     5.38 usr+sys    ;; 2019-10-23:19h08
+
+
+crypto-md5
+==========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    0.68 real     0.67 usr+sys      4.53 real     6.46 usr+sys      0.63 real     0.96 usr+sys      0.37 real     0.37 usr+sys      0.40 real      0.4 usr+sys      0.42 real     0.44 usr+sys      0.79 real     0.79 usr+sys    ;; 2019-10-23:19h08
+
+
+crypto-proxy
+============
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   390.37 real   374.06 usr+sys    181.10 real   247.06 usr+sys    95.72 real    219.17 usr+sys    450.86 real   451.28 usr+sys    295.41 real   293.29 usr+sys    306.34 real   303.63 usr+sys    308.70 real   302.33 usr+sys   ;; 2019-10-23:19h08
+
+
+crypto-sha1
+===========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    0.43 real     0.42 usr+sys      2.30 real     2.59 usr+sys      0.49 real     0.84 usr+sys      0.35 real     0.33 usr+sys      0.37 real     0.36 usr+sys      0.34 real     0.39 usr+sys      0.67 real     0.65 usr+sys    ;; 2019-10-23:19h08
+
+
+crypto-sha1-proxy
+=================
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    7.11 real     6.85 usr+sys      4.49 real     5.52 usr+sys      0.99 real     1.06 usr+sys      8.67 real     8.58 usr+sys      4.78 real     4.71 usr+sys      5.83 real     5.76 usr+sys      6.26 real     6.22 usr+sys    ;; 2019-10-23:19h08
+
+
+ctor
+====
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    2.61 real     3.28 usr+sys      2.87 real      3.2 usr+sys      6.84 real     32.44 usr+sys     2.95 real     2.94 usr+sys      5.36 real     5.35 usr+sys      0.32 real     0.31 usr+sys      0.97 real     0.92 usr+sys    ;; 2019-10-23:19h08
+
+
+deltablue
+=========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   12.64 real     13.96 usr+sys    18.87 real     28.15 usr+sys    36.33 real     78.35 usr+sys     3.72 real     3.57 usr+sys      4.32 real     4.34 usr+sys      5.93 real     6.24 usr+sys      4.51 real     4.68 usr+sys    ;; 2019-10-23:19h08
+
+
+deltablue-proxy
+===============
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   28.28 real     27.02 usr+sys    26.72 real     58.33 usr+sys     4.84 real     6.38 usr+sys     46.76 real     46.81 usr+sys    35.62 real     34.57 usr+sys    35.75 real     34.91 usr+sys     7.38 real     7.57 usr+sys    ;; 2019-10-23:19h08
+
+
+earley
+======
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    0.23 real     0.27 usr+sys      5.31 real     11.4 usr+sys      0.91 real     3.31 usr+sys      0.17 real     0.23 usr+sys      0.16 real     0.21 usr+sys      0.14 real     0.23 usr+sys      0.56 real     0.63 usr+sys    ;; 2019-10-23:19h08
+
+
+earley-proxy
+============
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    3.34 real     3.22 usr+sys     11.73 real     26.79 usr+sys     1.36 real     5.03 usr+sys      4.23 real     4.34 usr+sys      2.92 real     2.96 usr+sys      2.85 real     2.83 usr+sys      2.35 real     2.39 usr+sys    ;; 2019-10-23:19h08
+
+
+fannkuch
+========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    2.92 real     2.86 usr+sys      3.34 real     3.65 usr+sys      3.65 real     3.65 usr+sys      1.69 real     1.69 usr+sys      2.16 real     2.14 usr+sys      1.64 real     1.66 usr+sys      2.30 real     2.28 usr+sys    ;; 2019-10-23:19h08
+
+
+fannkuch-proxy
+==============
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    4.63 real     4.36 usr+sys      5.41 real     8.81 usr+sys      0.67 real     0.68 usr+sys      6.01 real     5.97 usr+sys      3.35 real     3.27 usr+sys      3.55 real     3.48 usr+sys      4.50 real     4.35 usr+sys    ;; 2019-10-23:19h08
+
+
+fib
+===
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    1.34 real      1.3 usr+sys      2.44 real     2.39 usr+sys      0.52 real     0.54 usr+sys      0.78 real     0.77 usr+sys      0.79 real     0.78 usr+sys      0.81 real      0.8 usr+sys      1.59 real     1.58 usr+sys    ;; 2019-10-23:19h08
+
+
+fib42
+=====
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   16.69 real     16.54 usr+sys    27.30 real     27.22 usr+sys     6.41 real     6.41 usr+sys      9.89 real     9.89 usr+sys     10.04 real     10.04 usr+sys    10.21 real     9.91 usr+sys     15.91 real     15.88 usr+sys   ;; 2019-10-23:19h08
+
+
+foreacharr
+==========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   10.65 real     13.21 usr+sys     2.31 real     2.28 usr+sys      7.07 real     27.07 usr+sys    52.68 real     50.85 usr+sys     7.28 real     7.26 usr+sys      1.66 real     1.77 usr+sys      1.55 real     1.72 usr+sys    ;; 2019-10-23:19h08
+
+
+forinarr
+========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    8.35 real     8.34 usr+sys     42.36 real     42.3 usr+sys      2.30 real     3.64 usr+sys     12.55 real     12.39 usr+sys     8.88 real     8.68 usr+sys      1.22 real     1.21 usr+sys      4.86 real     4.82 usr+sys    ;; 2019-10-23:19h08
+
+
+hash-map
+========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    0.34 real     0.32 usr+sys      1.17 real     1.69 usr+sys      0.47 real     0.69 usr+sys      0.14 real     0.14 usr+sys      0.15 real     0.15 usr+sys      0.18 real     0.25 usr+sys      0.62 real     0.66 usr+sys    ;; 2019-10-23:19h08
+
+
+hash-map-proxy
+==============
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    9.58 real     9.04 usr+sys      5.33 real      9.1 usr+sys      1.20 real      1.6 usr+sys     14.78 real     14.75 usr+sys     9.98 real     9.89 usr+sys     11.01 real      11 usr+sys       2.85 real     2.97 usr+sys    ;; 2019-10-23:19h08
+
+
+incop
+=====
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    0.66 real     0.65 usr+sys      0.24 real     0.22 usr+sys      0.93 real     0.93 usr+sys      0.14 real     0.13 usr+sys      0.15 real     0.14 usr+sys      0.08 real     0.09 usr+sys      0.67 real     0.65 usr+sys    ;; 2019-10-23:19h08
+
+
+maze
+====
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    2.12 real     2.28 usr+sys      NaN real     -0.001 usr+sys     0.92 real     2.46 usr+sys      2.96 real     3.03 usr+sys      1.80 real     1.89 usr+sys      0.70 real     1.15 usr+sys      1.59 real     2.14 usr+sys    ;; 2019-10-23:19h08
+
+
+maze-proxy
+==========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   12.75 real     12.33 usr+sys     NaN real     -0.001 usr+sys     2.26 real     3.99 usr+sys     27.17 real     26.5 usr+sys     14.43 real     14.43 usr+sys    12.73 real     13.66 usr+sys     4.25 real     5.36 usr+sys    ;; 2019-10-23:19h08
+
+
+poly
+====
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    0.38 real     0.36 usr+sys      1.50 real     1.82 usr+sys      0.96 real     0.97 usr+sys      0.06 real     0.05 usr+sys      0.06 real     0.06 usr+sys      0.09 real     0.09 usr+sys      0.52 real     0.49 usr+sys    ;; 2019-10-23:19h08
+
+
+puzzle
+======
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    2.00 real     2.01 usr+sys     11.87 real     20.63 usr+sys     2.40 real     2.37 usr+sys      0.67 real     0.68 usr+sys      0.81 real     0.81 usr+sys      0.90 real     0.92 usr+sys      1.38 real      1.4 usr+sys    ;; 2019-10-23:19h08
+
+
+puzzle-proxy
+============
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   12.90 real     11.98 usr+sys     3.79 real     4.85 usr+sys      1.49 real     1.48 usr+sys     13.36 real     13.32 usr+sys     7.98 real     7.93 usr+sys     11.02 real     10.64 usr+sys    11.39 real      11 usr+sys     ;; 2019-10-23:19h08
+
+
+qsort
+=====
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    0.85 real      0.8 usr+sys     69.38 real     70.18 usr+sys     0.81 real     0.94 usr+sys      4.03 real     3.96 usr+sys      7.00 real     3.26 usr+sys      0.54 real     0.53 usr+sys      1.13 real     1.08 usr+sys    ;; 2019-10-23:19h08
+
+
+qsort-proxy
+===========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    9.45 real     9.27 usr+sys     18.21 real     19.52 usr+sys     1.16 real      1.2 usr+sys     13.52 real     13.23 usr+sys     7.81 real     7.85 usr+sys      8.52 real     8.48 usr+sys      8.48 real     8.39 usr+sys    ;; 2019-10-23:19h08
+
+
+richards
+========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    7.80 real     7.87 usr+sys     10.43 real     11.6 usr+sys     15.25 real     15.71 usr+sys     3.79 real     3.78 usr+sys      4.83 real     4.85 usr+sys      4.14 real     4.22 usr+sys      5.24 real     5.26 usr+sys    ;; 2019-10-23:19h08
+
+
+set
+===
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    2.53 real      2.5 usr+sys      2.52 real     2.81 usr+sys      3.17 real     3.05 usr+sys      1.69 real     1.67 usr+sys      1.69 real     1.67 usr+sys      1.69 real     1.67 usr+sys      2.07 real     2.04 usr+sys    ;; 2019-10-23:19h08
+
+
+sieve
+=====
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    0.98 real       1 usr+sys       NaN real     -0.001 usr+sys     2.21 real     8.31 usr+sys      0.36 real     0.34 usr+sys      0.37 real     0.35 usr+sys      0.64 real     0.65 usr+sys      0.97 real     0.94 usr+sys    ;; 2019-10-23:19h08
+
+
+sieve-proxy
+===========
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   20.99 real     20.66 usr+sys     NaN real     -0.001 usr+sys     7.95 real     26.89 usr+sys    36.68 real     38.72 usr+sys    22.48 real     22.06 usr+sys    21.66 real     21.33 usr+sys     6.18 real     5.91 usr+sys    ;; 2019-10-23:19h08
+
+
+splay
+=====
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    5.45 real     6.78 usr+sys     26.31 real     27.65 usr+sys    10.47 real     21.27 usr+sys     4.88 real     4.26 usr+sys      4.91 real     4.68 usr+sys      2.76 real     10.41 usr+sys     5.50 real     13.75 usr+sys   ;; 2019-10-23:19h08
+
+
+splay-proxy
+===========
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     chakra          chakra           graal           graal            hop             hop            js52            js52            js60            js60             jsc             jsc           nodejs          nodejs     
+                                   (v10.15.2)      (v10.15.2)      (3.3.0-mt)      (3.3.0-mt)                                                                                                      (v10.15.2)      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock         redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   49.85 real     51.77 usr+sys    51.07 real     51.64 usr+sys    45.49 real     51.14 usr+sys    44.19 real     49.93 usr+sys    13.98 real     21.05 usr+sys    13.93 real     20.96 usr+sys    66.85 real     66.75 usr+sys    67.10 real     67.32 usr+sys    50.63 real     50.77 usr+sys    50.75 real     51.27 usr+sys    52.15 real     69.59 usr+sys    49.91 real     66.52 usr+sys    15.99 real     26.71 usr+sys    15.85 real     26.65 usr+sys   ;; 2019-10-23:19h08
+
+
+stridx
+======
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   22.32 real     22.3 usr+sys      3.36 real     3.32 usr+sys     28.97 real     29.13 usr+sys    52.03 real     51.89 usr+sys    51.97 real     51.97 usr+sys    22.83 real     22.81 usr+sys     7.76 real     7.72 usr+sys    ;; 2019-10-23:19h08
+
+
+string
+======
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+   14.16 real     14.14 usr+sys     2.33 real     2.28 usr+sys      9.06 real     9.17 usr+sys     16.76 real     16.73 usr+sys    16.81 real     16.78 usr+sys    15.24 real     15.2 usr+sys      2.21 real     2.19 usr+sys    ;; 2019-10-23:19h08
+
+
+switch
+======
+
+----------------------------------------------------------------------------------------------------------------
+     chakra           graal            hop            js52            js60             jsc           nodejs     
+                   (v10.15.2)      (3.3.0-mt)                                                      (v10.15.2)   
+     redrock         redrock         redrock         redrock         redrock         redrock         redrock    
+----------------------------------------------------------------------------------------------------------------
+    1.12 real      1.1 usr+sys      2.17 real     2.15 usr+sys      0.55 real     0.57 usr+sys      0.27 real     0.26 usr+sys      0.26 real     0.25 usr+sys      0.69 real     0.68 usr+sys      0.64 real     0.62 usr+sys    ;; 2019-10-23:19h08
+
+

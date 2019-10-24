@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:21:57 2017                          */
-/*    Last change :  Thu Oct 17 08:45:57 2019 (serrano)                */
+/*    Last change :  Thu Oct 24 09:23:56 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    text plugin                                                      */
@@ -154,17 +154,17 @@ function logText( logs, enames ) {
 	       } else {
 		  process.stdout.write( padding( "real", len ) );
 	       }
-	       if( l && l.time ) {
-		  if( l.time ) {
-		     if( !k ) k = l;
-		     
-		     process.stdout.write( padding( "" + l.time / 1000 + " usr+sys", len ) );
-		  } else {
-		     process.stdout.write( padding( "_ usr+sys", len ) );
-		  }
-	       } else {
-		  process.stdout.write( padding( "usr+sys", len ) );
-	       }
+/* 	       if( l && l.time ) {                                     */
+/* 		  if( l.time ) {                                       */
+/* 		     if( !k ) k = l;                                   */
+/* 		                                                       */
+/* 		     process.stdout.write( padding( "" + l.time / 1000 + " usr+sys", len ) ); */
+/* 		  } else {                                             */
+/* 		     process.stdout.write( padding( "_ usr+sys", len ) ); */
+/* 		  }                                                    */
+/* 	       } else {                                                */
+/* 		  process.stdout.write( padding( "usr+sys", len ) );   */
+/* 	       }                                                       */
 	    } );
 	    
 	    if( k ) {

@@ -1,0 +1,129 @@
+[
+  {
+    "name": "bague-proxy",
+    "subtitle": false,
+    "path": "proxy/bague-proxy.js",
+    "args": false,
+    "engines": [
+      {
+        "name": "hop",
+        "version": "3.3.0-mt",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/tmp/bague-proxy -",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [640,640,670],
+              "rtimes": [620,620,630]
+            },
+            "time": 640
+          }
+        ]
+      },
+      {
+        "name": "nodejs",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "nodejs proxy/bague-proxy.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [3990,3930,4230],
+              "rtimes": [3980,3920,4220]
+            },
+            "time": 3930
+          }
+        ]
+      },
+      {
+        "name": "jsc",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "jsc /tmp/bague-proxy-jsc.js --",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [3190,3230,3440],
+              "rtimes": [3170,3200,3430]
+            },
+            "time": 3190
+          }
+        ]
+      },
+      {
+        "name": "js52",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js52 /tmp/bague-proxy-js52.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [5130,5100,5100],
+              "rtimes": [5120,5080,5090]
+            },
+            "time": 5100
+          }
+        ]
+      },
+      {
+        "name": "js60",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "js60 /tmp/bague-proxy-js60.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [2610,2620,2600],
+              "rtimes": [2590,2610,2590]
+            },
+            "time": 2600
+          }
+        ]
+      },
+      {
+        "name": "chakra",
+        "version": "",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "ch /tmp/bague-proxy-chakra.js -args",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [3880,4140,3890],
+              "rtimes": [3860,4130,3880]
+            },
+            "time": 3880
+          }
+        ]
+      },
+      {
+        "name": "graal",
+        "version": "v10.15.2",
+        "host": "redrock",
+        "platform": "linux",
+        "cmd": "/opt/JS/GRAAL/graalvm-ce-19.1.1/bin/node proxy/bague-proxy.js",
+        "logs": [
+          {
+            "date": "2019-10-23T17:08:33.000Z",
+            "times": {
+              "ustimes": [3040,3070,3040],
+              "rtimes": [2200,2230,2190]
+            },
+            "time": 3040
+          }
+        ]
+      }
+    ]
+  }
+]
