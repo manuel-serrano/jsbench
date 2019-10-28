@@ -543,7 +543,7 @@ function BenchmarkSuite( name, val, benchs ) {
    go = function() {
       var num = benchs[ 0 ].iteration;
       var n = Math.round( num / 10 ), i = 1;
-      console.log( name );
+      console.log( name + " (" + num + ")" );
       while( num-- > 0 ) {
 	 if( num % n == 0 ) { console.log( i++ ); }
 	 benchs[ 0 ].go()
@@ -551,8 +551,10 @@ function BenchmarkSuite( name, val, benchs ) {
    }
 }
 
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 8200 * 5;
+
 var Richards = BenchmarkSuite('Richards', [35302], [
-  Benchmark("Richards", true, false, 8200 * 5, runRichards)
+  Benchmark("Richards", true, false, N, runRichards)
 ]);
 
 

@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Fri Jul 12 14:39:44 2019 (serrano)                */
+/*    Last change :  Sun Oct 27 10:56:19 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -262,7 +262,7 @@ function runBench( bench, engine ) {
       }
 
       process.stdout.write(
-	 " real: " + sec( Math.min.apply( null, rtimes ) ) + 
+	 "   real: " + sec( Math.min.apply( null, rtimes ) ) + 
 	 ", usr+sys: " + sec( Math.min.apply( null, ustimes ) ) + "\n" );
 
       return { ustimes, rtimes };
@@ -280,11 +280,20 @@ function runBench( bench, engine ) {
    }
 
    function compile( args ) {
-      return execPromise( benchCmd( args ), "compile" )
-	 .then( v => v,
-		(err) => {
-		   console.error( bench.name, "compilation failed with message", err );
-		} );
+      const target = path.join( config.tmp, bench.name );
+      const stattarget = fs.existsSync( target ) && fs.statSync( target );
+      const statsrc = fs.statSync( bench.path );
+
+      if( !config.recompile 
+	  && (stattarget && (stattarget.mtime > statsrc.mtime ) ) ) {
+	 return Promise.resolve( true );
+      } else {
+      	 return execPromise( benchCmd( args ), "compile" )
+	    .then( v => v,
+	       (err) => {
+		  console.error( bench.name, "compilation failed with message", err );
+	       } );
+      }
    }
 
    function runCompile( subtitle, args ) {
@@ -292,12 +301,12 @@ function runBench( bench, engine ) {
 	    .replace( /@TMP@/g, config.tmp )
 	    .replace( /@NAME@/g, bench.name )
 	    .replace( /@INTERPRETER@/g, engine.interpreter || "" )
-	    + (args ? " " + args : "");
+	    + (config.arg ? " " + config.arg : "");
       return benchLog( bench, engine, run, chrono( run ), subtitle, args );
    }
 
    function runInterpret( subtitle, args ) {
-      const run = benchCmd( args );
+      const run = benchCmd( config.arg );
 
       return benchLog( bench, engine, run, chrono( run ), subtitle, args );
    }
@@ -401,12 +410,14 @@ function runBenchmark( p ) {
    const bench = loadBench( p );
 
    if( config.verbose >= 1 ) {
-      process.stdout.write( bench.name + "...\n" );
+      process.stdout.write( bench.name + 
+			    (config.arg ? "(" + config.arg + ")" : "") +
+	    		    "...\n" );
    }
 
    return config.engines.forEachAsync( e => runBench( bench, e ) )
       .then( () => {
-	 if( config.verbose >= 1 ) {
+	 if( config.verbose >= 2 ) {
 	    process.stdout.write( "\n" );
 	 }
       } );
@@ -431,10 +442,12 @@ function main() {
       console.log( "  -e engine            Execution engine" );
       console.log( "  --name command       Execution command" );
       console.log( "  -m|--message message Log message" );
+      console.log( "  -a|--arg             Benchmark argument" );
       console.log( "  --hopc compiler      Hopc compiler" );
       console.log( "  --hopcflags flags    Hopc optional extra flags" );
       console.log( "  --date string        Set the log date" );
       console.log( "  --iteration n        Forced iteration number" );
+      console.log( "  --recompile          Forced recompilation" );
       console.log( "" );
       console.log( "Examples: " );
       console.log( "  hop --no-server -- runbench.js -v3 -e hop ../micro/poly.js" );
@@ -479,6 +492,9 @@ function main() {
    }
 
    config.directory = args.D || args.dir;
+   config.recompile = args.recompile;
+   
+   config.arg = args.a || args.arg;
    
    // load the engine plugins
    config.engines = engine.loadEngines( args.e, args );

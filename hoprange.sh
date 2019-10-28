@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 # the Hop benchmark suite
 . ./hopbench.sh
 
 hopc=hopc
-engines="-e hop -e nodejs -e jsc -e js52 -e js60 -e chakra -e graal"
+engines="-e hop -e nodejs -e jsc -e js60"
 
 resetengines=""
 
@@ -44,7 +44,7 @@ while : ; do
       ;;
 
     -*)
-      echo "Usage: hopstone.sh [options]" >&2;
+      echo "Usage: hoprange.sh [options]" >&2;
       echo "" >&2;
       echo "  -O path                            log output base directory" >&2;
       echo "  -m message                         log message (tag)" >&2;
@@ -74,22 +74,16 @@ else
   dt=`date -R`
 fi
 
-coolperiod=3
-
 mkdir -p $dir
 
 for p in $BENCHMARKS; do
   if [ "$msg " != " " ]; then
-    hop --no-server -- tools/runbench.js -v3 $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc
+    tools/rangebench.sh -v3 $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc
   else
-    hop --no-server -- tools/runbench.js -v3 $engines -D $dir $p --date "$dt" --hopc $hopc
+    echo "tools/rangebench.sh $engines -D $dir $p --date $dt --hopc $hopc"
+    tools/rangebench.sh $engines -D $dir $p --date "$dt" --hopc $hopc
   fi
-  sleep $coolperiod
 done
 
-hop --no-server -- tools/logbench.js text.js $dir >> $dir/RESULTS.txt
+echo "See $dir for output"
 
-hop --no-server -- tools/logbench.js summary.js $dir > $dir/SUMMARY.txt
-cat $dir/SUMMARY.txt
-
-echo "For details, run \"hop --no-server -- tools/logbench.js text.js $dir\""
