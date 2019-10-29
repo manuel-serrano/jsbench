@@ -110,6 +110,8 @@ case $BENCHMARKS in
     ;;
 esac
 
+echo "$engines [$BENCHMARKS]"
+
 for p in $BENCHMARKS; do
   if [ "$msg " != " " ]; then
     tools/rangebench.sh -v3 $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc
