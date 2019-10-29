@@ -9,16 +9,18 @@ function foo( a ) {
    return r;
 }
 
-function t() { 
+function t( N ) { 
    let a = [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2];
    let r;
    
-   for( let i = 0; i < 4000000; i++ ) {
+   for( let i = 0; i < N; i++ ) {
       r = foo( a );
    }
    
    return r;
 }
 	  
-console.log( "run=", t() );
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 4000000;
+
+console.log( "run=", t( N ) );
    

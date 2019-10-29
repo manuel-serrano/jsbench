@@ -100,7 +100,7 @@ cat > $outdir/$output << EOF
 EOF
 
 echo "\title{HopRange $tag}" >> $outdir/$output
-echo "\author{`hostname` (`uname -m`)}" >> $outdir/$output
+echo "\author{`hostname` (`uname -m | sed s'/_/-/'`)}" >> $outdir/$output
 echo "\\date{$dt}" >> $outdir/$output
 
 cat >> $outdir/$output << EOF

@@ -23,4 +23,6 @@ function foo( N ) {
    }
 }
 
-console.log( foo( 80000 ) );
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 80000;
+
+console.log( foo( N ) );

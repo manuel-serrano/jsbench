@@ -39,7 +39,9 @@ CTOR.prototype = { __proto__: { __proto__: { __proto__: p } } };
 
 var o1 = new CTOR( 1, 2, 3, 4 );
 
-console.log( "test=", test( 70000000 ) );
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 70000000;
+
+console.log( "test=", test( N ) );
 
 var o2 = new CTOR( 10, 20, 30, 40 );
 

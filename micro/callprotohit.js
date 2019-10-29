@@ -26,4 +26,6 @@ function gee( CNT, m ) {
    return s;
 }
 
-console.log( gee( 10000, 1 ) + " (=22344)" );
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10000;
+
+console.log( gee( N, 1 ) + " (=22344)" );
