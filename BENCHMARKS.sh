@@ -10,4 +10,5 @@ BENCHMARKS_MICRO="micro/assigop.js micro/ctor.js micro/incop.js micro/poly.js mi
 BENCHMARKS_OTHER="other/deltablue-class.js rho.js"
 BENCHMARKS_PROXY="proxy/crypto-proxy.js proxy/boyer-proxy.js proxy/deltablue-proxy.js richards-proxy.js proxy/splay-proxy.js proxy/maze-proxy.js proxy/hash-map-proxy.js proxy/earley-proxy.js proxy/bague-proxy.js proxy/puzzle-proxy.js proxy/crypto-aes-proxy.js proxy/crypo-md5-proxy.js proxy/crypto-sha1-proxy.js proxy/sieve-proxy.js proxy/qsort-proxy.js proxy/splay-proxy.js proxy/binary-tree-proxy.js proxy/fannkuch-proxy.js proxy/base64-proxy.js"
 BENCHMARKS_CONTRACT="contract/abbrev.js contract/abs.js contract/app-root-path.js contract/archy.js contract/argv.js"
+
 BENCHMARKS="$BENCHMARKS_OCTANE $BENCHMARKS_SUNSPIDER $BENCHMARKS_JETSTREAM $BENCHMARKS_SHOOTOUT $BENCHMARKS_BGLSTONE $BENCHMARKS_MICRO $BENCHMARKS_PROXY"

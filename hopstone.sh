@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # the Hop benchmark suite
-. ./hopbench.sh
+. ./BENCHMARKS.sh
 
 hopc=hopc
 engines="-e hop -e nodejs -e jsc -e js52 -e js60 -e chakra -e graal"

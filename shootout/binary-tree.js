@@ -52,4 +52,8 @@ function binarytree(n) {
 }
 
 
-binarytree(20);
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10;
+
+console.log( "binarytree (" + N + ")" );
+
+binarytree(N);

@@ -50,15 +50,15 @@ function fannkuch(n) {
 
 }
 
-var nn = 10;
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10;
 
-console.log( "n=", nn );
+console.log( "fannkuch (" + N + ")" );
 
 var k = 0;
 
-for( k = 0; k < 10; k++ ) {
+for( k = 0; k < N; k++ ) {
    console.log( "  k=", k );
-   var pf = fannkuch(nn);
+   var pf = fannkuch(10);
 }
 
 console.log( "pf=", pf );
