@@ -61,16 +61,16 @@ while : ; do
 done
 
 if [ "$dir " = " " -a "$base " = " " ]; then
-  tags=`$hopc --buildtag`
-  dir=LOGS/`date '+%Y-%m-%d-%Hh%M'`-`hostname`-$tags
+  tag=`$hopc --buildtag`
+  dir=LOGS/`date '+%Y-%m-%d-%Hh%M'`-`hostname`-$tag
   dt=`date -R`
 elif [ "$dir " = " " ]; then
-  tags=`$hopc --buildtag`
-  dir=$base/`date '+%Y-%m-%d-%Hh%M'`-`hostname`-$tags
+  tag=`$hopc --buildtag`
+  dir=$base/`date '+%Y-%m-%d-%Hh%M'`-`hostname`-$tag
   dt=`date -R`
 else
-  tags=`$hopc --buildtag`
-  dir=LOGS/`date '+%Y-%m-%d-%Hh%M'`-`hostname`-$tags
+  tag=`$hopc --buildtag`
+  dir=LOGS/`date '+%Y-%m-%d-%Hh%M'`-`hostname`-$tag
   dt=`date -R`
 fi
 
@@ -80,10 +80,12 @@ for p in $BENCHMARKS; do
   if [ "$msg " != " " ]; then
     tools/rangebench.sh -v3 $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc
   else
-    echo "tools/rangebench.sh $engines -D $dir $p --date $dt --hopc $hopc"
     tools/rangebench.sh $engines -D $dir $p --date "$dt" --hopc $hopc
   fi
 done
 
-echo "See $dir for output"
+echo "tools/rangelatex.sh $engines -D $dir --date "$dt" $BENCHMARKS"
+tools/rangelatex.sh $engines -D $dir --date "$dt" --tag $tag $BENCHMARKS
+
+echo "See $dir/report.pdf"
 

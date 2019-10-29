@@ -2,30 +2,6 @@
 // benchmark harness code at the beginning and end of the file.
 "use strict";
 
-var go;
-
-function Benchmark( name, opt1, opt2, it, go ) {
-   return { go: go, iteration: it };
-}
-
-function BenchmarkSuite( name, val, benchs ) {
-   go = function() {
-      var num = benchs[ 0 ].iteration;
-      var n = Math.round( num / 10 ), i = 1;
-      console.log( name );
-      while( num-- > 0 ) {
-	 if( num % n == 0 ) { console.log( i++ ); }
-	 benchs[ 0 ].go()
-      };
-   }
-}
-
-var EarleyBoyer = new BenchmarkSuite('EarleyBoyer', [666463], [
-  new Benchmark("Earley", true,  false, 250, function () { BgL_earleyzd2benchmarkzd2(); })
-/*   new Benchmark("Boyer", true, false, 200, function () { BgL_nboyerzd2benchmarkzd2(); }) */
-]);
-
-
 /************* GENERATED FILE - DO NOT EDIT *************/
 /************* GENERATED FILE - DO NOT EDIT *************/
 /************* GENERATED FILE - DO NOT EDIT *************/
@@ -4217,8 +4193,6 @@ function RunBenchmark(name, count, run, warn) {
 
 var BgL_runzd2benchmarkzd2 = RunBenchmark;
 
-go();
-
 function MKTREE( l ) {
    var sc_x_134;
    var tail1134;
@@ -4309,3 +4283,30 @@ function DTREE(sc_conf_91, i, j, sc_enders_92, sc_steps_93, sc_names_94, sc_toks
       }
    }), (sc_loop1_98((sc_enders_92[(sc_steps_93[prev])]), null)))));
 }
+
+var go;
+
+function Benchmark( name, opt1, opt2, it, go ) {
+   return { go: go, iteration: it };
+}
+
+function BenchmarkSuite( name, val, benchs ) {
+   go = function() {
+      var num = benchs[ 0 ].iteration;
+      var n = Math.round( num / 10 ), i = 1;
+      console.log( name + " (" + num + ")" );
+      while( num-- > 0 ) {
+	 if( num % n == 0 ) { console.log( i++ ); }
+	 benchs[ 0 ].go()
+      };
+   }
+}
+
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 250;
+
+var EarleyBoyer = new BenchmarkSuite('Earley', [666463], [
+  new Benchmark("Earley", true,  false, N, function () { BgL_earleyzd2benchmarkzd2(); })
+]);
+
+go();
+

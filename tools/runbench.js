@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Sun Oct 27 10:56:19 2019 (serrano)                */
+/*    Last change :  Mon Oct 28 07:03:32 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -261,9 +261,11 @@ function runBench( bench, engine ) {
 	 rtimes[ i ] = rtime;
       }
 
-      process.stdout.write(
-	 "   real: " + sec( Math.min.apply( null, rtimes ) ) + 
-	 ", usr+sys: " + sec( Math.min.apply( null, ustimes ) ) + "\n" );
+      if( config.verbose >= 1 ) {
+      	 process.stdout.write(
+	    "   real: " + sec( Math.min.apply( null, rtimes ) ) + 
+	    ", usr+sys: " + sec( Math.min.apply( null, ustimes ) ) + "\n" );
+      }
 
       return { ustimes, rtimes };
    }

@@ -31,7 +31,6 @@
 
 "use strict";
 
-
 const rnd = [0.8770995586538219, 0.7467351610524278, 0.23249549103551334,
              0.8231245166729784, 0.318460008277772, 0.2765477273038345,
              0.15513674037304556, 0.5188230101572456, 0.8788570276828749,
@@ -1761,11 +1760,12 @@ function BenchmarkSuite( name, val, benchs ) {
    }
 }   
 
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 220;
 
 // The code has been adapted for use as a benchmark by Google.
 var Crypto = new BenchmarkSuite('Crypto', [266181], [
-  new Benchmark("Encrypt", true, false, 3900, encrypt),
-  new Benchmark("Decrypt", true, false, 220, decrypt)
+  new Benchmark("Encrypt", true, false, N * 2, encrypt),
+  new Benchmark("Decrypt", true, false, N, decrypt)
 ]);
 
 

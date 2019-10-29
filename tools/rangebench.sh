@@ -7,14 +7,13 @@ logbenchjs=$jsbenchdir/tools/logbench.js
 engines="hop nodejs jsc"
 hopc=hopc
 
-outdir=
 format=
 output=
+outdir=.
 
 src=
 
 res=
-outdir=.
 
 resetengines=""
 
@@ -45,8 +44,8 @@ while : ; do
 
     -r)
       shift
-      inc=`hop --evaljs "console.log( require( '$1' ).inc )"`
-      end=`hop --evaljs "console.log( require( '$1' ).end )"`
+      inc=`hop --no-server --evaljs "console.log( require( '$1' ).inc )"`
+      end=`hop --no-server --evaljs "console.log( require( '$1' ).end )"`
       ;;
 
     -o)
@@ -72,6 +71,7 @@ while : ; do
       echo "  -e engine       execution engine" >&2;
       echo "  -date date      date" >&2;
       echo "  -m string       message" >&2;
+      echo "  -r path         range file (default prog.range.json)" >&2;
       exit 1;;
 
     *)
@@ -90,7 +90,7 @@ if [ "$format " = " " ]; then
   if [ "$output " != " " ]; then
     format=`echo $output | awk -F. '{ print $2 }'`
   else
-    format=svg
+    format=pdf
   fi
 fi
 
@@ -99,7 +99,7 @@ function run() {
   rm -rf $tmpbench
   mkdir -p $tmpbench
   
-  hop --sofile-policy none --no-server -- $runbenchjs -s -v3 -e $1 -D $tmpbench --hopc $hopc --iteration 1 $2 -a $3
+  hop --sofile-policy none --no-server -- $runbenchjs -s -v0 -e $1 -D $tmpbench --hopc $hopc --iteration 1 $2 -a $3
   res=`hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench`
   
   rm -rf $tmpbench
@@ -117,8 +117,8 @@ fi
 
 if [ "$inc " = " " ]; then
   if [ -f $dir/$base.range.json ]; then
-    inc=`hop --evaljs "console.log( require( './$dir/$base.range.json' ).inc ); process.exit( 0 )"`
-    end=`hop --evaljs "console.log( require( './$dir/$base.range.json' ).end ); process.exit( 0 )"`
+    inc=`hop --no-server --evaljs "console.log( require( './$dir/$base.range.json' ).inc ); process.exit( 0 )"`
+    end=`hop --no-server --evaljs "console.log( require( './$dir/$base.range.json' ).end ); process.exit( 0 )"`
     echo "inc=$inc end=$end"
   else
     inc=100
@@ -132,25 +132,31 @@ fi
 i=$inc
 
 echo "$src ($exe) inc=$inc end=$end"
+echo "  [$engines]"
 
 # the csv file
 echo "#    hop node" > $outdir/$base.csv
 
+echo -n " "
+
 while [ `expr $i "<" $end` = 1 ]; do
+  echo -n " $i"
+  
   i=`expr $i "+" $inc`
+  sep=""
 
   echo -n "$i " >> $outdir/$base.csv
-
-  sep=""
+  
   for e in $engines; do
-    echo $e
     run $e $src $i
     echo -n $sep $res >> $outdir/$base.csv
     sep="; "
   done
-  
+
   echo "" >> $outdir/$base.csv
 done
+
+echo ""
 
 # the plot file
 cat > $outdir/$base.plot << EOF
@@ -178,9 +184,11 @@ sep="plot"
 i=1
 for e in $engines; do
   j=`expr $i "+" 1`
-  echo "$sep '$base.csv' u $j:xtic(1) with line t '$e' ls $i" >> $outdir/$base.plot
-  sep=", \\\n"
-  j=i
+  echo -n "$sep '$base.csv' u $j:xtic(1) with line t '$e' ls $i" >> $outdir/$base.plot
+  sep=","
+  i=$j
 done
+
+echo "" >> $outdir/$base.plot
 
 (cd $outdir; gnuplot $base.plot)

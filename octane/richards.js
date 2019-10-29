@@ -557,5 +557,4 @@ var Richards = BenchmarkSuite('Richards', [35302], [
   Benchmark("Richards", true, false, N, runRichards)
 ]);
 
-
 go();

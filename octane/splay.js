@@ -34,36 +34,11 @@
 // graph.
 "use strict";
 
-var go;
-
-function Benchmark( name, opt1, opt2, it, go ) {
-   return { go: go, iteration: it };
-}
-
-function BenchmarkSuite( name, val, benchs ) {
-   go = function() {
-      var num = benchs[ 0 ].iteration;
-      var n = Math.round( num / 10 ), i = 1;
-      console.log( name );
-      while( num-- > 0 ) {
-	 if( num % n == 0 ) { console.log( i++ ); }
-	 benchs[ 0 ].go()
-      };
-   }
-}
-
 function goSplay() {
    SplaySetup();
    SplayRun();
 }
    
-
-var Splay = new BenchmarkSuite('Splay', [81491, 2739514], [
-   //new Benchmark("Splay", true, false, 1400, goSplay )
-   new Benchmark("Splay", true, false, 140, goSplay )
-/*     SplayRun, SplaySetup, SplayTearDown, SplayRMS)                  */
-]);
-
 
 // Configuration.
 var kSplayTreeSize = 8000;
@@ -450,5 +425,31 @@ SplayTree.Node.prototype.traverse_ = function(f) {
     current = current.right;
   }
 };
+
+var go;
+
+function Benchmark( name, opt1, opt2, it, go ) {
+   return { go: go, iteration: it };
+}
+
+function BenchmarkSuite( name, val, benchs ) {
+   go = function() {
+      var num = benchs[ 0 ].iteration;
+      var n = Math.round( num / 10 ), i = 1;
+      console.log( name );
+      while( num-- > 0 ) {
+	 if( num % n == 0 ) { console.log( i++ ); }
+	 benchs[ 0 ].go()
+      };
+   }
+}
+
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 140;
+
+var Splay = new BenchmarkSuite('Splay', [81491, 2739514], [
+   //new Benchmark("Splay", true, false, 1400, goSplay )
+   new Benchmark("Splay", true, false, N, goSplay )
+/*     SplayRun, SplaySetup, SplayTearDown, SplayRMS)                  */
+]);
 
 go();
