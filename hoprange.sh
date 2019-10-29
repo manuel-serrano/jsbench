@@ -76,6 +76,40 @@ fi
 
 mkdir -p $dir
 
+case $BENCHMARKS in
+  octane)
+    BENCHMARKS=$BENCHMARKS_OCTANE
+    ;;
+  
+  sunspider)
+    BENCHMARKS=$BENCHMARKS_SUNSPIDER
+    ;;
+  
+  jetstream)
+    BENCHMARKS=$BENCHMARKS_JETSTREAM
+    ;;
+  
+  bglstone)
+    BENCHMARKS=$BENCHMARKS_BGLSTONE
+    ;;
+  
+  shootout)
+    BENCHMARKS=$BENCHMARKS_SHOOTOUT
+    ;;
+  
+  micro)
+    BENCHMARKS=$BENCHMARKS_MICRO
+    ;;
+  
+  other)
+    BENCHMARKS=$BENCHMARKS_OTHER
+    ;;
+  
+  proxy)
+    BENCHMARKS=$BENCHMARKS_PROXY
+    ;;
+esac
+
 for p in $BENCHMARKS; do
   if [ "$msg " != " " ]; then
     tools/rangebench.sh -v3 $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc

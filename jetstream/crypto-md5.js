@@ -288,7 +288,7 @@ for (var i = 0; i <4; i++) {
 
 var expected = "a831e91e0f70eddcb70dc61c6f82f6cd";
 
-const N = 1000;
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000;
 const K = N / 10;
 
 for( let i = 0; i < N; i++ ) {

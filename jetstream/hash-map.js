@@ -573,30 +573,40 @@ var HashMap = (function() {
     return HashMap;
 })();
 
-var map = new HashMap();
-var COUNT = 500000;
+function bench() {
+   var map = new HashMap();
+   var COUNT = 100000;
 
-for (var i = 0; i < COUNT; ++i)
-    map.put(i, 42);
+   for (var i = 0; i < COUNT; ++i)
+    	  map.put(i, 42);
 
-var result = 0;
-for (var j = 0; j < 5; ++j) {
-    for (var i = 0; i < COUNT; ++i)
-        result += map.get(i);
+   var result = 0;
+   for (var j = 0; j < 5; ++j) {
+      for (var i = 0; i < COUNT; ++i)
+             result += map.get(i);
+   }
+
+   var keySum = 0;
+   var valueSum = 0;
+   for (var iterator = map.entrySet().iterator(); iterator.hasNext();) {
+      var entry = iterator.next();
+      keySum += entry.key;
+      valueSum += entry.value;
+   }
+
+   if (result != 21000000)
+      throw "Error: result = " + result;
+   if (keySum != 4999950000)
+      throw "Error: keySum = " + keySum;
+   if (valueSum != 4200000)
+      throw "Error: valueSum = " + valueSum;
 }
 
-var keySum = 0;
-var valueSum = 0;
-for (var iterator = map.entrySet().iterator(); iterator.hasNext();) {
-    var entry = iterator.next();
-    keySum += entry.key;
-    valueSum += entry.value;
-}
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 300;
+const K = N / 10;
 
-if (result != 105000000)
-    throw "Error: result = " + result;
-if (keySum != 124999750000)
-    throw "Error: keySum = " + keySum;
-if (valueSum != 21000000)
-    throw "Error: valueSum = " + valueSum;
+for( let i = 0; i < N; i++ ) {
+   if( i % K == 0 ) console.log( i );
+   bench()
+}
 

@@ -101,6 +101,11 @@ function run() {
   
   hop --sofile-policy none --no-server -- $runbenchjs -s -v0 -e $1 -D $tmpbench --hopc $hopc --iteration 1 $2 -a $3
   res=`hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench`
+
+  if [ "$res " = " " ]; then
+    echo "*** ERROR: bad run -- $1 $2 $3"
+    exit 1
+  fi
   
   rm -rf $tmpbench
 }
@@ -129,8 +134,6 @@ if [ "$end " = " " ]; then
   end=`expr $inc "*" 50`;
 fi
 
-i=$inc
-
 echo "$src ($exe) inc=$inc end=$end"
 echo "  [$engines]"
 
@@ -138,13 +141,13 @@ echo "  [$engines]"
 echo "#    hop node" > $outdir/$base.csv
 
 echo -n " "
+i=0
 
 while [ `expr $i "<" $end` = 1 ]; do
-  echo -n " $i"
-  
   i=`expr $i "+" $inc`
   sep=""
 
+  echo -n " $i"
   echo -n "$i " >> $outdir/$base.csv
   
   for e in $engines; do

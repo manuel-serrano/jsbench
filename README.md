@@ -1,7 +1,7 @@
 Hop JS benchmarks
 =================
 
-To run a the benchmarks:
+To run the benchmarks:
 
  hop --no-server -- tools/runbench.js -v3 -e hop <dir>
  hop --no-server -- tools/runbench.js -v3 -e hop -e nodejs micro -D /tmp
@@ -13,7 +13,7 @@ To run all the "official" benchmarks
  ./hopstone.sh --hopc=/tmp/HOP/bin/hopc -m "a message"
  ./hopstone.sh --hopc=/tmp/HOP/bin/hopc -O /tmp/HOPSTONE
  ./hopstone.sh -O /tmp/HOPSTONE
- 
+
 To run the benchmarks with Hop only:
 
  ./hopstone.sh -O /tmp/HOPSTONE -e hop
@@ -27,6 +27,18 @@ To run hop profile guided optimization
  ./hopstone.sh --hopc=/tmp/HOP/bin/hopc -e hopfp -O /tmp/HOPSTONE
  ./hopstoneshield.sh --hopc=/tmp/HOP/bin/hopc -e hopfp -O /tmp/HOPSTONE
 
+
+Hop JS range benchmarks
+=======================
+
+To range benchmarks:
+
+  ./hoprange.sh -e hop -e nodejs -O /tmp/HOPRANGE --benchmarks="octane/richards.js octane/deltablue.js octane/boyer.js octane/earley.js octane/splay.js"
+
+To range one bechmark family:
+
+  ./hoprange.sh -e hop -e nodejs -O /tmp/HOPRANGE jetstream
+  
 
 Visualization
 =============

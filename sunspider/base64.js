@@ -122,18 +122,19 @@ var str = "";
 for ( var i = 0; i < 8192; i++ )
         str += String.fromCharCode( (25 * Math.random()) + 97 );
 
-for ( var i = 0; i <= 10; i++ ) {
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 11;
 
-    var base64;
+for ( var i = 0; i < N; i++ ) {
+   var base64;
 
    console.log( i );
-    base64 = toBase64(str);
+   base64 = toBase64(str);
    var encoded = base64ToString(base64);
-    if (encoded != str)
-        throw "ERROR: bad result: expected " + str + " but got " + encoded;
+   if (encoded != str)
+      throw "ERROR: bad result: expected " + str + " but got " + encoded;
 
-    // Double the string
-    str += str;
+   // Double the string
+   str += str;
 }
 
 toBinaryTable = null;
