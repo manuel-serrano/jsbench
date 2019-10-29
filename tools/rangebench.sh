@@ -138,7 +138,7 @@ fi
 echo "$src ($exe) inc=$inc end=$end"
 
 # the csv file
-echo "#    hop node" > $outdir/$base.csv
+echo "#    $engines" > $outdir/$base.csv
 
 echo -n " "
 i=0
