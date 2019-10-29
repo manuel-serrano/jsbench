@@ -29,4 +29,6 @@ function foo( N ) {
 
 console.log( bar( 1 ) );
 
-console.log( foo( 20000 ) );
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 20000;
+
+console.log( foo( N ) );

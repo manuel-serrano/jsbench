@@ -34,4 +34,6 @@ function gee( CNT ) {
 
 exports.run = gee;
 
-console.log( gee( 25000 ) );
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 25000;
+
+console.log( gee( N ) );

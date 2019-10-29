@@ -144,11 +144,13 @@ function run( count, TEST, N, X, Y ) {
 /* example: nodejs cache.js mono 1 x y */
 /* const process = { argv: ["nodejs", "cache.js", "mono", "1", "x", "y" ] } */
 /* const console = { log: print };                                     */
-const TEST = process.argv[ 2 ] || "mono";
-const N = parseInt( process.argv[ 3 ] || "1" );
-const X = process.argv[ 4 ] || "x";
-const Y = process.argv[ 5 ] || "y";
 
-console.log( "testing...", TEST, N, X, Y );
+const K = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 40000;
+const TEST = process.argv[ 3 ] || "mono";
+const N = parseInt( process.argv[ 4 ] || "1" );
+const X = process.argv[ 5 ] || "x";
+const Y = process.argv[ 6 ] || "y";
 
-console.log( run( 40000, TEST, N, X, Y ) );
+console.log( "testing...", K, TEST, N, X, Y );
+
+console.log( run( K, TEST, N, X, Y ) );

@@ -104,6 +104,7 @@ function run() {
 
   if [ "$res " = " " ]; then
     echo "*** ERROR: bad run -- $1 $2 $3"
+    echo "hop --sofile-policy none --no-server -- $runbenchjs -s -v0 -e $1 -D $tmpbench --hopc $hopc --iteration 1 $2 -a $3"
     exit 1
   fi
   
