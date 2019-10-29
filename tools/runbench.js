@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Mon Oct 28 07:03:32 2019 (serrano)                */
+/*    Last change :  Tue Oct 29 17:11:52 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -366,7 +366,7 @@ function runBench( bench, engine ) {
 		       path.basename( bench.path, ".js" ) )
 	    + ".args.json";
       
-      if( fs.existsSync( argspath ) ) {
+      if( config.argsfile && fs.existsSync( argspath ) ) {
 	 const args = require( normalizeCwd( argspath ) );
 	 
 	 if( engine.compiler ) {
@@ -450,6 +450,7 @@ function main() {
       console.log( "  --date string        Set the log date" );
       console.log( "  --iteration n        Forced iteration number" );
       console.log( "  --recompile          Forced recompilation" );
+      console.log( "  --noargsfile         Disable args file" );
       console.log( "" );
       console.log( "Examples: " );
       console.log( "  hop --no-server -- runbench.js -v3 -e hop ../micro/poly.js" );
@@ -492,6 +493,8 @@ function main() {
    if( args.d || args.dry ) {
       config.log = false;
    }
+
+   config.argsfile = !args.noargsfile;
 
    config.directory = args.D || args.dir;
    config.recompile = args.recompile;

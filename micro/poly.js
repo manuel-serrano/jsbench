@@ -25,5 +25,7 @@ function gee( CNT ) {
    return zzz;
 }
 
-console.log( gee( 10000 ) );
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10000;
+
+console.log( gee( N ) );
 

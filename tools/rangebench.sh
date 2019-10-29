@@ -99,12 +99,12 @@ function run() {
   rm -rf $tmpbench
   mkdir -p $tmpbench
   
-  hop --sofile-policy none --no-server -- $runbenchjs -s -v0 -e $1 -D $tmpbench --hopc $hopc --iteration 1 $2 -a $3
+  hop --sofile-policy none --no-server -- $runbenchjs -s -v0 -e $1 -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3
   res=`hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench`
 
   if [ "$res " = " " ]; then
     echo "*** ERROR: bad run -- $1 $2 $3"
-    echo "hop --sofile-policy none --no-server -- $runbenchjs -s -v0 -e $1 -D $tmpbench --hopc $hopc --iteration 1 $2 -a $3"
+    echo "hop --sofile-policy none --no-server -- $runbenchjs -s -v0 -e $1 -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3"
     exit 1
   fi
   

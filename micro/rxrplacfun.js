@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu Oct  5 07:34:05 2017                          */
-/*    Last change :  Tue Oct 10 07:35:42 2017 (serrano)                */
-/*    Copyright   :  2017 Manuel Serrano                               */
+/*    Last change :  Tue Oct 29 14:43:21 2019 (serrano)                */
+/*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Testing string.replace( rx, fun )                                */
 /*=====================================================================*/
@@ -64,4 +64,6 @@ function run( N ) {
    return rxrplacfun( N, plainText );
 }
 
-console.log( run( 100000 ) );
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 100000;
+
+console.log( run( N ) );

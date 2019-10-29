@@ -17,4 +17,6 @@ function test( n ) {
    return g;
 }
 
-console.log( test( 100000000 ) );
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 100000000;
+
+console.log( test( N ) );

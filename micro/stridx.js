@@ -28,5 +28,7 @@ function str( num ) {
    return res;
 }
 
-console.log( "str=" + str( 30000 ) );
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 30000;
+
+console.log( "str=" + str( N ) );
 

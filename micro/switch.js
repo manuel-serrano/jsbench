@@ -40,5 +40,7 @@ function run( j ) {
 
 exports.run = run;
 
-console.log( "run=" + run( 50000000 ) );
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 50000000;
+
+console.log( "run=" + run( N ) );
 

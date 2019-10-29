@@ -177,9 +177,10 @@ function run( count, TEST, N ) {
 /* example: nodejs cache.js mono 1 */
 /* const process = { argv: ["nodejs", "cache.js", "proxy", "1" ] };    */
 /* const console = { log: print };                                     */
-const TEST = process.argv[ 2 ] || "mono";
-const N = parseInt( process.argv[ 3 ] || "1" );
+const K = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10000;
+const TEST = process.argv[ 3 ] || "mono";
+const N = parseInt( process.argv[ 4 ] || "1" );
 
-console.log( "testing...", TEST, N );
+console.log( "testing...", K, TEST, N );
 
-console.log( run( 10000, TEST, N ) );
+console.log( run( K, TEST, N ) );

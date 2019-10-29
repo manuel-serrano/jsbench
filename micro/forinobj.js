@@ -98,6 +98,8 @@ function test( n, name ) {
    return r;
 }
 
-console.log( "r=", test( 30000,  process.argv[ 2 ] || "switch" ) );
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 30000;
+
+console.log( "r=", test( N,  process.argv[ 3 ] || "switch" ) );
 //console.log( "run=", t() );
    

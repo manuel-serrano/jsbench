@@ -40,4 +40,5 @@ function test( n ) {
    }
 }
 
-test( 20000 );
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 20000;
+test( N );
