@@ -1766,11 +1766,12 @@ function BenchmarkSuite( name, val, benchs ) {
    }
 }   
 
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 220;
 
 // The code has been adapted for use as a benchmark by Google.
 var Crypto = new BenchmarkSuite('Crypto', [266181], [
-  new Benchmark("Encrypt", true, false, 3900, encrypt),
-  new Benchmark("Decrypt", true, false, 220, decrypt)
+  new Benchmark("Encrypt", true, false, N * 20, encrypt),
+  new Benchmark("Decrypt", true, false, N, decrypt)
 ]);
 
 
