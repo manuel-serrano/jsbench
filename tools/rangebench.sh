@@ -136,7 +136,6 @@ if [ "$end " = " " ]; then
 fi
 
 echo "$src ($exe) inc=$inc end=$end"
-echo "  [$engines]"
 
 # the csv file
 echo "#    hop node" > $outdir/$base.csv
