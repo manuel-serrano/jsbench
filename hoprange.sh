@@ -110,7 +110,7 @@ case $BENCHMARKS in
     ;;
 esac
 
-echo "$engines [$BENCHMARKS]"
+echo "engine [$engines] $BENCHMARKS"
 
 for p in $BENCHMARKS; do
   if [ "$msg " != " " ]; then
