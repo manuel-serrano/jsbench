@@ -23,7 +23,7 @@ function foo( N ) {
    
    for( let i = 0; i < N; i++ ) {
       if( i % k == 0 ) console.log( i );
-      bar( i );
+      bar( 150000 );
    }
 }
 

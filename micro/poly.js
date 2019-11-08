@@ -15,7 +15,7 @@ function gee( CNT ) {
 
    for( let jjj = 0; jjj < CNT; jjj++ ) {
       if( jjj % 1000 == 0 ) console.log( jjj );
-      for( let iii = 0; iii < CNT; iii++ ) {
+      for( let iii = 0; iii < 500000; iii++ ) {
 	 zzz = fns[ 0 ]( o1 );
 	 ttt = fns[ 1 ]( o2 );
 	 ddd = zzz + ttt;
