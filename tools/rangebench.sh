@@ -175,6 +175,7 @@ set ytics font "Verdana,12"
 
 set ylabel "execution time (in sec)" offset 0,0
 set key left box
+set grid
 
 set style line 1 linecolor rgb '#fa9600' linetype 1 linewidth 2 pointsize 1 pointtype 7
 set style line 2 linecolor rgb '#109318' linetype 1 linewidth 2 pointsize 1 pointtype 7
