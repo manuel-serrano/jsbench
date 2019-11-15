@@ -27,8 +27,8 @@ function foo( N ) {
    }
 }
 
-console.log( bar( 1 ) );
-
 const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 20000;
 
-console.log( foo( N ) );
+console.log( "incop(" + N + "):", bar( 1 ) );
+
+foo( N );
