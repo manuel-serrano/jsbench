@@ -7,6 +7,7 @@ hopc=hopc
 engines="-e hop -e nodejs -e jsc -e js60 -e chakra -e graal"
 
 resetengines=""
+verbose=-v0
 
 while : ; do
   case $1 in
@@ -43,6 +44,10 @@ while : ; do
       fi
       ;;
 
+    -v|-v0|-v1|-v2|-v3|-v4)
+      verbose=$1
+      ;;
+    
     -*)
       echo "Usage: hoprange.sh [options]" >&2;
       echo "" >&2;
@@ -52,6 +57,7 @@ while : ; do
       echo "  --hopc=path                        hopc compiler" >&2;
       echo "  --benchmarks=prog1 prog2 prog3...  bencharks" >&2;
       echo "  -e engine                          execution engine" >&2;
+      echo "  -v[0123]                           verbosity" >&2;
       exit 1;;
 
     *)
@@ -114,9 +120,9 @@ echo "engine [$engines] $BENCHMARKS"
 
 for p in $BENCHMARKS; do
   if [ "$msg " != " " ]; then
-    tools/rangebench.sh -v3 $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc
+    tools/rangebench.sh $verbose $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc
   else
-    tools/rangebench.sh $engines -D $dir $p --date "$dt" --hopc $hopc
+    tools/rangebench.sh $verbose $engines -D $dir $p --date "$dt" --hopc $hopc
   fi
 done
 

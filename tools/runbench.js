@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Tue Oct 29 17:11:52 2019 (serrano)                */
+/*    Last change :  Sun Nov 17 14:54:21 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -278,11 +278,12 @@ function runBench( bench, engine ) {
 	 .replace( /@COMPILER@/g, engine.compiler || "" )
 	 .replace( /@INTERPRETER@/g, engine.interpreter || "" )
 	 .replace( /@EXTRAOPTS@/g, engine.extraopts || "" )
+	 .replace( /@ENGINE@/g, engine.name || "" )
 	 + (args ? " " + args : "");
    }
 
    function compile( args ) {
-      const target = path.join( config.tmp, bench.name );
+      const target = path.join( config.tmp, bench.name + "." + engine.name );
       const stattarget = fs.existsSync( target ) && fs.statSync( target );
       const statsrc = fs.statSync( bench.path );
 
@@ -303,6 +304,7 @@ function runBench( bench, engine ) {
 	    .replace( /@TMP@/g, config.tmp )
 	    .replace( /@NAME@/g, bench.name )
 	    .replace( /@INTERPRETER@/g, engine.interpreter || "" )
+   	    .replace( /@ENGINE@/g, engine.name || "" )
 	    + (config.arg ? " " + config.arg : "");
       return benchLog( bench, engine, run, chrono( run ), subtitle, args );
    }
@@ -347,7 +349,8 @@ function runBench( bench, engine ) {
       const pld = engine.prelude
 	    .replace( /@PATH@/g, bench.path )
 	    .replace( /@TMP@/g, config.tmp )
-	    .replace( /@NAME@/g, bench.name );
+	    .replace( /@NAME@/g, bench.name )
+   	    .replace( /@ENGINE@/g, engine.name || "" );
       const p = path.join( config.tmp, bench.name + "-" + engine.name + ".js" );
       let b = fs.readFileSync( bench.path );
 

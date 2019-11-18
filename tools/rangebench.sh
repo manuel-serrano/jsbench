@@ -15,6 +15,8 @@ src=
 
 res=
 
+verbose=-v0
+
 resetengines=""
 
 while : ; do
@@ -60,6 +62,10 @@ while : ; do
     --date)
       shift
       ;;
+
+    -v|-v0|-v1|-v2|-v3|-v4)
+      verbose=$1
+      ;;
     
     -*)
       echo "Usage: rangebench.sh [options]" >&2;
@@ -72,6 +78,7 @@ while : ; do
       echo "  -date date      date" >&2;
       echo "  -m string       message" >&2;
       echo "  -r path         range file (default prog.range.json)" >&2;
+      echo "  -v[0123]        verbosity" >&2;
       exit 1;;
 
     *)
@@ -99,12 +106,12 @@ function run() {
   rm -rf $tmpbench
   mkdir -p $tmpbench
   
-  hop --sofile-policy none --no-server -- $runbenchjs -s -v0 -e $1 -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3
+  hop --sofile-policy none --no-server -- $runbenchjs -s $verbose -e $1 -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3
   res=`hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench`
 
   if [ "$res " = " " ]; then
     echo "*** ERROR: bad run -- $1 $2 $3"
-    echo "hop --sofile-policy none --no-server -- $runbenchjs -s -v0 -e $1 -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3"
+    echo "hop --sofile-policy none --no-server -- $runbenchjs -s $verbose -e $1 -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3"
     exit 1
   fi
   
