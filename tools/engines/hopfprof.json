@@ -1,7 +1,7 @@
 {
    "name": "hopfprof",
    "version": "@COMPILER@ --eval \"(begin (print (hop-version) (if (=fx (hop-max-threads) 1) \\\"-st\\\" \\\"-mt\\\")) (exit 0))\"",
-   "cmd": "@COMPILER@ -Ox --profile @PATH@ -o @TMP@/@NAME@.@ENGINE@ @EXTRAOPTS@ && HOPTRACE=\"hopscript:cache hopscript:call format:fprofile\" @TMP@/@NAME@.@ENGINE@ fprofile 2> @TMP@/@NAME@.@ENGINE@.prof.json && @COMPILER@ -Ox -fprofile @TMP@/@NAME@.@ENGINE@.prof.json @PATH@ -o @TMP@/@NAME@.@ENGINE@ @EXTRAOPTS@",
+   "cmd": "@COMPILER@ -Ox --profile @PATH@ -o @TMP@/@NAME@.@ENGINE@ @EXTRAOPTS@ && HOPTRACE=\"hopscript:cache hopscript:call format:fprofile logfile=@TMP@/@NAME@.@ENGINE@.prof.json\" @TMP@/@NAME@.@ENGINE@ fprofile && @COMPILER@ -Ox -fprofile @TMP@/@NAME@.@ENGINE@.prof.json @PATH@ -o @TMP@/@NAME@.@ENGINE@ @EXTRAOPTS@",
    "run": "@TMP@/@NAME@.@ENGINE@ -",
    "compiler": "hopc",
    "iteration": 3
