@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Sun Nov 17 14:54:21 2019 (serrano)                */
+/*    Last change :  Wed Nov 20 07:01:20 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -91,6 +91,7 @@ function execPromise( cmd, action ) {
    return new Promise( (resolve, reject) => {
       const proc = exec( cmd, (error, stdout, stderr) => {
 	 if( error ) {
+	    console.error( "*** EXEC ERROR: ", cmd );
 	    reject( error );
 	 }
       } );
@@ -99,11 +100,13 @@ function execPromise( cmd, action ) {
 	 if( code === 0 ) {
 	    resolve( code );
 	 } else {
+	    console.error( "*** EXEC ERROR: ", cmd );
 	    reject( code );
 	 }
       } );
       
       proc.on( "error", (code, signal) => {
+	 console.error( "*** EXEC ERROR: ", cmd );
 	 reject( code );
       } );
    } );

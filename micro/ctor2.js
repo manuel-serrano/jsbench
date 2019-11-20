@@ -39,7 +39,11 @@ CTOR.prototype = { __proto__: { __proto__: { __proto__: p } } };
 
 var o1 = new CTOR( 1, 2, 3, 4 );
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 70000000;
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? 10000
+      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 70000000);
+
+console.log( "ctor2(", N, ")..." );
 
 var arr = new Array( N );
 console.log( "test=", test( N ) );

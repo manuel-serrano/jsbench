@@ -25,7 +25,10 @@ function gee( CNT ) {
    return zzz;
 }
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10000;
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? 100
+      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10000);
 
+console.log( "poly(", N, ")..." );
 console.log( gee( N ) );
 

@@ -28,7 +28,11 @@ function str( num ) {
    return res;
 }
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 30000;
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? 10000
+      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 30000);
+
+console.log( "stridx(", N, ")..." );
 
 console.log( "str=" + str( N ) );
 

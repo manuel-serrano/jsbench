@@ -40,7 +40,10 @@ function run( j ) {
 
 exports.run = run;
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 50000000;
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? 10000
+      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 50000000);
 
+console.log( "switch(", N, ")..." );
 console.log( "run=" + run( N ) );
 

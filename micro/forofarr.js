@@ -19,6 +19,10 @@ function test( n ) {
    return g;
 }
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 100000000;
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? 10000
+      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 100000000);
+
+console.log( "forofarr(", N, ")..." );
 
 console.log( test( N ) );

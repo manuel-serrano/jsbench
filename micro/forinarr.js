@@ -20,7 +20,11 @@ function t( N ) {
    return r;
 }
 	  
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 4000000;
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? 10000
+      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 4000000);
+
+console.log( "forinarr(", N, ")..." );
 
 console.log( "run=", t( N ) );
    

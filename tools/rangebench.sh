@@ -106,12 +106,13 @@ function run() {
   rm -rf $tmpbench
   mkdir -p $tmpbench
   
-  hop --sofile-policy none --no-server -- $runbenchjs -s $verbose -e $1 -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3
+  hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3
   res=`hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench`
 
   if [ "$res " = " " ]; then
     echo "*** ERROR: bad run -- $1 $2 $3"
-    echo "hop --sofile-policy none --no-server -- $runbenchjs -s $verbose -e $1 -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3"
+    echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3"
+    echo "hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench"
     exit 1
   fi
   
@@ -121,8 +122,6 @@ function run() {
 # command line parsing
 base=`basename $src .js`
 dir=`dirname $src`
-
-exe=$base.out
 
 if [ "$output " = " " ]; then
   output=$base.$format
@@ -142,7 +141,7 @@ if [ "$end " = " " ]; then
   end=`expr $inc "*" 50`;
 fi
 
-echo "$src ($exe) inc=$inc end=$end"
+echo "$src inc=$inc end=$end"
 
 # the csv file
 echo "#    $engines" > $outdir/$base.csv

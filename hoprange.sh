@@ -8,6 +8,7 @@ engines="-e hop -e nodejs -e jsc -e js60 -e chakra -e graal"
 
 resetengines=""
 verbose=-v0
+benchmarks=
 
 while : ; do
   case $1 in
@@ -61,10 +62,20 @@ while : ; do
       exit 1;;
 
     *)
-      BENCHMARKS="`echo $1 | sed 's/^[-a-z]*=//'`";;
+      if [ "$benchmarks " = " " ]; then
+        benchmarks="`echo $1 | sed 's/^[-a-z]*=//'`"
+      else
+        benchmarks="$benchmarks `echo $1 | sed 's/^[-a-z]*=//'`"
+      fi
+      ;;
+    
   esac
   shift
 done
+
+if [ "$benchmarks " != " " ]; then
+  BENCHMARKS=$benchmarks
+fi
 
 if [ "$dir " = " " -a "$base " = " " ]; then
   tag=`$hopc --buildtag`
@@ -120,9 +131,9 @@ echo "engine [$engines] $BENCHMARKS"
 
 for p in $BENCHMARKS; do
   if [ "$msg " != " " ]; then
-    tools/rangebench.sh $verbose $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc
+    tools/rangebench.sh $verbose $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc || exit 1
   else
-    tools/rangebench.sh $verbose $engines -D $dir $p --date "$dt" --hopc $hopc
+    tools/rangebench.sh $verbose $engines -D $dir $p --date "$dt" --hopc $hopc || exit 1
   fi
 done
 

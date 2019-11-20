@@ -27,7 +27,9 @@ function foo( N ) {
    }
 }
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 20000;
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? 1000
+      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 20000);
 
 console.log( "incop(" + N + "):", bar( 1 ) );
 
