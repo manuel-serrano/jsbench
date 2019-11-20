@@ -1,6 +1,5 @@
 #!/bin/bash
 
-tmp=/tmp/JSBENCH
 jsbenchdir=$HOME/prgm/project/hop/jsbench
 runbenchjs=$jsbenchdir/tools/runbench.js
 logbenchjs=$jsbenchdir/tools/logbench.js
@@ -93,6 +92,9 @@ while : ; do
   shift
 done
 
+tag=`$hopc --buildtag`
+tmp=/tmp/JSBENCH/`date '+%Y-%m-%d-%Hh%M'`-`hostname`-$tag
+
 if [ "$format " = " " ]; then
   if [ "$output " != " " ]; then
     format=`echo $output | awk -F. '{ print $2 }'`
@@ -101,17 +103,19 @@ if [ "$format " = " " ]; then
   fi
 fi
 
+mkdir -p $tmp
+
 function run() {
   tmpbench=$tmp/$2.$3
   rm -rf $tmpbench
   mkdir -p $tmpbench
   
-  hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3
+  hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3
   res=`hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench`
 
   if [ "$res " = " " ]; then
     echo "*** ERROR: bad run -- $1 $2 $3"
-    echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3"
+    echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3"
     echo "hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench"
     exit 1
   fi
@@ -131,7 +135,6 @@ if [ "$inc " = " " ]; then
   if [ -f $dir/$base.range.json ]; then
     inc=`hop --no-server --evaljs "console.log( require( './$dir/$base.range.json' ).inc ); process.exit( 0 )"`
     end=`hop --no-server --evaljs "console.log( require( './$dir/$base.range.json' ).end ); process.exit( 0 )"`
-    echo "inc=$inc end=$end"
   else
     inc=100
   fi
@@ -146,14 +149,14 @@ echo "$src inc=$inc end=$end"
 # the csv file
 echo "#    $engines" > $outdir/$base.csv
 
-echo -n " "
+echo -n "  "
 i=0
 
 while [ `expr $i "<" $end` = 1 ]; do
   i=`expr $i "+" $inc`
   sep=""
 
-  echo -n " $i"
+  echo -n "$i "
   echo -n "$i " >> $outdir/$base.csv
   
   for e in $engines; do

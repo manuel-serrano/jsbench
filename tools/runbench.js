@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Wed Nov 20 07:01:20 2019 (serrano)                */
+/*    Last change :  Wed Nov 20 09:25:07 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -445,6 +445,7 @@ function main() {
       console.log( "  -q                   No configuration file" );
       console.log( "  -c|--config path     Configuration file" );
       console.log( "  -D,--dir directory   Directory to store log files" );
+      console.log( "  -T,--tmp directory   Tmp directory" );
       console.log( "  -v[level]            Verbosity" );
       console.log( "  -d,--dry             Do not log" );
       console.log( "  -e engine            Execution engine" );
@@ -492,6 +493,10 @@ function main() {
       config.verbose = typeof args.v === "number" ? args.v : 1;
    }
 
+   if( args.T || args.tmp ) {
+      config.tmp = args.T || args.tmp;
+   }
+   
    if( args.m || args.message ) {
       config.message = args.m || args.message;
    }
