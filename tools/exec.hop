@@ -3,7 +3,7 @@
 ;*    -------------------------------------------------------------    */
 ;*    Author      :  Manuel Serrano                                    */
 ;*    Creation    :  Mon Apr 17 19:51:13 2017                          */
-;*    Last change :  Wed Nov 20 09:29:10 2019 (serrano)                */
+;*    Last change :  Wed Nov 20 09:30:23 2019 (serrano)                */
 ;*    Copyright   :  2017-19 Manuel Serrano                            */
 ;*    -------------------------------------------------------------    */
 ;*    exec sync                                                        */
@@ -42,7 +42,7 @@
 	 :value (js-make-function %this
 		   (lambda (this cmd)
 		      (let* ((p (run-process "sh" "-c" (js-jsstring->string cmd)
-;* 				   :output "/dev/null"                 */
+				   :output "/dev/null"
 ;* 				   :error "/dev/null"                  */
 				   :wait #t))
 			     (x (process-exit-status p)))
