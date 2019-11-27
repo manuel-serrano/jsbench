@@ -552,7 +552,7 @@ function BenchmarkSuite( name, val, benchs ) {
 }
 
 const N = (process.argv[ 1 ] === "fprofile") 
-      ? 1000
+      ? 200
       : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 8200 * 5;
 
 var Richards = BenchmarkSuite('Richards', [35302], [

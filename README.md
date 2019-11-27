@@ -38,7 +38,7 @@ To range benchmarks:
 To range one bechmark family:
 
   ./hoprange.sh -e hop -e nodejs -O /tmp/HOPRANGE jetstream
-  
+  ./hoprange.sh -e hop -e hopfprof -e nodejs -O /tmp/HOPANGE micro
 
 Visualization
 =============
