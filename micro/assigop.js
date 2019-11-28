@@ -16,11 +16,13 @@ function bar( n ) {
 
 function foo( N ) {
    let k = N / 10;
+   var R;
    
    for( let iii = 0; iii < N; iii++ ) {
       if( iii % k == 0 ) console.log( iii );
-      bar( 40000 );
+      R = bar( 40000 );
    }
+   return R;
 }
 
 const N = (process.argv[ 1 ] === "fprofile") 
