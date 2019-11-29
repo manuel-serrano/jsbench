@@ -896,7 +896,9 @@ function BenchmarkSuite( name, val, benchs ) {
    }
 }  
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 40000;
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? 200
+      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 40000;
 
 var DeltaBlue = new BenchmarkSuite('DeltaBlue', [66118], [
   new Benchmark('DeltaBlue', true, false, N, deltaBlue)
