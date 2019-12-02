@@ -4302,7 +4302,9 @@ function BenchmarkSuite( name, val, benchs ) {
    }
 }
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 250;
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? 25
+      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 250;
 
 var EarleyBoyer = new BenchmarkSuite('Earley', [666463], [
   new Benchmark("Earley", true,  false, N, function () { BgL_earleyzd2benchmarkzd2(); })

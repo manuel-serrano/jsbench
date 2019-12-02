@@ -39,6 +39,8 @@ To range one bechmark family:
 
   ./hoprange.sh -e hop -e nodejs -O /tmp/HOPRANGE jetstream
   ./hoprange.sh -e hop -e hopfprof -e nodejs -O /tmp/HOPANGE micro
+  ./hoprange.sh -e hop -e hopfprof -e hopcprof -e nodejs -O /tmp/HOPANGE octane
+
 
 Visualization
 =============

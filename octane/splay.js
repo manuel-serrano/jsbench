@@ -444,7 +444,9 @@ function BenchmarkSuite( name, val, benchs ) {
    }
 }
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 140;
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? 14
+      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 140;
 
 var Splay = new BenchmarkSuite('Splay', [81491, 2739514], [
    //new Benchmark("Splay", true, false, 1400, goSplay )

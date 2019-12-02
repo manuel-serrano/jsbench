@@ -1793,8 +1793,7 @@ function RegExpBenchmark() {
   this.run = run;
 }
 
-function BenchmarkSuite( name ) {
-   var num = 100;
+function BenchmarkSuite( name, num ) {
    var n = Math.round( num / 10 ), i = 1;
    const b = new RegExpBenchmark();
 
@@ -1805,4 +1804,8 @@ function BenchmarkSuite( name ) {
    }
 }
 
-BenchmarkSuite( "regexp" );
+const N = (process.argv[ 1 ] === "fprofile") 
+   ? 10 : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 100;
+
+
+BenchmarkSuite( "regexp", N );
