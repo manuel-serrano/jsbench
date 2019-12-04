@@ -12,6 +12,7 @@ To run all the "official" benchmarks
  ./hopstone.sh
  ./hopstone.sh --hopc=/tmp/HOP/bin/hopc -m "a message"
  ./hopstone.sh --hopc=/tmp/HOP/bin/hopc -O /tmp/HOPSTONE
+ ./hopstone.sh -e hop -e nodejs -O /tmp/HOPSTONE
  ./hopstone.sh -O /tmp/HOPSTONE
 
 To run the benchmarks with Hop only:
@@ -24,8 +25,7 @@ To run them all shielded
 
 To run hop profile guided optimization
 
- ./hopstone.sh --hopc=/tmp/HOP/bin/hopc -e hopfp -O /tmp/HOPSTONE
- ./hopstoneshield.sh --hopc=/tmp/HOP/bin/hopc -e hopfp -O /tmp/HOPSTONE
+ ./hopstone.sh --hopc=/tmp/HOP/bin/hopc -e hopfprof -O /tmp/HOPSTONE
 
 
 Hop JS range benchmarks
