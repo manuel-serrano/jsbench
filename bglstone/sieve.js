@@ -68,16 +68,6 @@ function length( lst ) {
    return res;
 }
 
-function doit( num ) {
-   let res = 0;
-   
-   while( num-- > 0 ) {
-      res += length( sieve( 3000 ) );
-   }
-
-   return res;
-}
-
 function list2array( lst ) {
    let len = length( lst );
    var res = new Array( len );
@@ -94,14 +84,27 @@ const expected_result = [
    37, 41, 43, 47, 53, 59, 61, 67, 71, 73,
    79, 83, 89, 97 ];
 
-function main() {
+function main( bench, n ) {
    let s100 = sieve( 100 );
-   let n = 2000;
+   let res = 0;
+   const k = Math.round( n / 10 );
+   let i = 1;
+   
+   console.log( bench + "(", n, ")..." );
+   
+   while( n-- > 0 ) {
+      if( n % k === 0 ) { console.log( i++ ); }
+      res = sieve( 3000 );
+   }
 
-   doit( n );
-   console.log( list2array( s100 ) );
+   console.log( "res=", list2array( s100 ) );
 }
 
-main();
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 1000
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 20000;
+
+main( "sieve", N ); 
 
 

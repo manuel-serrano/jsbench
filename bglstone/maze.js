@@ -631,19 +631,26 @@ function newline() {
    return display( "\n" );
 }
 
-function run( num ) {
-   let k = num / 10;
-
+function main( bench, n ) {
+   let res = 0;
+   const k = Math.round( n / 10 );
+   let i = 1;
+   
+   console.log( bench + "(", n, ")..." );
+   
    stdio = null;
-   for( let i = 0; i < num; i++ ) {
-      pmaze( 500, 35 );
-      if( i % k == 0 ) console.log( i );
+   while( n-- > 0 ) {
+      if( n % k === 0 ) { console.log( i++ ); }
+      pmaze( 100, 100 );
    }
-
    stdio = true;
-      
-   pmaze( 10, 35 );
 
+   pmaze( 10, 35 );
 }
 
-run( 20 );
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 2
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 200;
+
+main( "maze", N ); 

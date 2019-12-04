@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Pierre Weis                                       */
 /*    Creation    :  Fri Apr  1 10:00:21 1994                          */
-/*    Last change :  Fri Aug 16 07:33:09 2019 (serrano)                */
+/*    Last change :  Wed Dec  4 07:59:14 2019 (serrano)                */
 /*    -------------------------------------------------------------    */
 /*    Resolution recursive du Baguenaudier: bench les appels de        */
 /*    fonctions et les acces aux vecteurs                              */
@@ -14,16 +14,15 @@
 "use strict";
 
 let nombre_de_coups = 0;
-const nombre_de_pierres = 26;
+let jeu = [];
 
 const une_pierre = 1;
 const une_case_vide = 0;
 
-const jeu = new Array( nombre_de_pierres );
-
-function init_jeu() {
+function init_jeu( nombre_de_pierres ) {
    nombre_de_coups = 0;
-
+   jeu = new Array( nombre_de_pierres );
+   
    for( let i = nombre_de_pierres - 1; i >= 0; i-- ) {
       jeu[ i ] = une_pierre;
    }
@@ -80,7 +79,7 @@ function pose_pierre( n ) {
    }
 }
 
-function main() {
+function run( nombre_de_pierres ) {
    function bague( n ) {
       switch( n ) {
 	 case 1:
@@ -119,7 +118,7 @@ function main() {
       }
    }
 
-   init_jeu();
+   init_jeu( nombre_de_pierres );
    bague( nombre_de_pierres );
 
    let res = 0;
@@ -137,7 +136,28 @@ function main() {
       case 28: res = 178956970; break;
    }
 
-   console.log( "res=", res, " nb-coups=", nombre_de_coups );
+   return "res=" + res + " nb-coups=" + nombre_de_coups;
 }
    
-main();
+function main( bench, n ) {
+   let res = 0;
+   const k = Math.round( n / 10 );
+   let i = 1;
+   
+   console.log( bench + "(", n, ")..." );
+   
+   while( n-- > 0 ) {
+      if( n % k === 0 ) { console.log( i++ ); }
+      res = run( 25 );
+   }
+
+   console.log( "res=", res );
+}
+
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 4
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 40;
+
+main( "bague", N ); 
+

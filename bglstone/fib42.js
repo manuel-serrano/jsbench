@@ -8,11 +8,25 @@ function fib(i) {
    }
 }
 
-let r = 0;
+function main( bench, n ) {
+   let res = 0;
+   const k = Math.round( n / 10 );
+   let i = 1;
+   
+   console.log( bench + "(", n, ")..." );
+   
+   while( n-- > 0 ) {
+      if( n % k === 0 ) { console.log( i++ ); }
+      res = fib( 42 );
+   }
 
-for( let i = 0; i < 5; i++ ) {
-   r = fib( 42 );
+   console.log( "res=", res );
 }
 
-console.log( "fib(42)=", r );
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 1
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 5;
+
+main( "fib", N ); 
 

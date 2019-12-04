@@ -1,10 +1,10 @@
 /*=====================================================================*/
-/*    serrano/prgm/project/hop/jsbench/micro/qsort.js                  */
+/*    serrano/prgm/project/hop/jsbench/bglstone/qsort.js               */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu Feb  9 14:03:22 2017                          */
-/*    Last change :  Fri Mar 17 14:45:00 2017 (serrano)                */
-/*    Copyright   :  2017 Manuel Serrano                               */
+/*    Last change :  Wed Dec  4 08:20:51 2019 (serrano)                */
+/*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Transcription of the Scheme qsort.scm benchmark.                 */
 /*=====================================================================*/
@@ -77,18 +77,30 @@ function test( size ) {
 	 throw "Illegal sort " + m;
       }
    }
-}
-
-function bench( n ) {
-   const size = 1 << 16;
    
-   let kkk = Math.round( n / 10 );
-   let j = 0;
-
-   for( let i = 0 ; i < n; i++ ) {
-      if( i % kkk == 0 ) console.log( j++ );
-      test( size );
-   }
+   return true;
 }
 
-bench( 100 );
+function main( bench, n ) {
+   const size = 1 << 16;
+   let res = 0;
+   const k = Math.round( n / 10 );
+   let i = 1;
+   
+   console.log( bench + "(", n, ")..." );
+   
+   while( n-- > 0 ) {
+      if( n % k === 0 ) { console.log( i++ ); }
+      res = test( size );
+   }
+
+   console.log( "res=", res );
+}
+
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 20
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000;
+
+main( "fib", N ); 
+

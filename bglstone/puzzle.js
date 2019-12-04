@@ -148,29 +148,44 @@ function start() {
    if( fit( 0, m ) ) {
       n = place( 0, m );
    } else {
-      console.log( "error" );
+      return "error";
    }
 
    if( trial( n ) ) {
-      console.log( "kount=", KOUNT );
+      return "kount=" + KOUNT;
    } else {
-      console.log( "failure" );
-   }
-
-}
-
-function repeat( num ) {
-   while( num-- > 0 ) {
-      start();
+      return "failure";
    }
 }
 
-function main() {
+function run() {
    for( let i = 0; i < typemax + 1; i++ ) {
       P[ i ] = new Array( size + 1 );
    }
 
-   repeat( 20 );
+   return start();
 }
    
-main();   
+function main( bench, n ) {
+   let res = 0;
+   const k = Math.round( n / 10 );
+   let i = 1;
+   
+   console.log( bench + "(", n, ")..." );
+   
+   while( n-- > 0 ) {
+      if( n % k === 0 ) { console.log( i++ ); }
+      res = run();
+   }
+
+   console.log( "res=", res );
+}
+
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 20
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 200;
+
+main( "puzzle", N ); 
+
+
