@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Tue Dec  3 13:33:13 2019                          */
-/*    Last change :  Tue Dec  3 16:03:49 2019 (serrano)                */
+/*    Last change :  Wed Dec  4 06:34:30 2019 (serrano)                */
 /*    Copyright   :  2019 Manuel Serrano                               */
 /*    -------------------------------------------------------------    */
 /*    Feeley's Scheme Lambda interpreter                               */
@@ -11,37 +11,19 @@
 "use strict";
 
 /*---------------------------------------------------------------------*/
-/*    ewal ...                                                         */
-/*---------------------------------------------------------------------*/
-function ewal( exp, env ) {
-   env.foreach( x => compDefine( car( x ), cdr( x ) )( env ) );
-   return meaning( comp( exp, nil, false ), env );
-}
-
-function meaning( cx, env ) {
-   return cx( env );
-}
-
-/*---------------------------------------------------------------------*/
-/*    globalEnv ...                                                    */
-/*---------------------------------------------------------------------*/
-function globalEnv() {
-   let env = cons( cons( false, (env) => false ), nil );
-
-   env = cons( cons( "+", (env, x, y) => x + y), env );
-   env = cons( cons( "-", (env, x, y) => x - y), env );
-   env = cons( cons( "<", (env, x, y) => x < y), env );
-   env = cons( cons( ">=", (env, x, y) => x >= y), env );
-   
-   return env;
-}
-
-/*---------------------------------------------------------------------*/
 /*    pair ...                                                         */
 /*---------------------------------------------------------------------*/
 function pair( car, cdr ) {
    this.car = car;
    this.cdr = cdr;
+}
+
+pair.prototype.toString = function() {
+   let s = "(" + car( this ).toString();
+   if( pairp( cdr( this ) ) ) {
+      cdr( this ).foreach( v => s += " " + v.toString() );
+   }
+   return s + ")";
 }
 
 pair.prototype.map = function( proc ) {
@@ -107,7 +89,7 @@ function cons( car, cdr ) {
    return new pair( car, cdr );
 }
 
-function list() {
+function list( ...els ) {
    function loop( v, i ) {
       if( i === v.length ) {
 	 return nil;
@@ -116,7 +98,7 @@ function list() {
       }
    }
    
-   return loop( arguments, 0 );
+   return loop( els, 0 );
 }   
 
 function car( p ) { return p.car; }
@@ -160,30 +142,29 @@ function comp( x, env ) {
       return compCnst( cadr( x ) );
    } else if( car( x ) === "if" ) {
       return compIf( 
-	 comp( cadr( x ), env, false ),
+	 comp( cadr( x ), env ),
 	 comp( caddr( x ), env ),
 	 comp( cadddr( x ), env ) );
    } else if( car( x ) === "begin" ) {
       return compBegin( cdr( x ), env );
    } else if( car( x ) === "define" ) {
-      return compDefine( cadr( x ), comp( caddr( x ), nil, false ) );
+      return compDefine( cadr( x ), caddr( x ) );
    } else if( car( x ) === "set!" ) {
       return compSet( 
 	 variable( cadr( x ), env ), 
-	 comp( caddr( x ), env, false ) );
+	 comp( caddr( x ), env ) );
    } else if( car( x ) === "lambda" ) {
       const formals = cadr( x );
       const body = caddr( x );
       return compLambda( 
 	 formals, 
-	 comp( body, extendEnv( formals, env ), true),
-	 true );
+	 comp( body, extendEnv( formals, env ) ) );
    } else {
       const fun = car( x );
       const args = cdr( x );
-      const actuals = args.map( a => comp( a, env, false ) );
+      const actuals = args.map( a => comp( a, env ) );
       const proc = comp( fun, env, false );
-      return compApply( proc, actuals );
+      return compApply( proc, actuals, x );
    }
 }
 
@@ -192,7 +173,7 @@ function comp( x, env ) {
 /*---------------------------------------------------------------------*/
 function variable( symbol, env ) {
    function loop( env, count ) {
-      if( env === nil ) {
+      if( nullp( env ) ) {
 	 return false;
       } else if( car( env ) === symbol ) {
 	 return count;
@@ -201,11 +182,11 @@ function variable( symbol, env ) {
    }
    
    const offset = loop( env, 0 );
-   
-   if( offset ) {
+
+   if( offset !== false ) {
       return offset;
    } else {
-      return env.assq( symbol );
+      return globalEnv.assq( symbol );
    }
 }
 
@@ -238,7 +219,7 @@ function compRef( variable ) {
 /*---------------------------------------------------------------------*/
 function compSet( variable, value ) {
    if( globalp( variable ) ) {
-      return env => update( variable, value, env );
+      return env => setCdr( variable, value( env ) );
    } else {
       switch( variable ) {
 	 case 0: return env => setCar( env, value( env ) );
@@ -269,26 +250,21 @@ function compIf( test, then, otherwise ) {
 /*---------------------------------------------------------------------*/
 function compBegin( body, env ) {
    if( pairp( body ) && nullp( cdr( body ) ) ) {
-      const rest = comp( car( body ), env );
-      return env => rest( env );
+      const node = comp( car( body ), env );
+      return env => node( env );
    } else {
-      function loop( rest ) {
-	 if( nullp( (cdr( rest ) ) ) ) {
-	    return cons( comp( car( rest ), env ), nil );
-	 } else {
-	    return cons( comp( car( rest ), env ), loop( cdr( rest ) ) );
-	 }
-      }
+      const nodes = body.map( n => comp( n, env ) );
       
       return env => {
-	 function _loop_( body ) {
-	    if( nullp( cdr( body ) ) ) {
-	       return car( body )( env );
+	 function _loop_( nodes ) {
+	    if( nullp( cdr( nodes ) ) ) {
+	       return car( nodes )( env );
 	    } else {
-	       car( body )( env );
-	       return _loop_( cdr( body ) );
+	       car( nodes )( env );
+	       return _loop_( cdr( nodes ) );
 	    }
 	 }
+	 return _loop_( nodes );
       }
    }
 }
@@ -296,29 +272,16 @@ function compBegin( body, env ) {
 /*---------------------------------------------------------------------*/
 /*    compDefine ...                                                   */
 /*---------------------------------------------------------------------*/
-function compDefine( v, val ) {
-   return env => {
-      const cell = env.assq( v );
-      console.log( "def v=", v, " val=", val );
+function compDefine( v, x ) {
+   let cell = globalEnv.assq( v );
       
-      if( pairp( cell ) ) {
-	 return update( cell, val, env );
-	 
-      } else {
-	 setCdr( env, cons( car( env ), cdr( env ) ) );
-	 setCar( env, cons( v, val( env ) ) );
-	 return v;
-      }
+   if( !cell ) {
+      cell = cons( v, undefined );
+      globalEnv = cons( cell, globalEnv );
    }
-}
 
-/*---------------------------------------------------------------------*/
-/*    update ...                                                       */
-/*---------------------------------------------------------------------*/
-function update( v, val, env ) {
-   console.log( "v=", v, " val=", val );
-   setCdr( v, val( env ) );
-   return car( v );
+   const val = comp( x, nil );
+   return env => setCdr( cell, val( env ) );
 }
 
 /*---------------------------------------------------------------------*/
@@ -361,32 +324,56 @@ function compLambda( formals, body ) {
 /*---------------------------------------------------------------------*/
 /*    compApply ...                                                    */
 /*---------------------------------------------------------------------*/
-function compApply( proc, actuals ) {
+function compApply( proc, actuals, src ) {
    switch( length( actuals ) ) {
       case 0:
-	 return env => proc( env );
+	 return env => proc( env )();
       case 1:
-	 return env => proc( env, 
-	    car( actuals )( env ) );
+	 return env => proc( env )(
+	    			car( actuals )( env ) );
       case 2:
-	 return env => proc( env, 
-	    car( actuals )( env ),
-	    cadr( actuals )( env ) );
+	 return env => proc( env )(
+	    			car( actuals )( env ),
+	    			cadr( actuals )( env ) );
       case 3:
-	 return env => proc( env, 
-	    car( actuals )( env ),
-	    cadr( actuals )( env ),
-	    caddr( actuals )( env ) );
+	 return env => proc( env )(
+	    			car( actuals )( env ),
+	    			cadr( actuals )( env ),
+	    			caddr( actuals )( env ) );
       case 4:
-	 return env => proc( env, 
-	    car( actuals )( env ),
-	    cadr( actuals )( env ),
-	    caddr( actuals )( env ),
-	    cadddr( actuals )( env ) );
+	 return env => proc( env )(
+	    			car( actuals )( env ),
+	    			cadr( actuals )( env ),
+	    			caddr( actuals )( env ),
+	    			cadddr( actuals )( env ) );
       default:
 	 return env => { throw( "not supported" ) };
    }
 }
+
+/*---------------------------------------------------------------------*/
+/*    globalEnv ...                                                    */
+/*---------------------------------------------------------------------*/
+let globalEnv = 
+   list( 
+      cons( "+", (x, y) => x + y),
+      cons( "-", (x, y) => x - y),
+      cons( "<", (x, y) => x < y),
+      cons( ">=", (x, y) => x >= y),
+      cons( "print", (x) => console.log( x ) ) );
+
+/*---------------------------------------------------------------------*/
+/*    ewal ...                                                         */
+/*---------------------------------------------------------------------*/
+function ewal( exp ) {
+   return comp( exp, nil )( nil );
+}
+
+/*---------------------------------------------------------------------*/
+/*    cnt ...                                                          */
+/*---------------------------------------------------------------------*/
+const cnt = list( "define", "cnt", 0);
+const cntref = "cnt";
 
 /*---------------------------------------------------------------------*/
 /*    tak ...                                                          */
@@ -394,28 +381,73 @@ function compApply( proc, actuals ) {
 const tak = list( "define", "tak", 
    list( "lambda", 
       list( "x", "y", "z" ),
-      list( "if", 
-	 list( ">=", "y", "x" ),
-	 "z",
-	 list( "tak", 
-	    list( "tak", list( "-", "x", "1"), "y", "z"),
-	    list( "tak", list( "-", "y", "1"), "z", "x"),
-	    list( "tak", list( "-", "z", "1"), "x", "y") ) ) ) );
+      list( "begin",
+	 list( "set!", "cnt", list( "+", "cnt", 1 ) ),
+      	 list( "if", 
+	    list( ">=", "y", "x" ),
+	    "z",
+	    list( "tak", 
+	       list( "tak", list( "-", "x", 1), "y", "z"),
+	       list( "tak", list( "-", "y", 1), "z", "x"),
+	       list( "tak", list( "-", "z", 1), "x", "y") ) ) ) ) );
 const takcall = list( "tak", 20, 10, 3 );
 
+/*---------------------------------------------------------------------*/
+/*    fib ...                                                          */
+/*---------------------------------------------------------------------*/
+const fib = list( "define", "fib",
+   list( "lambda",
+      list( "x" ),
+      list( "begin",
+	 list( "set!", "cnt", list( "+", "cnt", 1 ) ),
+      	 list( "if",
+	    list( "<", "x", 2 ),
+	    1,
+	    list( "+",
+	       list( "fib", list( "-", "x", 1) ),
+	       list( "fib", list( "-", "x", 2) ) ) ) ) ));
+
+const fibcall = list( "fib", 20 );
+   
 /*---------------------------------------------------------------------*/
 /*    run ...                                                          */
 /*---------------------------------------------------------------------*/
 function run( num ) {
    let r = 0;
-   let env = globalEnv();
 
    for( let i = 0; i < num; i++ ) {
-      ewal( tak, env );
-      r = ewal( takcall, env );
+      ewal( cnt );
+      ewal( tak );
+      r = "tak=" + ewal( takcall );
+      ewal( fib );
+      r += " fib=" + ewal( fibcall );
+      r += " cnt=" + ewal( cntref );
    }
    
    return r;
 }
 
-console.log( run( 1 ) );
+/*---------------------------------------------------------------------*/
+/*    main ...                                                         */
+/*---------------------------------------------------------------------*/
+function main( n ) {
+   let res = 0;
+   const k = Math.round( n / 10 );
+   let i = 1;
+   
+   console.log( "leval(", n, ")..." );
+   
+   while( n-- > 0 ) {
+      if( n % k === 0 ) { console.log( i++ ); }
+      res = run( 1 );
+   }
+
+   console.log( "res=", res );
+}
+
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 4
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 40;
+
+main( N );

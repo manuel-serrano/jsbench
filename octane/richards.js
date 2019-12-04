@@ -545,7 +545,7 @@ function BenchmarkSuite( name, val, benchs ) {
       var n = Math.round( num / 10 ), i = 1;
       console.log( name + " (" + num + ")" );
       while( num-- > 0 ) {
-	 if( num % n == 0 ) { console.log( i++ ); }
+	 if( num % n === 0 ) { console.log( i++ ); }
 	 benchs[ 0 ].go()
       };
    }
