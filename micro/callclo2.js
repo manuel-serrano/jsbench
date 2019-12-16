@@ -38,5 +38,5 @@ const N = (process.argv[ 1 ] === "fprofile")
       : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10000);
 
 console.log( "callclo2(", N, ")..." );
-console.log( gee( N, 1 ) + " (=300000)" );
+console.log( gee( N, 3 ) + " (=300000)" );
 
