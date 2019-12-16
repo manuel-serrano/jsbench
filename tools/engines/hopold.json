@@ -1,8 +1,8 @@
 {
-   "name": "/hop/HOPOLD/bin/hop",
+   "name": "hopold",
    "version": "@COMPILER@ --eval \"(begin (print (hop-version) \"-\" (hop-build-tag) (if (=fx (hop-max-threads) 1) \\\"-st\\\" \\\"-mt\\\")) (exit 0))\"",
    "cmd": "@COMPILER@ -Ox @PATH@ -o @TMP@/@NAME@.@ENGINE@ @EXTRAOPTS@",
    "run": "@TMP@/@NAME@.@ENGINE@ -",
-   "compiler": "hopc",
+   "compiler": "/tmp/HOPOLD/bin/hopc",
    "iteration": 3
 }
