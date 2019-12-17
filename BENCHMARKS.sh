@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Hop benchmarks
-BENCHMARKS_OCTANE="octane/richards.js octane/boyer.js octane/earley.js octane/deltablue.js octane/splay.js octane/crypto.js raytrace.js"
+BENCHMARKS_OCTANE="octane/richards.js octane/boyer.js octane/earley.js octane/deltablue.js octane/splay.js octane/crypto.js octane/raytrace.js"
 BENCHMARKS_SUNSPIDER="sunspider/base64.js"
 BENCHMARKS_JETSTREAM="jetstream/crypto-aes.js jetstream/crypto-md5.js jetstream/crypto-sha1.js tagcloud.js jetstream/hash-map.js"
 BENCHMARKS_BGLSTONE="bglstone/bague.js bglstone/fib42.js bglstone/puzzle.js bglstone/qsort.js bglstone/sieve.js bglstone/maze.js bglstone/leval.scm"

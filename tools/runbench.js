@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Wed Nov 20 09:30:47 2019 (serrano)                */
+/*    Last change :  Tue Dec 17 10:10:07 2019 (serrano)                */
 /*    Copyright   :  2017-19 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -529,6 +529,8 @@ function main() {
 	    benchmarks = benchmarks.concat( files );
 	 } else 
 	    benchmarks.push( args._[ i ] );
+      } else {
+	 throw "Cannot find test `" + args._[ i ] + "'";
       }
    }
 
