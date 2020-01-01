@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Tue Dec  3 13:33:13 2019                          */
-/*    Last change :  Wed Dec  4 06:34:30 2019 (serrano)                */
+/*    Last change :  Mon Dec 23 06:48:59 2019 (serrano)                */
 /*    Copyright   :  2019 Manuel Serrano                               */
 /*    -------------------------------------------------------------    */
 /*    Feeley's Scheme Lambda interpreter                               */
@@ -75,13 +75,13 @@ function listRef( l, i ) {
    }
 }
    
-function listSet( l, i ) {
+function listSet( l, i, val ) {
    if( l === nil ) {
       return false;
    } else if( i === 0 ) {
       return setCar( l, val );
    } else {
-      return listSet( cdr( l ), i - 1 );
+      return listSet( cdr( l ), i - 1, val );
    }
 }
    
@@ -163,7 +163,7 @@ function comp( x, env ) {
       const fun = car( x );
       const args = cdr( x );
       const actuals = args.map( a => comp( a, env ) );
-      const proc = comp( fun, env, false );
+      const proc = comp( fun, env );
       return compApply( proc, actuals, x );
    }
 }
@@ -280,8 +280,7 @@ function compDefine( v, x ) {
       globalEnv = cons( cell, globalEnv );
    }
 
-   const val = comp( x, nil );
-   return env => setCdr( cell, val( env ) );
+   return env => setCdr( cell, comp( x, nil )( env ) );
 }
 
 /*---------------------------------------------------------------------*/
@@ -317,7 +316,7 @@ function compLambda( formals, body ) {
       case 4: 
 	 return env => (x, y, z, t) => body( cons( x, cons( y, cons( z, cons( t, env ) ) ) ) );
       default:
-	 return env => { throw( "not supported" ) };
+	 return env => { throw( "compLambda: not supported" ) };
    } 
 }
 
@@ -347,7 +346,7 @@ function compApply( proc, actuals, src ) {
 	    			caddr( actuals )( env ),
 	    			cadddr( actuals )( env ) );
       default:
-	 return env => { throw( "not supported" ) };
+	 return env => { throw( "compApply: not supported" ) };
    }
 }
 
