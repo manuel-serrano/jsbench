@@ -35,7 +35,7 @@ To range benchmarks:
 
   ./hoprange.sh -e hop -e nodejs -O /tmp/HOPRANGE --benchmarks="octane/richards.js octane/deltablue.js octane/boyer.js octane/earley.js octane/splay.js"
 
-To range one bechmark family:
+To range one benchmark family:
 
   ./hoprange.sh -e hop -e nodejs -O /tmp/HOPRANGE jetstream
   ./hoprange.sh -e hop -e hopfprof -e nodejs -O /tmp/HOPANGE micro

@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:55:49 2017                          */
-/*    Last change :  Wed Aug 14 15:58:44 2019 (serrano)                */
-/*    Copyright   :  2017-19 Manuel Serrano                            */
+/*    Last change :  Fri Jan  3 08:43:08 2020 (serrano)                */
+/*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Engine management                                                */
 /*=====================================================================*/
@@ -36,7 +36,8 @@ function loadEngines( arr, args ) {
       if( o.version ) {
 	 const ver = o.version
 	       .replace( /@COMPILER@/g, o.compiler || "" )
-	       .replace( /@INTERPRETER@/g, o.interpreter || "" );
+	       .replace( /@INTERPRETER@/g, o.interpreter || "" )
+	    + " 2> /dev/null";
 
 	 o.version = #:js-string->jsstring( #:system->string( #:js-jsstring->string( ver ) ) ).replace( /\n/, "" );
       }
