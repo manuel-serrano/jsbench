@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Fri Jan  3 17:23:19 2020 (serrano)                */
+/*    Last change :  Fri Jan  3 17:25:41 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a relative gnuplot histogram, each bar is a benchmark.  */
@@ -73,16 +73,13 @@ module.exports = function( logfiles, engines, args ) {
    const output = args.o || args.output || (logs[ 0 ].name + "." + format);
    const base = output.replace( /.[^.]+$/, '' );
    const start = args.start ? parseInt( args.start ) : 0;
-   const deviation = args.deviation ? parseFloat( args.deviation ) : 0;
-   const errorbars = args.errorbars;
-   const uratio = args.unitRatio || unitRatio;
    
    enames.forEach( n => { if( n.length > enginepad ) enginepad = n.length } );
-   enginepad += ((deviation > 0 || errorbars) ? 8 : 4);
+   enginepad += 4;
    
    // plot data
    csvport.write( '#                  ' );
-   enames.forEach( n => csvport.write( utils.padding( n, enginepad ) ) );
+   enames.slice( 1 ).forEach( n => csvport.write( utils.padding( n, enginepad ) ) );
    csvport.write( "\n" );
    
    for( let i = start; i < logs.length; i++ ) {
@@ -90,34 +87,18 @@ module.exports = function( logfiles, engines, args ) {
       csvport.write( utils.padding( log.name + ",", 19 ) );
       csvport.write( " " );
       
-      for( let j = 0; j < enames.length; j++ ) {
+      for( let j = 1; j < enames.length; j++ ) {
+	 const entry0 = log.engines.find( e => e.name === enames[ 0 ] );
 	 const entry = log.engines.find( e => e.name === enames[ j ] );
+	 const times0 = entry0.logs[ 0 ].times;
 	 const times = entry.logs[ 0 ].times;
+	 const { tm: tm0, min: min0, max: max0 } = utils.median( times0.rtimes )
 	 const { tm, min, max } = utils.median( times.rtimes )
+	 const mn0 = utils.mean( times0.rtimes );
 	 const mn = utils.mean( times.rtimes );
-	 const val = (tm/uratio);
+	 const val = (tm/tm0);
 	 let str = (isNaN( val ) ? 0 : val).toFixed( 2 );
-	 
-	 if( deviation > 0 ) {
-	    str += ", ";
-	    
-	    const dev = (utils.deviation( times.rtimes ) * 10 / mn);
-	    
-	    if( dev > deviation ) {
-	       str += dev.toFixed( 2 );
-	    } else {
-	       str += "0.0";
-	    }
-	 } else if( args.errorbars ) {
-	    const minval = min/uratio;
-	    const maxval = max/uratio;
 
-	    str += ",";
-	    str += (isNaN( minval ) ? val : minval ).toFixed( 2 );
-	    str += ",";
-	    str += (isNaN( maxval ) ? val : maxval ).toFixed( 2 );
-	 }
-	 
 	 if( j < enames.length - 1 ) {
 	    str += ",  ";
 	 }
@@ -153,6 +134,7 @@ module.exports = function( logfiles, engines, args ) {
    // plot file
    plotport.write( `set title '${title}'` );
    plotport.write( "\n" );
+   
    if( args.ylabel ) {
       plotport.write( `set ylabel "${args.ylabel}" ${args.ylabelopt || ""}` );
       plotport.write( "\n" );
@@ -166,13 +148,7 @@ module.exports = function( logfiles, engines, args ) {
    plotport.write( "set auto x\n\n" );
    plotport.write( "set style data histogram\n" );
    
-   if( deviation || errorbars ) {
-      plotport.write( "set style histogram gap 1 errorbars lw 1\n" );
-      plotport.write( `set errorbars lc ${args.errorbars === true ? "black" : args.errorbars}` );
-      plotport.write( "\n" );
-   } else {
-      plotport.write( "set style histogram cluster gap 1\n" );
-   }
+   plotport.write( "set style histogram cluster gap 1\n" );
    
    if( args.xtics === "no" ) {
       plotport.write( "unset xtics\n\n" );
@@ -193,16 +169,9 @@ module.exports = function( logfiles, engines, args ) {
    plotport.write( `set boxwidth ${args.boxwidth || defaultBoxwidth}` );
    plotport.write( "\n" );
    plotport.write( "set style fill solid\n" );
-   for( let i = 0; i < enames.length; i++ ) {
-      plotport.write( `set style line ${i+1} linecolor rgb '${colors[ (i + linestyle - 1) % colors.length ]}' linetype 1 linewidth 1` );
+   for( let i = 1; i < enames.length; i++ ) {
+      plotport.write( `set style line ${i+1} linecolor rgb '${colors[ (i + linestyle - 2) % colors.length ]}' linetype 1 linewidth 1` );
       plotport.write( "\n" );
-   }
-   
-   if( deviation > 0 ) {
-      plotport.write( "set style line 100 linecolor rgb '#000000' linetype 1 linewidth 1\n" );
-   }
-   if( errorbars > 0 ) {
-      plotport.write( "set style line 100 linecolor rgb '#000000' linetype 1 linewidth 1\n" );
    }
    
    plotport.write( "\n" );
@@ -259,10 +228,6 @@ module.exports = function( logfiles, engines, args ) {
       plotport.write( `set xlabel '${args.xlabel}'` );
       plotport.write( "\n" );
    }
-   if( args.ylabel ) {
-      plotport.write( `set ylabel '${args.ylabel}'` );
-      plotport.write( "\n" );
-   }
       
    if( start > 0 ) {
       plotport.write( `set xrange [${start}:${logs.length}]` );
@@ -278,30 +243,10 @@ module.exports = function( logfiles, engines, args ) {
    plotport.write( `plot` );
    plotport.write( " \\\n" );
    
-   if( deviation > 0 ) {
-      for( let i = 0; i < enames.length; i++ ) {
-      	 plotport.write( `  '${base}.csv' u ${(i*2)+2}:${(i*2)+3}:xtic(1) title '${enames[ i ]}' ls ${i + 1} ` );
-      	 if( i < enames.length - 1 ) {
-	    plotport.write( ", \\\n" );
-      	 } else {
-	    plotport.write( "\n" );
-      	 }
-      }
-   } else if( errorbars) {
-      for( let i = 0; i < enames.length; i++ ) {
-      	 plotport.write( `  '${base}.csv' u ${(i*3)+2}:${(i*3)+3}:${(i*3)+4}:xtic(1) title '${enames[ i ]}' ls ${i + 1} ` );
-      	 if( i < enames.length - 1 ) {
-	    plotport.write( ", \\\n" );
-      	 } else {
-	    plotport.write( "\n" );
-      	 }
-      }
-   } else {
-      for( let i = 0; i < enames.length; i++ ) {
-      	 plotport.write( `  '${base}.csv' u ${i+2}:xtic(1) title '${enames[ i ]}' ls ${i + 1}` );
-      	 if( i < enames.length - 1 ) {
-	    plotport.write( ", \\\n" );
-      	 }
+   for( let i = 1; i < enames.length; i++ ) {
+      plotport.write( `  '${base}.csv' u ${i+1}:xtic(1) title '${enames[ i ]}' ls ${i}` );
+      if( i < enames.length - 1 ) {
+	 plotport.write( ", \\\n" );
       }
    }
    

@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Fri Jan  3 08:49:36 2020 (serrano)                */
+/*    Last change :  Fri Jan  3 18:06:28 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -259,10 +259,10 @@ module.exports = function( logfiles, engines, args ) {
       plotport.write( `set xlabel '${args.xlabel}'` );
       plotport.write( "\n" );
    }
-   if( args.ylabel ) {
-      plotport.write( `set ylabel '${args.ylabel}'` );
-      plotport.write( "\n" );
-   }
+/*    if( args.ylabel ) {                                              */
+/*       plotport.write( `set ylabel '${args.ylabel}'` );              */
+/*       plotport.write( "\n" );                                       */
+/*    }                                                                */
       
    if( start > 0 ) {
       plotport.write( `set xrange [${start}:${logs.length}]` );

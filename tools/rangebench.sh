@@ -127,14 +127,23 @@ function run() {
 base=`basename $src .js`
 dir=`dirname $src`
 
+case $dir in
+  /*)
+    root=
+    ;;
+  *)
+    root=./
+    ;;
+esac
+
 if [ "$output " = " " ]; then
   output=$base.$format
 fi
 
 if [ "$inc " = " " ]; then
   if [ -f $dir/$base.range.json ]; then
-    inc=`hop --no-server --evaljs "console.log( require( './$dir/$base.range.json' ).inc ); process.exit( 0 )"`
-    end=`hop --no-server --evaljs "console.log( require( './$dir/$base.range.json' ).end ); process.exit( 0 )"`
+    inc=`hop --no-server --evaljs "console.log( require( '$root$dir/$base.range.json' ).inc ); process.exit( 0 )"`
+    end=`hop --no-server --evaljs "console.log( require( '$root$dir/$base.range.json' ).end ); process.exit( 0 )"`
   else
     inc=100
   fi
