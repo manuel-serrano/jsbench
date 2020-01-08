@@ -50,13 +50,6 @@ function sieve( max ) {
    return filter_again( interval( 2, max ) );
 }
 
-function do_list( f, lst ) {
-   while( lst !== null ) {
-      f( lst.car );
-      lst = lst.cdr;
-   }
-}
-
 function length( lst ) {
    let res = 0;
 

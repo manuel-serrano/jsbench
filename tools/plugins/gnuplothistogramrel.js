@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Fri Jan  3 17:25:41 2020 (serrano)                */
+/*    Last change :  Tue Jan  7 07:47:55 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a relative gnuplot histogram, each bar is a benchmark.  */
@@ -39,7 +39,7 @@ function collectEngines( logs ) {
 /*---------------------------------------------------------------------*/
 /*    colors ...                                                       */
 /*---------------------------------------------------------------------*/
-const colors = [ '#3264c8', '#d83812', '#fa9600', '#109318', '#960096', '#0096c2' ];
+const colors = [ '#3264c8', '#d83812', '#fa9600', '#109318', '#960096' ];
 const defaultBoxwidth = 0.9;
 const defaultFont = "Verdana,18";
 const unitRatio = 1000;
@@ -61,7 +61,7 @@ module.exports = function( logfiles, engines, args ) {
 	 ? engines.map( e => e.name )
 	 : collectEngines( logs );
    let enginepad = 6;
-   const linestyle = args.lineStyle || 1;
+   const linestyle = args.lineStyle || 0;
    
    if( logs.length === 0 ) {
       throw TypeError( "no logs found" );
@@ -129,7 +129,12 @@ module.exports = function( logfiles, engines, args ) {
 	 plotport.write( "\n" );
    }
    plotport.write( `set output '${output}'` );
-   plotport.write( "\n\n" );
+   plotport.write( "\n" );
+   if( args.canvasSize ) {
+      plotport.write( `set size ${args.canvasSize}` );
+      plotport.write( "\n" );
+   }
+   plotport.write( "\n" );
    
    // plot file
    plotport.write( `set title '${title}'` );
@@ -170,7 +175,7 @@ module.exports = function( logfiles, engines, args ) {
    plotport.write( "\n" );
    plotport.write( "set style fill solid\n" );
    for( let i = 1; i < enames.length; i++ ) {
-      plotport.write( `set style line ${i+1} linecolor rgb '${colors[ (i + linestyle - 2) % colors.length ]}' linetype 1 linewidth 1` );
+      plotport.write( `set style line ${i} linecolor rgb '${colors[ (i + linestyle - 2) % colors.length ]}' linetype 1 linewidth 1` );
       plotport.write( "\n" );
    }
    
@@ -218,10 +223,9 @@ module.exports = function( logfiles, engines, args ) {
 	 plotport.write( "set key under nobox\n" );
    }
    
-   switch( args.logscale ) {
-      case "y": plotport.write( "set logscale y\n" ); break;
-      case "x": plotport.write( "set logscale x\n" ); break;
-      case "xy": plotport.write( "set logscale xy\n" ); break;
+   if( args.logscale ) {
+      plotport.write( `set logscale ${args.logscale}` );;
+      plotport.write( "\n" );
    }
    
    if( args.xlabel ) {

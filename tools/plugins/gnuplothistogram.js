@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Fri Jan  3 18:06:28 2020 (serrano)                */
+/*    Last change :  Tue Jan  7 07:50:47 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -39,7 +39,7 @@ function collectEngines( logs ) {
 /*---------------------------------------------------------------------*/
 /*    colors ...                                                       */
 /*---------------------------------------------------------------------*/
-const colors = [ '#3264c8', '#d83812', '#fa9600', '#109318', '#960096', '#0096c2' ];
+const colors = [ '#3264c8', '#d83812', '#fa9600', '#109318', '#960096' ];
 const defaultBoxwidth = 0.9;
 const defaultFont = "Verdana,18";
 const unitRatio = 1000;
@@ -146,10 +146,18 @@ module.exports = function( logfiles, engines, args ) {
 	 }
 	 plotport.write( ` font "${args.font || defaultFont}"` );
 	 plotport.write( "\n" );
+	 if( args.size ) {
+	    plotport.write( `set size ${args.size}` );
+	 }
    }
    plotport.write( `set output '${output}'` );
-   plotport.write( "\n\n" );
-   
+   plotport.write( "\n" );
+   if( args.canvasSize ) {
+      plotport.write( `set size ${args.canvasSize}` );
+      plotport.write( "\n" );
+   }
+   plotport.write( "\n" );
+
    // plot file
    plotport.write( `set title '${title}'` );
    plotport.write( "\n" );
@@ -249,11 +257,11 @@ module.exports = function( logfiles, engines, args ) {
 	 plotport.write( "set key under nobox\n" );
    }
    
-   switch( args.logscale ) {
-      case "y": plotport.write( "set logscale y\n" ); break;
-      case "x": plotport.write( "set logscale x\n" ); break;
-      case "xy": plotport.write( "set logscale xy\n" ); break;
+   if( args.logscale ) {
+      plotport.write( `set logscale ${args.logscale}` );
+      plotport.write( "\n" );
    }
+   
    
    if( args.xlabel ) {
       plotport.write( `set xlabel '${args.xlabel}'` );
