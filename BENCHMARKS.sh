@@ -3,7 +3,7 @@
 # Hop benchmarks
 BENCHMARKS_OCTANE="octane/richards.js octane/boyer.js octane/earley.js octane/deltablue.js octane/splay.js octane/crypto.js octane/raytrace.js"
 BENCHMARKS_SUNSPIDER="sunspider/base64.js"
-BENCHMARKS_JETSTREAM="jetstream/crypto-aes.js jetstream/crypto-md5.js jetstream/crypto-sha1.js tagcloud.js jetstream/hash-map.js"
+BENCHMARKS_JETSTREAM="jetstream/crypto-aes.js jetstream/crypto-md5.js jetstream/crypto-sha1.js jetstream/tagcloud.js jetstream/hash-map.js"
 BENCHMARKS_BGLSTONE="bglstone/bague.js bglstone/puzzle.js bglstone/qsort.js bglstone/sieve.js bglstone/maze.js bglstone/leval.js bglstone/boyer-scm.js"
 BENCHMARKS_SHOOTOUT="shootout/fannkuch.js shootout/binary-tree.js"
 BENCHMARKS_MICRO="micro/assigop.js micro/ctor.js micro/ctor2.js micro/incop.js micro/poly.js micro/set.js micro/callobjhit.js micro/callobjmiss.js micro/callprotohit.js micro/string.js micro/stridx.js micro/switch.js micro/forinarr.js micro/foreacharr.js micro/forofarr.js micro/callclo.js micro/callclo2.js micro/callobjpoly.js micro/assigprop.js micro/arguments.js micro/fib42.js"
