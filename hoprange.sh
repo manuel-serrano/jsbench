@@ -73,10 +73,6 @@ while : ; do
   shift
 done
 
-if [ "$benchmarks " != " " ]; then
-  BENCHMARKS=$benchmarks
-fi
-
 if [ "$dir " = " " -a "$base " = " " ]; then
   tag=`$hopc --buildtag`
   dir=LOGS/`date '+%Y-%m-%d-%Hh%M'`-`hostname`-$tag
@@ -93,39 +89,47 @@ fi
 
 mkdir -p $dir
 
-case $BENCHMARKS in
-  octane)
-    BENCHMARKS=$BENCHMARKS_OCTANE
-    ;;
-  
-  sunspider)
-    BENCHMARKS=$BENCHMARKS_SUNSPIDER
-    ;;
-  
-  jetstream)
-    BENCHMARKS=$BENCHMARKS_JETSTREAM
-    ;;
-  
-  bglstone)
-    BENCHMARKS=$BENCHMARKS_BGLSTONE
-    ;;
-  
-  shootout)
-    BENCHMARKS=$BENCHMARKS_SHOOTOUT
-    ;;
-  
-  micro)
-    BENCHMARKS=$BENCHMARKS_MICRO
-    ;;
-  
-  other)
-    BENCHMARKS=$BENCHMARKS_OTHER
-    ;;
-  
-  proxy)
-    BENCHMARKS=$BENCHMARKS_PROXY
-    ;;
-esac
+if [ "$benchmarks " != " " ]; then
+  BENCHMARKS=
+  for p in $benchmarks; do
+    case $p in
+      octane)
+	BENCHMARKS="$BENCHMARKS_OCTANE $BENCHMARKS"
+	;;
+      
+      sunspider)
+	BENCHMARKS="$BENCHMARKS_SUNSPIDER $BENCHMARKS"
+	;;
+      
+      jetstream)
+	BENCHMARKS="$BENCHMARKS_JETSTREAM $BENCHMARKS"
+	;;
+      
+      bglstone)
+	BENCHMARKS="$BENCHMARKS_BGLSTONE $BENCHMARKS"
+	;;
+      
+      shootout)
+	BENCHMARKS="$BENCHMARKS_SHOOTOUT $BENCHMARKS"
+	;;
+      
+      micro)
+	BENCHMARKS="$BENCHMARKS_MICRO $BENCHMARKS"
+	;;
+      
+      other)
+	BENCHMARKS="$BENCHMARKS_OTHER $BENCHMARKS"
+	;;
+      
+      proxy)
+	BENCHMARKS="$BENCHMARKS_PROXY $BENCHMARKS"
+	;;
+
+      *)
+	BENCHMARKS="$p $BENCHMARKS"
+    esac
+  done
+fi
 
 echo "engine [$engines] $BENCHMARKS"
 
