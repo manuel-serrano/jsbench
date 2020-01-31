@@ -1,5 +1,7 @@
 "use strict";
 
+var g;
+
 function SET1( o ) {
    o.x++;
 }
@@ -23,7 +25,7 @@ function foo( N ) {
    
    for( let i = 0; i < N; i++ ) {
       if( i % k == 0 ) console.log( i );
-      bar( 150000 );
+      g = bar( 150000 );
    }
 }
 

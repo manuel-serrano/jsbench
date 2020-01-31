@@ -127,6 +127,7 @@ const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 11;
 for ( var i = 0; i < N; i++ ) {
    var base64;
 
+   str = "";
    console.log( i );
    base64 = toBase64(str);
    var encoded = base64ToString(base64);
