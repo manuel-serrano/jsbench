@@ -705,7 +705,27 @@ function makeParser( grammar, lexer ) {
 	    }
 	 }
 	    
+	 function back( states, statesStar, stateNun, enders, steps, nbNts, toks ) {
+   	    const stateStar = statesStar[ stateNum ];
 	    
+	    function loop1() {
+	       const conf = stateStar[ 0 ];
+	       if( conf >= 0 ) {
+		  const confSet = stateStar[ conf + 1 ];
+		  const head = confSet[ 4 ];
+		  
+		  stateStar[ 0 ] = confSet[ 0 ];
+		  confSetMergeNew( confSet );
+		  
+		  for( let i = head; i >= 0; i = confSetNext( confSet, i ) ) {
+		     produce( conf, i, stateNum, enders, steps, 
+			toks, states, statesStar, nbNts );
+		  }
+	       }
+	    }
+	    
+	    return loop1();
+	 }
 	       
 	 
 	 
