@@ -1,10 +1,10 @@
 /*=====================================================================*/
-/*    serrano/prgm/project/hop/jsbench/proxy/abbrev.js                 */
+/*    serrano/prgm/project/hop/jsbench/contract/abbrev.js              */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu May 16 08:58:06 2019                          */
-/*    Last change :  Fri Jul 12 14:18:21 2019 (serrano)                */
-/*    Copyright   :  2019 Manuel Serrano                               */
+/*    Last change :  Thu Feb 13 16:22:37 2020 (serrano)                */
+/*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Basic Higher-Order contract JS implementation                    */
 /*=====================================================================*/
@@ -365,7 +365,10 @@ function bench( count, fun ) {
 const TEST = process.argv[ 2 ] || "regular";
 const N = parseInt( process.argv[ 3 ] || "3000000" );
 
-console.log( "./a.out [regular|contract] [iteration]" );
+if( process.argv < 2 ) {
+   console.log( "./a.out [regular|contract] [iteration]" );
+}
+
 console.log( "runnning: ", TEST );
 
 /* function bench( count ) {                                           */
