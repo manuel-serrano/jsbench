@@ -126,7 +126,7 @@ if [ "$benchmarks " != " " ]; then
 	;;
 
       *)
-	BENCHMARKS="$p $BENCHMARKS"
+	BENCHMARKS="$BENCHMARKS $p"
     esac
   done
 fi
