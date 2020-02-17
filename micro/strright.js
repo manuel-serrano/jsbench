@@ -15,17 +15,14 @@ function build( num ) {
 
 function str( num ) {
    var res = 0;
-   var s = build( 100000 );
    var j = 0;
    var l = 0;
 
-   console.log( "s=" + s.length );
-
    for( var i = 0; i < num; i++ ) {
+      var s = build( 5000 );
       if( i % 1000 == 0 ) console.log( "i=" + i );
-
-      res += s.length + 1;
-      res -= s.length;
+      
+      res = s.length + 1;
    }
 
    return res;
@@ -33,7 +30,7 @@ function str( num ) {
 
 const N = (process.argv[ 1 ] === "fprofile") 
       ? 10000
-      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 30000);
+      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 5000);
 
 console.log( "strright(", N, ")..." );
 
