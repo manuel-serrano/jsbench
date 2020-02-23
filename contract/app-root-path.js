@@ -1,10 +1,10 @@
 /*=====================================================================*/
-/*    serrano/prgm/project/hop/jsbench/proxy/app-root-path.js          */
+/*    serrano/trashcan/app-root-path.js                                */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu May 16 08:58:06 2019                          */
-/*    Last change :  Tue Jul 16 16:51:17 2019 (serrano)                */
-/*    Copyright   :  2019 Manuel Serrano                               */
+/*    Last change :  Wed Feb 19 14:44:44 2020 (serrano)                */
+/*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Basic Higher-Order contract JS implementation                    */
 /*=====================================================================*/
@@ -541,11 +541,12 @@ const ctz = CTObject( { z: isString } );
 const cty = CTObject( { y: ctz } );
 const ctx = CTObject( { x: cty } );
 const ctw = CTObject( { w: ctx } );
-function test( root ) {
+
+function simpletest( root ) {
    const o = ctw.wrap( { w: { x: { y: { z: "zzz" } } } } );
 }
 
-function test2( root ) {
+function runtest( root ) {
    const p = root.path;
    root.resolve('../dir');
    root.toString();
@@ -553,6 +554,21 @@ function test2( root ) {
    root.setPath('C:\\app-root');
    root.setPath(p);
 }
+   
+function testplain( ctroot, root ) {
+   return runtest( root );
+   return runtest( root );
+}
+
+function testcontract( ctroot, root ) {
+   return runtest( ctroot );
+   return runtest( ctroot );
+}
+
+function testmix( ctroot, root ) {
+   runtest( ctroot );
+   runtest( root );
+}   
 
 const ctApi = CTObject( 
    { aaa: CTFunction( [ isString ], isString ),
@@ -565,25 +581,39 @@ const ctApi = CTObject(
 
 const ctroot = ctApi.wrap( root );
 
-function bench( count, fun ) {
-   const n = count / 10;
-   let r;
-   for( let j = 0; j < 10; j++ ) {
-      for( let i = 0; i < n; i++ ) {
-	 r = test( fun );
-      }
-      console.log( j );
-   }
-   return r;
-}
-
 /*---------------------------------------------------------------------*/
 /*    Command line                                                     */
 /*---------------------------------------------------------------------*/
-const TEST = process.argv[ 2 ] || "regular";
-const N = parseInt( process.argv[ 3 ] || "5000000" );
+function main( name, n, testname ) {
+   let res = 0;
+   const k = Math.round( n / 10 );
+   let i = 1;
+   let test;
+   
+   switch( testname ) {
+      case "mix": test = testmix; break;
+      case "plain": test = testplain; break;
+      default: test = testcontract;
+   }
+   
+   console.log( name + " " + testname + " (", n, ")..." );
+   
+   for( let j = 0; j < 10; j++ ) {
+      for( let i = 0; i < k; i++ ) {
+      	 res = test( ctroot, root );
+      }
+      console.log( j );
+   }
 
-console.log( "./a.out [regular|contract] [iteration]" );
-console.log( "runnning: ", TEST );
+   console.log( "res=", res );
+}
+   
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 20
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 400000;
 
-bench( N, TEST === "contract" ? ctroot : root );
+const TEST =
+   ( process.argv.length > 3 ? process.argv[ 3 ] : "mix"); 
+
+main( "app-root-path", N, TEST );

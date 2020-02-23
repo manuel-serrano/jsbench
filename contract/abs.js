@@ -1,10 +1,10 @@
 /*=====================================================================*/
-/*    serrano/prgm/project/hop/jsbench/proxy/abs.js                    */
+/*    serrano/prgm/project/hop/jsbench/contract/abs.js                 */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu May 16 08:58:06 2019                          */
-/*    Last change :  Sun Jul 28 06:52:21 2019 (serrano)                */
-/*    Copyright   :  2019 Manuel Serrano                               */
+/*    Last change :  Fri Feb 21 21:43:44 2020 (serrano)                */
+/*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Basic Higher-Order contract JS implementation                    */
 /*=====================================================================*/
@@ -468,31 +468,72 @@ const ctabs = CTFunction( [ isString ], isString ).wrap( abs );
 
 let t = true;
 
-function bench( count, fun ) {
-   const n = count / 10;
-   for( let j = 0; j < 10; j++ ) {
-      for( let i = 0; i < n; i++ ) {
-      	 const x = fun('/foo');
-      	 const y = fun('/bar');
-	 t ^= (x !== y);
-      }
-      console.log( j );
-   }
-   return true;
+function bench( fun ) {
+   const x = fun('/foo');
+   const y = fun('/bar');
+   t ^= (x !== y);
+}
+
+function testplain( ctfun, fun ) {
+   bench( fun );
+   bench( fun );
+}
+
+function testcontract( ctfun, fun ) {
+   bench( ctfun );
+   bench( ctfun );
+}
+
+function testmix( ctfun, fun ) {
+   bench( ctfun );
+   bench( fun );
 }
 
 /*---------------------------------------------------------------------*/
 /*    Command line                                                     */
 /*---------------------------------------------------------------------*/
-const TEST = process.argv[ 2 ] || "regular";
-const N = parseInt( process.argv[ 3 ] || "200000000" );
+/* const TEST = process.argv[ 2 ] || "regular";                        */
+/* const N = parseInt( process.argv[ 3 ] || "200000000" );             */
+/*                                                                     */
+/* console.log( "./a.out [regular|contract] [iteration]" );            */
+/* console.log( "runnning: ", TEST, N );                               */
+/*                                                                     */
+/* bench( N, TEST === "contract" ? ctabs : abs );                      */
+/* console.log( "t=", t );                                             */
+/*                                                                     */
+/* module.exports = abs;                                               */
+/*                                                                     */
+function main( name, n, testname ) {
+   let res = 0;
+   const k = Math.round( n / 10 );
+   let i = 1;
+   let test;
+   
+   switch( testname ) {
+      case "mix": test = testmix; break;
+      case "plain": test = testplain; break;
+      default: test = testcontract;
+   }
+   
+   console.log( name + " " + testname + " (", n, ")..." );
+   
+   for( let j = 0; j < 10; j++ ) {
+      for( let i = 0; i < k; i++ ) {
+      	 res = test( ctabs, abs );
+      }
+      console.log( j );
+   }
 
-console.log( "./a.out [regular|contract] [iteration]" );
-console.log( "runnning: ", TEST, N );
+   console.log( "res=", res );
+}
+   
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 20
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 20000000;
 
-bench( N, TEST === "contract" ? ctabs : abs );
-console.log( "t=", t );
+const TEST =
+   ( process.argv.length > 3 ? process.argv[ 3 ] : "mix"); 
 
-module.exports = abs;
-
+main( "abs", N, TEST );
 

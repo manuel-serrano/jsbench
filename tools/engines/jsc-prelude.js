@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 07:38:36 2017                          */
-/*    Last change :  Mon Oct 15 08:05:28 2018 (serrano)                */
-/*    Copyright   :  2017-18 Manuel Serrano                            */
+/*    Last change :  Wed Feb 19 14:50:17 2020 (serrano)                */
+/*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Prelude file for JavaScriptCore                                  */
 /*=====================================================================*/
@@ -12,6 +12,7 @@
 
 let exports = {};
 let module = { filename: "@PATH@" };
+const __dirname = "@DIRNAME@";
 
 let buffer_stdout = "";
 

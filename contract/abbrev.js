@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu May 16 08:58:06 2019                          */
-/*    Last change :  Thu Feb 13 16:22:37 2020 (serrano)                */
+/*    Last change :  Mon Feb 17 19:43:57 2020 (serrano)                */
 /*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Basic Higher-Order contract JS implementation                    */
@@ -343,45 +343,57 @@ const ctc = CTFunction( [ CTArray( isString ) ],
    CTObject( { fl: isString } ) );
 const ctabbrev = ctc.wrap( abbrev );
 
-function test( fun ) {
+function testplain( ctfun, fun ) {
    let abbrs = fun(['foo', 'fool', 'folding', 'flop']);
+   abbrs = fun(['foo', 'fool', 'folding', 'flop']);
    return typeof abbrs.fl === "string";
 }
 
-function bench( count, fun ) {
-   const n = count / 10;
-   for( let j = 0; j < 10; j++ ) {
-      for( let i = 0; i < n; i++ ) {
-      	 const x = test( fun );
-      }
-      console.log( j );
-   }
-   return true;
+function testcontract( ctfun, fun ) {
+   let abbrs = ctfun(['foo', 'fool', 'folding', 'flop']);
+   abbrs = ctfun(['foo', 'fool', 'folding', 'flop']);
+   return typeof abbrs.fl === "string";
+}
+
+function testmix( ctfun, fun ) {
+   let abbrs = fun(['foo', 'fool', 'folding', 'flop']);
+   let ctabbrs = ctfun(['foo', 'fool', 'folding', 'flop']);
+   return typeof abbrs.fl === "string";
 }
 
 /*---------------------------------------------------------------------*/
 /*    Command line                                                     */
 /*---------------------------------------------------------------------*/
-const TEST = process.argv[ 2 ] || "regular";
-const N = parseInt( process.argv[ 3 ] || "3000000" );
+function main( name, n, testname ) {
+   let res = 0;
+   const k = Math.round( n / 10 );
+   let i = 1;
+   let test;
+   
+   switch( testname ) {
+      case "mix": test = testmix; break;
+      case "plain": test = testplain; break;
+      default: test = testcontract;
+   }
+   
+   console.log( name + " " + testname + " (", n, ")..." );
+   
+   for( let j = 0; j < 10; j++ ) {
+      for( let i = 0; i < k; i++ ) {
+      	 res = test( ctabbrev, abbrev );
+      }
+      console.log( j );
+   }
 
-if( process.argv < 2 ) {
-   console.log( "./a.out [regular|contract] [iteration]" );
+   console.log( "res=", res );
 }
+   
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 20
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 200000;
 
-console.log( "runnning: ", TEST );
+const TEST =
+   ( process.argv.length > 3 ? process.argv[ 3 ] : "mix"); 
 
-/* function bench( count ) {                                           */
-/*    const n = count / 10;                                            */
-/*    for( let j = 0; j < 10; j++ ) {                                  */
-/*       for( let i = 0; i < n; i++ ) {                                */
-/*       	 const x = test2();                                    */
-/*       }                                                             */
-/*       console.log( j );                                             */
-/*    }                                                                */
-/*    return true;                                                     */
-/* }                                                                   */
-
-bench( 3000000, TEST === "contract" ? ctabbrev : abbrev );
-//bench( 100000 );
-
+main( "abbrev", N, TEST );

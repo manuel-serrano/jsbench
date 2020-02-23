@@ -3,8 +3,8 @@
 ;*    -------------------------------------------------------------    */
 ;*    Author      :  Manuel Serrano                                    */
 ;*    Creation    :  Mon Apr 17 19:51:13 2017                          */
-;*    Last change :  Wed Nov 20 09:30:23 2019 (serrano)                */
-;*    Copyright   :  2017-19 Manuel Serrano                            */
+;*    Last change :  Sun Feb 23 18:33:53 2020 (serrano)                */
+;*    Copyright   :  2017-20 Manuel Serrano                            */
 ;*    -------------------------------------------------------------    */
 ;*    exec sync                                                        */
 ;*=====================================================================*/
@@ -47,7 +47,7 @@
 				   :wait #t))
 			     (x (process-exit-status p)))
 			 x))
-		   1 "system")
+		   1 (& "system"))
 	 :writable #f
 	 :enumerable #f)))
 

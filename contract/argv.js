@@ -1,10 +1,10 @@
 /*=====================================================================*/
-/*    serrano/prgm/project/hop/jsbench/proxy/argv.js                   */
+/*    serrano/prgm/project/hop/jsbench/contract/argv.js                */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu May 16 08:58:06 2019                          */
-/*    Last change :  Fri Jul 12 16:25:18 2019 (serrano)                */
-/*    Copyright   :  2019 Manuel Serrano                               */
+/*    Last change :  Sat Feb 22 01:28:11 2020 (serrano)                */
+/*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Basic Higher-Order contract JS implementation                    */
 /*=====================================================================*/
@@ -246,48 +246,9 @@ function isBoolean( o ) { return (typeof o) === "boolean" }
 function isUndefined( o ) { return o === undefined }
 function True( o ) { return true }
 
-/*---------------------------------------------------------------------*/
-/*    example                                                          */
-/*---------------------------------------------------------------------*/
-/* function add( x, y ) {                                              */
-/*    return x + y;                                                    */
-/* }                                                                   */
-/*                                                                     */
-/* const fxadd = CTFunction(                                           */
-/*    [ Number.isInteger, Number.isInteger ],                          */
-/*    Number.isInteger )                                               */
-/*    .wrap( add );                                                    */
-/*                                                                     */
-/* function checkf( thunk ) {                                          */
-/*    try {                                                            */
-/*       return thunk();                                               */
-/*    } catch( e ) {                                                   */
-/*       console.log( "exnf=", e );                                    */
-/*       return false;                                                 */
-/*    }                                                                */
-/* }                                                                   */
-/*                                                                     */
-/* console.log( "f.test1=", checkf( () => fxadd( 5, 2 ) ) );           */
-/* console.log( "f.test2=", checkf( () => fxadd( 1.2, 2 ) ) );         */
-/*                                                                     */
-/* function checka( arr, src ) {                                       */
-/*    try {                                                            */
-/*       for( let i = src.length - 1; i >=0; i-- ) {                   */
-/*       	 arr[ i ] += src[ i ];                                 */
-/*       }                                                             */
-/*       return arr;                                                   */
-/*    } catch( e ) {                                                   */
-/*       console.log( "exna=", e );                                    */
-/*       return false;                                                 */
-/*    }                                                                */
-/* }                                                                   */
-/*                                                                     */
-/* console.log( "a.test1=", checka( CTArray( Number.isInteger ).wrap( [ 1, 2, -4 ] ), [ 10, 20, 30 ] ) ); */
-/* console.log( "a.test2=", checka( CTArray( Number.isInteger ).wrap( [ 1, 2, -4 ] ), [ 10, 2.1, 30 ] ) ); */
-/* console.log( "a.test3=", checka( CTArray( Number.isInteger ).wrap( [ 1, 2.3, -4 ] ), [ 10, 20, 30 ] ) ); */
 "use strict"
 
-var PATH = require( 'path' ),
+var PATH = undefined,
 	toString = Object.prototype.toString,
 	rhome = /^\~\//,
 	rroot = /^\//,
@@ -784,9 +745,9 @@ const ctApi = CTObject(
 const ctargv = ctApi.wrap( argv );
 			   
 /*---------------------------------------------------------------------*/
-/*    testing                                                          */
+/*    runtest                                                          */
 /*---------------------------------------------------------------------*/
-function test( api ) {
+function runtest( api ) {
    api.version( 'v1.0' );
    api.info( 'Special script info', undefined );
    const res =
@@ -804,28 +765,57 @@ function test( api ) {
    return res;
 }
 
-function bench( count, api ) {
-   console.log( "bench...", count );
-   const n = count / 10;
-   let r;
-   for( let j = 0; j < 10; j++ ) {
-      for( let i = 0; i < n; i++ ) {
-	 r = test( api );
-      }
-      console.log( j );
-   }
-   console.log( r );
-   
-   return r;
+/*---------------------------------------------------------------------*/
+/*    bench                                                            */
+/*---------------------------------------------------------------------*/
+function testplain( ctapi, api ) {
+   return runtest( api );
+   return runtest( api );
 }
+
+function testcontract( ctapi, api ) {
+   return runtest( ctapi );
+   return runtest( ctapi );
+}
+
+function testmix( ctapi, api ) {
+   runtest( ctapi );
+   runtest( api );
+}   
 
 /*---------------------------------------------------------------------*/
 /*    Command line                                                     */
 /*---------------------------------------------------------------------*/
-const TEST = process.argv[ 2 ] || "regular";
-const N = parseInt( process.argv[ 3 ] || "1000000" );
+function main( name, n, testname ) {
+   let res = 0;
+   const k = Math.round( n / 10 );
+   let i = 1;
+   let test;
+   
+   switch( testname ) {
+      case "mix": test = testmix; break;
+      case "plain": test = testplain; break;
+      default: test = testcontract;
+   }
+   
+   console.log( name + " " + testname + " (", n, ")..." );
+   
+   for( let j = 0; j < 10; j++ ) {
+      for( let i = 0; i < k; i++ ) {
+      	 res = test( ctargv, argv );
+      }
+      console.log( j );
+   }
 
-console.log( "./a.out [regular|contract] [iteration]" );
-console.log( "runnning: ", TEST );
+   console.log( "res=", res );
+}
+   
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 20
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 400000;
 
-bench( N, TEST === "contract" ? ctargv : argv );
+const TEST =
+   ( process.argv.length > 3 ? process.argv[ 3 ] : "mix"); 
+
+main( "argv", N, TEST );

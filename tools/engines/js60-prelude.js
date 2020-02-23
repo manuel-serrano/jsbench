@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 07:38:36 2017                          */
-/*    Last change :  Wed Jan 23 20:06:46 2019 (serrano)                */
-/*    Copyright   :  2017-19 Manuel Serrano                            */
+/*    Last change :  Wed Feb 19 14:47:52 2020 (serrano)                */
+/*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Prelude file for spidermonkey (js24)                             */
 /*=====================================================================*/
@@ -12,6 +12,7 @@
 
 let exports = {};
 let module = { filename: "@PATH@" };
+const __dirname = "@DIRNAME@";
 
 let buffer_stdout = "";
 

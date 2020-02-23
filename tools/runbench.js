@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Tue Dec 17 10:10:07 2019 (serrano)                */
-/*    Copyright   :  2017-19 Manuel Serrano                            */
+/*    Last change :  Wed Feb 19 14:49:30 2020 (serrano)                */
+/*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
 /*=====================================================================*/
@@ -276,6 +276,7 @@ function runBench( bench, engine ) {
    function benchCmd( args ) {
       return engine.cmd
 	 .replace( /@PATH@/g, bench.path )
+	 .replace( /@DIRNAME@/g, path.dirname( bench.path ) )
 	 .replace( /@TMP@/g, config.tmp )
 	 .replace( /@NAME@/g, bench.name )
 	 .replace( /@COMPILER@/g, engine.compiler || "" )
@@ -351,6 +352,7 @@ function runBench( bench, engine ) {
       // need to build the temporary source file
       const pld = engine.prelude
 	    .replace( /@PATH@/g, bench.path )
+	    .replace( /@DIRNAME@/g, path.dirname( bench.path ) )
 	    .replace( /@TMP@/g, config.tmp )
 	    .replace( /@NAME@/g, bench.name )
    	    .replace( /@ENGINE@/g, engine.name || "" );
