@@ -328,7 +328,7 @@ function length( l ) {
 
 let k = 0;
 let kl = 50000;
-const isdebug = true;
+const isdebug = false;
 
 function debug( ... args ) {
    function show( a ) {
@@ -356,7 +356,7 @@ function makeParser( grammar, lexer ) {
    function nonTerminals( grammar ) {
       
       function addNt( nt, nts) {
-	 debug( "add-nt ", length( nts ), " ", member( nt, nts ), " ", nts );
+	 // debug( "add-nt ", length( nts ), " ", member( nt, nts ), " ", nts );
 	 if( member( nt, nts ) ) {
 	    return nts;
 	 } else {
@@ -369,11 +369,11 @@ function makeParser( grammar, lexer ) {
 	    let def = car( defs );
 	    let head = car( def );
 	    
-	    function ruleLoop( rules, nts ) {
+	    const ruleLoop = function ruleLoop( rules, nts ) {
 	       if( pairp( rules ) ) {
 	       	  let rule = car( rules );
 	       
-	       	  function loop( l, nts ) {
+	       	  const loop = function loop( l, nts ) {
 		     if( pairp( l ) ) {
 		     	let nt = car( l );
 		     	return loop( cdr( l ), addNt( nt, nts ) );
@@ -394,12 +394,12 @@ function makeParser( grammar, lexer ) {
 	 }
       }
       
-      debug( "grammar ", grammar );
+      // debug( "grammar ", grammar );
       return defLoop( grammar, nil );
    }
 
    function index( nt, nts ) {
-      debug( "index ", nts.length );
+      // debug( "index ", nts.length );
       for( let i = nts.length - 1; i >= 0; i-- ) {
 	 if( equal( nts[ i ], nt ) ) {
 	    return i;
@@ -411,17 +411,17 @@ function makeParser( grammar, lexer ) {
    function nbConfigurations( grammar ) {
       
       function defLoop( defs, nbConfs ) {
-	 debug( "nbConfigurations.def-loop.1 ", nbConfs, " ", defs );
+	 // debug( "nbConfigurations.def-loop.1 ", nbConfs, " ", defs );
 	 if( pairp( defs ) ) {
 	    let def = car( defs );
 	    
-	    function ruleLoop( rules, nbConfs ) {
-	       debug( "ruleLoop rules=", rules, " ", nbConfs );
+	    const ruleLoop = function ruleLoop( rules, nbConfs ) {
+	       // debug( "ruleLoop rules=", rules, " ", nbConfs );
 	       if( pairp( rules ) ) {
 		  let rule = car( rules );
 		  
 		  for( let l = rule; pairp( l ); l = cdr( l ), nbConfs++ );
-		     debug( "nbConfigurations.ruleLoop ", nbConfs );
+		     // debug( "nbConfigurations.ruleLoop ", nbConfs );
                   return ruleLoop( cdr( rules ), nbConfs + 1 );
 	       } else {
 		  return defLoop( cdr( defs ), nbConfs );
@@ -437,11 +437,11 @@ function makeParser( grammar, lexer ) {
       return defLoop( grammar, 0 );
    }
    
-   let nts = nonTerminals( grammar );
-   debug( "nts.0=", nts );
-   let nbNts = nts.length;
+   let XXXnts = nonTerminals( grammar );
+   // debug( "nts.0=", nts );
+   let nbNts = XXXnts.length;
    let nbConfs = nbConfigurations( grammar ) + nbNts;
-   debug( "nbConfs=", nbConfs, " ", nbNts )
+   // debug( "nbConfs=", nbConfs, " ", nbNts )
    let starters = new Array( nbNts );
    let enders = new Array( nbNts );
    let predictors = new Array( nbNts );
@@ -456,15 +456,15 @@ function makeParser( grammar, lexer ) {
    
    function setupTables( grammar, nts, starters, enders, predictors, steps, names ) {
       function addConf( conf, nt, nts, klass ) {
-	 debug( "addConf class=", klass );
+	 // debug( "addConf class=", klass );
 	 let i = index( nt, nts );
 	 klass[ i ] = cons( conf, klass[ i ] );
       }
       
       let nbNts = nts.length;
       
-      debug( "nb-nts.2 ", nbNts );
-      debug( "starters=", starters );
+      // debug( "nb-nts.2 ", nbNts );
+      // debug( "starters=", starters );
       
       for( let i = nbNts - 1; i >=0; i-- ) {
 	 steps[ i ] = i - nbNts;
@@ -473,28 +473,28 @@ function makeParser( grammar, lexer ) {
       }
       
       function defLoop( defs, conf ) {
-	 debug( "setupTables.defLoop.1 ", length( defs ) );
+	 // debug( "setupTables.defLoop.1 ", length( defs ) );
 	 if( pairp( defs ) ) {
 	    let def = car( defs );
 	    let head = car( def );
 	    
-	    function ruleLoop( rules, conf, ruleNum ) {
+	    const ruleLoop = function ruleLoop( rules, conf, ruleNum ) {
 	       if( pairp( rules ) ) {
 		  const rule = car( rules );
 		  names[ conf ] = list( head, ruleNum );
-		  debug( "add-conf.1 ", starters );
+		  // debug( "add-conf.1 ", starters );
 		  addConf( conf, head, nts, starters );
 		  
-		  function loop( l, conf ) {
+		  const loop = function loop( l, conf ) {
 		     if( pairp( l ) ) {
 			let nt = car( l );
 			steps[ conf ] = index( nt, nts );
-		  debug( "add-conf.2 ", predictors );
+		  // debug( "add-conf.2 ", predictors );
 			addConf( conf, nt, nts, predictors );
 			return loop( cdr( l ), conf + 1 );
 		     } else {
 			steps[ conf ] = index( head, nts ) - nbNts;
-		  debug( "add-conf.3 ", enders );
+		  // debug( "add-conf.3 ", enders );
 			addConf( conf, head, nts, enders );
 			return ruleLoop( cdr( rules ), conf + 1, ruleNum + 1 );
 		     }
@@ -513,11 +513,11 @@ function makeParser( grammar, lexer ) {
       return defLoop( grammar, nts.length );
    }
       
-   setupTables( grammar, nts, starters, enders, predictors, steps, names );
+   setupTables( grammar, XXXnts, starters, enders, predictors, steps, names );
    
    const parserDescr = 
       { lexer: lexer, 
-	nts: nts, 
+	nts: XXXnts, 
 	starters: starters, 
 	enders: enders, 
 	predictors: predictors, 
@@ -527,9 +527,9 @@ function makeParser( grammar, lexer ) {
    function parse( input ) {
       
       function index( nt, nts ) {
-	 debug( "index.2 ", nts.length );
+	 // debug( "index.2 ", nts.length );
 	 for( let i = nts.length - 1; i >= 0; i-- ) {
-	    debug( "index.2.b ", i, " ", nts[ i ] );
+	    // debug( "index.2.b ", i, " ", nts[ i ] );
 	    if( nts[ i ] == nt ) {
 	       return i;
 	    } 
@@ -538,7 +538,7 @@ function makeParser( grammar, lexer ) {
       }
       
       function compTok( tok, nts ) {
-	 debug( "comp-tok ", nts.length );
+	 // debug( "comp-tok ", nts.length );
 	 function loop( l1, l2 ) {
 	    if( pairp( l1 ) ) {
 	       let i = index( car( l1 ), nts );
@@ -557,12 +557,12 @@ function makeParser( grammar, lexer ) {
       }
       
       function inputToTokens( input, lexer, nts ) {
-	 debug( "inputToTokens ", input );
+	 // debug( "inputToTokens ", input );
 	 return lexer( input ).toArray().map( tok => compTok( tok, nts ) );
       }
       
       function makeStates( nbToks, nbConfs ) {
-	 debug( "make-states ", nbToks, " ", nbConfs );
+	 // debug( "make-states ", nbToks, " ", nbConfs );
 	 const states = new Array( nbToks );
 	 states.fill( false );
 	 
@@ -581,7 +581,7 @@ function makeParser( grammar, lexer ) {
       }
       
       function confSetGetStar( state, stateNum, conf ) {
-	 debug( "confSetGetStar ", state, " ", stateNum, " ", conf );
+	 // debug( "confSetGetStar ", state, " ", stateNum, " ", conf );
 	 const confSet = confSetGet( state, conf );
 	 
 	 if( confSet ) {
@@ -612,12 +612,12 @@ function makeParser( grammar, lexer ) {
       }
       
       function confSetNext( confSet, i ) {
-	 debug( "confSetNext ", confSet, " ", i, " -> ", confSet[ i + 5 ] );
+	 // debug( "confSetNext ", confSet, " ", i, " -> ", confSet[ i + 5 ] );
 	 return confSet[ i + 5 ];
       }
 
       function confSetMemberp( state, conf, i ) {
-	 debug( "confSetMemberp ", state, " ", conf, " ", i );
+	 // debug( "confSetMemberp ", state, " ", conf, " ", i );
 	 const confSet = state[ conf + 1 ];
 	 if( confSet !== false ) {
 	    return confSetNext( confSet, i ) !== false;
@@ -627,7 +627,7 @@ function makeParser( grammar, lexer ) {
       }
       
       function confSetAdjoin( state, confSet, conf, i ) {
-	 debug( "confSetAdjoin ", state, " ", confSet, " ", conf, " ", i );
+	 // debug( "confSetAdjoin ", state, " ", confSet, " ", conf, " ", i );
 	 const tail = confSet[ 3 ];
 	 confSet[ i + 5 ] = -1;
 	 confSet[ tail + 5 ] = i;
@@ -639,12 +639,12 @@ function makeParser( grammar, lexer ) {
       }
       
       function confSetAdjoinStar( states, stateNum, l, i ) {
-	 debug( "confSetAdjoinStar ", stateNum, " ", l, " ", i );
+	 // debug( "confSetAdjoinStar ", stateNum, " ", l, " ", i );
 	 const state = states[ stateNum ];
-	 for( l1 = l; pairp( l1 ); l1 = cdr( l1 ) ) {
+	 for( let l1 = l; pairp( l1 ); l1 = cdr( l1 ) ) {
 	    const conf = car( l1 );
 	    const confSet = confSetGetStar( state, stateNum, conf );
-	    debug( "confSetAdjoinStar.2 ", confSet );
+	    // debug( "confSetAdjoinStar.2 ", confSet );
 	    if( confSetNext( confSet, i ) === false) {
 	       confSetAdjoin( state, confSet, conf, i );
 	    }
@@ -652,7 +652,7 @@ function makeParser( grammar, lexer ) {
       }
       
       function confSetAdjoinStarStar( states, statesStar, stateNum, conf, i ) {
-	 debug( "confSetAdjoinStarStar ", stateNum, " ", conf, " ", i );
+	 // debug( "confSetAdjoinStarStar ", stateNum, " ", conf, " ", i );
 	 const state = states[ stateNum ];
 	 if( confSetMemberp( state, conf, i ) ) {
 	    const stateStar = statesStar[ stateNum ];
@@ -668,13 +668,13 @@ function makeParser( grammar, lexer ) {
       }
       
       function confSetUnion( state, confSet, conf, otherSet ) {
-	 debug( "confSetUnion ", confSet, " ", conf, " ", otherSet );
+	 // debug( "confSetUnion ", confSet, " ", conf, " ", otherSet );
 	 for( let i = confSetHead( otherSet ); 
 	 i >= 0; 
 	 i = confSetNext( otherSet, i ) ) {
-	    debug( "confSetUnion.for i=", i );
+	    // debug( "confSetUnion.for i=", i );
 	    if( confSetNext( confSet, i ) === false ) {
-	       debug( "confSetUnion.for.confSetAdjoin..." );
+	       // debug( "confSetUnion.for.confSetAdjoin..." );
 	       confSetAdjoin( state, confSet, conf, i );
 	    }
 	 }
@@ -682,10 +682,10 @@ function makeParser( grammar, lexer ) {
       
       function forw( states, stateNum, starters, enders, predictors, steps, nts ) {
 	 function predict( state, stateNum, confSet, conf, nt, starters, enders ) {
-	    debug( "predict.loop1 ", state, " sn=", stateNum, " cs=", confSet, " c=", conf, " nt=", nt, " ", length( starters[ nt ] ) );
+	    // debug( "predict.loop1 ", state, " sn=", stateNum, " cs=", confSet, " c=", conf, " nt=", nt, " ", length( starters[ nt ] ) );
 	    for( let l = starters[ nt ]; pairp( l ); l = cdr( l ) ) {
 	       const starter = car( l );
-	       debug( "predict.starter=", starter );
+	       // debug( "predict.starter=", starter );
 	       const starterSet = confSetGetStar( state, stateNum, starter );
 	       
 	       if( confSetNext( starterSet, stateNum ) === false ) {
@@ -693,34 +693,34 @@ function makeParser( grammar, lexer ) {
 	       }
 	    }
 
-	    debug( "predict.loop2 l=", length( enders[ nt ] ) );
+	    // debug( "predict.loop2 l=", length( enders[ nt ] ) );
 	    for( let l = enders[ nt ]; pairp( l ); l = cdr( l ) ) {
 	       const ender = car( l );
-	       debug( "predict.ender=", ender );
+	       // debug( "predict.ender=", ender );
 	       if( confSetMemberp( state, ender, stateNum ) ) {
 		  const next = conf + 1;
 		  const nextSet = confSetGetStar( state, stateNum, next );
-		  debug( "predict.loop2.member next=", next, " ns=", nextSet );
+		  // debug( "predict.loop2.member next=", next, " ns=", nextSet );
 		  confSetUnion( state, nextSet, next, confSet );
 	       }
 	    }
 	 }
 	 
 	 function reduce( states, state, stateNum, confSet, head, preds ) {
-	    debug( "reduce ", state, " ", stateNum, " ", confSet, " ", preds );
-	    function loop1( l ) {
+	    // debug( "reduce ", state, " ", stateNum, " ", confSet, " ", preds );
+	    const loop1 = function loop1( l ) {
 	       if( pairp( l ) ) {
 		  const predxxx = car( l );
-		  debug( "reduce.loop1 ", predxxx );
+		  // debug( "reduce.loop1 ", predxxx );
 		  
-		  function loop2( i ) {
+		  const loop2 = function loop2( i ) {
 		     if( i >= 0 ) {
 			const predSet = confSetGet( states[ i ], predxxx );
-			debug( "reduce.loop2 ", i, " ", predSet );
+			// debug( "reduce.loop2 ", i, " ", predSet );
 			if( predSet ) {
 			   const next = predxxx + 1;
 			   const nextSet = confSetGetStar( state, stateNum, next );
-			   debug( "reduce.loop2.predSet ", next, " ", nextSet );
+			   // debug( "reduce.loop2.predSet ", next, " ", nextSet );
 			   confSetUnion( state, nextSet, next, predSet );
 			} 
 			return loop2( confSetNext( confSet, i ) );
@@ -741,27 +741,27 @@ function makeParser( grammar, lexer ) {
 	 const state = states[ stateNum ];
 	 const nbNts = nts.length;
 	 
-	 debug( "state=", state, " s[3]=", state[ 3 ] );
+	 // debug( "state=", state, " s[3]=", state[ 3 ] );
 	 while( true ) {
 	    const conf = state[ 0 ];
-	    debug( "while.conf=", conf );
+	    // debug( "while.conf=", conf );
 	    if( conf >= 0 ) {
 	       const step = steps[ conf ];
 	       const confSet = state[ conf + 1 ];
-	       debug( "while.confSet=", confSet );
+	       // debug( "while.confSet=", confSet );
 	       const head = confSet[ 4 ];
 	       
 	       state[ 0 ] = confSet[ 0 ];
 	       confSetMergeNew( confSet );
-	       debug( "while.confSet.2=", confSet, " s0=", state[ 0 ], " step=", step );
+	       // debug( "while.confSet.2=", confSet, " s0=", state[ 0 ], " step=", step );
 	       
 	       if( step >= 0 ) {
-		  debug( ">>> predict state=", state );
+		  // debug( ">>> predict state=", state );
 		  predict( state, stateNum, confSet, conf, step, starters, enders ); 
-		  debug( "<<< predict state=", state );
+		  // debug( "<<< predict state=", state );
 	       } else {
 		  const preds = predictors[ step + nbNts ];
-		  debug( "preds=", preds );
+		  // debug( "preds=", preds );
 		  reduce( states, state, stateNum, confSet, head, preds );
 	       }
 	    } else {
@@ -776,7 +776,7 @@ function makeParser( grammar, lexer ) {
 	 const states = makeStates( nbToks, nbConfs );
 	 const goalStarters = starters[ 0 ];
 	 
-	 debug( "forward nts=", nbToks, " ", nbConfs );
+	 // debug( "forward nts=", nbToks, " ", nbConfs );
 	 confSetAdjoinStar( states, 0, goalStarters, 0 );
 	 forw( states, 0, starters, enders, predictors, steps, nts );
 	 
@@ -790,17 +790,17 @@ function makeParser( grammar, lexer ) {
       }
       
       function produce( conf, i, j, enders, steps, toks, states, statesStar, nbNts ) {
-	 debug( "produce ", conf, " ", i, " ", j, " ", nbNts );
+	 // debug( "produce ", conf, " ", i, " ", j, " ", nbNts );
 	 const prev = conf - 1;
 	 
 	 if( conf >= nbNts && steps[ prev ] >= 0 ) {
-	    function loop1( l ) {
+	    const loop1 = function loop1( l ) {
 	       if( pairp( l ) ) {
 		  const ender = car( l );
 		  const enderSet = confSetGet( states[ j ], ender );
 		  
 		  if( enderSet ) {
-		     function loop2( k ) {
+		     const loop2 = function loop2( k ) {
 			if( k >= 0 ) {
 			   if( k >= i ) {
 			      if( confSetAdjoinStarStar( states, statesStar, k, prev, i ) ) {
@@ -826,15 +826,15 @@ function makeParser( grammar, lexer ) {
       
       function back( states, statesStar, stateNum, enders, steps, nbNts, toks ) {
 	 const stateStar = statesStar[ stateNum ];
-	 debug( "back ", stateNum, " ", stateStar );
+	 // debug( "back ", stateNum, " ", stateStar );
 	 
 	 function loop1() {
 	    const conf = stateStar[ 0 ];
-	    debug( "back.1 conf=", conf);
+	    // debug( "back.1 conf=", conf);
 	    if( conf >= 0 ) {
 	       const confSet = stateStar[ conf + 1 ];
 	       const head = confSet[ 4 ];
-	       debug( "back.2 confSet=", confSet, " head=", head );
+	       // debug( "back.2 confSet=", confSet, " head=", head );
 	       
 	       stateStar[ 0 ] = confSet[ 0 ];
 	       confSetMergeNew( confSet );
@@ -850,22 +850,22 @@ function makeParser( grammar, lexer ) {
 	 return loop1();
       }
       
-      function backward( states, enders, steps, tks, toks ) {
+      function backward( states, enders, steps, nts, toks ) {
 	 const nbToks = toks.length;
 	 const nbConfs = steps.length;
 	 const nbNts = nts.length;
 	 const statesStar = makeStates( nbToks, nbConfs );
 	 const goalEnders = enders[ 0 ];
 
-	 debug( "backward ", nbToks, " ", nbConfs, " ", nbNts );
+	 // debug( "backward ", nbToks, " ", nbConfs, " ", nbNts );
 	 for( let l = goalEnders; pairp( l ); l = cdr( l ) ) {
 	    const conf = car( l );
-	    debug( "backward.1 ", length( l ), " ", conf);
+	    // debug( "backward.1 ", length( l ), " ", conf);
 	    confSetAdjoinStarStar( states, statesStar, nbToks, conf, 0 );
 	 }
 	 
 	 for( let i = nbToks; i >= 0; i-- ) {
-	    debug( "backward.2 ", nbToks, " ", i );
+	    // debug( "backward.2 ", nbToks, " ", i );
 	    back( states, statesStar, i, enders, steps, nbNts, toks );
 	 }
 	 
@@ -873,7 +873,7 @@ function makeParser( grammar, lexer ) {
       }
       
       function parsedp( nt, i, j, nts, enders, states ) {
-	 debug( "parsed? ", i, " ", j );
+	 // debug( "parsed? ", i, " ", j );
 	 const ntStar = index( nt, nts );
 	 
 	 if( ntStar ) {
@@ -892,9 +892,9 @@ function makeParser( grammar, lexer ) {
       }
       
       function derivTrees( conf, i, j, enders, steps, names, toks, states, nbNts ) {
-	 debug( "derivTrees conf=", conf, " ", i, " ", j, " names=", names );
+	 // debug( "derivTrees conf=", conf, " ", i, " ", j, " names=", names );
 	 const name = names[ conf ];
-	 debug( "derivTrees name=", name );
+	 // debug( "derivTrees name=", name );
 	 
 	 if( name ) {
 	    if( conf < nbNts ) {
@@ -905,16 +905,16 @@ function makeParser( grammar, lexer ) {
 	 } else {
 	    const prev = conf - 1;
 	    
-	    function loop1( l1, l2 ) {
-	       debug( "derivTree.loop1 l1=", l1, " l2=", l2 );
+	    const loop1 = function loop1( l1, l2 ) {
+	       // debug( "derivTree.loop1 l1=", l1, " l2=", l2 );
 
 	       if( pairp( l1 ) ) {
 		  const ender = car( l1 );
 		  const enderSet = confSetGet( states[ j ], ender );
-		  debug( "derivTrees ender=", ender, " es=", enderSet);
+		  // debug( "derivTrees ender=", ender, " es=", enderSet);
 		  if( enderSet ) {
-		     function loop2( k, l2 ) {
-			debug( "derivTrees.loop2 k=", k, " l2=", l2 );
+		     const loop2 = function loop2( k, l2 ) {
+			// debug( "derivTrees.loop2 k=", k, " l2=", l2 );
 			if( k >= 0 ) {
 			   if( k >= i && confSetMemberp( states[ k ], prev, i ) ) {
 			      const prevTrees =
@@ -924,14 +924,13 @@ function makeParser( grammar, lexer ) {
 				 derivTrees( ender, k, j, enders, steps, names,
 				    toks, states, nbNts );
 			      
-			      function loop3( l3, l2 ) {
+			      const loop3 = function loop3( l3, l2 ) {
 				 if( pairp( l3 ) ) {
 				    const enderTree = list( car( l3 ) );
-				    function loop4( l4, l2 ) {
-				       debug( "loop4 l4=", l4, " l2=", l2 );
+				    const loop4 = function loop4( l4, l2 ) {
+				       // debug( "loop4 l4=", l4, " l2=", l2 );
 				       if( pairp( l4 ) ) {
-					  debug( "loop4.cdr=", cdr( l4 ), " ", 
-					     listp( enderTree ) );
+					  // debug( "loop4.cdr=", cdr( l4 ), " ", listp( enderTree ) );
 					  return loop4( cdr( l4 ), 
 					     cons( append( car( l4 ), enderTree ), l2 ) );
 				       } else {
@@ -939,7 +938,7 @@ function makeParser( grammar, lexer ) {
 				       }
 				    }
 				    
-				    debug( ">>> loop4 ", prevTrees, " ", listp( prevTrees ) );
+				    // debug( ">>> loop4 ", prevTrees, " ", listp( prevTrees ) );
 				    return loop4( prevTrees, l2 );
 				 } else {
 				    return loop2( confSetNext( enderSet, k ), l2 );
@@ -963,7 +962,7 @@ function makeParser( grammar, lexer ) {
 		  return l2;
 	       }
 	    }
-	    debug( "derive.loop1.0 steps=", steps, " enders=", enders, " prev=", prev );
+	    // debug( "derive.loop1.0 steps=", steps, " enders=", enders, " prev=", prev );
 	    return loop1( enders[ steps[ prev ] ], null );
 	 }
       }
@@ -971,17 +970,17 @@ function makeParser( grammar, lexer ) {
       function derivTreesStar( nt, i, j, nts, enders, steps, names, toks, states ) {
 	 const ntStar = index( nt, nts );
 	 
-	 debug( "derivTreesStar ", ntStar, " ", j, " ", states, " ", names );
+	 // debug( "derivTreesStar ", ntStar, " ", j, " ", states, " ", names );
 	 if( ntStar !== false ) {
 	    const nbNts = nts.length;
-	    debug( "derivTreesStar.2 nbNts=", nbNts, " ", enders[ ntStar ] );
+	    // debug( "derivTreesStar.2 nbNts=", nbNts, " ", enders[ ntStar ] );
 	    
-	    function loop( l, trees ) {
-	       debug( "derivTreesStar.3 ", trees, " ", length( l), " ", length( trees ));
+	    const loop = function loop( l, trees ) {
+	       // debug( "derivTreesStar.3 ", trees, " ", length( l), " ", length( trees ));
 	       if( pairp( l ) ) {
 		  const conf = car( l );
-		  debug( "derivTreesStar.4 ", conf );
-		  debug( "derivTreesStar.5 j=", j, " ", states.length );
+		  // debug( "derivTreesStar.4 ", conf );
+		  // debug( "derivTreesStar.5 j=", j, " ", states.length );
 		  if( confSetMemberp( states[ j ], conf, i ) ) {
 		     return loop( cdr( l ),
 			append( derivTrees( conf, i, j, enders, steps, names,
@@ -1007,13 +1006,13 @@ function makeParser( grammar, lexer ) {
 	 if( conf < nbNts || steps[ prev ] < 0 ) {
 	    return 1;
 	 } else {
-	    function loop1( l, n ) {
+	    const loop = function loop1( l, n ) {
 	       if( pairp( l ) ) {
 		  const ender = car( l );
 		  const enderSet = confSetGet( states[ j ], ender );
 		  
 		  if( enderSet ) {
-		     function loopII( k, n ) {
+		     const loopII = function loopII( k, n ) {
 			if( k >= 0 ) {
 			   if( k >= i && confSetMemberp( states[ k ], prev, i ) ) {
 			      const nbPrevTrees = 
@@ -1049,7 +1048,7 @@ function makeParser( grammar, lexer ) {
 	 if( ntStar ) {
 	    const nbNts = nts.length;
 	    
-	    function loop( l, ntTres ) {
+	    const loop = function loop( l, ntTres ) {
 	       if( pairp( l ) ) {
 		  const conf = car( l );
 		  
@@ -1072,7 +1071,7 @@ function makeParser( grammar, lexer ) {
       }
       
       const toks = inputToTokens( input, parserDescr.lexer, parserDescr.nts );
-      debug( "toks=", toks);
+      // debug( "toks=", toks);
       return {
 	 nts: parserDescr.nts,
 	 starters: parserDescr.starters,
@@ -1096,7 +1095,7 @@ function makeParser( grammar, lexer ) {
 	 nbDerivTreesStar: nbDerivTreesStar
       }
    };
-   console.log( parse.size );
+   console.log( parse.length );
    return parse;
 }
 
@@ -1110,8 +1109,32 @@ function test() {
       l => l.map( x => list( x, x ) ) );
    const x = p( list( "a", "a", "a", "a", "a", "a", "a", "a", "a" ) );
    const t = parseToTrees( x, "s", 0, 9 );
-   debug( "test t=", t );
+   // debug( "test t=", t );
    return length( t );
 }
 	    
-console.log( "test=", test() );      
+/*---------------------------------------------------------------------*/
+/*    main ...                                                         */
+/*---------------------------------------------------------------------*/
+function main( n ) {
+   let res = 0;
+   const k = Math.round( n / 10 );
+   let i = 1;
+   
+   console.log( "early(", n, ")..." );
+   
+   while( n-- > 0 ) {
+      if( n % k === 0 ) { console.log( i++ ); }
+      res = test();
+   }
+
+   console.log( "res=", res );
+}
+
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 4
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 500;
+
+main( N );
+    
