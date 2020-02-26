@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 07:38:36 2017                          */
-/*    Last change :  Wed Jun 27 09:08:40 2018 (serrano)                */
-/*    Copyright   :  2017-18 Manuel Serrano                            */
+/*    Last change :  Mon Feb 24 15:56:11 2020 (serrano)                */
+/*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Prelude file for rhino compiler                                  */
 /*=====================================================================*/
@@ -17,6 +17,7 @@ let buffer_stdout = "";
 
 let process = {
    argv: [ "@INTERPRETER@", "-" ],
+   env: { HOME: "@HOME" },
    stdout: {
       write: function( n ) {
 	 if( n == "\n" ) {

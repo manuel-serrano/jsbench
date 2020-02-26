@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Wed Feb 19 14:49:30 2020 (serrano)                */
+/*    Last change :  Mon Feb 24 15:54:10 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -278,6 +278,7 @@ function runBench( bench, engine ) {
 	 .replace( /@PATH@/g, bench.path )
 	 .replace( /@DIRNAME@/g, path.dirname( bench.path ) )
 	 .replace( /@TMP@/g, config.tmp )
+	 .replace( /@HOME@/g, process.env.home )
 	 .replace( /@NAME@/g, bench.name )
 	 .replace( /@COMPILER@/g, engine.compiler || "" )
 	 .replace( /@INTERPRETER@/g, engine.interpreter || "" )

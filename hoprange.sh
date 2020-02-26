@@ -125,6 +125,10 @@ if [ "$benchmarks " != " " ]; then
 	BENCHMARKS="$BENCHMARKS_PROXY $BENCHMARKS"
 	;;
 
+      contract)
+	BENCHMARKS="$BENCHMARKS_CONTRACT $BENCHMARKS"
+	;;
+
       *)
 	BENCHMARKS="$BENCHMARKS $p"
     esac

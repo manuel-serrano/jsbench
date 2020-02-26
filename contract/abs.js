@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu May 16 08:58:06 2019                          */
-/*    Last change :  Fri Feb 21 21:43:44 2020 (serrano)                */
+/*    Last change :  Mon Feb 24 15:50:24 2020 (serrano)                */
 /*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Basic Higher-Order contract JS implementation                    */
@@ -435,7 +435,7 @@ Any.toString = function() { return "Any" };
 /*---------------------------------------------------------------------*/
 /*    abs                                                              */
 /*---------------------------------------------------------------------*/
-var path = require("path"),
+var path = { resolve: x => false },
    ul = { HOME_DIR: process.env[process.platform == "win32" ? "USERPROFILE" : "HOME"] };
 
 /**

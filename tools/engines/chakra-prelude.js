@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 07:38:36 2017                          */
-/*    Last change :  Thu Oct 11 09:18:36 2018 (serrano)                */
-/*    Copyright   :  2017-18 Manuel Serrano                            */
+/*    Last change :  Mon Feb 24 15:56:01 2020 (serrano)                */
+/*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Prelude file for JavaScriptCore                                  */
 /*=====================================================================*/
@@ -17,6 +17,7 @@ let buffer_stdout = "";
 
 let process = {
    argv: [ "@INTERPRETER@", "-" ].concat( WScript.Arguments ),
+   env: { HOME: "@HOME" },
    stdout: {
       write: function( n ) {
 	 if( n == "\n" ) {
