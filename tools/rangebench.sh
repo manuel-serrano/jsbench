@@ -124,19 +124,28 @@ function run() {
   rm -rf $tmpbench
   mkdir -p $tmpbench
 
-  if [ "$extraargs " != " " ]; then
-    hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $extraarg -a $3
+  if [ "$extraarg " != " " ]; then
+    echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3 -a $extraarg" > /tmp/rangebench.log
+    hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3 -a $extraarg >> /tmp/rangebench.log
   else
-    hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3
-    fi
-  res=`hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench 2> /tmp/rangebench.log`
+    echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3" > /tmp/rangebench.log
+    hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3 >> /tmp/rangebench.log
+  fi
+
+  if [ $? != 0 ]; then
+    echo "*** ERROR: bad execution [$?] (see /tmp/rangebench.log)"
+    exit 1
+  fi
+     
+  echo "hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench" >> /tmp/rangebench.log
+  res=`hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench 2>> /tmp/rangebench.log`
 
   if [ "$res " = " " ]; then
     echo ""
     echo ""
     echo "*** ERROR: bad run -- $1 $2 $3 (see /tmp/rangebench.log)"
-    if [ "$extraargs " != " " ]; then
-      echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $extraarg -a $3"
+    if [ "$extraarg " != " " ]; then
+      echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3 -a $extraarg"
     else
       echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3"
     fi
