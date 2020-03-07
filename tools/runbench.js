@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Mon Feb 24 15:54:10 2020 (serrano)                */
+/*    Last change :  Sat Mar  7 14:56:32 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -304,13 +304,23 @@ function runBench( bench, engine ) {
       }
    }
 
+   function argsToString( args ) {
+      if( typeof args === "string" ) {
+	 return args;
+      } else if( args instanceof Array ) {
+	 return s.toString().replace( ",", " " );
+      } else {
+	 return "";
+      }
+   }
+	
    function runCompile( subtitle, args ) {
       const run = engine.run
 	    .replace( /@TMP@/g, config.tmp )
 	    .replace( /@NAME@/g, bench.name )
 	    .replace( /@INTERPRETER@/g, engine.interpreter || "" )
    	    .replace( /@ENGINE@/g, engine.name || "" )
-	    + (config.arg ? " " + config.arg : "");
+	 + (config.arg ? " " + argsToString( config.arg ) : "");
       return benchLog( bench, engine, run, chrono( run ), subtitle, args );
    }
 

@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu May 16 08:58:06 2019                          */
-/*    Last change :  Mon Feb 24 15:50:24 2020 (serrano)                */
+/*    Last change :  Sun Mar  1 12:18:32 2020 (serrano)                */
 /*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Basic Higher-Order contract JS implementation                    */
@@ -331,14 +331,11 @@ function CTFix( thunk ) {
    };
    
    return new CT( function( infot, infof ) {
-	    console.log( "HERE.0");
       return { 
 	 t: new CTWrapper( function( value ) {
-	    console.log( "HERE.1");
 	    return CTapply( get(), infot, infof ).t.ctor( value );
 	 } ), 
 	 f: new CTWrapper( function( value ) {
-	    console.log( "HERE.2");
 	    return CTapply( get(), infot, infof ).f.ctor( value );
       	 } )
       }

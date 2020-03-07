@@ -15,6 +15,8 @@ src=
 res=
 
 verbose=-v0
+extraarg=
+namesuf=
 
 resetengines=""
 
@@ -65,6 +67,16 @@ while : ; do
     -v|-v0|-v1|-v2|-v3|-v4)
       verbose=$1
       ;;
+
+    --namesuf)
+      shift
+      namesuf=$1
+      ;;
+    
+    --arg)
+      shift
+      extraarg=$1
+      ;;
     
     -*)
       echo "Usage: rangebench.sh [options]" >&2;
@@ -78,6 +90,8 @@ while : ; do
       echo "  -m string       message" >&2;
       echo "  -r path         range file (default prog.range.json)" >&2;
       echo "  -v[0123]        verbosity" >&2;
+      echo "  --namesuf       name suffix" >&2;
+      echo "  --arg           extra program arg" >&2;
       exit 1;;
 
     *)
@@ -109,13 +123,23 @@ function run() {
   tmpbench=$tmp/$2.$3
   rm -rf $tmpbench
   mkdir -p $tmpbench
-  
-  hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3
-  res=`hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench`
+
+  if [ "$extraargs " != " " ]; then
+    hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $extraarg -a $3
+  else
+    hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3
+    fi
+  res=`hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench 2> /tmp/rangebench.log`
 
   if [ "$res " = " " ]; then
-    echo "*** ERROR: bad run -- $1 $2 $3"
-    echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3"
+    echo ""
+    echo ""
+    echo "*** ERROR: bad run -- $1 $2 $3 (see /tmp/rangebench.log)"
+    if [ "$extraargs " != " " ]; then
+      echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $extraarg -a $3"
+    else
+      echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3"
+    fi
     echo "hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench"
     exit 1
   fi
@@ -125,7 +149,12 @@ function run() {
 
 # command line parsing
 base=`basename $src .js`
+out=$base
 dir=`dirname $src`
+
+if [ "$extraarg " != " " ]; then
+  out="$base-$extraarg"
+fi
 
 case $dir in
   /*)
@@ -137,7 +166,7 @@ case $dir in
 esac
 
 if [ "$output " = " " ]; then
-  output=$base.$format
+  output=$out.$format
 fi
 
 if [ "$inc " = " " ]; then
@@ -153,10 +182,14 @@ if [ "$end " = " " ]; then
   end=`expr $inc "*" 50`;
 fi
 
-echo "$src inc=$inc end=$end"
+if [ "$extraarg " != " " ]; then
+  echo "$src ($extraarg) inc=$inc end=$end"
+else  
+  echo "$src inc=$inc end=$end"
+fi  
 
 # the csv file
-echo "#    $engines" > $outdir/$base.csv
+echo "#    $engines" > $outdir/$out.csv
 
 echo -n "  "
 i=0
@@ -166,28 +199,32 @@ while [ `expr $i "<" $end` = 1 ]; do
   sep=""
 
   echo -n "$i "
-  echo -n "$i " >> $outdir/$base.csv
+  echo -n "$i " >> $outdir/$out.csv
   
   for e in $engines; do
     run $e $src $i
-    echo -n $sep $res >> $outdir/$base.csv
+    echo -n $sep $res >> $outdir/$out.csv
     sep="; "
   done
 
-  echo "" >> $outdir/$base.csv
+  echo "" >> $outdir/$out.csv
 done
 
 echo ""
 
 # the plot file
-cat > $outdir/$base.plot << EOF
+cat > $outdir/$out.plot << EOF
 set terminal $format font "Verdana,16"
 EOF
 
-echo "set output '$output'" >> $outdir/$base.plot
-echo "set title '$base.js'" >> $outdir/$base.plot
+echo "set output '$output'" >> $outdir/$out.plot
+if [ "$extraarg " != " " ]; then
+  echo "set title '$base.js ($extraarg)'" >> $outdir/$out.plot
+else  
+  echo "set title '$base.js'" >> $outdir/$out.plot
+fi  
 
-cat >> $outdir/$base.plot << EOF
+cat >> $outdir/$out.plot << EOF
 set xtics rotate by 90 right font "Verdana,8"
 set ytics font "Verdana,12"
 
@@ -206,11 +243,11 @@ sep="plot"
 i=1
 for e in $engines; do
   j=`expr $i "+" 1`
-  echo -n "$sep '$base.csv' u $j:xtic(1) with line t '$e' ls $i" >> $outdir/$base.plot
+  echo -n "$sep '$out.csv' u $j:xtic(1) with line t '$e' ls $i" >> $outdir/$out.plot
   sep=","
   i=$j
 done
 
-echo "" >> $outdir/$base.plot
+echo "" >> $outdir/$out.plot
 
-(cd $outdir; gnuplot $base.plot)
+(cd $outdir; gnuplot $out.plot)

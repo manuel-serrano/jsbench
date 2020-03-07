@@ -111,8 +111,20 @@ EOF
 echo "\\noindent " >> $outdir/$output
 
 for p in $srcs; do
-  base=`basename $p .js`
-  echo "\\includegraphics[width=$width\\linewidth]{$outdir/$base.pdf}" >> $outdir/$output
+  argsfile="`dirname $p`/`basename $p .js`.args.json"
+
+  if [ -f $argsfile ]; then
+    args=`grep ".*:.*" $argsfile | sed s/:.*//`
+    for a in $args; do
+      name=`echo $a | sed s'/\x22//g'`
+      arg=`grep "$a:" $argsfile | awk -F: '{print $2}' | sed s'/[ \x22,]//g'`
+      base=`basename $p .js`
+      echo "\\includegraphics[width=$width\\linewidth]{$outdir/$base-$arg.pdf}" >> $outdir/$output
+    done
+  else
+    base=`basename $p .js`
+    echo "\\includegraphics[width=$width\\linewidth]{$outdir/$base.pdf}" >> $outdir/$output
+  fi
 done
 
 cat >> $outdir/$output << EOF
