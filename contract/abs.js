@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu May 16 08:58:06 2019                          */
-/*    Last change :  Sun Mar  8 07:04:02 2020 (serrano)                */
+/*    Last change :  Sun Mar  8 18:26:20 2020 (serrano)                */
 /*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Basic Higher-Order contract JS implementation                    */
@@ -468,7 +468,7 @@ let t = true;
 function bench( fun ) {
    const x = fun('/foo');
    const y = fun('/bar');
-   t ^= (x !== y);
+   t = (x !== y);
 }
 
 function testplain( ctfun, fun ) {
@@ -510,7 +510,7 @@ function main( name, n, testname ) {
       console.log( j );
    }
 
-   console.log( "res=", res );
+   console.log( "res=", t );
 }
    
 /*---------------------------------------------------------------------*/
