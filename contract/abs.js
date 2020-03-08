@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu May 16 08:58:06 2019                          */
-/*    Last change :  Sun Mar  1 12:18:32 2020 (serrano)                */
+/*    Last change :  Sun Mar  8 07:04:02 2020 (serrano)                */
 /*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Basic Higher-Order contract JS implementation                    */
@@ -487,19 +487,8 @@ function testmix( ctfun, fun ) {
 }
 
 /*---------------------------------------------------------------------*/
-/*    Command line                                                     */
+/*    main ...                                                         */
 /*---------------------------------------------------------------------*/
-/* const TEST = process.argv[ 2 ] || "regular";                        */
-/* const N = parseInt( process.argv[ 3 ] || "200000000" );             */
-/*                                                                     */
-/* console.log( "./a.out [regular|contract] [iteration]" );            */
-/* console.log( "runnning: ", TEST, N );                               */
-/*                                                                     */
-/* bench( N, TEST === "contract" ? ctabs : abs );                      */
-/* console.log( "t=", t );                                             */
-/*                                                                     */
-/* module.exports = abs;                                               */
-/*                                                                     */
 function main( name, n, testname ) {
    let res = 0;
    const k = Math.round( n / 10 );
@@ -524,6 +513,9 @@ function main( name, n, testname ) {
    console.log( "res=", res );
 }
    
+/*---------------------------------------------------------------------*/
+/*    Command line                                                     */
+/*---------------------------------------------------------------------*/
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 20
