@@ -1095,7 +1095,6 @@ function makeParser( grammar, lexer ) {
 	 nbDerivTreesStar: nbDerivTreesStar
       }
    };
-   console.log( parse.length );
    return parse;
 }
 
@@ -1121,7 +1120,7 @@ function main( n ) {
    const k = Math.round( n / 10 );
    let i = 1;
    
-   console.log( "early(", n, ")..." );
+   console.log( "earley(", n, ")..." );
    
    while( n-- > 0 ) {
       if( n % k === 0 ) { console.log( i++ ); }

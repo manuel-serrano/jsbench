@@ -9,10 +9,9 @@ function CTOR( a, b ) {
    f.prototype = fp;
 }
 
-function loop( arr, n ) {
+function loop( arr, n, j ) {
    for( let i = 0; i < n; i++ ) {
-      let OOO = CTOR( i, n );
-      arr[ n ] = CTOR( i, n );
+      arr[ i ] = CTOR( j, n );
    }
 }
 
@@ -23,7 +22,7 @@ function test( n ) {
    for( let j = 0; j < 10; j++ ) {
       console.log( j );
       for( let i = 0; i < n; i++ ) {
-	 loop( arr, i );
+	 loop( arr, arr.length, j );
       }
    }
 
