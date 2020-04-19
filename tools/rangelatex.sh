@@ -119,11 +119,11 @@ for p in $srcs; do
       name=`echo $a | sed s'/\x22//g'`
       arg=`grep "$a:" $argsfile | awk -F: '{print $2}' | sed s'/[ \x22,]//g'`
       base=`basename $p .js`
-      echo "\\includegraphics[width=$width\\linewidth]{$outdir/$base-$arg.pdf}" >> $outdir/$output
+      echo "\\includegraphics[width=$width\\linewidth]{$base-$arg.pdf}" >> $outdir/$output
     done
   else
     base=`basename $p .js`
-    echo "\\includegraphics[width=$width\\linewidth]{$outdir/$base.pdf}" >> $outdir/$output
+    echo "\\includegraphics[width=$width\\linewidth]{$base.pdf}" >> $outdir/$output
   fi
 done
 
@@ -131,4 +131,4 @@ cat >> $outdir/$output << EOF
 \end{document}
 EOF
 
-(cd $outdir; pdflatex $outdir/$output)
+(cd $outdir; pdflatex $output)

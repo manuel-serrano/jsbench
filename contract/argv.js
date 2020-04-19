@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu May 16 08:58:06 2019                          */
-/*    Last change :  Sat Feb 22 01:28:11 2020 (serrano)                */
+/*    Last change :  Sat Apr 11 13:51:42 2020 (serrano)                */
 /*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Basic Higher-Order contract JS implementation                    */
@@ -39,8 +39,8 @@ function CTFlat( pred ) {
    if( typeof pred !== "function" ) {
       throw new TypeError( "Illegal predicat: " + pred );
    } else {
-      return new CT( function( info ) {
-      	 return new CTWrapper( function( value ) {
+      return new CT( ( info ) => {
+      	    return new CTWrapper( ( value ) => {
 	    if( pred( value ) ) {
 	       return value;
 	    } else {
@@ -84,10 +84,10 @@ function CTFunction( domain, range ) {
 	 const ri = CTapply( range, info );
 	 const dis = domain.map( d => CTapply( d, !info ) );
 	 
-	 return new CTWrapper( function( value ) {
+	 return new CTWrapper( ( value ) => {
 	    if( typeof value === "function" ) {
 	       return new Proxy( value, {
-		  apply: function( target, self, args ) {
+		  apply: ( target, self, args ) => {
 		     switch( args.length ) {
 			case 0:
 		     	   return ri.box( value.call( this, undefined ) );
@@ -113,19 +113,19 @@ function CTFunction( domain, range ) {
 /*    CTArray ...                                                      */
 /*---------------------------------------------------------------------*/
 function CTArray( element ) {
-   return new CT( function( info ) {
+   return new CT( ( info ) => {
       const ei = CTapply( element, info );
       const nei = CTapply( element, !info );
       
       const handler = {
-	 get: function( target, prop ) {
+	 get: ( target, prop ) => {
 	    if( typeof prop === "string" && prop.match( /^[0-9]+$/ ) ) {
                return ei.box( target[ prop ] );
             } else {
 	       return target[ prop ];
 	    }
 	 },
-	 set: function( target, prop, newval ) {
+	 set: ( target, prop, newval ) => {
 	    if( typeof prop === "string" && prop.match( /^[0-9]+$/ ) ) {
                    target[ prop ] = nei.box( newval );
             } else {
@@ -134,7 +134,7 @@ function CTArray( element ) {
 	    return true;
 	 }
       };
-      return new CTWrapper( function( value ) {
+      return new CTWrapper( ( value ) => {
 	 if( value instanceof Array ) {
 	    return new Proxy( value, handler );
 	 } else {
@@ -149,7 +149,7 @@ function CTArray( element ) {
 /*    CTObject ...                                                     */
 /*---------------------------------------------------------------------*/
 function CTObject( fields ) {
-   return new CT( function( info ) {
+   return new CT( ( info ) => {
       const ei = {}, nei = {};
       
       for( let k in fields ) {
@@ -158,7 +158,7 @@ function CTObject( fields ) {
       }
       
       var handler = {
-	 get: function( target, prop ) {
+	 get: ( target, prop ) => {
 	    const ct = ei[ prop ];
 	    if( ct ) { 
 	       if( handler[ prop ] ) {
@@ -172,7 +172,7 @@ function CTObject( fields ) {
 	       return target[ prop ];
 	    }
       	 },
-	 set: function( target, prop, newval ) {
+	 set: ( target, prop, newval ) => {
 	    const ct = nei[ prop ];
 	    if( ct ) { 
 	       target[ prop ] = false;
@@ -184,7 +184,7 @@ function CTObject( fields ) {
       	 }
       }
       
-      return new CTWrapper( function( value ) {
+      return new CTWrapper( ( value ) => {
 	 if( value instanceof Object ) {
 	    return new Proxy( value, handler );
 	 } else {
@@ -199,11 +199,11 @@ function CTObject( fields ) {
 /*    CTOr ...                                                         */
 /*---------------------------------------------------------------------*/
 function CTOr( left, right ) {
-   return new CT( function( info ) {
+   return new CT( ( info ) => {
       const cleft = CTapply( left, info );
       const cright = CTapply( right, info );
       
-      return new CTWrapper( function( value ) {
+      return new CTWrapper( ( value ) => {
 	 try {
 	    return cleft.box( value );
 	 } catch( e ) {
