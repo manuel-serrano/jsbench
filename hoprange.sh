@@ -83,7 +83,6 @@ elif [ "$dir " = " " ]; then
   dt=`date -R`
 else
   tag=`$hopc --buildtag`
-  dir=LOGS/`date '+%Y-%m-%d-%Hh%M'`-`hostname`-$tag
   dt=`date -R`
 fi
 
