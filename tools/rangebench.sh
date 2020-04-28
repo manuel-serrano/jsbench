@@ -1,6 +1,7 @@
 #!/bin/bash
 
-jsbenchdir=$HOME/prgm/project/hop/jsbench
+toolsdir=`dirname $0`
+jsbenchdir=`dirname $toolsdir`
 runbenchjs=$jsbenchdir/tools/runbench.js
 logbenchjs=$jsbenchdir/tools/logbench.js
 engines="hop nodejs jsc"
