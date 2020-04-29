@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Wed Apr 29 11:09:31 2020 (serrano)                */
+/*    Last change :  Wed Apr 29 11:43:12 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -63,7 +63,7 @@ Array.prototype.forEachAsync = function( proc ) {
 	 return proc( arr[ i ] )
 	    .then( sec => loop( i + 1 ) );
       } else {
-	 return new Promise.resolve();
+	 return Promise.resolve();
       }
    }
 
