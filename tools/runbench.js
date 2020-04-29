@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Wed Apr 29 17:01:24 2020 (serrano)                */
+/*    Last change :  Wed Apr 29 19:20:06 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -84,7 +84,7 @@ JSON.format = function( o ) {
 /*    execPromise ...                                                  */
 /*---------------------------------------------------------------------*/
 function execPromise( cmd, action ) {
-   if( config.verbose >= 3 ) {
+   if( config.verbose >= 2 ) {
       process.stdout.write( "    " + action + ": " + cmd + "\n" );
    }
    
@@ -113,7 +113,7 @@ function execPromise( cmd, action ) {
 /*    execSync ...                                                     */
 /*---------------------------------------------------------------------*/
 function execSync( cmd, action ) {
-   if( config.verbose >= 3 ) {
+   if( config.verbose >= 2 ) {
       process.stdout.write( "." );
    }
 
