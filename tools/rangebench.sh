@@ -137,7 +137,12 @@ function run() {
     echo "*** ERROR: bad execution [$?] (see /tmp/rangebench.log)"
     exit 1
   fi
-     
+
+  if [ "`ls -l $tmpbench` " = "1 " ]; then
+    echo "*** ERROR: bad execution, no log file produced (see /tmp/rangebench.log)"
+    exit 1
+  fi
+
   echo "hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench" >> /tmp/rangebench.log
   res=`hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench 2>> /tmp/rangebench.log`
 

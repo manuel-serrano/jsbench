@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Sat Mar  7 21:32:55 2020 (serrano)                */
+/*    Last change :  Tue Apr 28 18:17:12 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -63,7 +63,7 @@ Array.prototype.forEachAsync = function( proc ) {
 	 return proc( arr[ i ] )
 	    .then( sec => loop( i + 1 ), err => console.error( err ) );
       } else {
-	 return new Promise( (resolve, reject ) => resolve( true ) );
+	 return new Promise.revole();
       }
    }
 
