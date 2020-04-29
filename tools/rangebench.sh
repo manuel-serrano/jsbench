@@ -120,6 +120,10 @@ fi
 
 mkdir -p $tmp
 
+if [ ! -f /tmp/rangebench.log ]; then
+  touch /tmp/rangebench.log
+fi
+
 function run() {
   tmpbench=$tmp/$2.$3
   rm -rf $tmpbench
