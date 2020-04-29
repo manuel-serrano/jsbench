@@ -138,7 +138,7 @@ function run() {
     exit 1
   fi
 
-  if [ "`ls -l $tmpbench` " = "1 " ]; then
+  if [ "`ls -l $tmpbench  | wc -l` " = "1 " ]; then
     echo "*** ERROR: bad execution, no log file produced (see /tmp/rangebench.log)"
     exit 1
   fi
