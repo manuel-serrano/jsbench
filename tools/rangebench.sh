@@ -126,7 +126,7 @@ function run() {
   mkdir -p $tmpbench
 
   if [ "$extraarg " != " " ]; then
-    echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3 -a $extraarg" > /tmp/rangebench.log
+    echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3 -a $extraarg" >> /tmp/rangebench.log
     hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3 -a $extraarg >> /tmp/rangebench.log
   else
     echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3" > /tmp/rangebench.log
