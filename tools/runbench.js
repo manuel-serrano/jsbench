@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Tue Apr 28 18:17:12 2020 (serrano)                */
+/*    Last change :  Wed Apr 29 11:09:31 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -61,9 +61,9 @@ Array.prototype.forEachAsync = function( proc ) {
    function loop( i ) {
       if( i < arr.length ) {
 	 return proc( arr[ i ] )
-	    .then( sec => loop( i + 1 ), err => console.error( err ) );
+	    .then( sec => loop( i + 1 ) );
       } else {
-	 return new Promise.revole();
+	 return new Promise.resolve();
       }
    }
 
@@ -91,7 +91,6 @@ function execPromise( cmd, action ) {
    return new Promise( (resolve, reject) => {
       const proc = exec( cmd, (error, stdout, stderr) => {
 	 if( error ) {
-	    console.error( "*** EXEC ERROR: ", cmd );
 	    reject( error );
 	 }
       } );
@@ -100,13 +99,11 @@ function execPromise( cmd, action ) {
 	 if( code === 0 ) {
 	    resolve( code );
 	 } else {
-	    console.error( "*** EXEC ERROR: ", cmd );
 	    reject( code );
 	 }
       } );
       
       proc.on( "error", (code, signal) => {
-	 console.error( "*** EXEC ERROR: ", cmd );
 	 reject( code );
       } );
    } );
@@ -219,7 +216,6 @@ function benchLog( bench, engine, cmd, times, subtitle, args ) {
 	 if( config.directory ) {
 	    json = path.join( config.directory, path.basename( json ) );
 	 }
-	 
 	 fs.writeFile( json,
 		       JSON.format( mkBenchLogs( json ) ),
 		       err => err ? reject( err ) : resolve( 0 ) );
@@ -437,7 +433,7 @@ function runBenchmark( p ) {
    }
 
    return config.engines.forEachAsync( e => runBench( bench, e ) )
-      .then( () => {
+      .then( _ => {
 	 if( config.verbose >= 2 ) {
 	    process.stdout.write( "\n" );
 	 }
@@ -550,7 +546,7 @@ function main() {
    benchmarks
       .forEachAsync( runBenchmark )
       .then( x => { console.log( args.e, "ok" ); process.exit( 0 ); } )
-      .catch( e => { console.error( "*** EXCEPTION: ", e ); process.exit( 1 ) } );
+      .catch( e => { throw( e ) } );
 }
 
 main();

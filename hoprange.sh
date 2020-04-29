@@ -146,15 +146,27 @@ for p in $BENCHMARKS; do
       name=`echo $a | sed s'/\x22//g'`
       arg=`grep "$a:" $argsfile | awk -F: '{print $2}' | sed s'/[ \x22,]//g'`
       if [ "$msg " != " " ]; then
+	if [ $verbose != " " ]; then
+          echo "tools/rangebench.sh $verbose $engines -D $dir $p -m \"$msg\" --date \"$dt\" --namesuf $name --arg $arg --hopc $hopc"
+	fi
         tools/rangebench.sh $verbose $engines -D $dir $p -m "$msg" --date "$dt" --namesuf $name --arg $arg --hopc $hopc || exit 1
       else
+	if [ $verbose != " " ]; then
+          echo "tools/rangebench.sh $verbose $engines -D $dir $p --date \"$dt\" --namesuf $name --arg $arg --hopc $hopc"
+	fi
         tools/rangebench.sh $verbose $engines -D $dir $p --date "$dt" --namesuf $name --arg $arg --hopc $hopc || exit 1
       fi
     done
   else
     if [ "$msg " != " " ]; then
+      if [ $verbose != " " ]; then
+	echo "tools/rangebench.sh $verbose $engines -D $dir $p -m \"$msg\" --date \"$dt\" --hopc $hopc"
+      fi
       tools/rangebench.sh $verbose $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc || exit 1
     else
+      if [ $verbose != " " ]; then
+	echo "tools/rangebench.sh $verbose $engines -D $dir $p --date \"$dt\" --hopc $hopc"
+      fi
       tools/rangebench.sh $verbose $engines -D $dir $p --date "$dt" --hopc $hopc || exit 1
     fi
   fi
