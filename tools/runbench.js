@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Wed Apr 29 19:20:06 2020 (serrano)                */
+/*    Last change :  Thu Apr 30 07:03:25 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -216,9 +216,20 @@ function benchLog( bench, engine, cmd, times, subtitle, args ) {
 	 if( config.directory ) {
 	    json = path.join( config.directory, path.basename( json ) );
 	 }
+	 if( config.verbose >= 3 ) {
+	    process.stdout.write( " dump [" + json + "]..." );
+	 }
 	 fs.writeFile( json, 
 	    JSON.format( mkBenchLogs( json ) ),
-	    err => err ? reject( err ) : resolve( 0 ) );
+	    err => { 
+	       if( err ) {
+		  reject( err ) 
+	       } else {
+	 	  if( config.verbose >= 3 ) {
+	    	     process.stdout.write( " done..." );
+		  }
+		  resolve( 0 );
+	       } );
       } else {
 	 resolve( 0 );
       }
