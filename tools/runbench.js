@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Thu Apr 30 07:04:10 2020 (serrano)                */
+/*    Last change :  Thu Apr 30 07:21:10 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -226,7 +226,7 @@ function benchLog( bench, engine, cmd, times, subtitle, args ) {
 		  reject( err ) 
 	       } else {
 	 	  if( config.verbose >= 3 ) {
-	    	     process.stdout.write( " done..." );
+	    	     process.stdout.write( "done." );
 		  }
 		  resolve( 0 );
 	       }
