@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Oct 27 14:00:39 2019                          */
-/*    Last change :  Sun Oct 27 14:45:15 2019 (serrano)                */
-/*    Copyright   :  2019 Manuel Serrano                               */
+/*    Last change :  Thu Apr 30 08:03:18 2020 (serrano)                */
+/*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Display the mean of real executions time for one benchmark       */
 /*    and one engine.                                                  */
@@ -35,10 +35,15 @@ function mean( times ) {
 /*---------------------------------------------------------------------*/
 /*    logRTime ...                                                     */
 /*---------------------------------------------------------------------*/
-function logRTime( logs, enames ) {
+function logRTime( logs, enames, args ) {
+   
    logs.forEach( log => {
       	 let len = 0;
       	 let engines = log.engines.filter( e => enames.indexOf( e.name ) != -1 );
+	 
+	 if( args.v ) {
+      	    process.stdout.write( "log=" + log + "\n" );
+	 }
       	 
       	 engines.forEach( e => {
 	       if( e.name.length > len )
@@ -55,8 +60,8 @@ function logRTime( logs, enames ) {
 	       let l = e.logs[ 0 ];
 	       
 	       if( l && l.times.rtimes ) {
-		  console.log( (mean( l.times.rtimes ) / 1000).toFixed( 2 ) );
-		  
+		  process.stdout.writeSync( (mean( l.times.rtimes ) / 1000).toFixed( 2 ) + "\n" );
+		  fs.fsyncSync( process.stdout );
 	       } } );
       } );
 }
@@ -79,5 +84,9 @@ module.exports = function( logfiles, engines, args ) {
       } );
    }
       
-   logRTime( logs, engines.map( e => e.name ) );
+   if( args.v ) {
+      process.stdout.write( "rtimes engines=" + engines + "\n" );
+   }
+   
+   logRTime( logs, engines.map( e => e.name ), args );
 }

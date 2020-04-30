@@ -142,7 +142,7 @@ function run() {
     exit 1
   fi
 
-  echo "ls -l $tmpbench.." >> /tmp/rangebench.log
+  echo "ls -l $tmpbench" >> /tmp/rangebench.log
   ls -l $tmpbench >> /tmp/rangebench.log
   
   if [ "`ls -l $tmpbench  | wc -l` " = "1 " ]; then

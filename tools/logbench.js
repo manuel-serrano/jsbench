@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:16:47 2017                          */
-/*    Last change :  Thu Oct 17 08:42:00 2019 (serrano)                */
-/*    Copyright   :  2017-19 Manuel Serrano                            */
+/*    Last change :  Thu Apr 30 08:00:12 2020 (serrano)                */
+/*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Output bench log                                                 */
 /*=====================================================================*/
@@ -40,6 +40,7 @@ function main() {
       console.log( "  -q              No configuration file" );
       console.log( "  -c|--config     Configuration file" );
       console.log( "  -e              Execution engine" );
+      console.log( "  -v[int]         Verbose" );
       console.log( "  --acceptmissing Accept missing engines" );
       console.log( "  --nosort        Don't sort benchmarks" );
       console.log( "  --sortalias     Use alias name when sorting" );
