@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Oct 27 14:00:39 2019                          */
-/*    Last change :  Thu Apr 30 08:03:18 2020 (serrano)                */
+/*    Last change :  Fri May 29 08:20:36 2020 (serrano)                */
 /*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Display the mean of real executions time for one benchmark       */
@@ -42,7 +42,7 @@ function logRTime( logs, enames, args ) {
       	 let engines = log.engines.filter( e => enames.indexOf( e.name ) != -1 );
 	 
 	 if( args.v ) {
-      	    process.stdout.write( "log=" + log + "\n" );
+      	    console.error( "log=", log );
 	 }
       	 
       	 engines.forEach( e => {
@@ -60,8 +60,8 @@ function logRTime( logs, enames, args ) {
 	       let l = e.logs[ 0 ];
 	       
 	       if( l && l.times.rtimes ) {
-		  process.stdout.writeSync( (mean( l.times.rtimes ) / 1000).toFixed( 2 ) + "\n" );
-		  fs.fsyncSync( process.stdout );
+		  fs.writeSync( process.stdout.fd, (mean( l.times.rtimes ) / 1000).toFixed( 2 ) + "\n" );
+		  fs.fsyncSync( process.stdout.fd );
 	       } } );
       } );
 }
@@ -85,7 +85,7 @@ module.exports = function( logfiles, engines, args ) {
    }
       
    if( args.v ) {
-      process.stdout.write( "rtimes engines=" + engines + "\n" );
+      console.error( "rtimes engines=" + engines + "\n" );
    }
    
    logRTime( logs, engines.map( e => e.name ), args );
