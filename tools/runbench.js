@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Thu Apr 30 07:21:10 2020 (serrano)                */
+/*    Last change :  Fri May 29 08:51:03 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -511,7 +511,7 @@ function main() {
       : rc.loadConfig( args.config || args.c );
 
    if( "v" in args ) {
-      config.verbose = typeof args.v === "number" ? args.v : 1;
+      config.verbose = parseInt( args.v );
    }
 
    if( args.T || args.tmp ) {

@@ -120,9 +120,8 @@ fi
 
 mkdir -p $tmp
 
-if [ ! -f /tmp/rangebench.log ]; then
-  touch /tmp/rangebench.log
-fi
+rm -f /tmp/rangebench.log
+touch /tmp/rangebench.log
 
 function run() {
   tmpbench=$tmp/$2.$3
@@ -133,7 +132,7 @@ function run() {
     echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3 -a $extraarg" >> /tmp/rangebench.log
     hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3 -a $extraarg >> /tmp/rangebench.log
   else
-    echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3" > /tmp/rangebench.log
+    echo "hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3" >> /tmp/rangebench.log
     hop --sofile-policy none --no-server -- $runbenchjs $verbose -e $1 -T $tmp -D $tmpbench --hopc $hopc --noargsfile --iteration 1 $2 -a $3 >> /tmp/rangebench.log
   fi
 
@@ -152,7 +151,7 @@ function run() {
 
   echo "hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench" >> /tmp/rangebench.log
   hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench 2>> /tmp/rangebench.log > /tmp/res
-  res=`cat -n /tmp/res`
+  res=`cat /tmp/res`
 
   if [ "$res " = " " ]; then
     echo ""

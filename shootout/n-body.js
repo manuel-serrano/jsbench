@@ -71,9 +71,7 @@ function Sun() {
     return new Body(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, SOLAR_MASS);
 }
 
-const bodies = Array(Sun(), Jupiter(), Saturn(), Uranus(), Neptune());
-
-function offsetMomentum() {
+function offsetMomentum( bodies ) {
     let px = 0;
     let py = 0;
     let pz = 0;
@@ -92,7 +90,7 @@ function offsetMomentum() {
     body.vz = -pz / SOLAR_MASS;
 }
 
-function advance(dt) {
+function advance(bodies, dt) {
     const size = bodies.length;
 
     for (let i = 0; i < size; i++) {
@@ -132,7 +130,7 @@ function advance(dt) {
     }
 }
 
-function energy() {
+function energy( bodies ) {
     let e = 0;
     const size = bodies.length;
 
@@ -154,18 +152,29 @@ function energy() {
     return e;
 }
 
-function main( n ) {
+function run( n ) {
+   const bodies = Array(Sun(), Jupiter(), Saturn(), Uranus(), Neptune());
 
-   offsetMomentum();
+   offsetMomentum( bodies );
 
-   console.log(energy().toFixed(9));
    for (let i = 0; i < n; i++) {
-      advance(0.01);
+      advance(bodies, 0.01);
    }
-   return(energy().toFixed(9));
+   return(energy( bodies).toFixed(9));
 }
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10;
+function main( N ) {
+   let res;
+   for( let i = 0; i < N; i++ ) {
+      res = run( 1000 );
+   }
+   return res;
+}
+
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 100
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000;
 
 console.log( "n-body (" + N + ")" );
 console.log( main( N ) );
