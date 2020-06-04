@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Oct 27 14:00:39 2019                          */
-/*    Last change :  Fri May 29 08:20:36 2020 (serrano)                */
+/*    Last change :  Mon Jun  1 08:26:59 2020 (serrano)                */
 /*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Display the mean of real executions time for one benchmark       */
@@ -35,13 +35,13 @@ function mean( times ) {
 /*---------------------------------------------------------------------*/
 /*    logRTime ...                                                     */
 /*---------------------------------------------------------------------*/
-function logRTime( logs, enames, args ) {
+function logRTime( logs, enames, config ) {
    
    logs.forEach( log => {
       	 let len = 0;
       	 let engines = log.engines.filter( e => enames.indexOf( e.name ) != -1 );
 	 
-	 if( args.v ) {
+	 if( config.verbse ) {
       	    console.error( "log=", log );
 	 }
       	 
@@ -60,8 +60,8 @@ function logRTime( logs, enames, args ) {
 	       let l = e.logs[ 0 ];
 	       
 	       if( l && l.times.rtimes ) {
-		  fs.writeSync( process.stdout.fd, (mean( l.times.rtimes ) / 1000).toFixed( 2 ) + "\n" );
-		  fs.fsyncSync( process.stdout.fd );
+		  fs.writeSync( config.fd, (mean( l.times.rtimes ) / 1000).toFixed( 2 ) + "\n" );
+		  fs.fsyncSync( config.fd );
 	       } } );
       } );
 }
@@ -69,8 +69,8 @@ function logRTime( logs, enames, args ) {
 /*---------------------------------------------------------------------*/
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
-module.exports = function( logfiles, engines, args ) {
-   let logs = common.mergeLogs( logfiles, args );
+module.exports = function( logfiles, engines, config ) {
+   let logs = common.mergeLogs( logfiles, config );
    let queue = [];
    
    if( engines.length == 0 ) {
@@ -84,9 +84,9 @@ module.exports = function( logfiles, engines, args ) {
       } );
    }
       
-   if( args.v ) {
+   if( config.verbse ) {
       console.error( "rtimes engines=" + engines + "\n" );
    }
    
-   logRTime( logs, engines.map( e => e.name ), args );
+   logRTime( logs, engines.map( e => e.name ), config );
 }

@@ -149,8 +149,8 @@ function run() {
     exit 1
   fi
 
-  echo "hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench" >> /tmp/rangebench.log
-  hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench 2>> /tmp/rangebench.log > /tmp/res
+  echo "hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench -o /tmp/res" >> /tmp/rangebench.log
+  hop --sofile-policy none --no-server -- $logbenchjs rtimes.js -e $1 $tmpbench 2>> /tmp/rangebench.log -o /tmp/res
   res=`cat /tmp/res`
 
   if [ "$res " = " " ]; then
