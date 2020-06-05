@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Fri May 29 08:51:03 2020 (serrano)                */
+/*    Last change :  Fri Jun  5 08:07:12 2020 (serrano)                */
 /*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -231,6 +231,8 @@ function benchLog( bench, engine, cmd, times, subtitle, args ) {
 		  resolve( 0 );
 	       }
 	    } );
+	 // wait for writeFile to flush
+	 setTimeout( resolve, 100 );
       } else {
 	 resolve( 0 );
       }

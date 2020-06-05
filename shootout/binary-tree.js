@@ -52,10 +52,12 @@ function binarytree(n) {
 }
 
 
+const K = 12;
+
 function test( N ) {
-   let r = binarytree( 10 );
+   let r = binarytree( K );
    for( let i = 0; i < N; i++ ) {
-      r = binarytree( 10 );
+      r = binarytree( K );
    }
    return r;
 }
