@@ -6,11 +6,14 @@ function Ctr() {
 
 function gee( CNT ) {
    var ddd = 0;
-
    var obj = new Ctr();
-   
+   let profstart = Date.now();
    for( let jjj = 0; jjj < CNT; jjj++ ) {
-      if( jjj % 1000 == 0 ) console.log( jjj );
+      if( jjj % 1000 == 0 ) {
+	 const profend = Date.now();
+	 console.log( jjj, profend - profstart );
+	 profstart = profend;
+      }
       for( let iii = 0; iii < 80000; iii++ ) {
    
 	 obj.yyy = 1;
