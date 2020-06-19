@@ -138,6 +138,18 @@ if [ "$benchmarks " != " " ]; then
   done
 fi
 
+rndvs=`cat /proc/sys/kernel/randomize_va_space`
+
+function cleanup() {
+  sudo sh -c "echo $rndvs > /proc/sys/kernel/randomize_va_space"
+}
+
+if [ "$rndvaspace " = "yes " ]; then
+  echo "disable randomize_va_space"
+  trap cleanup EXIT
+  sudo sh -c "echo 0 > /proc/sys/kernel/randomize_va_space"
+fi
+
 echo "engine [$engines] $BENCHMARKS"
 
 for p in $BENCHMARKS; do
@@ -175,18 +187,6 @@ for p in $BENCHMARKS; do
     fi
   fi
 done
-
-rndvs=`cat /proc/sys/kernel/randomize_va_space`
-
-function cleanup() {
-  sudo sh -c "echo $rndvs > /proc/sys/kernel/randomize_va_space"
-}
-
-if [ "$rndvaspace " = "yes " ]; then
-  echo "disable randomize_va_space"
-  trap cleanup EXIT
-  sudo sh -c "echo 0 > /proc/sys/kernel/randomize_va_space"
-fi
 
 echo "tools/rangelatex.sh $engines -D $dir --date "$dt" $BENCHMARKS"
 tools/rangelatex.sh $engines -D $dir --date "$dt" --tag $tag $BENCHMARKS
