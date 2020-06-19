@@ -182,7 +182,7 @@ function cleanup() {
   sudo sh -c "echo $rndvs > /proc/sys/kernel/randomize_va_space"
 }
 
-if [ "rndvaspace " = "yes " ]; then
+if [ "$rndvaspace " = "yes " ]; then
   echo "disable randomize_va_space"
   trap cleanup EXIT
   sudo sh -c "echo 0 > /proc/sys/kernel/randomize_va_space"
