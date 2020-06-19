@@ -9,6 +9,7 @@ engines="-e hop -e nodejs -e jsc -e js60 -e chakra -e graal"
 resetengines=""
 verbose=-v0
 benchmarks=
+rndvaspace=yes
 
 while : ; do
   case $1 in
@@ -31,6 +32,9 @@ while : ; do
 
     --shield=*)
       shield="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --rndvaspace=*)
+      rndvaspace="`echo $1 | sed 's/^[-a-z]*=//'`";;
 
     --benchmarks=*)
       BENCHMARKS="`echo $1 | sed 's/^[-a-z]*=//'`";;
@@ -171,6 +175,18 @@ for p in $BENCHMARKS; do
     fi
   fi
 done
+
+rndvs=`cat /proc/sys/kernel/randomize_va_space`
+
+function cleanup() {
+  sudo sh -c "echo $rndvs > /proc/sys/kernel/randomize_va_space"
+}
+
+if [ "rndvaspace " = "yes " ]; then
+  echo "disable randomize_va_space"
+  trap cleanup EXIT
+  sudo sh -c "echo 0 > /proc/sys/kernel/randomize_va_space"
+fi
 
 echo "tools/rangelatex.sh $engines -D $dir --date "$dt" $BENCHMARKS"
 tools/rangelatex.sh $engines -D $dir --date "$dt" --tag $tag $BENCHMARKS
