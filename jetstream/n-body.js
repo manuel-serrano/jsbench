@@ -188,10 +188,19 @@ function nBody() {
    }
 }
 
-const N = 1000;
-const K = N / 10;
-
-for( let i = 0; i < N; i++ ) {
-   if( i % K == 0 ) console.log( i );
-   nBody();
+function main( N ) {
+   let res;
+   for( let i = 0; i < N; i++ ) {
+      res = nBody();
+   }
+   return res;
 }
+
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 100
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000;
+
+console.log( "n-body (" + N + ")" );
+console.log( main( N ) );
+
