@@ -3323,11 +3323,27 @@ var funvec =
       y[ 2 ] = 3.5;
       return y.length } );
 
-for( let i = 0; i < 50000; i++ ) {
-   if( i % 5000 === 0 ) console.log( i );
-   linear(0);
-   linear(1);
-   linear(10);
+function main( bench, n ) {
+   let res = 0;
+   const k = Math.round( n / 10 );
+   let i = 1;
+   
+   console.log( bench + "(", n, ")..." );
+   
+   for( let i = 0; i < n; i++ ) {
+      if( i % k === 0 ) console.log( i );
+      linear(0);
+      linear(1);
+      linear(10);
 
-   funvec( [1, 2, 34] );
+      funvec( [1, 2, 34] );
+   }
+
 }
+
+const N = 
+   (process.argv[ 1 ] === "fprofile") 
+   ? 2
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 200000;
+
+main( "rho", N ); 
