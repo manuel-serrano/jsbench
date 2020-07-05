@@ -123,12 +123,13 @@ for ( var i = 0; i < 8192; i++ )
         str += String.fromCharCode( (25 * Math.random()) + 97 );
 
 const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 11;
+const K = N / 10;
 
 for ( var i = 0; i < N; i++ ) {
    var base64;
 
    str = "";
-   console.log( i );
+   if( i % K === 0 ) console.log( i );
    base64 = toBase64(str);
    var encoded = base64ToString(base64);
    if (encoded != str)
