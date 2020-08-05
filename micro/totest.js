@@ -1,17 +1,17 @@
 "use strict";
 
-function foo( x, y ) {
-   if( x && y ) {
-      return 4;
+function foo( x, y, z ) {
+   if( x && y || z ) {
+      return 1;
    } else {
-      return 5;
+      return -1;
    }
 }
 
 function test( N ) {
-   let k = false;
+   let k = 0;
    for( let i = 0; i < N; i++ ) {
-      k = k || foo( i, N );
+      k += foo( i <= 1000, N > i, i > 1000 );
    }
    return k;
 }
