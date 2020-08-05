@@ -520,36 +520,6 @@ const underscore = function( module, exports ) {
     return flatten(array, shallow, false);
   };
 
- // Produce a duplicate-free version of the array. If the array has already
-  // been sorted, you have the option of using a faster algorithm.
-  // Aliased as `unique`.
-  _.uniq = _.unique = function(array, isSorted, iteratee, context) {
-    if (!_.isBoolean(isSorted)) {
-      context = iteratee;
-      iteratee = isSorted;
-      isSorted = false;
-    }
-    if (iteratee != null) iteratee = cb(iteratee, context);
-    var result = [];
-    var seen = [];
-    for (var i = 0, length = getLength(array); i < length; i++) {
-      var value = array[i],
-          computed = iteratee ? iteratee(value, i, array) : value;
-      if (isSorted) {
-        if (!i || seen !== computed) result.push(value);
-        seen = computed;
-      } else if (iteratee) {
-        if (!_.contains(seen, computed)) {
-          seen.push(computed);
-          result.push(value);
-        }
-      } else if (!_.contains(result, value)) {
-        result.push(value);
-      }
-    }
-    return result;
-  };
-  
   // Produce an array that contains the union: each distinct element from all of
   // the passed-in arrays.
   _.union = restArguments(function(arrays) {
@@ -2961,7 +2931,7 @@ var contracts = {
   
 };
 
-module.exports = c.publish(thisModuleName, c, contracts,
+module.exports = c.publish(thisModuleName, c, contracts, 
                            {
                              functionContract: functionContract,
                              contractObject: contractObject,
@@ -3006,83 +2976,6 @@ var funvec =
       y[ 2 ] = 3.5;
       return y.length } );
 
-// Define a contract for position objects with two methods, 
-// `moveX` and `moveY`:
-var posContract =
-    c.object({
-        x: c.number,
-        y: c.number,
-        moveX: c.fun({dx: c.number}),
-        moveY: c.fun({dx: c.number})
-    })
-
-// Define a constructor for position objects. Objects returned
-// will have their methods `.wrap()`-ed with contract-checking shells:
-var makePos = c.fun({x: c.number}, { y: c.number })
-   .returns(posContract)
-   .wrap(
-      function(x, y) {
-	 return { x: x,
-		  y: y,
-		  moveX: function(dx) { return makePos(this.x + dx, this.y) },
-		  moveY: function(dy) { return makePos(this.x, this.y + dy) }
-	 }
-      });
-
-var answerContract = c.oneOf("y", "yes", "n", "no");
-
-var square = c.fun({ x: c.number }).wrap(function (x) {
-  return x * x
-})
-var normalizeTime = c.fun( { secondSinceEpoc: c.number } )
-   .wrap( function (s) { return s % 60 } );
-var _x = 0
-var incrementIt = c.fun({ i: c.optional(c.number) } ).returns(c.number)
-   .wrap( function(i) { if (i) _x+=i; else _x++; return _x });
-String.prototype.repeat = function( num ) {   
-   // A helper function on String, just for fun.
-   return new Array(num + 1).join(this);
-};	
-c.animal = c.object({ nLegs: c.number,
-		      name:  c.string,
-		      speak: c.fun({n: c.number}).returns(c.string) });
-var makeCat = c.fun({ name: c.string }).returns(c.animal)
-   .wrap(function (name) {
-      return {
-	 nLegs: 4,
-	 name: name,
-	 speak: function(n) { return this.name + " says " + "meow".repeat(n) }
-      }
-   });
-var makeBird = c.fun({ name: c.string }).returns(c.animal)
-   .wrap(function (name) {
-      return {
-	 nLegs: 2,
-	 name: name,
-	 speak: function(n) { return this.name + " says " + "tweet".repeat(n) }
-      }
-   });
-var tweetie = makeBird("tweetie");
-
-function testRho() {
-/*       linear(0);                                                    */
-/*       linear(1);                                                    */
-   linear(10);
-
-   funvec( [1, 2, 34] );
-
-   makePos(5, 7).moveX(0).moveY(0);
-   c.number.check(5);
-   answerContract.check("yes");
-   c.or(c.number, c.string).check(10);
-   c.or(c.number, c.string).check("ten");
-   c.tuple(c.number, c.string).check([10, "ten"]);
-   square(25);
-   normalizeTime(124526);
-   incrementIt(10);
-   tweetie.speak(3);
-}
-
 function main( bench, n ) {
    let res = 0;
    const k = Math.round( n / 10 );
@@ -3092,13 +2985,18 @@ function main( bench, n ) {
    
    for( let i = 0; i < n; i++ ) {
       if( i % k === 0 ) console.log( i );
-      testRho();
+      linear(0);
+      linear(1);
+      linear(10);
+
+      funvec( [1, 2, 34] );
    }
+
 }
 
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
-   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 50000;
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 200000;
 
 main( "rho", N ); 
