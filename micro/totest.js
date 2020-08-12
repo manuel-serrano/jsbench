@@ -1,7 +1,7 @@
 "use strict";
 
-function foo( x, y, z ) {
-   if( x && y || z ) {
+function puzzle( k, end, P, PUZZLE, i, j ) {
+   if( k > end || P[ i ][ k ] && PUZZLE[ j + k ] ) {
       return 1;
    } else {
       return -1;
@@ -9,17 +9,30 @@ function foo( x, y, z ) {
 }
 
 function test( N ) {
-   let k = 0;
+   let r = 0;
+   let end = 10;
+   const P = [ [ true, false ], [ true, true ], [ false, false ] ];
+   const PUZZLE = [ true, false, false, true ];
+   
    for( let i = 0; i < N; i++ ) {
-      k += foo( i <= 1000, N > i, i > 1000 );
+      r += puzzle( 10, 0, P, PUZZLE, 0, 0 );
+      r += puzzle( 0, 1, P, PUZZLE, 1, 0 );
+      r += puzzle( 0, 1, P, PUZZLE, 2, 0 );
+      r += puzzle( 0, 1, P, PUZZLE, 2, 1 );
    }
-   return k;
+   return r;
 }
 	 
 function main( bench, n ) {
    var res;
-   for( let i = 0; i < n; i++ ) {
+   let N = Math.round( n / 10 );
+   
+   for( let i = 0, j = 0; i < n; i++, j++ ) {
       res = test( 100000 );
+      if( j === N ) {
+	 console.log( i );
+	 j = 0;
+      }
    }
    console.log( bench, res );
 }
