@@ -2324,12 +2324,21 @@ function fnHelper(who, argumentContracts) {
       };
 
       var wrappedThis = next(self.thisContract, this, stackContextItems.this, true);
+      var vargs0 = Array.prototype.slice.call( arguments, 0, self.argumentContracts.length );
+      var vargs1 = Array.prototype.slice.call( arguments, self.argumentContracts.length );
+/*       var wrappedArgs =                                             */
+/*         __.map(__.zip(self.argumentContracts, __.toArray(arguments).slice(0, self.argumentContracts.length)), function(pair, i) { */
+/*           return next(pair[0], pair[1], stackContextItems.argument(pair[0].thingName ? pair[0].thingName : i), true); */
+/*         });                                                         */
+/*       var extraArgs = (!self.extraArgumentContract ? [] :           */
+/*                        next(self.extraArgumentContract, __.toArray(arguments).slice(self.argumentContracts.length),  */
+/*                             stackContextItems.extraArguments, true)); */
       var wrappedArgs = 
-        __.map(__.zip(self.argumentContracts, __.toArray(arguments).slice(0, self.argumentContracts.length)), function(pair, i) {
+         __.map(__.zip(self.argumentContracts, vargs0), function(pair, i) {
           return next(pair[0], pair[1], stackContextItems.argument(pair[0].thingName ? pair[0].thingName : i), true);
         });
       var extraArgs = (!self.extraArgumentContract ? [] :
-                       next(self.extraArgumentContract, __.toArray(arguments).slice(self.argumentContracts.length), 
+                       next(self.extraArgumentContract, vargs1, 
                             stackContextItems.extraArguments, true));
 
       var result = fn.apply(wrappedThis, wrappedArgs.concat(extraArgs));
@@ -2421,7 +2430,6 @@ exports.fun = fun;
 function method(ths /* ... */) {
   if (!(ths instanceof Contract))
     throw new ContractLibraryError('method', false, "expected a Contract for the `this` argument, by got " + stringify(ths));
-/*   #:tprint( "literal3" );                                           */
   return gentleUpdate(funHelper('method', __.toArray(arguments).slice(1)).ths(ths),
                       { contractName: 'method' });
 }
