@@ -449,7 +449,6 @@ var defaultCalendar = {
 };
 
 function calendar(key, mom, now) {
-   console.log( "calendar.1 key=", key, " mom=", mom, " now=", now );
    var output = this._calendar[key] || this._calendar['sameElse'];
    return isFunction(output) ? output.call(mom, now) : output;
 }
@@ -3754,7 +3753,6 @@ function getCalendarFormat(myMoment, now) {
 }
 
 function calendar$1(time, formats) {
-   console.log( "calendar$1.1 time=", time, " formats=", formats );
    // Support for single parameter, formats only overload to the calendar function
    if (arguments.length === 1) {
       if (isMomentInput(arguments[0])) {
@@ -3776,7 +3774,6 @@ function calendar$1(time, formats) {
 	  ? formats[format].call(this, now)
 	  : formats[format]);
 ///
-console.log( "calendar$1.2 now=", now, "format=" + format.toString(), "output=", output, "args=", arguments );
    return this.format(
       output || this.localeData().calendar(format, this, createLocal(now))
 	 );
@@ -9260,9 +9257,9 @@ function testCreate() {
 
 function testAll( verb ) {
    verbOn = verb;
-/*    testAddSubtract();                                               */
+   testAddSubtract();
    testCalendar();
-/*    testCreate();                                                    */
+   testCreate();
 }
 
 function main( bench, n ) {
@@ -9272,11 +9269,12 @@ function main( bench, n ) {
    
    console.log( bench + "(", n, ")..." );
    
+   testAll( true );
+   
    while( n-- > 0 ) {
       if( n % k === 0 ) { console.log( i++ ); }
       testAll( false );
    }
-   testAll( true );
 }
 
 const N = 
