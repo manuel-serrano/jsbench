@@ -11,9 +11,45 @@ let verbOn = process.env[ "VERB_MOMENT" ];
 
 function assertEqual( x, y, msg ) {
    if( x !== y ) {
-      console.error( "*** ASSERT ERROR:", msg );
+      console.error( "*** ASSERT EQUAL ERROR:", msg );
       process.exit( 0 );
    }
+   
+   return true;
+}
+
+function assertNotEqual( x, y, msg ) {
+   if( x === y ) {
+      console.error( "*** ASSERT NOT EQUAL ERROR:", msg );
+      process.exit( 0 );
+   }
+   
+   return true;
+}
+
+function assertOk( x, msg ) {
+   if( !x ) {
+      console.error( "*** ASSERT OK ERROR:", msg );
+      process.exit( 0 );
+   }
+   
+   return true;
+}
+
+function assertDeepEqual( x, y, msg ) {
+   if( x.length !== y.length ) {
+      console.error( "*** ASSERT DEEP EQUAL ERROR:", msg );
+      process.exit( 0 );
+   }
+   
+   for( let i = x.length - 1; i >= 0; i-- ) {
+      if( x[ i ] !== y[ i ] ) {
+      	 console.error( "*** ASSERT DEEP EQUAL ERROR:", msg );
+      	 process.exit( 0 );
+      }
+   }
+	
+   return true;
 }
 
 function verb( msg ) { 
@@ -6444,22 +6480,22 @@ function testCreate() {
    verb( "create.js" );
    
    test('array', function (assert) {
-      assert.ok(moment([2010]).toDate() instanceof Date, '[2010]');
-      assert.ok(moment([2010, 1]).toDate() instanceof Date, '[2010, 1]');
-      assert.ok(moment([2010, 1, 12]).toDate() instanceof Date, '[2010, 1, 12]');
-      assert.ok(
+      assertOk(moment([2010]).toDate() instanceof Date, '[2010]');
+      assertOk(moment([2010, 1]).toDate() instanceof Date, '[2010, 1]');
+      assertOk(moment([2010, 1, 12]).toDate() instanceof Date, '[2010, 1, 12]');
+      assertOk(
          moment([2010, 1, 12, 1]).toDate() instanceof Date,
          '[2010, 1, 12, 1]'
     	 );
-      assert.ok(
+      assertOk(
          moment([2010, 1, 12, 1, 1]).toDate() instanceof Date,
          '[2010, 1, 12, 1, 1]'
     	 );
-      assert.ok(
+      assertOk(
          moment([2010, 1, 12, 1, 1, 1]).toDate() instanceof Date,
          '[2010, 1, 12, 1, 1, 1]'
     	 );
-      assert.ok(
+      assertOk(
          moment([2010, 1, 12, 1, 1, 1, 1]).toDate() instanceof Date,
          '[2010, 1, 12, 1, 1, 1, 1]'
     	 );
@@ -6471,8 +6507,8 @@ function testCreate() {
    });
 
    test('array with invalid arguments', function (assert) {
-      assert.ok(!moment([2010, null, null]).isValid(), '[2010, null, null]');
-      assert.ok(
+      assertOk(!moment([2010, null, null]).isValid(), '[2010, null, null]');
+      assertOk(
          !moment([1945, null, null]).isValid(),
          '[1945, null, null] (pre-1970)'
     	 );
@@ -6481,7 +6517,7 @@ function testCreate() {
    test('array copying', function (assert) {
       var importantArray = [2009, 11];
       moment(importantArray);
-      assert.deepEqual(
+      assertDeepEqual(
          importantArray,
          [2009, 11],
          'initializer should not mutate the original array'
@@ -6579,7 +6615,7 @@ function testCreate() {
    test('multi format array copying', function (assert) {
       var importantArray = ['MM/DD/YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'];
       moment('1999-02-13', importantArray);
-      assert.deepEqual(
+      assertDeepEqual(
          importantArray,
          ['MM/DD/YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'],
          'initializer should not mutate the original array'
@@ -6587,7 +6623,7 @@ function testCreate() {
    });
 
    test('number', function (assert) {
-      assert.ok(moment(1000).toDate() instanceof Date, '1000');
+      assertOk(moment(1000).toDate() instanceof Date, '1000');
       assertEqual(moment(1000).valueOf(), 1000, 'asserting valueOf');
       assertEqual(moment.utc(1000).valueOf(), 1000, 'asserting valueOf');
    });
@@ -6636,7 +6672,7 @@ function testCreate() {
    });
 
    test('date', function (assert) {
-      assert.ok(moment(new Date()).toDate() instanceof Date, 'new Date()');
+      assertOk(moment(new Date()).toDate() instanceof Date, 'new Date()');
       assertEqual(
          moment(new Date(2016, 0, 1), 'YYYY-MM-DD').format('YYYY-MM-DD'),
          '2016-01-01',
@@ -6665,22 +6701,22 @@ function testCreate() {
 
    test('date mutation', function (assert) {
       var a = new Date();
-      assert.ok(
+      assertOk(
          moment(a).toDate() !== a,
          'the date moment uses should not be the date passed in'
     	 );
    });
 
    test('moment', function (assert) {
-      assert.ok(moment(moment()).toDate() instanceof Date, 'moment(moment())');
-      assert.ok(
+      assertOk(moment(moment()).toDate() instanceof Date, 'moment(moment())');
+      assertOk(
          moment(moment(moment())).toDate() instanceof Date,
          'moment(moment(moment()))'
     	 );
    });
 
    test('cloning moment should only copy own properties', function (assert) {
-      assert.ok(
+      assertOk(
          !hasOwnProp(moment().clone(), 'month'),
          'Should not clone prototype methods'
     	 );
@@ -6728,15 +6764,15 @@ function testCreate() {
    });
 
    test('undefined', function (assert) {
-      assert.ok(moment().toDate() instanceof Date, 'undefined');
+      assertOk(moment().toDate() instanceof Date, 'undefined');
    });
 
    test('iso with bad input', function (assert) {
-      assert.ok(
+      assertOk(
          !moment('a', moment.ISO_8601).isValid(),
          'iso parsing with invalid string'
     	 );
-      assert.ok(
+      assertOk(
          !moment('a', moment.ISO_8601, true).isValid(),
          'iso parsing with invalid string, strict'
     	 );
@@ -6828,9 +6864,9 @@ function testCreate() {
          'should not break if am/pm is left off from the parsing tokens'
     	 );
 
-      assert.ok(moment('05/1/2012 12:25:00', 'MM/DD/YYYY h:m:s a').isValid());
-      assert.ok(moment('05/1/2012 12:25:00 am', 'MM/DD/YYYY h:m:s a').isValid());
-      assert.ok(moment('05/1/2012 12:25:00 pm', 'MM/DD/YYYY h:m:s a').isValid());
+      assertOk(moment('05/1/2012 12:25:00', 'MM/DD/YYYY h:m:s a').isValid());
+      assertOk(moment('05/1/2012 12:25:00 am', 'MM/DD/YYYY h:m:s a').isValid());
+      assertOk(moment('05/1/2012 12:25:00 pm', 'MM/DD/YYYY h:m:s a').isValid());
    });
 
    test('empty string with formats', function (assert) {
@@ -6851,10 +6887,10 @@ function testCreate() {
          'Invalid date'
     	 );
 
-      assert.ok(!moment('', 'MM').isValid());
-      assert.ok(!moment(' ', 'MM').isValid());
-      assert.ok(!moment(' ', 'DD').isValid());
-      assert.ok(!moment(' ', ['MM', 'DD']).isValid());
+      assertOk(!moment('', 'MM').isValid());
+      assertOk(!moment(' ', 'MM').isValid());
+      assertOk(!moment(' ', 'DD').isValid());
+      assertOk(!moment(' ', ['MM', 'DD']).isValid());
    });
 
    test('undefined argument with formats', function (assert) {
@@ -6871,10 +6907,10 @@ function testCreate() {
          'Invalid date'
     	 );
 
-      assert.ok(!moment(undefined, 'MM').isValid());
-      assert.ok(!moment(undefined, 'MM').isValid());
-      assert.ok(!moment(undefined, 'DD').isValid());
-      assert.ok(!moment(undefined, ['MM', 'DD']).isValid());
+      assertOk(!moment(undefined, 'MM').isValid());
+      assertOk(!moment(undefined, 'MM').isValid());
+      assertOk(!moment(undefined, 'DD').isValid());
+      assertOk(!moment(undefined, ['MM', 'DD']).isValid());
    });
 
    test('defaulting to current date', function (assert) {
@@ -7062,7 +7098,7 @@ function testCreate() {
 
       for (i = 0; i < a.length; i++) {
          m = moment(a[i][1], a[i][0]);
-         assert.ok(m.isValid());
+         assertOk(m.isValid());
          assertEqual(m.format(a[i][0]), a[i][1], a[i][0] + ' ---> ' + a[i][1]);
       }
    });
@@ -7469,7 +7505,7 @@ function testCreate() {
         ],
          true
     	    );
-      assert.deepEqual(
+      assertDeepEqual(
          b.parsingFlags().parsedDateParts,
          [2019, 1, 30, 7, 0],
          'strict parsing multiple formats should still select the best format even if the date is invalid'
@@ -7487,7 +7523,7 @@ function testCreate() {
       var momentA = moment([2011, 10, 10]),
          momentB = moment(momentA);
       momentA.month(5);
-      assert.notEqual(
+      assertNotEqual(
          momentA.month(),
          momentB.month(),
          'Calling moment() on a moment will create a clone'
@@ -7498,7 +7534,7 @@ function testCreate() {
       var momentA = moment([2011, 10, 10]),
          momentB = momentA.clone();
       momentA.month(5);
-      assert.notEqual(
+      assertNotEqual(
          momentA.month(),
          momentB.month(),
          'Calling clone() on a moment will create a clone'
@@ -7600,8 +7636,8 @@ function testCreate() {
             expResult = moment
 	       .utc(tokens.slice(0, 6))
 	       .utcOffset(tokens[6], true);
-         assert.ok(parseResult.isValid(), inp);
-         assert.ok(
+         assertOk(parseResult.isValid(), inp);
+         assertOk(
             parseResult.parsingFlags().rfc2822,
             inp + ' - rfc2822 parsingFlag'
             );
@@ -7628,11 +7664,11 @@ function testCreate() {
 
       eachOwnProp(testCases, function (testCase) {
          var testResult = moment(testCases[testCase], moment.RFC_2822, true);
-         assert.ok(
+         assertOk(
             !testResult.isValid(),
             testCase + ': ' + testResult + ' - is invalid rfc2822'
             );
-         assert.ok(
+         assertOk(
             !testResult.parsingFlags().rfc2822,
             testCase + ': ' + testResult + ' - rfc2822 parsingFlag'
             );
@@ -7658,8 +7694,8 @@ function testCreate() {
          moment.locale('ru');
          eachOwnProp(testCases, function (testCase) {
             var testResult = moment(testCases[testCase], moment.RFC_2822, true);
-            assert.ok(testResult.isValid(), testResult);
-            assert.ok(
+            assertOk(testResult.isValid(), testResult);
+            assertOk(
 	       testResult.parsingFlags().rfc2822,
 	       testResult + ' - rfc2822 parsingFlag'
                );
@@ -7681,8 +7717,8 @@ function testCreate() {
          moment.locale('ru');
          eachOwnProp(testCases, function (testCase) {
             var testResult = moment(testCases[testCase], moment.RFC_2822, true);
-            assert.ok(!testResult.isValid(), testResult);
-            assert.ok(
+            assertOk(!testResult.isValid(), testResult);
+            assertOk(
 	       !testResult.parsingFlags().rfc2822,
 	       testResult + ' - rfc2822 parsingFlag'
                );
@@ -7974,27 +8010,27 @@ function testCreate() {
    });
 
    test('non iso 8601 strings', function (assert) {
-      assert.ok(
+      assertOk(
          !moment('2015-10T10:15', moment.ISO_8601, true).isValid(),
          'incomplete date with time'
     	 );
-      assert.ok(
+      assertOk(
          !moment('2015-W10T10:15', moment.ISO_8601, true).isValid(),
          'incomplete week date with time'
     	 );
-      assert.ok(
+      assertOk(
          !moment('2015W10T1015', moment.ISO_8601, true).isValid(),
          'incomplete week date with time (basic)'
     	 );
-      assert.ok(
+      assertOk(
          !moment('2015-10-08T1015', moment.ISO_8601, true).isValid(),
          'mixing extended and basic format'
     	 );
-      assert.ok(
+      assertOk(
          !moment('20151008T10:15', moment.ISO_8601, true).isValid(),
          'mixing basic and extended format'
     	 );
-      assert.ok(
+      assertOk(
          !moment('2015-10-1', moment.ISO_8601, true).isValid(),
          'missing zero padding for day'
     	 );
@@ -8040,27 +8076,27 @@ function testCreate() {
 
    test('parsing weekdays verifies the day', function (assert) {
       // string with format
-      assert.ok(
+      assertOk(
          !moment('Wed 08-10-2017', 'ddd MM-DD-YYYY').isValid(),
          'because day of week is incorrect for the date'
     	 );
-      assert.ok(
+      assertOk(
          moment('Thu 08-10-2017', 'ddd MM-DD-YYYY').isValid(),
          'because day of week is correct for the date'
     	 );
    });
 
    test('parsing weekday on utc dates verifies day according to utc time', function (assert) {
-      assert.ok(moment.utc('Mon 03:59', 'ddd HH:mm').isValid(), 'Monday 03:59');
+      assertOk(moment.utc('Mon 03:59', 'ddd HH:mm').isValid(), 'Monday 03:59');
    });
 
    test('parsing weekday on local dates verifies day according to local time', function (assert) {
       // this doesn't do much useful if you're not in the US or at least close to it
-      assert.ok(moment('Mon 03:59', 'ddd HH:mm').isValid(), 'Monday 03:59');
+      assertOk(moment('Mon 03:59', 'ddd HH:mm').isValid(), 'Monday 03:59');
    });
 
    test('parsing weekday on utc dates with specified offsets verifies day according to that offset', function (assert) {
-      assert.ok(
+      assertOk(
          moment.utc('Mon 03:59 +12:00', 'ddd HH:mm Z', true).isValid(),
          'Monday 03:59'
     	 );
@@ -8068,7 +8104,7 @@ function testCreate() {
 
    test('parsing weekday on local dates with specified offsets verifies day according to that offset', function (assert) {
       // if you're in the US, these times will all be sometime Sunday, but they should parse as Monday
-      assert.ok(
+      assertOk(
          moment('Mon 03:59 +12:00', 'ddd HH:mm Z', true).isValid(),
          'Monday 03:59'
     	 );
@@ -8729,35 +8765,35 @@ function testCreate() {
     	 );
 
       // strict parsing respects month length
-      assert.ok(
+      assertOk(
          moment('1 January 2000', 'D MMMM YYYY', true).isValid(),
          'capital long-month + MMMM'
     	 );
-      assert.ok(
+      assertOk(
          !moment('1 January 2000', 'D MMM YYYY', true).isValid(),
          'capital long-month + MMM'
     	 );
-      assert.ok(
+      assertOk(
          !moment('1 Jan 2000', 'D MMMM YYYY', true).isValid(),
          'capital short-month + MMMM'
     	 );
-      assert.ok(
+      assertOk(
          moment('1 Jan 2000', 'D MMM YYYY', true).isValid(),
          'capital short-month + MMM'
     	 );
-      assert.ok(
+      assertOk(
          moment('1 january 2000', 'D MMMM YYYY', true).isValid(),
          'lower long-month + MMMM'
     	 );
-      assert.ok(
+      assertOk(
          !moment('1 january 2000', 'D MMM YYYY', true).isValid(),
          'lower long-month + MMM'
     	 );
-      assert.ok(
+      assertOk(
          !moment('1 jan 2000', 'D MMMM YYYY', true).isValid(),
          'lower short-month + MMMM'
     	 );
-      assert.ok(
+      assertOk(
          moment('1 jan 2000', 'D MMM YYYY', true).isValid(),
          'lower short-month + MMM'
     	 );
@@ -8795,17 +8831,17 @@ function testCreate() {
    function getVerifier(test) {
       return function (input, format, expected, description, asymetrical) {
          var m = moment(input, format);
-         test.equal(m.format('YYYY MM DD'), expected, 'compare: ' + description);
+         assertEqual(m.format('YYYY MM DD'), expected, 'compare: ' + description);
 
          //test round trip
          if (!asymetrical) {
-            test.equal(m.format(format), input, 'round trip: ' + description);
+            assertEqual(m.format(format), input, 'round trip: ' + description);
          }
       };
    }
 
    test('parsing week and weekday information', function (assert) {
-      var ver = getVerifier(assert),
+      var ver = getVerifier(),
          currentWeekOfYear = moment().weeks(),
          expectedDate2012 = moment([2012, 0, 1])
             .day(0)
@@ -8907,7 +8943,7 @@ function testCreate() {
    });
 
    test('parsing localized weekdays', function (assert) {
-      var ver = getVerifier(assert);
+      var ver = getVerifier();
       try {
          moment.locale('dow:1,doy:4', {
             weekdays: 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split(
@@ -9202,15 +9238,15 @@ function testCreate() {
    });
 
    test('parsing only meridiem results in invalid date', function (assert) {
-      assert.ok(
+      assertOk(
          !moment('alkj', 'hh:mm a').isValid(),
          'because an a token is used, a meridiem will be parsed but nothing else was so invalid'
     	 );
-      assert.ok(
+      assertOk(
          moment('02:30 p more extra stuff', 'hh:mm a').isValid(),
          'because other tokens were parsed, date is valid'
     	 );
-      assert.ok(
+      assertOk(
          moment('1/1/2016 extra data', ['a', 'M/D/YYYY']).isValid(),
          'took second format, does not pick up on meridiem parsed from first format (good copy)'
     	 );
@@ -9218,8 +9254,8 @@ function testCreate() {
 
    test('invalid dates return invalid for methods that access the _d prop', function (assert) {
       var momentAsDate = moment(['2015', '12', '1']).toDate();
-      assert.ok(momentAsDate instanceof Date, 'toDate returns a Date object');
-      assert.ok(
+      assertOk(momentAsDate instanceof Date, 'toDate returns a Date object');
+      assertOk(
          isNaN(momentAsDate.getTime()),
          'toDate returns an invalid Date invalid'
     	 );
@@ -9231,11 +9267,11 @@ function testCreate() {
          kVal = i + ':15:59';
          kkVal = (i < 10 ? '0' : '') + i + ':15:59';
          if (i !== 24) {
-            assert.ok(
+            assertOk(
 	       moment(kVal, 'k:mm:ss').isSame(moment(kVal, 'H:mm:ss')),
 	       kVal + ' k parsing'
                );
-            assert.ok(
+            assertOk(
 	       moment(kkVal, 'kk:mm:ss').isSame(moment(kkVal, 'HH:mm:ss')),
 	       kkVal + ' kk parsing'
                );
