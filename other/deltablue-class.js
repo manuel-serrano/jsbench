@@ -893,4 +893,32 @@ function deltaBlue() {
   chainTest(100);
   projectionTest(100);
 }
+// Benchmark execution
+var go;
+
+function Benchmark( name, opt1, opt2, it, go ) {
+   return { go: go, iteration: it };
+}
+
+function BenchmarkSuite( name, val, benchs ) {
+   go = function() {
+      let num = benchs[ 0 ].iteration;
+      let n = Math.round( num / 10 ), i = 1;
+      console.log( name + " (" + num + ")" );
+      while( num-- > 0 ) {
+	 if( num % n == 0 ) { console.log( i++ ); }
+	 benchs[ 0 ].go()
+      };
+   }
+}  
+
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? 200
+      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 40000;
+
+var DeltaBlue = new BenchmarkSuite('DeltaBlue', [66118], [
+  new Benchmark('DeltaBlue', true, false, N, deltaBlue)
+]);
+
 go();
+
