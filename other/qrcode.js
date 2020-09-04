@@ -2258,7 +2258,12 @@ function Qrcode( data ) {
 
 function test( url ) {
    const qr = Qrcode( url );
-   return qr.createASCII( 4 ).length + qr.createSvgTag( 6 ).length;
+   const ascii = qr.createASCII( 4 );
+   const svg = qr.createSvgTag( 6 );
+   const table = qr.createTableTag( 6 );
+   const img = qr.createImgTag( 6 );
+   
+   return ascii.length + svg.length + table.length + img.length;
 }
 
 function testAll() {
@@ -2287,4 +2292,4 @@ const N =
    ? 2
    : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 100;
 
-main( "qrcode", N ); 
+main( "moment", N ); 
