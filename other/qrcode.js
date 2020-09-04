@@ -2292,4 +2292,4 @@ const N =
    ? 2
    : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 100;
 
-main( "moment", N ); 
+main( "qrcode", N ); 
