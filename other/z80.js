@@ -543,6 +543,7 @@ Z80.prototype.reset = function () {
     this.iff2 = 0;
     this.im = 0;
     this.isHalted = 0;
+    this.memory.data.fill(0);
 };
 Z80.prototype.inc8Bit = function (reg) {
     this[reg]++;
@@ -816,7 +817,7 @@ function suite( key ) {
 }
 
 function Memory() {
-    this.data = new Uint8Array(0xFFFF);
+    this.data = new Array(0xFFFF);
 }
 
 Memory.prototype.readByte = function(address) {
@@ -931,8 +932,9 @@ function describe( lbl, thunk ) {
    return thunk();
 }
 
-function main( N ) {
+function main( bench, N ) {
    console.log( bench + "(", N, ")..." );
+   const mem = new Memory();
    
    for( let i = 0; i < 10; i++ ) {
       console.log( i );
@@ -944,7 +946,7 @@ function main( N ) {
 	    	  var output = test.output;
 
 	    	  // New CPU
-	    	  var z80 = new Z80(new Memory(), new IO());
+	    	  var z80 = new Z80(mem, new IO());
 
 	    	  // Registers
 	    	  populateRegisters(z80, input);
@@ -968,9 +970,7 @@ function main( N ) {
 
 const N = 
    (process.argv[ 1 ] === "fprofile") 
-   ? 10
-   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 5000;
+   ? 100
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000;
 
-main( "Z80", N ); 
-
-
+main( "z80", N ); 
