@@ -332,7 +332,7 @@ function main( bench, N ) {
 110 print w
 120 return`.split("\n");
 
-  console.log( bench + "(", n, ")..." );
+  console.log( bench + "(", N, ")..." );
    
   for( let j = 0; j < 10; j++ ) {
      console.log( j );
