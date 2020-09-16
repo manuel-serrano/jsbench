@@ -114,7 +114,7 @@ function main() {
    try {
       require( plugin )( logs, engines, args );
    } catch( e ) {
-      require( "./plugins/" + plugin )( logs, engines, config );
+      require( "./plugins/" + plugin )( logs, engines, args );
    } finally {
       fs.close( config.fd );
    }
