@@ -1,27 +1,34 @@
 "use strict";
 
 let M = 0;
+let G = 0;
 
 function fun( i ) {
-   return this.x + i;
+   G++;
+   return this.x;
 }
 
 function gee( CNT, m ) {
    M = m;
    let s = 0;
-   let os = [ { x: 12345, y : 2, f: fun },
-	      { a: 0, x: 12345, y: 2, f: fun },
-	      { a: 0, b: 1, x: 12345, y: 2, f: fun } ];
+   let os = [ { x: 1, y : 2, f: fun },
+	      { a: 0, x: 2, y: 2, f: fun },
+	      { a: 0, b: 1, x: -3, y: 2, f: fun } ];
    
    for( let j = 0; j < CNT; j++ ) {
+      G = 0;
       if( j % 1000 == 0 ) console.log( j );
-      for( let i = 0; i < 300000; i++ ) {
+      for( let i = 0; i < 150000; i++ ) {
+         let o = os[ i % M ];
+         s = o.f( i );
+      }
+      for( let i = 0; i < 150000; i++ ) {
          let o = os[ i % M ];
          s = o.f( i );
       }
    }
 
-   return s;
+   return G + s;
 }
 
 const N = (process.argv[ 1 ] === "fprofile") 
