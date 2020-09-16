@@ -520,17 +520,20 @@ function BenchmarkSuite( name, val, benchs ) {
    go = function() {
       var num = benchs[ 0 ].iteration;
       var n = Math.round( num / 10 ), i = 1;
-      console.log( name );
+      console.log( name + " (" + num + ")" );
       while( num-- > 0 ) {
-	 if( num % n == 0 ) { console.log( i++ ); }
+	 if( num % n === 0 ) { console.log( i++ ); }
 	 benchs[ 0 ].go()
       };
    }
 }
 
-var Richards = BenchmarkSuite('Richards', [3530], [
-  Benchmark("Richards", true, false, 820 * 1, runRichards)
-]);
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? 200
+      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000;
 
+var Richards = BenchmarkSuite('Richards', [35302], [
+  Benchmark("Richards", true, false, N, runRichards)
+]);
 
 go();
