@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
 /*    Last change :  Thu Oct 17 08:45:35 2019 (serrano)                */
-/*    Copyright   :  2017-19 Manuel Serrano                            */
+/*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot line, each horizontal tick is a benchmark.    */
 /*    This plugin was implemented for the jsprop paper.                */
@@ -44,7 +44,7 @@ const colors = [ '#3264c8', '#d83812', '#fa9600', '#109318', '#960096', '#0096c2
 /*---------------------------------------------------------------------*/
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
-module.exports = function( logfiles, engines, args ) {
+module.exports = function( logfiles, engines, args, config ) {
    const alogs = logfiles.map( l => require( common.normalizeCwd( l ) ) );
 
    const logs = common.mergeLogs( logfiles, args );

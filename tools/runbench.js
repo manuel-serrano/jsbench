@@ -216,7 +216,7 @@ function benchLog( bench, engine, cmd, times, subtitle, args ) {
 	 if( config.directory ) {
 	    json = path.join( config.directory, path.basename( json ) );
 	 }
-	 if( config.verbose >= 3 ) {
+	 if( config.verbose >= 4 ) {
 	    process.stdout.write( " dump [" + json + "]..." );
 	 }
 	 fs.writeFile( json, 
@@ -225,7 +225,7 @@ function benchLog( bench, engine, cmd, times, subtitle, args ) {
 	       if( err ) {
 		  reject( err ) 
 	       } else {
-	 	  if( config.verbose >= 3 ) {
+	 	  if( config.verbose >= 4 ) {
 	    	     process.stdout.write( "done." );
 		  }
 		  resolve( 0 );

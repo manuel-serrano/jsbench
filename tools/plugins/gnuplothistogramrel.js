@@ -53,7 +53,7 @@ const plotport = process.stdout;
 /*---------------------------------------------------------------------*/
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
-module.exports = function( logfiles, engines, args ) {
+module.exports = function( logfiles, engines, args, config ) {
    const alogs = logfiles.map( l => require( common.normalizeCwd( l ) ) );
 
    const logs = common.mergeLogs( logfiles, args );

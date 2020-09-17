@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:21:57 2017                          */
 /*    Last change :  Thu Oct 24 09:23:56 2019 (serrano)                */
-/*    Copyright   :  2017-19 Manuel Serrano                            */
+/*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    text plugin                                                      */
 /*=====================================================================*/
@@ -197,7 +197,7 @@ function logText( logs, enames ) {
 /*---------------------------------------------------------------------*/
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
-module.exports = function( logfiles, engines, args ) {
+module.exports = function( logfiles, engines, args, config ) {
    let logs = common.mergeLogs( logfiles, args );
    let queue = [];
    

@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:21:57 2017                          */
 /*    Last change :  Thu Oct 17 08:46:04 2019 (serrano)                */
-/*    Copyright   :  2017-19 Manuel Serrano                            */
+/*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    xgraph plugin                                                    */
 /*=====================================================================*/
@@ -79,7 +79,7 @@ function logXgraph( logs, engines ) {
 /*---------------------------------------------------------------------*/
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
-module.exports = function( logfiles, engines, args ) {
+module.exports = function( logfiles, engines, args, config ) {
    const logs = common.mergeLogs( logfiles, args );
    logXgraph( logs, engines.map( e => e.name ) );
 }
