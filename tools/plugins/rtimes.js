@@ -69,7 +69,7 @@ function logRTime( logs, enames, config ) {
 /*---------------------------------------------------------------------*/
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
-module.exports = function( logfiles, engines, config ) {
+module.exports = function( logfiles, engines, args, config ) {
    let logs = common.mergeLogs( logfiles, config );
    let queue = [];
    

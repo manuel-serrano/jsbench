@@ -112,9 +112,9 @@ function main() {
    const engines = engine.loadEngines( args.e, args );
 
    try {
-      require( plugin )( logs, engines, args );
+      require( plugin )( logs, engines, args, config );
    } catch( e ) {
-      require( "./plugins/" + plugin )( logs, engines, args );
+      require( "./plugins/" + plugin )( logs, engines, args, config );
    } finally {
       fs.close( config.fd );
    }

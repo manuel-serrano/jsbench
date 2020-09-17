@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Mon Aug 12 10:15:42 2019                          */
 /*    Last change :  Wed Aug 14 16:02:50 2019 (serrano)                */
-/*    Copyright   :  2019 Manuel Serrano                               */
+/*    Copyright   :  2019-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a new log file that is the ratio of two log files.      */
 /*=====================================================================*/
@@ -81,7 +81,7 @@ function ratioEngine( e, log0, log1 ) {
 /*---------------------------------------------------------------------*/
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
-module.exports = function( logfiles, engines, args ) {
+module.exports = function( logfiles, engines, args, config ) {
    const logs0 = require( common.normalizeCwd( logfiles[ 0 ] ) );
    const logs1 = require( common.normalizeCwd( logfiles[ 1 ] ) );
    

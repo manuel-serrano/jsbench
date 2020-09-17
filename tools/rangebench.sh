@@ -48,6 +48,7 @@ while : ; do
 
     -r)
       shift
+      init=`hop --no-server --evaljs "console.log( require( '$1' ).init || 1)"`
       inc=`hop --no-server --evaljs "console.log( require( '$1' ).inc )"`
       end=`hop --no-server --evaljs "console.log( require( '$1' ).end )"`
       ;;
@@ -99,6 +100,7 @@ while : ; do
       if [ "$src " = " " ]; then
 	src=$1
       elif [ "$inc " = " " ]; then
+	init=1
 	inc=$1
       elif [ "$end " = " " ]; then
 	end=$1
@@ -193,9 +195,11 @@ fi
 
 if [ "$inc " = " " ]; then
   if [ -f $dir/$base.range.json ]; then
+    init=`hop --no-server --evaljs "console.log( require( '$root$dir/$base.range.json' ).init || 1); process.exit( 0 )"`
     inc=`hop --no-server --evaljs "console.log( require( '$root$dir/$base.range.json' ).inc ); process.exit( 0 )"`
     end=`hop --no-server --evaljs "console.log( require( '$root$dir/$base.range.json' ).end ); process.exit( 0 )"`
   else
+    init=1
     inc=100
   fi
 fi
@@ -205,19 +209,18 @@ if [ "$end " = " " ]; then
 fi
 
 if [ "$extraarg " != " " ]; then
-  echo "$src ($extraarg) inc=$inc end=$end"
+  echo "$src ($extraarg) init=$init inc=$inc end=$end"
 else  
-  echo "$src inc=$inc end=$end"
+  echo "$src init=$init inc=$inc end=$end"
 fi  
 
 # the csv file
 echo "#    $engines" > $outdir/$out.csv
 
 echo -n "  "
-i=0
+i=$init
 
-while [ `expr $i "<" $end` = 1 ]; do
-  i=`expr $i "+" $inc`
+while [ `expr $i "<=" $end` = 1 ]; do
   sep=""
 
   echo -n "$i "
@@ -230,6 +233,8 @@ while [ `expr $i "<" $end` = 1 ]; do
   done
 
   echo "" >> $outdir/$out.csv
+  i=`expr $i "+" $inc "-" $init`
+  init=0
 done
 
 echo ""

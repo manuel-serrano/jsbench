@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
 /*    Last change :  Mon Oct 22 18:50:21 2018 (serrano)                */
-/*    Copyright   :  2017-18 Manuel Serrano                            */
+/*    Copyright   :  2017-20 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a HTML table from logs                                  */
 /*=====================================================================*/
@@ -66,7 +66,7 @@ function collectEngines( logs ) {
 /*---------------------------------------------------------------------*/
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
-module.exports = function( logfiles, engines, args ) {
+module.exports = function( logfiles, engines, args, config ) {
    const alogs = logfiles.map( l => require( common.normalizeCwd( l ) ) );
    const logs = Array.prototype.concat.apply( [], alogs );
    const enames = engines.length > 0
