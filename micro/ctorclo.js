@@ -7,6 +7,7 @@ function CTOR( a, b ) {
       return a + b + c;
    }
    f.prototype = fp;
+   return f;
 }
 
 function loop( arr, n, j ) {
