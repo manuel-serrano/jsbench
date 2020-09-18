@@ -180,7 +180,7 @@ function cos( n ) { return Math.cos( n ); }
 function acos( n ) { return Math.acos( n ); }
 function sin( n ) { return Math.sin( n ); }
 function asin( n ) { return Math.asin( n ); }
-function atan2( n, m ) { return Math.atan( n, m ); }
+function atan2( n, m ) { return Math.atan2( n, m ); }
 function abs( n ) { return Math.abs( n ); }
 function sqrt( n ) { return Math.sqrt( n ); }
  
