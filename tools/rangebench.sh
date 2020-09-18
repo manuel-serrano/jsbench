@@ -233,7 +233,11 @@ while [ `expr $i "<=" $end` = 1 ]; do
   done
 
   echo "" >> $outdir/$out.csv
-  i=`expr $i "+" $inc "-" $init`
+  if [ "$inc " = "$init " ]; then
+    i=`expr $i "+" $inc
+  else
+    i=`expr $i "+" $inc "-" $init`
+  fi
   init=0
 done
 
