@@ -559,7 +559,10 @@ function main() {
 
    benchmarks
       .forEachAsync( runBenchmark )
-      .then( x => { console.log( args.e, "ok" ); process.exit( 0 ); } )
+      .then( x => { if( config.verbose >= 4 ) {
+		       console.log( args.e, "ok" ); 
+		    }
+		    process.exit( 0 ); } )
       .catch( e => { throw( e ) } );
 }
 
