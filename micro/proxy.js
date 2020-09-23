@@ -42,8 +42,8 @@ function buildObjects() {
 }
 
 function run( count ) {
-   const rem = tabulateRemainder( count, 16 );
    const os = buildObjects();
+   const rem = tabulateRemainder( count, os.length );
    let s = 0;
 
    for( let j = 0; j < count; j++ ) {
