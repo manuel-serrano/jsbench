@@ -340,15 +340,15 @@ function binl2b64(binarray)
 /*    sha1                                                             */
 /*---------------------------------------------------------------------*/
 function sha1( msg ) {
-   // constants [4.2.1]
+   // constants [§4.2.1]
    var K = [0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xca62c1d6];
 
 
    // PREPROCESSING 
  
-   msg += String.fromCharCode(0x80); // add trailing '1' bit to string [5.1.1]
+   msg += String.fromCharCode(0x80); // add trailing '1' bit to string [§5.1.1]
 
-   // convert string msg into 512-bit/16-integer blocks arrays of ints [5.2.1]
+   // convert string msg into 512-bit/16-integer blocks arrays of ints [§5.2.1]
    var l = Math.ceil(msg.length/4) + 2;  // long enough to contain msg plus 2-word length
    var N = Math.ceil(l/16);              // in N 16-int blocks
    var M = new Array(N);
@@ -367,14 +367,14 @@ function sha1( msg ) {
    M[N-1][14] = Math.floor(M[N-1][14]);
    M[N-1][15] = ((msg.length-1)*8) & 0xffffffff;
 
-   // set initial hash value [5.3.1]
+   // set initial hash value [§5.3.1]
    var H0 = 0x67452301;
    var H1 = 0xefcdab89;
    var H2 = 0x98badcfe;
    var H3 = 0x10325476;
    var H4 = 0xc3d2e1f0;
 
-   // HASH COMPUTATION [6.1.2]
+   // HASH COMPUTATION [§6.1.2]
 
    var W = new Array(80); var a, b, c, d, e;
    for (var i=0; i<N; i++) {
@@ -424,7 +424,7 @@ function sha1( msg ) {
 
 
 //
-// function 'f' [4.1.1]
+// function 'f' [§4.1.1]
 //
 function sha1f(s, x, y, z) {
    switch (s) {
@@ -436,7 +436,7 @@ function sha1f(s, x, y, z) {
 }
 
 //
-// rotate left (circular left shift) value x by n positions [3.2.5]
+// rotate left (circular left shift) value x by n positions [§3.2.5]
 //
 function sha1ROTL(x, n) {
    return (x<<n) | (x>>>(32-n));
@@ -673,7 +673,7 @@ function parse(uuid) {
   }
 
   let v;
-  const arr = new Array(16);
+  const arr = new Uint8Array(16);
 
   // Parse ########-....-....-....-............
   arr[0] = (v = parseInt(uuid.slice(0, 8), 16)) >>> 24;
@@ -752,16 +752,9 @@ function v35(name, version, hashfunc) {
     // Compute hash of namespace and value, Per 4.3
     // Future: Use spread syntax when supported on all platforms, e.g. `bytes =
     // hashfunc([...namespace, ... value])`
-    let bytes = new Array(16 + value.length);
-/*     bytes.set(namespace);                                           */
-/*     bytes.set(value, namespace.length);                             */
-    for( let i = namespace.length -1; i >= 0; i-- ) {
-       bytes[ i ] = namespace[ i ];
-    }
-    for( let i = value.length - 1, base = namespace.length; i >= 0; i-- ) {
-       bytes[ i + base ] = value[ i ];
-    }
-    
+    let bytes = new Uint8Array(16 + value.length);
+    bytes.set(namespace);
+    bytes.set(value, namespace.length);
     bytes = hashfunc(bytesToString( bytes ));
 
     bytes[6] = (bytes[6] & 0x0f) | version;
@@ -997,6 +990,10 @@ function testv35() {
   	 ];
 
       function hashToHex(hash) {
+    	 if (hash instanceof Buffer) {
+      	    hash = Array.from(hash);
+    	 }
+
     	 return hash
       	    .map(function (b) {
                return b.toString(16).padStart(2, '0');
@@ -1081,9 +1078,7 @@ function testv35() {
       	       v3('hello.example.com', new Array(17));
     	    });
 
-	 let js68fix = new Array(16);
-	 js68fix.fill(0);
-    	 assert.ok(v3('hello.example.com', js68fix));
+    	 assert.ok(v3('hello.example.com', new Array(16).fill(0)));
       });
 
       test('v3 fill buffer', () => {
@@ -1179,9 +1174,7 @@ function testv35() {
       	       v5('hello.example.com', new Array(17));
     	    });
 
-	 let js68fix = new Array(16);
-	 js68fix.fill(0);
-    	 assert.ok(v5('hello.example.com', js68fix));
+    	 assert.ok(v5('hello.example.com', new Array(16).fill(0)));
       });
 
       test('v5 fill buffer', () => {
@@ -1323,7 +1316,7 @@ function main( bench, n ) {
 
 const N = 
    (process.argv[ 1 ] === "fprofile") 
-   ? 500
-   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 5000;
+   ? 2
+   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 100;
 
 main( "uuid", N ); 
