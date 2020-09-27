@@ -67,9 +67,9 @@ assert.ok = function( x ) { return x === true };
  * Configurable variables. You may need to tweak these to be compatible with
  * the server-side, but the defaults work in most cases.
  */
-var hexcase = 0;  /* hex output format. 0 - lowercase; 1 - uppercase        */
-var b64pad  = ""; /* base-64 pad character. "=" for strict RFC compliance   */
-var chrsz   = 8;  /* bits per input character. 8 - ASCII; 16 - Unicode      */
+const hexcase = 0;  /* hex output format. 0 - lowercase; 1 - uppercase        */
+const b64pad  = ""; /* base-64 pad character. "=" for strict RFC compliance   */
+const chrsz   = 8;  /* bits per input character. 8 - ASCII; 16 - Unicode      */
 
 /*
  * These are the functions you'll usually want to call
@@ -299,12 +299,12 @@ function md5Buffer( n ) {
 
 function binl2buf(bin)
 {
-/*    return md5Buffer( bin[0] )                                       */
-/*       .concat( md5Buffer( bin[1] ), md5Buffer( bin[2] ), md5Buffer( bin[3] ) ); */
    return md5Buffer( bin[0] )
-      .concat( md5Buffer( bin[1] ) )
-      .concat( md5Buffer( bin[2] ) )
-      .concat( md5Buffer( bin[3] ) );
+      .concat( md5Buffer( bin[1] ), md5Buffer( bin[2] ), md5Buffer( bin[3] ) );
+/*    return md5Buffer( bin[0] )                                       */
+/*       .concat( md5Buffer( bin[1] ) )                                */
+/*       .concat( md5Buffer( bin[2] ) )                                */
+/*       .concat( md5Buffer( bin[3] ) );                               */
 }
 
 
@@ -411,12 +411,12 @@ function sha1( msg ) {
       H4 = (H4+e) & 0xffffffff;
    }
 
-/*    return sha1Buffer(H0).concat( sha1Buffer(H1),sha1Buffer(H2), sha1Buffer(H3), sha1Buffer(H4) ); */
-   return sha1Buffer(H0)
-      .concat( sha1Buffer(H1) )
-      .concat( sha1Buffer(H2) )
-      .concat( sha1Buffer(H3) )
-      .concat( sha1Buffer(H4) );
+   return sha1Buffer(H0).concat( sha1Buffer(H1),sha1Buffer(H2), sha1Buffer(H3), sha1Buffer(H4) );
+/*    return sha1Buffer(H0)                                            */
+/*       .concat( sha1Buffer(H1) )                                     */
+/*       .concat( sha1Buffer(H2) )                                     */
+/*       .concat( sha1Buffer(H3) )                                     */
+/*       .concat( sha1Buffer(H4) );                                    */
 }
 
 //<Buffer 37 73 de a6 51 56 90 98 38 fa 6c 22 82 5c af e0 90 ff 80 30>
@@ -650,6 +650,7 @@ function v1(options, buf, offset) {
   b[i++] = tmh & 0xff;
 
   // `time_high_and_version`
+  //#:tprint( "ICI" );
   b[i++] = ((tmh >>> 24) & 0xf) | 0x10; // include version
   b[i++] = (tmh >>> 16) & 0xff;
 
