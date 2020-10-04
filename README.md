@@ -34,6 +34,7 @@ Hop JS range benchmarks
 To range benchmarks:
 
   ./hoprange.sh -e hop -e nodejs -O /tmp/HOPRANGE --benchmarks="octane/richards.js octane/deltablue.js octane/boyer.js octane/earley.js octane/splay.js"
+  ./hoprange.sh -e hop -e nodejs -e js60 -e jsc -O /tmp/HOPRANGE micro/concat.js
 
 To range one benchmark family:
 
