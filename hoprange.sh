@@ -10,6 +10,7 @@ resetengines=""
 verbose=-v0
 benchmarks=
 rndvaspace=yes
+range=
 
 while : ; do
   case $1 in
@@ -52,6 +53,10 @@ while : ; do
     -v|-v0|-v1|-v2|-v3|-v4)
       verbose=$1
       ;;
+
+    -r)
+      range="-r $1"
+      ;;
     
     -*)
       echo "Usage: hoprange.sh [options]" >&2;
@@ -62,6 +67,7 @@ while : ; do
       echo "  --hopc=path                        hopc compiler" >&2;
       echo "  --benchmarks=prog1 prog2 prog3...  bencharks" >&2;
       echo "  -e engine                          execution engine" >&2;
+      echo "  -r range.json                      range file" >&2;
       echo "  -v[0123]                           verbosity" >&2;
       exit 1;;
 
@@ -163,27 +169,27 @@ for p in $BENCHMARKS; do
       arg=`grep "$a:" $argsfile | awk -F: '{print $2}' | sed s'/[ \x22,]//g'`
       if [ "$msg " != " " ]; then
 	if [ $verbose != " " ]; then
-          echo "tools/rangebench.sh $verbose $engines -D $dir $p -m \"$msg\" --date \"$dt\" --namesuf $name --arg $arg --hopc $hopc"
+          echo "tools/rangebench.sh $verbose $engines -D $dir $p -m \"$msg\" --date \"$dt\" --namesuf $name --arg $arg --hopc $hopc $range"
 	fi
-        tools/rangebench.sh $verbose $engines -D $dir $p -m "$msg" --date "$dt" --namesuf $name --arg $arg --hopc $hopc || exit 1
+        tools/rangebench.sh $verbose $engines -D $dir $p -m "$msg" --date "$dt" --namesuf $name --arg $arg --hopc $hopc $range || exit 1
       else
 	if [ $verbose != " " ]; then
-          echo "tools/rangebench.sh $verbose $engines -D $dir $p --date \"$dt\" --namesuf $name --arg $arg --hopc $hopc"
+          echo "tools/rangebench.sh $verbose $engines -D $dir $p --date \"$dt\" --namesuf $name --arg $arg --hopc $hopc $range"
 	fi
-        tools/rangebench.sh $verbose $engines -D $dir $p --date "$dt" --namesuf $name --arg $arg --hopc $hopc || exit 1
+        tools/rangebench.sh $verbose $engines -D $dir $p --date "$dt" --namesuf $name --arg $arg --hopc $hopc $range || exit 1
       fi
     done
   else
     if [ "$msg " != " " ]; then
       if [ $verbose != " " ]; then
-	echo "tools/rangebench.sh $verbose $engines -D $dir $p -m \"$msg\" --date \"$dt\" --hopc $hopc"
+	echo "tools/rangebench.sh $verbose $engines -D $dir $p -m \"$msg\" --date \"$dt\" --hopc $hopc $range"
       fi
-      tools/rangebench.sh $verbose $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc || exit 1
+      tools/rangebench.sh $verbose $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc $range || exit 1
     else
       if [ $verbose != " " ]; then
-	echo "tools/rangebench.sh $verbose $engines -D $dir $p --date \"$dt\" --hopc $hopc"
+	echo "tools/rangebench.sh $verbose $engines -D $dir $p --date \"$dt\" --hopc $hopc $range"
       fi
-      tools/rangebench.sh $verbose $engines -D $dir $p --date "$dt" --hopc $hopc || exit 1
+      tools/rangebench.sh $verbose $engines -D $dir $p --date "$dt" --hopc $hopc $range || exit 1
     fi
   fi
 done
