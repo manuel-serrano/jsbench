@@ -29,6 +29,9 @@ function newRegExp( pat, flags ) {
    }
 }
 
+function debug( a, b, c = undefined, d = undefined , e = undefined ) {
+}
+
 /*---------------------------------------------------------------------*/
 /*    minimatch                                                        */
 /*---------------------------------------------------------------------*/
@@ -164,8 +167,6 @@ function Minimatch (pattern, options) {
   this.make()
 }
 
-Minimatch.prototype.debug = function () {}
-
 Minimatch.prototype.make = make
 function make () {
   // don't do it more than once.
@@ -190,9 +191,7 @@ function make () {
   // step 2: expand braces
   var set = this.globSet = this.braceExpand()
 
-  if (options.debug) this.debug = console.error
-
-  this.debug(this.pattern, set)
+  debug(this.pattern, set)
 
   // step 3: now we have a set, so turn each one into a series of path-portion
   // matching patterns.
@@ -203,21 +202,21 @@ function make () {
     return s.split(slashSplit)
   })
 
-  this.debug(this.pattern, set)
+  debug(this.pattern, set)
 
   // glob --> regexps
   set = set.map(function (s, si, set) {
     return s.map(this.parse, this)
   }, this)
 
-  this.debug(this.pattern, set)
+  debug(this.pattern, set)
 
   // filter out everything that didn't compile properly.
   set = set.filter(function (s) {
     return s.indexOf(false) === -1
   })
 
-  this.debug(this.pattern, set)
+  debug(this.pattern, set)
 
   this.set = set
 }
@@ -342,7 +341,7 @@ function parse (pattern, isSub) {
           re += '\\' + stateChar
         break
       }
-      self.debug('clearStateChar %j %j', stateChar, re)
+      debug('clearStateChar %j %j', stateChar, re)
       stateChar = false
     }
   }
@@ -350,7 +349,7 @@ function parse (pattern, isSub) {
   for (var i = 0, len = pattern.length, c
     ; (i < len) && (c = pattern.charAt(i))
     ; i++) {
-    this.debug('%s\t%s %s %j', pattern, i, re, c)
+    debug('%s\t%s %s %j', pattern, i, re, c)
 
     // skip over any that are escaped.
     if (escaping && reSpecials[c]) {
@@ -377,12 +376,12 @@ function parse (pattern, isSub) {
       case '+':
       case '@':
       case '!':
-        this.debug('%s\t%s %s %j <-- stateChar', pattern, i, re, c)
+        debug('%s\t%s %s %j <-- stateChar', pattern, i, re, c)
 
         // all of those are literals inside a class, except that
         // the glob [!a] means [^a] in regexp
         if (inClass) {
-          this.debug('  in class')
+          debug('  in class')
           if (c === '!' && i === classStart + 1) c = '^'
           re += c
           continue
@@ -391,7 +390,7 @@ function parse (pattern, isSub) {
         // if we already have a stateChar, then it means
         // that there was something like ** or +? in there.
         // Handle the stateChar, then proceed with this one.
-        self.debug('call clearStateChar %j', stateChar)
+        debug('call clearStateChar %j', stateChar)
         clearStateChar()
         stateChar = c
         // if extglob is disabled, then +(asdf|foo) isn't a thing.
@@ -420,7 +419,7 @@ function parse (pattern, isSub) {
         })
         // negation is (?:(?!js)[^/]*)
         re += stateChar === '!' ? '(?:(?!(?:' : '(?:'
-        this.debug('plType %j %j', stateChar, re)
+        debug('plType %j %j', stateChar, re)
         stateChar = false
       continue
 
@@ -547,7 +546,7 @@ function parse (pattern, isSub) {
   // | chars that were already escaped.
   for (pl = patternListStack.pop(); pl; pl = patternListStack.pop()) {
     var tail = re.slice(pl.reStart + pl.open.length)
-    this.debug('setting tail', re, pl)
+    debug('setting tail', re, pl)
     // maybe some even number of \, then maybe 1 \, followed by a |
     tail = tail.replace(/((?:\\{2}){0,64})(\\?)\|/g, function (_, $1, $2) {
       if (!$2) {
@@ -564,7 +563,7 @@ function parse (pattern, isSub) {
       return $1 + $1 + $2 + '|'
     })
 
-    this.debug('tail=%j\n   %s', tail, tail, pl, re)
+    debug('tail=%j\n   %s', tail, tail, pl, re)
     var t = pl.type === '*' ? star
       : pl.type === '?' ? qmark
       : '\\' + pl.type
@@ -726,7 +725,7 @@ minimatch.match = function (list, pattern, options) {
 
 Minimatch.prototype.match = match
 function match (f, partial) {
-  this.debug('match', f, this.pattern)
+  debug('match', f, this.pattern)
   // short-circuit in the case of busted things.
   // comments, etc.
   if (this.comment) return false
@@ -743,7 +742,7 @@ function match (f, partial) {
 
   // treat the test path as a set of pathparts.
   f = f.split(slashSplit)
-  this.debug(this.pattern, 'split', f)
+  debug(this.pattern, 'split', f)
 
   // just ONE of the pattern sets in this.set needs to match
   // in order for it to be valid.  If negating, then just one
@@ -751,7 +750,7 @@ function match (f, partial) {
   // Either way, return on the first hit.
 
   var set = this.set
-  this.debug(this.pattern, 'set', set)
+  debug(this.pattern, 'set', set)
 
   // Find the basename of the path by looking for the last non-empty segment
   var filename
@@ -788,10 +787,10 @@ function match (f, partial) {
 Minimatch.prototype.matchOne = function (file, pattern, partial) {
   var options = this.options
 
-  this.debug('matchOne',
+  debug('matchOne',
     { 'this': this, file: file, pattern: pattern })
 
-  this.debug('matchOne', file.length, pattern.length)
+  debug('matchOne', file.length, pattern.length)
 
   for (var fi = 0,
       pi = 0,
@@ -799,18 +798,18 @@ Minimatch.prototype.matchOne = function (file, pattern, partial) {
       pl = pattern.length
       ; (fi < fl) && (pi < pl)
       ; fi++, pi++) {
-    this.debug('matchOne loop')
+    debug('matchOne loop')
     var p = pattern[pi]
     var f = file[fi]
 
-    this.debug(pattern, p, f)
+    debug(pattern, p, f)
 
     // should be impossible.
     // some invalid regexp stuff in the set.
     if (p === false) return false
 
     if (p === GLOBSTAR) {
-      this.debug('GLOBSTAR', [pattern, p, f])
+      debug('GLOBSTAR', [pattern, p, f])
 
       // "**"
       // a/**/b/**/c would match the following:
@@ -837,7 +836,7 @@ Minimatch.prototype.matchOne = function (file, pattern, partial) {
       var fr = fi
       var pr = pi + 1
       if (pr === pl) {
-        this.debug('** at the end')
+        debug('** at the end')
         // a ** at the end will just swallow the rest.
         // We have found a match.
         // however, it will not swallow /.x, unless
@@ -855,11 +854,11 @@ Minimatch.prototype.matchOne = function (file, pattern, partial) {
       while (fr < fl) {
         var swallowee = file[fr]
 
-        this.debug('\nglobstar while', file, fr, pattern, pr, swallowee)
+        debug('\nglobstar while', file, fr, pattern, pr, swallowee)
 
         // XXX remove this slice.  Just pass the start index.
         if (this.matchOne(file.slice(fr), pattern.slice(pr), partial)) {
-          this.debug('globstar found match!', fr, fl, swallowee)
+          debug('globstar found match!', fr, fl, swallowee)
           // found a match.
           return true
         } else {
@@ -867,12 +866,12 @@ Minimatch.prototype.matchOne = function (file, pattern, partial) {
           // can only swallow ".foo" when explicitly asked.
           if (swallowee === '.' || swallowee === '..' ||
             (!options.dot && swallowee.charAt(0) === '.')) {
-            this.debug('dot detected!', file, fr, pattern, pr)
+            debug('dot detected!', file, fr, pattern, pr)
             break
           }
 
           // ** swallows a segment, and continue.
-          this.debug('globstar swallow a segment, and continue')
+          debug('globstar swallow a segment, and continue')
           fr++
         }
       }
@@ -882,7 +881,7 @@ Minimatch.prototype.matchOne = function (file, pattern, partial) {
       // If there's more *pattern* left, then
       if (partial) {
         // ran out of file
-        this.debug('\n>>> no match, partial?', file, fr, pattern, pr)
+        debug('\n>>> no match, partial?', file, fr, pattern, pr)
         if (fr === fl) return true
       }
       return false
@@ -898,10 +897,10 @@ Minimatch.prototype.matchOne = function (file, pattern, partial) {
       } else {
         hit = f === p
       }
-      this.debug('string match', p, f, hit)
+      debug('string match', p, f, hit)
     } else {
       hit = f.match(p)
-      this.debug('pattern match', p, f, hit)
+      debug('pattern match', p, f, hit)
     }
 
     if (!hit) return false
