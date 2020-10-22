@@ -81,7 +81,7 @@ const env = {
 
 function Eval( x ) { 
    if( typeof( x ) === "number" ) {
-      return Math.parseInteger( x );
+      return parseInt( x );
    } else {
       if( x.charAt( 0 ) === '"' ) {
 	 return x;
@@ -210,7 +210,7 @@ function BASIC_REM(){}
 BASIC.REM=BASIC_REM;
 
 function BASIC_RETURN(){
-  CurrentLine=Pop();
+  CurrentLine=parseInt( Pop() );
 }
 BASIC.RETURN=BASIC_RETURN;
 
@@ -295,7 +295,7 @@ function RunProgram( prgm ){
    
   if(CurrentForm.Trace.value=="Trace Off"){
     CurrentLine=0
-    while(CurrentLine<9999){
+    while(CurrentLine<9997){
       Execute(GetLine(CurrentLine));
       CurrentLine++;
       if(CurrentForm.Trace.value=="Trace On") return;
@@ -304,7 +304,7 @@ function RunProgram( prgm ){
     Execute(GetLine(CurrentLine));
     CurrentLine++;
   }
-  if(CurrentLine>=9999){
+  if(CurrentLine>=9998){
     CurrentLine=0;
   }
 }
