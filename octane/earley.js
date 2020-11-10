@@ -4154,10 +4154,10 @@ var const_earley;
             args = sc_cons(arguments[sc_tmp], args);
         }
         var k;
-        return ((k = ((args === null)?(7):(args.car))), (BgL_runzd2benchmarkzd2("earley", (1), function() {
+        return ((k = ((args === null)?(9):(args.car))), (BgL_runzd2benchmarkzd2("earley", (1), function() {
             return (test(k));
         }, function(result) {
-            return ((sc_display(result)), (sc_newline()), result == 132);
+            return ((sc_display(result)), (sc_newline()), result == 1430);
         })));
     };
 }
@@ -4186,7 +4186,7 @@ function RunBenchmark(name, count, run, warn) {
   for (var n = 0; n < count; ++n) {
     var result = run();
     if (!warn(result)) {
-      throw new Error("Earley or Boyer did incorrect number of rewrites");
+       throw new Error("Earley or Boyer did incorrect number of rewrites: " + result);
     }
   }
 }
@@ -4297,14 +4297,14 @@ function BenchmarkSuite( name, val, benchs ) {
       console.log( name + " (" + num + ")" );
       while( num-- > 0 ) {
 	 if( num % n == 0 ) { console.log( i++ ); }
-	 benchs[ 0 ].go()
+	 benchs[ 0 ].go();
       };
    }
 }
 
 const N = (process.argv[ 1 ] === "fprofile") 
       ? 25
-      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 250;
+      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 500;
 
 var EarleyBoyer = new BenchmarkSuite('Earley', [666463], [
   new Benchmark("Earley", true,  false, N, function () { BgL_earleyzd2benchmarkzd2(); })
