@@ -175,7 +175,7 @@ module.exports = function( logfiles, engines, args, config ) {
    plotport.write( "\n" );
    plotport.write( "set style fill solid\n" );
    for( let i = 1; i < enames.length; i++ ) {
-      plotport.write( `set style line ${i} linecolor rgb '${colors[ (i + linestyle - 2) % colors.length ]}' linetype 1 linewidth 1` );
+      plotport.write( `set style line ${i} linecolor rgb '${colors[ (i + linestyle - 1) % colors.length ]}' linetype 1 linewidth 1` );
       plotport.write( "\n" );
    }
    
