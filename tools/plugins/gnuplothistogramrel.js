@@ -79,13 +79,22 @@ module.exports = function( logfiles, engines, args, config ) {
    
    // plot data
    csvport.write( '#                  ' );
-   enames.slice( 1 ).forEach( n => csvport.write( utils.padding( n, enginepad ) ) );
+   
+   if( args.includebase ) {
+      enames.forEach( n => csvport.write( utils.padding( n, enginepad ) ) );
+   } else {
+      enames.slice( 1 ).forEach( n => csvport.write( utils.padding( n, enginepad ) ) );
+   }
    csvport.write( "\n" );
    
    for( let i = start; i < logs.length; i++ ) {
       const log = logs[ i ];
       csvport.write( utils.padding( log.name + ",", 19 ) );
       csvport.write( " " );
+      
+      if( args.includebase ) {
+	 csvport.write( utils.padding( "1, ", enginepad ) );
+      }
       
       for( let j = 1; j < enames.length; j++ ) {
 	 const entry0 = log.engines.find( e => e.name === enames[ 0 ] );
@@ -174,8 +183,8 @@ module.exports = function( logfiles, engines, args, config ) {
    plotport.write( `set boxwidth ${args.boxwidth || defaultBoxwidth}` );
    plotport.write( "\n" );
    plotport.write( "set style fill solid\n" );
-   for( let i = 1; i < enames.length; i++ ) {
-      plotport.write( `set style line ${i} linecolor rgb '${colors[ (i + linestyle - 1) % colors.length ]}' linetype 1 linewidth 1` );
+   for( let i = args.includebase ? 0 : 1; i < enames.length; i++ ) {
+      plotport.write( `set style line ${i + (args.includebase ? 1 : 0)} linecolor rgb '${colors[ (i + linestyle) % colors.length ]}' linetype 1 linewidth 1` );
       plotport.write( "\n" );
    }
    
@@ -247,8 +256,8 @@ module.exports = function( logfiles, engines, args, config ) {
    plotport.write( `plot` );
    plotport.write( " \\\n" );
    
-   for( let i = 1; i < enames.length; i++ ) {
-      plotport.write( `  '${base}.csv' u ${i+1}:xtic(1) title '${enames[ i ]}' ls ${i}` );
+   for( let i = args.includebase ? 0 : 1; i < enames.length; i++ ) {
+      plotport.write( `  '${base}.csv' u ${i+(args.includebase ? 2 : 1)}:xtic(1) title '${enames[ i ]}' ls ${i + (args.includebase ? 1 : 0)}` );
       if( i < enames.length - 1 ) {
 	 plotport.write( ", \\\n" );
       }
