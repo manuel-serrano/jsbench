@@ -206,10 +206,10 @@ module.exports = function( logfiles, engines, args, config ) {
       plotport.write( "\n" );
    }
    
-   if( deviation > 0 ) {
+   if( deviation ) {
       plotport.write( "set style line 100 linecolor rgb '#000000' linetype 1 linewidth 1\n" );
    }
-   if( errorbars > 0 ) {
+   if( errorbars ) {
       plotport.write( "set style line 100 linecolor rgb '#000000' linetype 1 linewidth 1\n" );
    }
    

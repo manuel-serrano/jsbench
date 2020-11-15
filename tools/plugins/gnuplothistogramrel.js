@@ -73,9 +73,11 @@ module.exports = function( logfiles, engines, args, config ) {
    const output = args.o || args.output || (logs[ 0 ].name + "." + format);
    const base = output.replace( /.[^.]+$/, '' );
    const start = args.start ? parseInt( args.start ) : 0;
+   const errorbars = args.errorbars;
+   const uratio = args.unitRatio || unitRatio;
    
    enames.forEach( n => { if( n.length > enginepad ) enginepad = n.length } );
-   enginepad += 4;
+   enginepad += (errorbars ? 8 : 4);
    
    // plot data
    csvport.write( '#                  ' );
@@ -92,22 +94,26 @@ module.exports = function( logfiles, engines, args, config ) {
       csvport.write( utils.padding( log.name + ",", 19 ) );
       csvport.write( " " );
       
-      if( args.includebase ) {
-	 csvport.write( utils.padding( "1, ", enginepad ) );
-      }
-      
-      for( let j = 1; j < enames.length; j++ ) {
+      for( let j = (args.includebase ? 0 : 1); j < enames.length; j++ ) {
 	 const entry0 = log.engines.find( e => e.name === enames[ 0 ] );
 	 const entry = log.engines.find( e => e.name === enames[ j ] );
 	 const times0 = entry0.logs[ 0 ].times;
 	 const times = entry.logs[ 0 ].times;
 	 const { tm: tm0, min: min0, max: max0 } = utils.median( times0.rtimes )
 	 const { tm, min, max } = utils.median( times.rtimes )
-	 const mn0 = utils.mean( times0.rtimes );
-	 const mn = utils.mean( times.rtimes );
 	 const val = (tm/tm0);
 	 let str = (isNaN( val ) ? 0 : val).toFixed( 2 );
 
+	 if( errorbars ) {
+	    const minval = (min/tm0);
+            const maxval = (max/tm0);
+
+	    str += ",";
+	    str += (isNaN( minval ) ? val : minval ).toFixed( 2 );
+	    str += ",";
+	    str += (isNaN( maxval ) ? val : maxval ).toFixed( 2 );
+	 } 
+	 
 	 if( j < enames.length - 1 ) {
 	    str += ",  ";
 	 }
@@ -162,7 +168,13 @@ module.exports = function( logfiles, engines, args, config ) {
    plotport.write( "set auto x\n\n" );
    plotport.write( "set style data histogram\n" );
    
-   plotport.write( "set style histogram cluster gap 1\n" );
+   if( errorbars ) {
+      plotport.write( "set style histogram gap 1 errorbars lw 1\n" );
+      plotport.write( `set errorbars lc ${args.errorbars === true ? "black" : args.errorbars}` );
+      plotport.write( "\n" );
+   } else {
+      plotport.write( "set style histogram cluster gap 1\n" );
+   }
    
    if( args.xtics === "no" ) {
       plotport.write( "unset xtics\n\n" );
@@ -186,6 +198,10 @@ module.exports = function( logfiles, engines, args, config ) {
    for( let i = args.includebase ? 0 : 1; i < enames.length; i++ ) {
       plotport.write( `set style line ${i + (args.includebase ? 1 : 0)} linecolor rgb '${colors[ (i + linestyle) % colors.length ]}' linetype 1 linewidth 1` );
       plotport.write( "\n" );
+   }
+   
+   if( errorbars ) {
+      plotport.write( "set style line 100 linecolor rgb '#000000' linetype 1 linewidth 1\n" );
    }
    
    plotport.write( "\n" );
@@ -256,10 +272,20 @@ module.exports = function( logfiles, engines, args, config ) {
    plotport.write( `plot` );
    plotport.write( " \\\n" );
    
-   for( let i = args.includebase ? 0 : 1; i < enames.length; i++ ) {
-      plotport.write( `  '${base}.csv' u ${i+(args.includebase ? 2 : 1)}:xtic(1) title '${enames[ i ]}' ls ${i + (args.includebase ? 1 : 0)}` );
-      if( i < enames.length - 1 ) {
-	 plotport.write( ", \\\n" );
+   if( errorbars) {
+      for( let i = args.includebase ? 0 : 1; i < enames.length; i++ ) {
+	 const j = (i * 3) + (args.includebase ? 2 : 1);
+	 plotport.write( `  '${base}.csv' u ${j}:${j+1}:${j+2}:xtic(1) title '${enames[ i ]}' ls ${i + (args.includebase ? 1 : 0)}` );
+      	 if( i < enames.length - 1 ) {
+	    plotport.write( ", \\\n" );
+      	 }
+      }
+   } else {
+      for( let i = args.includebase ? 0 : 1; i < enames.length; i++ ) {
+      	 plotport.write( `  '${base}.csv' u ${i+(args.includebase ? 2 : 1)}:xtic(1) title '${enames[ i ]}' ls ${i + (args.includebase ? 1 : 0)}` );
+      	 if( i < enames.length - 1 ) {
+	    plotport.write( ", \\\n" );
+      	 }
       }
    }
    
