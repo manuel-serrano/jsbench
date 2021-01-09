@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
 /*    Last change :  Fri Jun  5 08:07:12 2020 (serrano)                */
-/*    Copyright   :  2017-20 Manuel Serrano                            */
+/*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
 /*=====================================================================*/
@@ -342,7 +342,7 @@ function runBench( bench, engine ) {
    
    function run( k = false, args = false ) {
       if( engine.compiler ) {
-	 return compile( args ).then( () => runCompile( k, args ) );
+	 return compile( args ).then( _ => runCompile( k, args ) );
       } else {
 	 return runInterpret( k, args );
       }
@@ -400,7 +400,7 @@ function runBench( bench, engine ) {
 	 
 	 if( engine.compiler ) {
 	    return compile( false )
-	       .then( () => Promise.all( 
+	       .then( _ => Promise.all( 
 		  Object.keys( args ).map( k => runCompile( k, args[ k ] ) ) ) );
 	 } else {
 	    return Promise.all( 

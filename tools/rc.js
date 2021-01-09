@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 06:43:39 2017                          */
 /*    Last change :  Mon Aug 27 15:15:57 2018 (serrano)                */
-/*    Copyright   :  2017-18 Manuel Serrano                            */
+/*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Manages RC files                                                 */
 /*=====================================================================*/
@@ -85,7 +85,7 @@ function loadConfig( cfg ) {
       if( fs.existsSync( cfg ) ) {
 	 return mergeConfig( require( cfg ), dft );
       } else {
-	 throw "Config file does not exist \"" + args.config + "\"";
+	 throw "Config file does not exist \"" + cfg + "\"";
       }
    } else {
       let cfg = findConfigFile( "jsbench.json" );
@@ -100,8 +100,6 @@ function loadConfig( cfg ) {
 	 }
       }
    }
-
-   return config;
 }
 
 /*---------------------------------------------------------------------*/
