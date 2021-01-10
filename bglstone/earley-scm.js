@@ -260,13 +260,13 @@ function listRef( l, i ) {
    }
 }
    
-function listSet( l, i ) {
+function listSet( l, i, val ) {
    if( l === nil ) {
       return false;
    } else if( i === 0 ) {
       return setCar( l, val );
    } else {
-      return listSet( cdr( l ), i - 1 );
+      return listSet( cdr( l ), i - 1, val );
    }
 }
    
@@ -1023,7 +1023,7 @@ function makeParser( grammar, lexer ) {
 				    toks, states, nbNts );
 			      
 			      return loopII( confSetNext( enderSet, k ),
-				 n + (nvPrevTrees * nvEnderTrees) );
+				 n + (nbPrevTrees * nbEnderTrees) );
 			   } else {
 			      return loopII( confSetNext( enderSet( k ), n ) );
 			   }
@@ -1039,7 +1039,7 @@ function makeParser( grammar, lexer ) {
 	       }
 	    }
 	    
-	    return loop1( enders[ stesp[ prev ] ], 0 );
+	    return loop( enders[ steps[ prev ] ], 0 );
 	 }
       }
       
@@ -1048,13 +1048,13 @@ function makeParser( grammar, lexer ) {
 	 if( ntStar ) {
 	    const nbNts = nts.length;
 	    
-	    const loop = function loop( l, ntTres ) {
+	    const loop = function loop( l, nbTrees ) {
 	       if( pairp( l ) ) {
 		  const conf = car( l );
 		  
 		  if( confSetMemberp( states[ j ], conf, i ) ) {
 		     return loop( cdr( l ), 
-			nvDerivTres( conf, i, j, enders, steps, toks, states,
+			nbDerivTrees( conf, i, j, enders, steps, toks, states,
 			   nbNts ) + nbTrees );
 		  } else {
 		     return loop( cdr( l ), nbTrees );
