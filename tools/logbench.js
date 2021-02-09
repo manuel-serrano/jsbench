@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:16:47 2017                          */
 /*    Last change :  Mon Jun  1 08:21:05 2020 (serrano)                */
-/*    Copyright   :  2017-20 Manuel Serrano                            */
+/*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Output bench log                                                 */
 /*=====================================================================*/
@@ -116,7 +116,7 @@ function main() {
    } catch( e ) {
       require( "./plugins/" + plugin )( logs, engines, args, config );
    } finally {
-      fs.close( config.fd );
+      fs.closeSync( config.fd );
    }
 }
 
