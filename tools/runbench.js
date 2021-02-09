@@ -378,7 +378,7 @@ function runBench( bench, engine ) {
 	    .replace( /@NAME@/g, bench.name )
    	    .replace( /@ENGINE@/g, engine.name || "" );
       const p = path.join( config.tmp, bench.name + "-" + engine.name + ".js" );
-      let b = fs.readFileSync( bench.path );
+      let b = fs.readFileSync( bench.path ).toString();
 
       fs.writeFileSync( p, pld );
 
