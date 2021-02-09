@@ -1,0 +1,7 @@
+{
+   "name": "nodejs",
+   "version": "@INTERPRETER@ -e \"console.log( process.version )\"",
+   "cmd": "@INTERPRETER@ --jitless @PATH@",
+   "interpreter": "nodejs",
+   "iteration": 3
+}

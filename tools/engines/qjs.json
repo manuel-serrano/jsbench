@@ -1,0 +1,9 @@
+{
+   "name": "qjs",
+   "version": "@COMPILER@ -h | grep QuickJS | sed 's/[^ ]* [^ ]* version //'",
+   "cmd": "@COMPILER@ -flto @TMP@/@NAME@-qjs.js -o @TMP@/@NAME@.@ENGINE@",
+   "run": "@TMP@/@NAME@.@ENGINE@ -",
+   "compiler": "qjsc",
+   "prelude": "qjs-prelude.js",
+   "iteration": 3
+}
