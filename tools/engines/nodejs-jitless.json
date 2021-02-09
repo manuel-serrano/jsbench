@@ -1,7 +1,7 @@
 {
-   "name": "nodejs",
+   "name": "nodejs-jitless",
    "version": "@INTERPRETER@ -e \"console.log( process.version )\"",
    "cmd": "@INTERPRETER@ --jitless @PATH@",
-   "interpreter": "nodejs",
+   "interpreter": "node",
    "iteration": 3
 }
