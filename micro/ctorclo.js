@@ -10,31 +10,44 @@ function CTOR( a, b ) {
    return f;
 }
 
-function loop( arr, n, j ) {
-   for( let i = 0; i < n; i++ ) {
-      arr[ i ] = CTOR( j, n );
-   }
-}
-
 function test( n ) {
    let k = n / 10;
-   let arr = new Array( 1000 );
-   
-   for( let j = 0; j < 10; j++ ) {
-      console.log( j );
-      for( let i = 0; i < n; i++ ) {
-	 loop( arr, arr.length, j );
-      }
+   let m = 0;
+   var r = 0;
+   let j = 0;
+   let l = arr.length;
+  
+   for( let i = 0; i < n; i++ ) {
+      let III = i;
+      if( III % k == 0 ) console.log( III );
+      let OOO = new CTOR( III, n );
+      if( ++j === l ) j = 0;
+      arr[ j ] = OOO;
    }
 
-   return arr.length;
+   return m;
 }
 
+var p = {};
+CTOR.prototype = { __proto__: { __proto__: { __proto__: p } } };
+
+var o1 = new CTOR( 1, 2, 3, 4 );
+
 const N = (process.argv[ 1 ] === "fprofile") 
-      ? 10000
-      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 4000);
+      ? 40000
+      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 400000);
+
+let arr = new Array( Math.min( N, 10000 ) );
 
 console.log( "ctorclo(", N, ")..." );
 
-var arr = new Array( N );
 console.log( "test=", test( N ) );
+var o2 = new CTOR( 10, 20 );
+
+let s = 0;
+for( let i = arr.length - 1; i >= 0; i-- ) {
+   s +=  ((arr[ i ].a > arr[ i ].b) ? 1 : -1);
+   s +=  ((arr[ i ].c2 > arr[ i ].d2) ? 1 : -1);
+}
+
+console.log( "s=", s );
