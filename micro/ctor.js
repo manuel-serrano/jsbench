@@ -34,9 +34,10 @@ CTOR.prototype = { __proto__: { __proto__: { __proto__: p } } };
 
 var o1 = new CTOR( 1, 2, 3, 4 );
 
+const K = 40000;
 const N = (process.argv[ 1 ] === "fprofile") 
-      ? 10000
-      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 70000000);
+      ? K / 10
+      : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1) * K);
 
 let arr = new Array( Math.min( N, 10 ) );
 

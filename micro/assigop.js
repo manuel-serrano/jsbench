@@ -1,17 +1,19 @@
 "use strict";
 
+let o;
+
 function SET( o, v ) {
    o.x += v;
 }
 
 function bar( n ) {
-   let o = { x : 0 };
+   o = { x: 0 };
 
    for( let i = 0; i < n; i++ ) {
       SET( o, i + 1 );
       SET( o, -i );
    }
-   return o;
+   return o.x;
 }
 
 function foo( N ) {
@@ -22,6 +24,8 @@ function foo( N ) {
       if( iii % k == 0 ) console.log( iii );
       R = bar( 40000 );
    }
+   
+   console.log( "R=", R );
    return R;
 }
 
