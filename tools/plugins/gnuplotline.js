@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
 /*    Last change :  Thu Oct 17 08:45:35 2019 (serrano)                */
-/*    Copyright   :  2017-20 Manuel Serrano                            */
+/*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot line, each horizontal tick is a benchmark.    */
 /*    This plugin was implemented for the jsprop paper.                */
@@ -117,7 +117,7 @@ module.exports = function( logfiles, engines, args, config ) {
 	 break;
 	 
       case "svg":
-	 process.stderr.write( `set terminal svg size ${size} font "Verdana,20"` );
+	 process.stderr.write( `set terminal svg size ${size} font "Verdana,14"` );
 	 process.stderr.write( "\n" );
    }
    process.stderr.write( `set output '${output}'` );

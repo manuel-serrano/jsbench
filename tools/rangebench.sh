@@ -245,7 +245,7 @@ echo ""
 
 # the plot file
 cat > $outdir/$out.plot << EOF
-set terminal $format font "Verdana,16"
+set terminal $format font "Verdana,14" size 9cm,6cm
 EOF
 
 echo "set output '$output'" >> $outdir/$out.plot
