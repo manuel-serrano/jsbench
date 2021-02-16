@@ -26,9 +26,10 @@ function foo( N ) {
    return R;
 }
 
+const K = 100;
 const N = (process.argv[ 1 ] === "fprofile") 
-      ? 1000
-      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 80000);
+      ? K / 10
+      : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000) * K);
 
 console.log( "bitwise(", N, ")..." );
 

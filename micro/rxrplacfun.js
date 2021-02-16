@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu Oct  5 07:34:05 2017                          */
 /*    Last change :  Tue Oct 29 14:43:21 2019 (serrano)                */
-/*    Copyright   :  2017-19 Manuel Serrano                            */
+/*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Testing string.replace( rx, fun )                                */
 /*=====================================================================*/
@@ -64,6 +64,9 @@ function run( N ) {
    return rxrplacfun( N, plainText );
 }
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 100000;
+const K = 50;
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? K / 10
+      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000) * K;
 
 console.log( run( N ) );
