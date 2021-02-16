@@ -27,10 +27,12 @@ function foo( N ) {
    }
 }
 
-const N = (process.argv[ 1 ] === "fprofile") 
-      ? 1000
-      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 80000);
+const K = 40;
 
-console.log( "assigop(", N, ")..." );
+const N = (process.argv[ 1 ] === "fprofile") 
+      ? K / 10
+      : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000) * K);
+
+console.log( "assigprop(", N, ")..." );
 
 console.log( foo( N ) );
