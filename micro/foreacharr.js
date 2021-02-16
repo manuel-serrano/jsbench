@@ -17,9 +17,10 @@ function test( n ) {
    return g;
 }
 
+const K = 100000;
 const N = (process.argv[ 1 ] === "fprofile") 
-      ? 10000
-      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 100000000);
+      ? K / 10
+      : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1) * K);
 
 console.log( "foreacharr(", N, ")..." );
 console.log( test( N ) );
