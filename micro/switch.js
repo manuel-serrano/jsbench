@@ -40,7 +40,7 @@ function run( j ) {
 
 exports.run = run;
 
-const K = 300000;
+const K = 600000;
 
 const N = (process.argv[ 1 ] === "fprofile") 
       ? K / 10

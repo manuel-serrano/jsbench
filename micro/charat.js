@@ -31,9 +31,10 @@ function str( num ) {
    return res;
 }
 
+const K = 1000;
 const N = (process.argv[ 1 ] === "fprofile") 
-      ? 10000
-      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000000);
+      ? K / 10
+      : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1) * K)
 
 console.log( "charat(", N, ")..." );
 
