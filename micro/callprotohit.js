@@ -32,6 +32,6 @@ function gee( CNT, m ) {
 const K = 1;
 const N = (process.argv[ 1 ] === "fprofile") 
       ? K 
-      : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1) * K);
+      : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000) * K);
 
 console.log( gee( N, 1 ) + " (=22344)" );

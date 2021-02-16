@@ -34,7 +34,7 @@ function gee( CNT, m ) {
 const K = 2;
 const N = (process.argv[ 1 ] === "fprofile") 
       ? K / 2
-      : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1) * K);
+      : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000) * K);
 
 console.log( "callobjhit(", N, ")..." );
 console.log( gee( N, 1 ) + " (=299997)" );

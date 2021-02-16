@@ -44,9 +44,10 @@ function gee( CNT ) {
 
 exports.run = gee;
 
+const K = 50;
 const N = (process.argv[ 1 ] === "fprofile") 
-      ? 1000
-      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 5000);
+      ? K / 10
+      : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000) * K);
 
 console.log( "instanceof(", N, ")..." );
 console.log( gee( N ) );
