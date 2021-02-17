@@ -145,7 +145,7 @@ function listRef( l, i ) {
    }
 }
    
-function listSet( l, i ) {
+function listSet( l, i, val ) {
    if( l === nil ) {
       return false;
    } else if( i === 0 ) {
