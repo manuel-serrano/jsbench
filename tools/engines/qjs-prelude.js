@@ -35,3 +35,7 @@ const console = {
    log: print
 }
 
+const global = {
+   console: console,
+   process: process
+}

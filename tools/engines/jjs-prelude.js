@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 07:38:36 2017                          */
 /*    Last change :  Tue Apr  3 05:14:29 2018 (serrano)                */
-/*    Copyright   :  2017-18 Manuel Serrano                            */
+/*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Prelude file for jjs compiler                                    */
 /*=====================================================================*/
@@ -40,4 +40,9 @@ Array.prototype.fill = function( value, start, end ) {
    for( let i = start; i < end; i++ ) {
       this[ i ] = value;
    }
+}
+
+const global = {
+   console: console,
+   process: process
 }

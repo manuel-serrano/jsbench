@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 07:38:36 2017                          */
 /*    Last change :  Mon Feb 24 15:56:11 2020 (serrano)                */
-/*    Copyright   :  2017-20 Manuel Serrano                            */
+/*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Prelude file for rhino compiler                                  */
 /*=====================================================================*/
@@ -41,4 +41,9 @@ Array.prototype.fill = function( value, start, end ) {
    for( let i = start; i < end; i++ ) {
       this[ i ] = value;
    }
+}
+
+const global = {
+   console: console,
+   process: process
 }

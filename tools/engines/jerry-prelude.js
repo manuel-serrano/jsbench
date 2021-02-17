@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 07:38:36 2017                          */
 /*    Last change :  Tue Apr  3 05:14:01 2018 (serrano)                */
-/*    Copyright   :  2017-18 Manuel Serrano                            */
+/*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Prelude file for rhino compiler                                  */
 /*=====================================================================*/
@@ -31,4 +31,9 @@ var process = {
 
 var console = {
    log: print
+}
+
+const global = {
+   console: console,
+   process: process
 }

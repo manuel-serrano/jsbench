@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 07:38:36 2017                          */
 /*    Last change :  Mon Feb 24 15:53:05 2020 (serrano)                */
-/*    Copyright   :  2017-20 Manuel Serrano                            */
+/*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Prelude file for JavaScriptCore                                  */
 /*=====================================================================*/
@@ -35,3 +35,7 @@ const console = {
    log: print
 }
 
+const global = {
+   console: console,
+   process: process
+}
