@@ -1641,7 +1641,7 @@ function main(bench, n) {
     console.log(bench, res);
 }
 
-const K = 1;
+const K = 100;
 const N =
     (process.argv[1] === "fprofile") ?
     K / 1 :
