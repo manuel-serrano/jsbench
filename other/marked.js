@@ -2813,11 +2813,11 @@ function main( bench, n ) {
    console.log( res );
 }
 
-const K = 10;
+const K = 200;
 
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? K / 10
-   : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1) * K);
+   : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 100) * K);
 
 main( "marked", N ); 
