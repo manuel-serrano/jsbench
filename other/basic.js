@@ -345,9 +345,10 @@ function main( bench, N ) {
    console.log( res );
 }
 
+const K = 100;
 const N = 
    (process.argv[ 1 ] === "fprofile") 
-   ? 5
-   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 50000;
+   ? K / 10
+   : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000) * K;
 
 main( "basic", N ); 

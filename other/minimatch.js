@@ -1083,9 +1083,10 @@ function main( bench, n ) {
    }
 }
 
+const K = 30;
 const N = 
    (process.argv[ 1 ] === "fprofile") 
-   ? 500
-   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 50000;
+   ? K / 10
+   : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000) * K;
 
 main( "minimatch", N ); 

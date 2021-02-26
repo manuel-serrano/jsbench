@@ -4,7 +4,7 @@
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu Oct  1 13:36:01 2020                          */
 /*    Last change :  Thu Oct  1 13:50:11 2020 (serrano)                */
-/*    Copyright   :  2020 Manuel Serrano                               */
+/*    Copyright   :  2020-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    minimist benchmark                                               */
 /*    -------------------------------------------------------------    */
@@ -1224,9 +1224,11 @@ function main( bench, n ) {
    }
 }
 
+const K = 20;
+
 const N = 
    (process.argv[ 1 ] === "fprofile") 
-   ? 500
-   : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10000;
+   ? K / 10
+   : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000) * K;
 
 main( "minimist", N ); 
