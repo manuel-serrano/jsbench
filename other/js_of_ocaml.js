@@ -1641,10 +1641,10 @@ function main(bench, n) {
     console.log(bench, res);
 }
 
-const K = 100;
+const K = 10;
 const N =
     (process.argv[1] === "fprofile") ?
-    K / 1 :
+    K / 10 :
     ((process.argv[2] ? parseInt(process.argv[2]) : 1) * K);
 
 life(THIS, 9999999);
