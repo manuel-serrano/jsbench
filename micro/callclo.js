@@ -15,7 +15,7 @@ function gee( CNT, m ) {
    
    for( let j = 0; j < CNT; j++ ) {
       if( j % 1000 == 0 ) console.log( j );
-      for( let i = 0; i < 300000; i++ ) {
+      for( let i = 0; i < 200000; i++ ) {
          let o = os[ i % M ];
 	 var g = o.f;
          s = g( i );
@@ -25,9 +25,10 @@ function gee( CNT, m ) {
    return s;
 }
 
+const K = 10;
 const N = (process.argv[ 1 ] === "fprofile") 
-      ? 100 
-      : (process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10000);
+      ? K / 10 
+      : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1) * K);
 
 console.log( "callclo(", N, ")..." );
 console.log( gee( N, 3 ) + " (=300000)" );
