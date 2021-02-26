@@ -2813,7 +2813,7 @@ function main( bench, n ) {
    console.log( res );
 }
 
-const K = 200;
+const K = 20;
 
 const N = 
    (process.argv[ 1 ] === "fprofile") 
