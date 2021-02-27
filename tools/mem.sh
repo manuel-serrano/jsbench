@@ -13,6 +13,11 @@
 # example ./pmapall ./a.out
 processname=$1
 
+if [ "$processname " = " " ]; then
+  echo "usage: mem process-name"
+  exit 1
+fi
+
 pid=`ps aux | grep "[0-9] $processname" | awk '{print $2}'`
 
 if [ "$pid " = " " ]; then
@@ -37,4 +42,4 @@ rss=`echo $sizes | awk '{print $3}'`
 # VSZ is the Virtual Memory Size. It includes all memory that the
 # process can access, including memory that is swapped out, memory that
 # is allocated, but not used, and memory that is from shared libraries.
-echo "pmap=$pmap rss=$rss vsz=$vsz sz=$sz"
+echo "pmap=$pmap rss=`expr $rss / 1024` ($rss) vsz=`expr $vsz / 1024` ($vsz) sz=`expr $sz / 1024` ($sz)"
