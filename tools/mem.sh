@@ -27,7 +27,7 @@ else
   pmap=`pmap $pid | tail -n 1 | awk '{print $2}'`
 fi  
 
-sizes=`ps -eo pid,sz,vsz,rss | grep "^$pid"`
+sizes=`ps -eo pid,sz,vsz,rss | grep "^[ ]?$pid "`
 
 sz=`echo $sizes | awk '{print $1}'`
 vsz=`echo $sizes | awk '{print $2}'`
