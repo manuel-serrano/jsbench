@@ -42,8 +42,3 @@ Array.prototype.fill = function( value, start, end ) {
       this[ i ] = value;
    }
 }
-
-const global = {
-   console: console,
-   process: process
-}
