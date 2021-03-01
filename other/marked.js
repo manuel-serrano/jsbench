@@ -2818,6 +2818,6 @@ const K = 20;
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? K / 10
-   : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 100) * K);
+   : ((process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000) * K);
 
 main( "marked", N ); 
