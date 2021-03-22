@@ -10,7 +10,7 @@
 #*    Show the memory usage of a running process                       */
 #*=====================================================================*/
 
-# example ./pmapall ./a.out
+# example ./mem.sh ./a.out
 processname=$1
 
 if [ "$processname " = " " ]; then
