@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu Feb  9 14:03:22 2017                          */
-/*    Last change :  Wed Dec  4 08:20:51 2019 (serrano)                */
-/*    Copyright   :  2017-19 Manuel Serrano                            */
+/*    Last change :  Fri May  7 17:00:41 2021 (serrano)                */
+/*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Transcription of the Scheme qsort.scm benchmark.                 */
 /*=====================================================================*/
@@ -102,5 +102,5 @@ const N =
    ? 20
    : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000;
 
-main( "fib", N ); 
+main( "qsort", N ); 
 

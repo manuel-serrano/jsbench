@@ -93,6 +93,7 @@ function base64ToString(data) {
     for (var i = 0; i < data.length; i++) {
         var c = toBinaryTable[data.charCodeAt(i) & 0x7f];
         var padding = (data.charCodeAt(i) == base64Pad.charCodeAt(0));
+
         // Skip illegal characters and whitespace
         if (c == -1) continue;
         
@@ -112,31 +113,43 @@ function base64ToString(data) {
 
     // If there are any bits left, the base64 string was corrupted
     if (leftbits)
-        throw Components.Exception('Corrupted base64 string');
+        throw ('Corrupted base64 string');
 
     return result;
 }
 
+let seed = 0.36;
+
+function Mathrandom() {
+   seed += 0.32;
+   if( seed > 1 ) seed = 1 - seed;
+   return seed;
+}
+
 var str = "";
 
-for ( var i = 0; i < 8192; i++ )
-        str += String.fromCharCode( (25 * Math.random()) + 97 );
+for ( var i = 0; i < 8192; i++ ) {
+   str += String.fromCharCode( (25 * Mathrandom()) + 97 );
+}
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 11;
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10200;
 const K = N / 10;
 
-for ( var i = 0; i < N; i++ ) {
+const store = new Array( 1000 );
+
+for ( var i = 0, j = 0; i < N; i++, j++ ) {
    var base64;
 
-   str = "";
    if( i % K === 0 ) console.log( i );
    base64 = toBase64(str);
+
    var encoded = base64ToString(base64);
    if (encoded != str)
       throw "ERROR: bad result: expected " + str + " but got " + encoded;
 
    // Double the string
-   str += str;
+   store[ j++ ] = str;
+   if( j === 999 ) j = 0;
 }
 
 toBinaryTable = null;
