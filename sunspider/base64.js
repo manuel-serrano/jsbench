@@ -151,5 +151,3 @@ for ( var i = 0, j = 0; i < N; i++, j++ ) {
    store[ j++ ] = str;
    if( j === 999 ) j = 0;
 }
-
-toBinaryTable = null;

@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Fri Jun  5 08:07:12 2020 (serrano)                */
+/*    Last change :  Tue May 11 14:34:14 2021 (serrano)                */
 /*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -246,9 +246,9 @@ function benchLog( bench, engine, cmd, times, subtitle, args ) {
 function runBench( bench, engine ) {
 
    function sec( ms ) {
-      let sec = ms / 1000;
+      let s = ms / 1000;
 
-      return sec.toFixed( 2 );
+      return s.toFixed( 2 );
    }
 
    function chrono( cmd ) {
