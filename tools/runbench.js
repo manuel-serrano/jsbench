@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Tue May 11 14:35:20 2021 (serrano)                */
+/*    Last change :  Tue May 11 14:35:53 2021 (serrano)                */
 /*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -425,17 +425,17 @@ function runBenchmark( p ) {
       const json = p.replace( /[.]js$/, "" ) + ".log.json";
       const name = path.basename( p ).replace( /.js$/, "" );
 
-      const bench = fs.existsSync( json ) ?
+      const test = fs.existsSync( json ) ?
 	    require( normalizeCwd( json ) ) : {};
 
-      bench.name = name;
-      bench.path = p;
+      test.name = name;
+      test.path = p;
 
-      if( !("extraopts" in bench) ) {
-	 bench.extraopts = "";
+      if( !("extraopts" in test) ) {
+	 test.extraopts = "";
       }
       
-      return bench;
+      return test;
    }
 
    const bench = loadBench( p );
