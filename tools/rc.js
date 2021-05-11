@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 06:43:39 2017                          */
-/*    Last change :  Mon Aug 27 15:15:57 2018 (serrano)                */
+/*    Last change :  Tue May 11 14:36:25 2021 (serrano)                */
 /*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Manages RC files                                                 */
@@ -88,10 +88,10 @@ function loadConfig( cfg ) {
 	 throw "Config file does not exist \"" + cfg + "\"";
       }
    } else {
-      let cfg = findConfigFile( "jsbench.json" );
+      let conf = findConfigFile( "jsbench.json" );
    
-      if( cfg ) {
-	 return mergeConfig( require( cfg ), dft );
+      if( conf ) {
+	 return mergeConfig( require( conf ), dft );
       } else {
 	 try {
 	    return mergeConfig( require( "./jsbench.json" ), dft );
