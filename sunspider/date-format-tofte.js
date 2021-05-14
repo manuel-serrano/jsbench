@@ -292,7 +292,7 @@ Date.prototype.formatDate = function (input,time) {
 function run() {
     var date = new Date("1/1/2007 1:11:11");
 
-    for (i = 0; i < 500; ++i) {
+    for (var i = 0; i < 500; ++i) {
         var shortFormat = date.formatDate("Y-m-d");
         var longFormat = date.formatDate("l, F d, Y g:i:s A");
         date.setTime(date.getTime() + 84266956);
@@ -311,13 +311,13 @@ class Benchmark {
 }
 
 function main( bench, n ) {
-   let res = 0;
-   const k = Math.round( n / 10 );
-   let i = 1;
+   var res = 0;
+   var k = Math.round( n / 10 );
+   var i = 1;
    
    console.log( bench + "(", n, ")..." );
    
-   for( let i = 0; i < n; i++ ) {
+   for( var i = 0; i < n; i++ ) {
       if( i % k === 0 ) console.log( i );
       run();
    }

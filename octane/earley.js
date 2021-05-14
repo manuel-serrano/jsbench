@@ -2176,7 +2176,7 @@ sc_Tokenizer.prototype.nextToken = function() {
     };
 
     function readString() {
-	res = "";
+	var res = "";
 	while (true) {
 	    var c = port.readChar();
 	    switch (c) {
@@ -2744,8 +2744,8 @@ function sc_toWriteString(o) {
 
 function sc_escapeWriteString(s) {
     var res = "";
-    var j = 0;
-    for (i = 0; i < s.length; i++) {
+    var j = 0, i = 0;
+    for (; i < s.length; i++) {
 	switch (s.charAt(i)) {
 	case "\0": res += s.substring(j, i) + "\\0"; j = i + 1; break;
 	case "\b": res += s.substring(j, i) + "\\b"; j = i + 1; break;
