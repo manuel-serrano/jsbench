@@ -132,7 +132,7 @@ for ( var i = 0; i < 8192; i++ ) {
    str += String.fromCharCode( (25 * Mathrandom()) + 97 );
 }
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 160200;
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 28040;
 const K = N / 10;
 
 const store = new Array( 1000 );
