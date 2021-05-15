@@ -2775,7 +2775,7 @@ function BenchmarkSuite( name, val, benchs ) {
 
 const N = (process.argv[ 1 ] === "fprofile") 
       ? 50
-      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 200;
+      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000;
 
 var EarleyBoyer = new BenchmarkSuite('Boyer', [666463], [
   new Benchmark("Boyer", true, false, N, function () { BgL_nboyerzd2benchmarkzd2(); })

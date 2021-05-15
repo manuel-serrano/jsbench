@@ -921,7 +921,7 @@ function BenchmarkSuite( name, val, benchs ) {
 
 const N = (process.argv[ 1 ] === "fprofile") 
       ? 60
-      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 600;
+      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1200;
 
 var RayTrace = new BenchmarkSuite('RayTrace', [739989], [
   new Benchmark('RayTrace', true, false, N, renderScene)

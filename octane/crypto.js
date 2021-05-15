@@ -1762,7 +1762,7 @@ function BenchmarkSuite( name, val, benchs ) {
 
 const N = (process.argv[ 1 ] === "fprofile") 
       ? 22
-      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 220;
+      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1020;
 
 // The code has been adapted for use as a benchmark by Google.
 var Crypto = new BenchmarkSuite('Crypto', [266181], [

@@ -262,7 +262,7 @@ function makeTagCloud(tagInfo)
 }
 
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000;
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 4000;
 const K = N / 10;
 
 for( let i = 0; i < N; i++ ) {

@@ -1805,7 +1805,7 @@ function BenchmarkSuite( name, num ) {
 }
 
 const N = (process.argv[ 1 ] === "fprofile") 
-   ? 10 : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 100;
+   ? 10 : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 500;
 
 
 BenchmarkSuite( "regexp", N );

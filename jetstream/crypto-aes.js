@@ -419,7 +419,7 @@ And sails upon the bosom of the air.";
 
 var password = "O Romeo, Romeo! wherefore art thou Romeo?";
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000;
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 6000;
 const K = N / 10;
 
 for( let i = 0; i < N; i++ ) {
