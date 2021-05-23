@@ -225,7 +225,7 @@ for (var i = 0; i <4; i++) {
 
 var expected = "2524d264def74cce2498bf112bedf00e6c0b796d";
 
-const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000;
+const N = process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 30000;
 
 const K = N / 10;
 
