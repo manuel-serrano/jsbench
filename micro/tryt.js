@@ -9,7 +9,8 @@ function thrower(f, v) {
 }
 function test(f1, f2, f3, f4, f5, N) {
    let x = 0;
-   for (let i = 0; i < 10000; i++) {
+
+   for (let i = 0; i < N; i++) {
       try {
 	 x += thrower(f5, N);
       	 try {
@@ -40,18 +41,19 @@ function test(f1, f2, f3, f4, f5, N) {
 }
 
 function main(bench, n) {
-   const f = false;
-   const m = f ? Math.round( n / 128 ) : n;
+   const f = true;
+   const m = f ? Math.round( n / 32 ) : n;
    let N = Math.round(m / 10);
    
-   let res = test(true, false, false, false, false, 100000);
-   res += test(false, true, false, false, false, 100000);
-   res += test(false, false, true, false, false, 100000);
-   res += test(false, false, false, true, false, 100000);
-   res += test(false, false, false, false, true, 100000);
+   let res = 0;
    
    for (let i = 0, j = 0; i < m; i++, j++) {
-      res = test(f, f, f, f, f, 100000);
+      res = test(false, false, f, false, false, 10000);
+      res += test(true, false, false, false, false, 10);
+      res += test(false, true, false, false, false, 10);
+      res += test(false, false, true, false, false, 10);
+      res += test(false, false, false, true, false, 10);
+      res += test(false, false, false, false, true, 10);
       if (j === N) {
 	 console.log(i);
 	 j = 0;
@@ -62,7 +64,7 @@ function main(bench, n) {
 
 const N = 
    (process.argv[ 1 ] === "fprofile") 
-   ? 1000
+   ? 100
    : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10000;
 
 main( "totest", N );
