@@ -1,0 +1,8 @@
+{
+   "name": "js78",
+   "version": "",
+   "cmd": "@INTERPRETER@ @TMP@/@NAME@-js78.js",
+   "interpreter": "js78",
+   "iteration": 3,
+   "prelude": "js78-prelude.js"
+}
