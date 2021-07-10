@@ -10,6 +10,7 @@ To run the benchmarks:
 To run all the "official" benchmarks
 
  ./hopstone.sh
+ ./hopstone.sh icfp21
  ./hopstone.sh --hopc=/tmp/HOP/bin/hopc -m "a message"
  ./hopstone.sh --hopc=/tmp/HOP/bin/hopc -O /tmp/HOPSTONE
  ./hopstone.sh -e hop -e nodejs -O /tmp/HOPSTONE
@@ -39,6 +40,7 @@ To range benchmarks:
 
 To range one benchmark family:
 
+  ./hoprange.sh -e hop -e nodejs -O /tmp/HOPRANGE icfp21
   ./hoprange.sh -e hop -e nodejs -O /tmp/HOPRANGE jetstream
   ./hoprange.sh -e hop -e hopfprof -e nodejs -O /tmp/HOPRANGE micro
   ./hoprange.sh -e hop -e hopfprof -e hopcprof -e nodejs -O /tmp/HOPRANGE octane
