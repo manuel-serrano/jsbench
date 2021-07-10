@@ -40,7 +40,7 @@ To range benchmarks:
 
 To range one benchmark family:
 
-  ./hoprange.sh -e hop -e nodejs -O /tmp/HOPRANGE icfp21
+  ./hoprange.sh -O /tmp/HOPRANGE icfp21
   ./hoprange.sh -e hop -e nodejs -O /tmp/HOPRANGE jetstream
   ./hoprange.sh -e hop -e hopfprof -e nodejs -O /tmp/HOPRANGE micro
   ./hoprange.sh -e hop -e hopfprof -e hopcprof -e nodejs -O /tmp/HOPRANGE octane

@@ -137,6 +137,10 @@ if [ "$benchmarks " != " " ]; then
       contract)
 	BENCHMARKS="$BENCHMARKS_CONTRACT $BENCHMARKS"
 	;;
+      
+      icfp21)
+	BENCHMARKS="$BENCHMARKS_ICFP21 $BENCHMARKS"
+	;;
 
       *)
 	BENCHMARKS="$BENCHMARKS $p"
