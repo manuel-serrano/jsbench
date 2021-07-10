@@ -12,3 +12,6 @@ BENCHMARKS_CONTRACT="contract/abbrev.js contract/abs.js contract/app-root-path.j
 BENCHMARKS_OTHER="other/deltablue-class.js other/rho.js other/moment.js other/qrcode.js other/basic.js other/uuid.js other/z80.js other/minimist.js other/minimatch.js other/jpeg.js other/js-of-ocaml.js other/marked.js"
 
 BENCHMARKS="$BENCHMARKS_OCTANE $BENCHMARKS_SUNSPIDER $BENCHMARKS_JETSTREAM $BENCHMARKS_SHOOTOUT $BENCHMARKS_BGLSTONE $BENCHMARKS_MICRO $BENCHMARKS_PROXY"
+
+BENCHMARKS_ICFP21="bglstone/almabench.js bglstone/bague.js other/basic.js bglstone/boyer-scm.js bglstone/earley-scm.js other/jpeg.js other/js-of-ocaml.js bglstone/leval.js other/marked.js bglstone/maze.js other/minimatch.js other/minimist.js other/moment.js other/qrcode.js other/rho.js proxy/richards-proxy.js other/uuid.js other/z80.js"
+
