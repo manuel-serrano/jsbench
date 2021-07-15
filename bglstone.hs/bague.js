@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    serrano/prgm/project/hop/jsbench/bglstone/bague.hs.js            */
+/*    serrano/prgm/project/hop/jsbench/bglstone.hs/bague.js            */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Pierre Weis                                       */
 /*    Creation    :  Fri Apr  1 10:00:21 1994                          */
-/*    Last change :  Sat Jul 10 09:55:53 2021 (serrano)                */
+/*    Last change :  Sun Jul 11 10:39:48 2021 (serrano)                */
 /*    -------------------------------------------------------------    */
 /*    Resolution recursive du Baguenaudier: bench les appels de        */
 /*    fonctions et les acces aux vecteurs                              */
@@ -22,7 +22,7 @@ let jeu/*:vector*/ = new Vector(0);
 const une_pierre = 1;
 const une_case_vide = 0;
 
-function init_jeu( nombre_de_pierres/*:integer*/ ) {
+function init_jeu( nombre_de_pierres ) {
    nombre_de_coups = 0;
    jeu = new Vector( nombre_de_pierres );
    
@@ -31,7 +31,7 @@ function init_jeu( nombre_de_pierres/*:integer*/ ) {
    }
 }
 
-function la_case( n/*:integer*/ ) {
+function la_case( n ) {
    return n - 1;
 }
 
