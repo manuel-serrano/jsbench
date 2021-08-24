@@ -23,29 +23,6 @@
 // more like a JavaScript program.
 "use strict";
 
-var go;
-
-function Benchmark( name, opt1, opt2, it, go ) {
-   return { go: go, iteration: it };
-}
-
-function BenchmarkSuite( name, val, benchs ) {
-   go = function() {
-      let num = benchs[ 0 ].iteration;
-      let n = Math.round( num / 10 ), i = 1;
-      console.log( name );
-      while( num-- > 0 ) {
-	 if( num % n == 0 ) { console.log( i++ ); }
-	 benchs[ 0 ].go()
-      };
-   }
-}   
-
-var DeltaBlue = new BenchmarkSuite('DeltaBlue', [66118], [
-  new Benchmark('DeltaBlue', true, false, 4400, deltaBlue)
-]);
-
-
 /**
  * A JavaScript implementation of the DeltaBlue constraint-solving
  * algorithm, as described in:
