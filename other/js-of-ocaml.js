@@ -382,7 +382,6 @@ function life(joo_global_object, disp) {
     }
 
     function caml_string_of_jsstring(s) {
-        console.log("ICI...", s);
         return caml_bytes_of_utf16_jsstring(s)
     }
 

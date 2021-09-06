@@ -1,14 +1,14 @@
 /*=====================================================================*/
-/*    serrano/trashcan/minimist/minimist.js                            */
+/*    serrano/prgm/project/hop/jsbench/other/minimist.js               */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu Oct  1 13:36:01 2020                          */
-/*    Last change :  Thu Oct  1 13:50:11 2020 (serrano)                */
+/*    Last change :  Tue Aug 31 12:20:12 2021 (serrano)                */
 /*    Copyright   :  2020-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    minimist benchmark                                               */
 /*    -------------------------------------------------------------    */
-/*    https://www.npmjs.com/package/minimis                            */
+/*    https://www.npmjs.com/package/minimist                           */
 /*=====================================================================*/
 "use strict";
 
