@@ -45,7 +45,8 @@
 
 /* --- O b j e c t   M o d e l --- */
 
-class OrderedCollection {
+record OrderedCollection {
+   elms;
    constructor() {
       this.elms = new Array();
    }
@@ -87,7 +88,9 @@ class OrderedCollection {
  * disrupting current constraints.  Strengths cannot be created outside
  * this class, so pointer comparison can be used for value comparison.
  */
-class Strength {
+record Strength {
+   strengthValue; 
+   name;
    constructor(strengthValue, name) {
       this.strengthValue = strengthValue;
       this.name = name;
@@ -141,7 +144,8 @@ Strength.WEAKEST         = new Strength(6, "weakest");
  * of storing the constrained variables and other information required
  * to represent a constraint.
  */
-class Constraint {
+record Constraint {
+   strength;
    constructor(strength) {
       this.strength = strength;
    }
@@ -198,7 +202,9 @@ class Constraint {
  * Abstract superclass for constraints having a single possible output
  * variable.
  */
-class UnaryConstraint extends Constraint {
+record UnaryConstraint extends Constraint {
+   myOutput;
+   satisfied;
    constructor(v, strength) {
       super(strength);
       this.myOutput = v;
@@ -279,7 +285,7 @@ class UnaryConstraint extends Constraint {
  * change their output during plan execution.  This is called "stay
  * optimization".
  */
-class StayConstraint extends UnaryConstraint {
+record StayConstraint extends UnaryConstraint {
    constructor(v, str) {
       super(v, str);
    }
@@ -297,7 +303,7 @@ class StayConstraint extends UnaryConstraint {
  * A unary input constraint used to mark a variable that the client
  * wishes to change.
  */
-class EditConstraint extends UnaryConstraint {
+record EditConstraint extends UnaryConstraint {
    constructor(v, str) {
       super(v, str);
    }
@@ -326,7 +332,9 @@ Direction.BACKWARD = -1;
  * Abstract superclass for constraints having two possible output
  * variables.
  */
-class BinaryConstraint extends Constraint {
+record BinaryConstraint extends Constraint {
+   v1; v2; 
+   direction;
    constructor (var1, var2, strength, init) {
       super( strength );
       this.v1 = var1;
@@ -442,7 +450,9 @@ class BinaryConstraint extends Constraint {
  * this relationship but the scale factor and offset are considered
  * read-only.
  */
-class ScaleConstraint extends BinaryConstraint {
+record ScaleConstraint extends BinaryConstraint {
+   scale;
+   offset;
    constructor(src, scale, offset, dest, strength) {
       super( src,dest,strength, true );
       this.direction = Direction.NONE;
@@ -502,9 +512,9 @@ class ScaleConstraint extends BinaryConstraint {
 /**
  * Constrains two variables to have the same value.
  */
-class EqualityConstraint extends BinaryConstraint {
+record EqualityConstraint extends BinaryConstraint {
    constructor(var1, var2, strength)  {
-      super(var1, var2, strength);
+      super(var1, var2, strength, undefined);
    }
 
 /**
@@ -525,7 +535,15 @@ class EqualityConstraint extends BinaryConstraint {
  * various parameters of interest to the DeltaBlue incremental
  * constraint solver.
  **/
-class Variable {
+record Variable {
+   value;
+   constraints;
+   determinedBy;
+   mark;
+   walkStrength;
+   stay;
+   name;
+   
    constructor(name, initialValue) {
       this.value = initialValue || 0;
       this.constraints = new OrderedCollection();
@@ -560,10 +578,8 @@ class Variable {
 /**
  * The DeltaBlue planner
  */
-class Planner {
-   constructor() {
-      this.currentMark = 0;
-   }
+record Planner {
+   currentMark = 0;
 
 /**
  * Attempt to satisfy the given constraint and, if successful,
@@ -749,7 +765,9 @@ class Planner {
  * to resatisfy all currently satisfiable constraints in the face of
  * one or more changing inputs.
  */
-class Plan {
+record Plan {
+   v;
+   
    constructor() {
       this.v = new OrderedCollection();
    }
@@ -797,7 +815,7 @@ function chainTest(n) {
   // Build chain of n equality constraints
   for (var i = 0; i <= n; i++) {
     var name = "v" + i;
-    var v = new Variable(name);
+    var v = new Variable(name, undefined);
     if (prev != null)
       new EqualityConstraint(prev, v, Strength.REQUIRED);
     if (i == 0) first = v;
