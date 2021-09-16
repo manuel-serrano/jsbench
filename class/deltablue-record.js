@@ -46,35 +46,36 @@
 /* --- O b j e c t   M o d e l --- */
 
 record OrderedCollection {
-   elms;
+   #elms;
+   
    constructor() {
-      this.elms = new Array();
+      this.#elms = new Array();
    }
    add(elm) {
-      this.elms.push(elm);
+      this.#elms.push(elm);
    }
    at(index) {
-      return this.elms[index];
+      return this.#elms[index];
    }
    size() {
-      return this.elms.length;
+      return this.#elms.length;
    }
    removeFirst() {
-      return this.elms.pop();
+      return this.#elms.pop();
    }
    remove(elm) {
       var index = 0, skipped = 0;
-      for (var i = 0; i < this.elms.length; i++) {
-	 var value = this.elms[i];
+      for (var i = 0; i < this.#elms.length; i++) {
+	 var value = this.#elms[i];
 	 if (value != elm) {
-	    this.elms[index] = value;
+	    this.#elms[index] = value;
 	    index++;
 	 } else {
 	    skipped++;
 	 }
       }
       for (var i = 0; i < skipped; i++)
-	 this.elms.pop();
+	 this.#elms.pop();
    }
 }
 
@@ -88,50 +89,50 @@ record OrderedCollection {
  * disrupting current constraints.  Strengths cannot be created outside
  * this class, so pointer comparison can be used for value comparison.
  */
-record Strength {
-   strengthValue; 
-   name;
-   constructor(strengthValue, name) {
-      this.strengthValue = strengthValue;
-      this.name = name;
-   }
+ record Strength {
+    strengthValue;
+    name; 
+    
+    constructor(strengthValue, name) {
+       this.strengthValue = strengthValue;
+       this.name = name;
+    }
 
-   static stronger(s1, s2) {
-      return s1.strengthValue < s2.strengthValue;
-   }
+    static stronger(s1, s2) {
+       return s1.strengthValue < s2.strengthValue;
+    }
 
-   static weaker(s1, s2) {
-      return s1.strengthValue > s2.strengthValue;
+    static weaker(s1, s2) {
+       return s1.strengthValue > s2.strengthValue;
+    }
+
+    static weakestOf(s1, s2) {
+       return Strength.weaker(s1, s2) ? s1 : s2;
+    }
+
+    static strongest(s1, s2) {
+       return Strength.stronger(s1, s2) ? s1 : s2;
+    }
+
+    nextWeaker() {
+       switch (this.strengthValue) {
+	  case 0: return Strength.WEAKEST;
+	  case 1: return Strength.WEAK_DEFAULT;
+	  case 2: return Strength.NORMAL;
+	  case 3: return Strength.STRONG_DEFAULT;
+	  case 4: return Strength.PREFERRED;
+	  case 5: return Strength.REQUIRED;
+       }
+    }
+    // Strength constants.
+    static REQUIRED = new Strength(0, "required");
+    static STRONG_PREFERRED = new Strength(1, "strongPreferred");
+    static PREFERRED = new Strength(2, "preferred");
+    static STRONG_DEFAULT = new Strength(3, "strongDefault");
+    static NORMAL = new Strength(4, "normal");
+    static WEAK_DEFAULT = new Strength(5, "weakDefault");
+    static WEAKEST = new Strength(6, "weakest");
 }
-
-   static weakestOf(s1, s2) {
-      return Strength.weaker(s1, s2) ? s1 : s2;
-   }
-
-   static strongest(s1, s2) {
-      return Strength.stronger(s1, s2) ? s1 : s2;
-}
-
-   nextWeaker() {
-      switch (this.strengthValue) {
-	 case 0: return Strength.WEAKEST;
-	 case 1: return Strength.WEAK_DEFAULT;
-	 case 2: return Strength.NORMAL;
-	 case 3: return Strength.STRONG_DEFAULT;
-	 case 4: return Strength.PREFERRED;
-	 case 5: return Strength.REQUIRED;
-      }
-   }
-}
-
-// Strength constants.
-Strength.REQUIRED        = new Strength(0, "required");
-Strength.STONG_PREFERRED = new Strength(1, "strongPreferred");
-Strength.PREFERRED       = new Strength(2, "preferred");
-Strength.STRONG_DEFAULT  = new Strength(3, "strongDefault");
-Strength.NORMAL          = new Strength(4, "normal");
-Strength.WEAK_DEFAULT    = new Strength(5, "weakDefault");
-Strength.WEAKEST         = new Strength(6, "weakest");
 
 /* --- *
  * C o n s t r a i n t
@@ -146,14 +147,35 @@ Strength.WEAKEST         = new Strength(6, "weakest");
  */
 record Constraint {
    strength;
+   
    constructor(strength) {
       this.strength = strength;
    }
+   
+   addToGraph() {
+   }
+   
+   removeFromGraph() {
+   }
+   
    addConstraint() {
       this.addToGraph();
       planner.incrementalAdd(this);
    }
 
+   chooseMethod(mark) {
+   }
+   
+   isSatisfied() {
+      return false;
+   }
+   
+   markInputs(mark) {
+   }
+   
+   output() {
+   }
+   
 /**
  * Attempt to find a way to enforce this constraint. If successful,
  * record the solution, perhaps modifying the current dataflow
@@ -203,12 +225,13 @@ record Constraint {
  * variable.
  */
 record UnaryConstraint extends Constraint {
-   myOutput;
-   satisfied;
+   #myOutput;
+   #satisfied;
+
    constructor(v, strength) {
       super(strength);
-      this.myOutput = v;
-      this.satisfied = false;
+      this.#myOutput = v;
+      this.#satisfied = false;
       this.addConstraint();
    }
 
@@ -216,8 +239,8 @@ record UnaryConstraint extends Constraint {
  * Adds this constraint to the constraint graph
  */
    addToGraph() {
-      this.myOutput.addConstraint(this);
-      this.satisfied = false;
+      this.#myOutput.addConstraint(this);
+      this.#satisfied = false;
    }
 
 /**
@@ -225,15 +248,15 @@ record UnaryConstraint extends Constraint {
  * decision.
  */
    chooseMethod(mark) {
-      this.satisfied = (this.myOutput.mark != mark)
-	 && Strength.stronger(this.strength, this.myOutput.walkStrength);
+      this.#satisfied = (this.#myOutput.mark != mark)
+	 && Strength.stronger(this.strength, this.#myOutput.walkStrength);
    }
 
 /**
  * Returns true if this constraint is satisfied in the current solution.
  */
    isSatisfied() {
-      return this.satisfied;
+      return this.#satisfied;
    }
 
    markInputs(mark) {
@@ -244,7 +267,7 @@ record UnaryConstraint extends Constraint {
  * Returns the current output variable.
  */
    output() {
-      return this.myOutput;
+      return this.#myOutput;
    }
 
 /**
@@ -253,16 +276,16 @@ record UnaryConstraint extends Constraint {
  * this constraint is satisfied.
  */
    recalculate() {
-      this.myOutput.walkStrength = this.strength;
-      this.myOutput.stay = !this.isInput();
-      if (this.myOutput.stay) this.execute(); // Stay optimization
+      this.#myOutput.walkStrength = this.strength;
+      this.#myOutput.stay = !this.isInput();
+      if (this.#myOutput.stay) this.execute(); // Stay optimization
    }
 
 /**
  * Records that this constraint is unsatisfied
  */
    markUnsatisfied() {
-      this.satisfied = false;
+      this.#satisfied = false;
    }
 
    inputsKnown() {
@@ -270,8 +293,8 @@ record UnaryConstraint extends Constraint {
    }
 
    removeFromGraph() {
-      if (this.myOutput != null) this.myOutput.removeConstraint(this);
-      this.satisfied = false;
+      if (this.#myOutput != null) this.#myOutput.removeConstraint(this);
+      this.#satisfied = false;
    }
 }
 
@@ -333,8 +356,10 @@ Direction.BACKWARD = -1;
  * variables.
  */
 record BinaryConstraint extends Constraint {
-   v1; v2; 
+   v1;
+   v2;
    direction;
+      
    constructor (var1, var2, strength, init) {
       super( strength );
       this.v1 = var1;
@@ -453,6 +478,7 @@ record BinaryConstraint extends Constraint {
 record ScaleConstraint extends BinaryConstraint {
    scale;
    offset;
+   
    constructor(src, scale, offset, dest, strength) {
       super( src,dest,strength, true );
       this.direction = Direction.NONE;
@@ -579,7 +605,11 @@ record Variable {
  * The DeltaBlue planner
  */
 record Planner {
-   currentMark = 0;
+   currentMark;
+   
+   constructor() {
+      this.currentMark = 0;
+   }
 
 /**
  * Attempt to satisfy the given constraint and, if successful,
@@ -766,21 +796,21 @@ record Planner {
  * one or more changing inputs.
  */
 record Plan {
-   v;
+   #v;
    
    constructor() {
-      this.v = new OrderedCollection();
+      this.#v = new OrderedCollection();
    }
    addConstraint(c) {
-      this.v.add(c);
+      this.#v.add(c);
    }
 
    size() {
-      return this.v.size();
+      return this.#v.size();
    }
 
    constraintAt(index) {
-      return this.v.at(index);
+      return this.#v.at(index);
    }
 
    execute() {
@@ -815,7 +845,7 @@ function chainTest(n) {
   // Build chain of n equality constraints
   for (var i = 0; i <= n; i++) {
     var name = "v" + i;
-    var v = new Variable(name, undefined);
+    var v = new Variable(name, 0);
     if (prev != null)
       new EqualityConstraint(prev, v, Strength.REQUIRED);
     if (i == 0) first = v;

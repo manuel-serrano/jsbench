@@ -46,34 +46,36 @@
 /* --- O b j e c t   M o d e l --- */
 
 class OrderedCollection {
+   #elms;
+   
    constructor() {
-      this.elms = new Array();
+      this.#elms = new Array();
    }
    add(elm) {
-      this.elms.push(elm);
+      this.#elms.push(elm);
    }
    at(index) {
-      return this.elms[index];
+      return this.#elms[index];
    }
    size() {
-      return this.elms.length;
+      return this.#elms.length;
    }
    removeFirst() {
-      return this.elms.pop();
+      return this.#elms.pop();
    }
    remove(elm) {
       var index = 0, skipped = 0;
-      for (var i = 0; i < this.elms.length; i++) {
-	 var value = this.elms[i];
+      for (var i = 0; i < this.#elms.length; i++) {
+	 var value = this.#elms[i];
 	 if (value != elm) {
-	    this.elms[index] = value;
+	    this.#elms[index] = value;
 	    index++;
 	 } else {
 	    skipped++;
 	 }
       }
       for (var i = 0; i < skipped; i++)
-	 this.elms.pop();
+	 this.#elms.pop();
    }
 }
 
@@ -145,11 +147,31 @@ class Constraint {
    constructor(strength) {
       this.strength = strength;
    }
+   
+   addToGraph() {
+   }
+   
+   removeFromGraph() {
+   }
+   
    addConstraint() {
       this.addToGraph();
       planner.incrementalAdd(this);
    }
 
+   chooseMethod(mark) {
+   }
+   
+   isSatisfied() {
+      return false;
+   }
+   
+   markInputs(mark) {
+   }
+   
+   output() {
+   }
+   
 /**
  * Attempt to find a way to enforce this constraint. If successful,
  * record the solution, perhaps modifying the current dataflow
@@ -199,10 +221,13 @@ class Constraint {
  * variable.
  */
 class UnaryConstraint extends Constraint {
+   #satisfied;
+   #myOutput;
+   
    constructor(v, strength) {
       super(strength);
-      this.myOutput = v;
-      this.satisfied = false;
+      this.#myOutput = v;
+      this.#satisfied = false;
       this.addConstraint();
    }
 
@@ -210,8 +235,8 @@ class UnaryConstraint extends Constraint {
  * Adds this constraint to the constraint graph
  */
    addToGraph() {
-      this.myOutput.addConstraint(this);
-      this.satisfied = false;
+      this.#myOutput.addConstraint(this);
+      this.#satisfied = false;
    }
 
 /**
@@ -219,15 +244,15 @@ class UnaryConstraint extends Constraint {
  * decision.
  */
    chooseMethod(mark) {
-      this.satisfied = (this.myOutput.mark != mark)
-	 && Strength.stronger(this.strength, this.myOutput.walkStrength);
+      this.#satisfied = (this.#myOutput.mark != mark)
+	 && Strength.stronger(this.strength, this.#myOutput.walkStrength);
    }
 
 /**
  * Returns true if this constraint is satisfied in the current solution.
  */
    isSatisfied() {
-      return this.satisfied;
+      return this.#satisfied;
    }
 
    markInputs(mark) {
@@ -238,7 +263,7 @@ class UnaryConstraint extends Constraint {
  * Returns the current output variable.
  */
    output() {
-      return this.myOutput;
+      return this.#myOutput;
    }
 
 /**
@@ -247,16 +272,16 @@ class UnaryConstraint extends Constraint {
  * this constraint is satisfied.
  */
    recalculate() {
-      this.myOutput.walkStrength = this.strength;
-      this.myOutput.stay = !this.isInput();
-      if (this.myOutput.stay) this.execute(); // Stay optimization
+      this.#myOutput.walkStrength = this.strength;
+      this.#myOutput.stay = !this.isInput();
+      if (this.#myOutput.stay) this.execute(); // Stay optimization
    }
 
 /**
  * Records that this constraint is unsatisfied
  */
    markUnsatisfied() {
-      this.satisfied = false;
+      this.#satisfied = false;
    }
 
    inputsKnown() {
@@ -264,8 +289,8 @@ class UnaryConstraint extends Constraint {
    }
 
    removeFromGraph() {
-      if (this.myOutput != null) this.myOutput.removeConstraint(this);
-      this.satisfied = false;
+      if (this.#myOutput != null) this.#myOutput.removeConstraint(this);
+      this.#satisfied = false;
    }
 }
 
@@ -750,19 +775,21 @@ class Planner {
  * one or more changing inputs.
  */
 class Plan {
+   #v;
+   
    constructor() {
-      this.v = new OrderedCollection();
+      this.#v = new OrderedCollection();
    }
    addConstraint(c) {
-      this.v.add(c);
+      this.#v.add(c);
    }
 
    size() {
-      return this.v.size();
+      return this.#v.size();
    }
 
    constraintAt(index) {
-      return this.v.at(index);
+      return this.#v.at(index);
    }
 
    execute() {
