@@ -35,43 +35,6 @@
 // Martin Richards.
 "use strict";
 
-/**
- * The Richards benchmark simulates the task dispatcher of an
- * operating system.
- **/
-function runRichards() {
-  var scheduler = new Scheduler();
-  scheduler.addIdleTask(ID_IDLE, 0, null, COUNT);
-
-  var queue = new Packet(null, ID_WORKER, KIND_WORK);
-  queue = new Packet(queue,  ID_WORKER, KIND_WORK);
-  scheduler.addWorkerTask(ID_WORKER, 1000, queue);
-
-  queue = new Packet(null, ID_DEVICE_A, KIND_DEVICE);
-  queue = new Packet(queue,  ID_DEVICE_A, KIND_DEVICE);
-  queue = new Packet(queue,  ID_DEVICE_A, KIND_DEVICE);
-  scheduler.addHandlerTask(ID_HANDLER_A, 2000, queue);
-
-  queue = new Packet(null, ID_DEVICE_B, KIND_DEVICE);
-  queue = new Packet(queue,  ID_DEVICE_B, KIND_DEVICE);
-  queue = new Packet(queue,  ID_DEVICE_B, KIND_DEVICE);
-  scheduler.addHandlerTask(ID_HANDLER_B, 3000, queue);
-
-  scheduler.addDeviceTask(ID_DEVICE_A, 4000, null);
-
-  scheduler.addDeviceTask(ID_DEVICE_B, 5000, null);
-
-  scheduler.schedule();
-
-  if (scheduler.queueCount != EXPECTED_QUEUE_COUNT ||
-      scheduler.holdCount != EXPECTED_HOLD_COUNT) {
-    var msg =
-        "Error during execution: queueCount = " + scheduler.queueCount +
-        ", holdCount = " + scheduler.holdCount + ".";
-    throw new Error(msg);
-  }
-}
-
 var COUNT = 1000;
 
 /**
@@ -102,13 +65,14 @@ var NUMBER_OF_IDS = 6;
 var KIND_DEVICE   = 0;
 var KIND_WORK     = 1;
 
-record Scheduler {
+// @record
+class Scheduler {
    queueCount = 0;
    holdCount = 0;
-   blocks = new Array(NUMBER_OF_IDS);
-   list = null;
-   currentTcb = null;
-   currentId = null;
+   #blocks = new Array(NUMBER_OF_IDS);
+   #list = null;
+   #currentTcb = null;
+   #currentId = null;
    
 /**
  * Add an idle task to this scheduler.
@@ -160,7 +124,7 @@ record Scheduler {
  */
  addRunningTask(id, priority, queue, task) {
     this.addTask(id, priority, queue, task);
-    this.currentTcb.setRunning();
+    this.#currentTcb.setRunning();
  }
 
 /**
@@ -171,22 +135,22 @@ record Scheduler {
  * @param {Task} task the task to add
  */
  addTask(id, priority, queue, task) {
-    this.currentTcb = new TaskControlBlock(this.list, id, priority, queue, task);
-    this.list = this.currentTcb;
-    this.blocks[id] = this.currentTcb;
+    this.#currentTcb = new TaskControlBlock(this.#list, id, priority, queue, task);
+    this.#list = this.#currentTcb;
+    this.#blocks[id] = this.#currentTcb;
  }
 
 /**
  * Execute the tasks managed by this scheduler.
  */
  schedule() {
-    this.currentTcb = this.list;
-    while (this.currentTcb != null) {
-       if (this.currentTcb.isHeldOrSuspended()) {
-      	  this.currentTcb = this.currentTcb.link;
+    this.#currentTcb = this.#list;
+    while (this.#currentTcb != null) {
+       if (this.#currentTcb.isHeldOrSuspended()) {
+      	  this.#currentTcb = this.#currentTcb.link;
        } else {
-      	  this.currentId = this.currentTcb.id;
-      	  this.currentTcb = this.currentTcb.run();
+      	  this.#currentId = this.#currentTcb.id;
+      	  this.#currentTcb = this.#currentTcb.run();
        }
     }
  }
@@ -196,13 +160,13 @@ record Scheduler {
  * @param {int} id the id of the task to suspend
  */
  release(id) {
-    var tcb = this.blocks[id];
+    var tcb = this.#blocks[id];
     if (tcb == null) return tcb;
     tcb.markAsNotHeld();
-    if (tcb.priority > this.currentTcb.priority) {
+    if (tcb.priority > this.#currentTcb.priority) {
        return tcb;
     } else {
-       return this.currentTcb;
+       return this.#currentTcb;
     }
  }
 
@@ -213,8 +177,8 @@ record Scheduler {
  */
  holdCurrent() {
     this.holdCount++;
-    this.currentTcb.markAsHeld();
-    return this.currentTcb.link;
+    this.#currentTcb.markAsHeld();
+    return this.#currentTcb.link;
  }
 
 /**
@@ -222,8 +186,8 @@ record Scheduler {
  * to run.  If new work is added to the suspended task it will be made runnable.
  */
  suspendCurrent() {
-    this.currentTcb.markAsSuspended();
-    return this.currentTcb;
+    this.#currentTcb.markAsSuspended();
+    return this.#currentTcb;
  }
 
 /**
@@ -233,12 +197,12 @@ record Scheduler {
  * @param {Packet} packet the packet to add
  */
  queue(packet) {
-    var t = this.blocks[packet.id];
+    var t = this.#blocks[packet.id];
     if (t == null) return t;
     this.queueCount++;
     packet.link = null;
-    packet.id = this.currentId;
-    return t.checkPriorityAdd(this.currentTcb, packet);
+    packet.id = this.#currentId;
+    return t.checkPriorityAdd(this.#currentTcb, packet);
  }
 }
 
@@ -276,13 +240,14 @@ var STATE_HELD = 4;
 var STATE_SUSPENDED_RUNNABLE = STATE_SUSPENDED | STATE_RUNNABLE;
 var STATE_NOT_HELD = ~STATE_HELD;
 
- record TaskControlBlock {
+// @record
+class TaskControlBlock {
     link;
     id;
     priority;
     queue;
     task;
-    state;
+    #state;
     
     constructor(link, id, priority, queue, task) {
        this.link = link;
@@ -291,34 +256,34 @@ var STATE_NOT_HELD = ~STATE_HELD;
        this.queue = queue;
        this.task = task;
        if (queue == null) {
-    	  this.state = STATE_SUSPENDED;
+    	  this.#state = STATE_SUSPENDED;
        } else {
-    	  this.state = STATE_SUSPENDED_RUNNABLE;
+    	  this.#state = STATE_SUSPENDED_RUNNABLE;
        }
     }
 
  setRunning() {
-    this.state = STATE_RUNNING;
+    this.#state = STATE_RUNNING;
  }
 
  markAsNotHeld() {
-    this.state = this.state & STATE_NOT_HELD;
+    this.#state = this.#state & STATE_NOT_HELD;
  }
 
  markAsHeld() {
-    this.state = this.state | STATE_HELD;
+    this.#state = this.#state | STATE_HELD;
  }
 
  isHeldOrSuspended() {
-    return (this.state & STATE_HELD) != 0 || (this.state == STATE_SUSPENDED);
+    return (this.#state & STATE_HELD) != 0 || (this.#state == STATE_SUSPENDED);
  }
 
  markAsSuspended() {
-    this.state = this.state | STATE_SUSPENDED;
+    this.#state = this.#state | STATE_SUSPENDED;
  }
 
  markAsRunnable() {
-    this.state = this.state | STATE_RUNNABLE;
+    this.#state = this.#state | STATE_RUNNABLE;
  }
 
 /**
@@ -326,13 +291,13 @@ var STATE_NOT_HELD = ~STATE_HELD;
  */
  run() {
     var packet;
-    if (this.state == STATE_SUSPENDED_RUNNABLE) {
+    if (this.#state == STATE_SUSPENDED_RUNNABLE) {
        packet = this.queue;
        this.queue = packet.link;
        if (this.queue == null) {
-      	  this.state = STATE_RUNNING;
+      	  this.#state = STATE_RUNNING;
        } else {
-      	  this.state = STATE_RUNNABLE;
+      	  this.#state = STATE_RUNNABLE;
        }
     } else {
        packet = null;
@@ -358,7 +323,7 @@ var STATE_NOT_HELD = ~STATE_HELD;
 }
 
 toString() {
-  return "tcb { " + this.task + "@" + this.state + " }";
+  return "tcb { " + this.task + "@" + this.#state + " }";
 }
 }
  
@@ -370,26 +335,27 @@ toString() {
  * @param {int} count the number of times this task should be scheduled
  * @constructor
  */
- record IdleTask{
-    scheduler;
-    v1;
-    count;
+// @record 
+class IdleTask {
+    #scheduler;
+    #v1;
+    #count;
     
     constructor(scheduler, v1, count) {
-       this.scheduler = scheduler;
-       this.v1 = v1;
-       this.count = count;
+       this.#scheduler = scheduler;
+       this.#v1 = v1;
+       this.#count = count;
     }
 
     run(packet) {
-       this.count--;
-       if (this.count == 0) return this.scheduler.holdCurrent();
-       if ((this.v1 & 1) == 0) {
-    	  this.v1 = this.v1 >> 1;
-    			       return this.scheduler.release(ID_DEVICE_A);
+       this.#count--;
+       if (this.#count == 0) return this.#scheduler.holdCurrent();
+       if ((this.#v1 & 1) == 0) {
+    	  this.#v1 = this.#v1 >> 1;
+    			       return this.#scheduler.release(ID_DEVICE_A);
        } else {
-    	  this.v1 = (this.v1 >> 1) ^ 0xD008;
-    	  return this.scheduler.release(ID_DEVICE_B);
+    	  this.#v1 = (this.#v1 >> 1) ^ 0xD008;
+    	  return this.#scheduler.release(ID_DEVICE_B);
        }
     }
 
@@ -404,24 +370,25 @@ toString() {
  * @param {Scheduler} scheduler the scheduler that manages this task
  * @constructor
  */
- record DeviceTask {
-    scheduler;
-    v1;
+// @record
+class DeviceTask {
+    #scheduler;
+    #v1;
     
     constructor (scheduler) {
-       this.scheduler = scheduler;
-       this.v1 = null;
+       this.#scheduler = scheduler;
+       this.#v1 = null;
     }
 
     run(packet) {
        if (packet == null) {
-    	  if (this.v1 == null) return this.scheduler.suspendCurrent();
-    	  var v = this.v1;
-    	  this.v1 = null;
-    	  return this.scheduler.queue(v);
+    	  if (this.#v1 == null) return this.#scheduler.suspendCurrent();
+    	  var v = this.#v1;
+    	  this.#v1 = null;
+    	  return this.#scheduler.queue(v);
        } else {
-    	  this.v1 = packet;
-    	  return this.scheduler.holdCurrent();
+    	  this.#v1 = packet;
+    	  return this.#scheduler.holdCurrent();
        }
     }
 
@@ -437,34 +404,35 @@ toString() {
  * @param {int} v2 another seed used to specify how work packets are manipulated
  * @constructor
  */
- record WorkerTask {
-    scheduler;
-    v1;
-    v2;
+// @record 
+class WorkerTask {
+    #scheduler;
+    #v1;
+    #v2;
     
     constructor(scheduler, v1, v2) {
-       this.scheduler = scheduler;
-       this.v1 = v1;
-       this.v2 = v2;
+       this.#scheduler = scheduler;
+       this.#v1 = v1;
+       this.#v2 = v2;
     }
 
     run(packet) {
        if (packet == null) {
-    	  return this.scheduler.suspendCurrent();
+    	  return this.#scheduler.suspendCurrent();
        } else {
-    	  if (this.v1 == ID_HANDLER_A) {
-      	     this.v1 = ID_HANDLER_B;
+    	  if (this.#v1 == ID_HANDLER_A) {
+      	     this.#v1 = ID_HANDLER_B;
     	  } else {
-      	     this.v1 = ID_HANDLER_A;
+      	     this.#v1 = ID_HANDLER_A;
     	  }
-    	  packet.id = this.v1;
+    	  packet.id = this.#v1;
     	  packet.a1 = 0;
     	  for (var i = 0; i < DATA_SIZE; i++) {
-      	     this.v2++;
-      	     if (this.v2 > 26) this.v2 = 1;
-      	     packet.a2[i] = this.v2;
+      	     this.#v2++;
+      	     if (this.#v2 > 26) this.#v2 = 1;
+      	     packet.a2[i] = this.#v2;
     	  }
-    	  return this.scheduler.queue(packet);
+    	  return this.#scheduler.queue(packet);
        }
     }
 
@@ -478,47 +446,48 @@ toString() {
  * @param {Scheduler} scheduler the scheduler that manages this task
  * @constructor
  */
- record HandlerTask {
-    scheduler;
-    v1 = null;
-    v2 = null;
-    
-    constructor (scheduler) {
-       this.scheduler = scheduler;
-    }
+// @record 
+class HandlerTask {
+   #scheduler;
+   #v1 = null;
+   #v2 = null;
+   
+   constructor (scheduler) {
+      this.#scheduler = scheduler;
+   }
 
-    run(packet) {
-       if (packet != null) {
-    	  if (packet.kind == KIND_WORK) {
-      	     this.v1 = packet.addTo(this.v1);
-    	  } else {
-      	     this.v2 = packet.addTo(this.v2);
-    	  }
-       }
-       if (this.v1 != null) {
-    	  var count = this.v1.a1;
-    	  var v;
-    	  if (count < DATA_SIZE) {
-      	     if (this.v2 != null) {
-        	v = this.v2;
-        	this.v2 = this.v2.link;
-        	v.a1 = this.v1.a2[count];
-        	this.v1.a1 = count + 1;
-        	return this.scheduler.queue(v);
-      	     }
-    	  } else {
-      	     v = this.v1;
-      	     this.v1 = this.v1.link;
-      	     return this.scheduler.queue(v);
-    	  }
-       }
-       return this.scheduler.suspendCurrent();
-    }
-    
-    toString() {
-       return "HandlerTask";
-    }
- }
+   run(packet) {
+      if (packet != null) {
+	 if (packet.kind == KIND_WORK) {
+	    this.#v1 = packet.addTo(this.#v1);
+	 } else {
+	    this.#v2 = packet.addTo(this.#v2);
+	 }
+      }
+      if (this.#v1 != null) {
+	 var count = this.#v1.a1;
+	 var v;
+	 if (count < DATA_SIZE) {
+	    if (this.#v2 != null) {
+	       v = this.#v2;
+	       this.#v2 = this.#v2.link;
+	       v.a1 = this.#v1.a2[count];
+	       this.#v1.a1 = count + 1;
+	       return this.#scheduler.queue(v);
+	    }
+	 } else {
+	    v = this.#v1;
+	    this.#v1 = this.#v1.link;
+	    return this.#scheduler.queue(v);
+	 }
+      }
+      return this.#scheduler.suspendCurrent();
+   }
+   
+   toString() {
+      return "HandlerTask";
+   }
+}
 
 /* --- *
  * P a c k e t
@@ -538,12 +507,14 @@ var DATA_SIZE = 4;
  * @param {int} kind the type of this packet
  * @constructor
  */
- record Packet {
+// @record 
+class Packet {
     link;
     id;
     kind;
     a1 = 0;
     a2 = new Array(DATA_SIZE);
+    
     constructor (link, id, kind) {
        this.link = link;
        this.id = id;
@@ -567,6 +538,43 @@ var DATA_SIZE = 4;
  toString() {
     return "Packet";
  }
+}
+
+/**
+ * The Richards benchmark simulates the task dispatcher of an
+ * operating system.
+ **/
+function runRichards() {
+  var scheduler = new Scheduler();
+  scheduler.addIdleTask(ID_IDLE, 0, null, COUNT);
+
+  var queue = new Packet(null, ID_WORKER, KIND_WORK);
+  queue = new Packet(queue,  ID_WORKER, KIND_WORK);
+  scheduler.addWorkerTask(ID_WORKER, 1000, queue);
+
+  queue = new Packet(null, ID_DEVICE_A, KIND_DEVICE);
+  queue = new Packet(queue,  ID_DEVICE_A, KIND_DEVICE);
+  queue = new Packet(queue,  ID_DEVICE_A, KIND_DEVICE);
+  scheduler.addHandlerTask(ID_HANDLER_A, 2000, queue);
+
+  queue = new Packet(null, ID_DEVICE_B, KIND_DEVICE);
+  queue = new Packet(queue,  ID_DEVICE_B, KIND_DEVICE);
+  queue = new Packet(queue,  ID_DEVICE_B, KIND_DEVICE);
+  scheduler.addHandlerTask(ID_HANDLER_B, 3000, queue);
+
+  scheduler.addDeviceTask(ID_DEVICE_A, 4000, null);
+
+  scheduler.addDeviceTask(ID_DEVICE_B, 5000, null);
+
+  scheduler.schedule();
+
+  if (scheduler.queueCount != EXPECTED_QUEUE_COUNT ||
+      scheduler.holdCount != EXPECTED_HOLD_COUNT) {
+    var msg =
+        "Error during execution: queueCount = " + scheduler.queueCount +
+        ", holdCount = " + scheduler.holdCount + ".";
+    throw new Error(msg);
+  }
 }
 
 var go;

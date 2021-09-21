@@ -44,8 +44,8 @@
  }
 
 /* --- O b j e c t   M o d e l --- */
-
-record OrderedCollection {
+// @record 
+class OrderedCollection {
    #elms;
    
    constructor() {
@@ -89,7 +89,8 @@ record OrderedCollection {
  * disrupting current constraints.  Strengths cannot be created outside
  * this class, so pointer comparison can be used for value comparison.
  */
- record Strength {
+// @record
+class Strength {
     strengthValue;
     name; 
     
@@ -145,7 +146,8 @@ record OrderedCollection {
  * of storing the constrained variables and other information required
  * to represent a constraint.
  */
-record Constraint {
+// @record
+class Constraint {
    strength;
    
    constructor(strength) {
@@ -224,7 +226,8 @@ record Constraint {
  * Abstract superclass for constraints having a single possible output
  * variable.
  */
-record UnaryConstraint extends Constraint {
+// @record
+class UnaryConstraint extends Constraint {
    #myOutput;
    #satisfied;
 
@@ -308,7 +311,8 @@ record UnaryConstraint extends Constraint {
  * change their output during plan execution.  This is called "stay
  * optimization".
  */
-record StayConstraint extends UnaryConstraint {
+// @record
+class StayConstraint extends UnaryConstraint {
    constructor(v, str) {
       super(v, str);
    }
@@ -326,7 +330,8 @@ record StayConstraint extends UnaryConstraint {
  * A unary input constraint used to mark a variable that the client
  * wishes to change.
  */
-record EditConstraint extends UnaryConstraint {
+// @record
+class EditConstraint extends UnaryConstraint {
    constructor(v, str) {
       super(v, str);
    }
@@ -355,7 +360,8 @@ Direction.BACKWARD = -1;
  * Abstract superclass for constraints having two possible output
  * variables.
  */
-record BinaryConstraint extends Constraint {
+// @record
+class BinaryConstraint extends Constraint {
    v1;
    v2;
    direction;
@@ -475,7 +481,8 @@ record BinaryConstraint extends Constraint {
  * this relationship but the scale factor and offset are considered
  * read-only.
  */
-record ScaleConstraint extends BinaryConstraint {
+// @record 
+class ScaleConstraint extends BinaryConstraint {
    scale;
    offset;
    
@@ -538,9 +545,10 @@ record ScaleConstraint extends BinaryConstraint {
 /**
  * Constrains two variables to have the same value.
  */
-record EqualityConstraint extends BinaryConstraint {
+// @record
+class EqualityConstraint extends BinaryConstraint {
    constructor(var1, var2, strength)  {
-      super(var1, var2, strength, undefined);
+      super(var1, var2, strength);
    }
 
 /**
@@ -561,7 +569,8 @@ record EqualityConstraint extends BinaryConstraint {
  * various parameters of interest to the DeltaBlue incremental
  * constraint solver.
  **/
-record Variable {
+// @record
+class Variable {
    value;
    constraints;
    determinedBy;
@@ -604,11 +613,12 @@ record Variable {
 /**
  * The DeltaBlue planner
  */
-record Planner {
-   currentMark;
-   
+// @record
+class Planner {
+   #currentMark;
+
    constructor() {
-      this.currentMark = 0;
+      this.#currentMark = 0;
    }
 
 /**
@@ -663,7 +673,7 @@ record Planner {
  * Select a previously unused mark value.
  */
    newMark() {
-      return ++this.currentMark;
+      return ++this.#currentMark;
    }
 
 /**
@@ -795,7 +805,8 @@ record Planner {
  * to resatisfy all currently satisfiable constraints in the face of
  * one or more changing inputs.
  */
-record Plan {
+// @record
+class Plan {
    #v;
    
    constructor() {
@@ -845,7 +856,7 @@ function chainTest(n) {
   // Build chain of n equality constraints
   for (var i = 0; i <= n; i++) {
     var name = "v" + i;
-    var v = new Variable(name, 0);
+    var v = new Variable(name);
     if (prev != null)
       new EqualityConstraint(prev, v, Strength.REQUIRED);
     if (i == 0) first = v;
@@ -941,13 +952,12 @@ function BenchmarkSuite( name, val, benchs ) {
    }
 }  
 
-const N = (process.argv[ 1 ] === "fprofile") 
+const NNN = (process.argv[ 1 ] === "fprofile") 
       ? 200
       : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10000;
 
 var DeltaBlue = new BenchmarkSuite('DeltaBlue', [66118], [
-  new Benchmark('DeltaBlue', true, false, N, deltaBlue)
+  new Benchmark('DeltaBlue', true, false, NNN, deltaBlue)
 ]);
 
 go();
-
