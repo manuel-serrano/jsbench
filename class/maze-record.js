@@ -2,7 +2,8 @@
 
 // Adapted by Manuel Serrano from Olin Shivers's maze.scm program
 // Copyright (c) 1993 by Olin Shivers.
-record Cons {
+// @record
+class Cons {
    car;
    cdr;
    
@@ -22,7 +23,8 @@ function CONS( car, cdr ) {
    return new Cons( car, cdr );
 }
 
-record Harr {
+// @record
+class Harr {
    nrows;
    ncols;
    elts;
@@ -45,7 +47,8 @@ record Harr {
    }
 }
 
-record Wall {
+// @record
+class Wall {
    owner;
    neighbor;
    bit;
@@ -57,7 +60,8 @@ record Wall {
    }
 }
 
-record Box {
+// @record
+class Box {
    reachable;
    id;
    walls;
