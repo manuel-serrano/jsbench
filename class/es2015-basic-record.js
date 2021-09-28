@@ -1291,7 +1291,7 @@ class State {
     {
         this.values = new CaselessMap();
         this.stringValues = new CaselessMap();
-        this.sideState = new WeakMap();
+        this.#sideState = new WeakMap();
         this.statement = null;
         this.nextLineNumber = 0;
         this.subStack = [];
@@ -1336,12 +1336,12 @@ class State {
     
     getSideState(key)
     {
-        if (!this.sideState.has(key)) {
+        if (!this.#sideState.has(key)) {
             let result = {};
-            this.sideState.set(key, result);
+            this.#sideState.set(key, result);
             return result;
         }
-        return this.sideState.get(key);
+        return this.#sideState.get(key);
     }
     
     abort(text)
