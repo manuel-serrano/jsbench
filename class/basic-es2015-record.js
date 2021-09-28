@@ -1279,7 +1279,7 @@ function createRNGWithRandomSeed()
 class State {
    values;
    stringValues;
-   sideState;
+   #sideState;
    statement;
    nextLineNumber;
    subStack;
