@@ -1,23 +1,23 @@
 /*=====================================================================*/
-/*    serrano/prgm/project/hop/jsbench/bglstone/qsort.hs               */
+/*    serrano/trashcan/qsort.js                                        */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Thu Feb  9 14:03:22 2017                          */
-/*    Last change :  Fri May  7 17:00:35 2021 (serrano)                */
+/*    Last change :  Sun Jul 11 17:37:06 2021 (serrano)                */
 /*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Transcription of the Scheme qsort.scm benchmark.                 */
 /*=====================================================================*/
 "use hopscript";
 
-let seed:int = 0;
+let seed:integer = 0;
 
-function rand():int {
+function rand():integer {
    seed = ((seed * 25173) + 17431) & 4095;
    return seed;
 }
 
-function qsort( lo:int, hi:int, a:vector ) {
+function qsort( lo:integer, hi:integer, a:vector ) {
    if( lo < hi) {
       let i = lo;
       let j = hi;
@@ -46,7 +46,7 @@ function qsort( lo:int, hi:int, a:vector ) {
 }
 
 
-function test( size:int ) {
+function test( size:integer ) {
    let a = new Vector( size );
    let check = new Vector( 4096 );
 
@@ -97,7 +97,7 @@ function main( bench, n ) {
    console.log( "res=", res );
 }
 
-const N:int = 
+const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 20
    : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 1000;
