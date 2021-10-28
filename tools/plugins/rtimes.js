@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Oct 27 14:00:39 2019                          */
-/*    Last change :  Mon Jun  1 08:26:59 2020 (serrano)                */
-/*    Copyright   :  2019-20 Manuel Serrano                            */
+/*    Last change :  Thu Oct 28 09:11:26 2021 (serrano)                */
+/*    Copyright   :  2019-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Display the mean of real executions time for one benchmark       */
 /*    and one engine.                                                  */
@@ -14,79 +14,86 @@
 /*---------------------------------------------------------------------*/
 /*    module imports                                                   */
 /*---------------------------------------------------------------------*/
-const path = require( "path" );
-const fs = require( "fs" );
-const format = require( "util" ).format;
-const common = require( "../common.js" );
+const path = require("path");
+const fs = require("fs");
+const format = require("util").format;
+const common = require("../common.js");
 
 /*---------------------------------------------------------------------*/
 /*    mean ...                                                         */
 /*---------------------------------------------------------------------*/
-function mean( times ) {
+function mean(times) {
    let res = 0;
    
-   for( let i = times.length - 1; i >= 0; i-- ) {
+   for (let i = times.length - 1; i >= 0; i--) {
       res += times[ i ];
    }
    
-   return Math.round( res / times.length );
+   return Math.round(res / times.length);
 }
 
 /*---------------------------------------------------------------------*/
 /*    logRTime ...                                                     */
 /*---------------------------------------------------------------------*/
-function logRTime( logs, enames, config ) {
+function logRTime(logs, enames, config) {
    
-   logs.forEach( log => {
+   logs.forEach(log => {
       	 let len = 0;
-      	 let engines = log.engines.filter( e => enames.indexOf( e.name ) != -1 );
+      	 let engines = log.engines.filter(e => enames.indexOf(e.name) != -1);
 	 
-	 if( config.verbse ) {
-      	    console.error( "log=", log );
+	 if (config.verbse) {
+      	    console.error("log=", log);
 	 }
       	 
-      	 engines.forEach( e => {
-	       if( e.name.length > len )
+      	 engines.forEach(e => {
+	       if (e.name.length > len)
 	    	  len = e.name.length;
-	       if( e.host.length > len )
+	       if (e.host.length > len)
 	    	  len = e.host.length;
-	       if( e.version && (e.version.length + 2) > len )
+	       if (e.version && (e.version.length + 2) > len)
 	    	  len = 2 +  e.version.length;
-      	    } );
+      	    });
 
       	 len += 6;
 
-	 engines.forEach( e => {
+	 engines.forEach(e => {
 	       let l = e.logs[ 0 ];
 	       
-	       if( l && l.times.rtimes ) {
-		  fs.writeSync( config.fd, (mean( l.times.rtimes ) / 1000).toFixed( 2 ) + "\n" );
-		  fs.fsyncSync( config.fd );
-	       } } );
-      } );
+	       if (l && l.times.rtimes) {
+		  fs.writeSync(config.fd, (mean(l.times.rtimes) / 1000).toFixed(2) + "\n");
+		  fs.fsyncSync(config.fd);
+	       } });
+      });
 }
 
 /*---------------------------------------------------------------------*/
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
-module.exports = function( logfiles, engines, args, config ) {
-   let logs = common.mergeLogs( logfiles, config );
+module.exports = function(logfiles, engines, args, config) {
+   let logs = common.mergeLogs(logfiles, config);
    let queue = [];
    
-   if( engines.length == 0 ) {
-      logs.forEach( log => {
-	 log.engines.forEach( e => {
-	    if( queue.indexOf( e.name ) == -1 ) {
-	       engines.push( e );
-	       queue.push( e.name );
+   if (engines.length == 0) {
+      logs.forEach(log => {
+	 log.engines.forEach(e => {
+	    if (queue.indexOf(e.name) == -1) {
+	       engines.push(e);
+	       queue.push(e.name);
 	    }
-	 } );
-      } );
+	 });
+      });
    }
       
-   if( config.verbse ) {
-      console.error( "rtimes engines=" + engines + "\n" );
+   if (config.verbse) {
+      console.error("rtimes engines=" + engines + "\n");
    }
    
-   logRTime( logs, engines.map( e => e.name ), config );
+   const fd = (config.output || process.stdout.fd);
+	
+   try {
+      logRTime(logs, engines.map(e => e.name), config, fd);
+   } finally {
+      if (config.output) {
+	 fs.closeSync(fd);
+      }
 }

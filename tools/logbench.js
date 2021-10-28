@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:16:47 2017                          */
-/*    Last change :  Thu Oct 28 08:41:10 2021 (serrano)                */
+/*    Last change :  Thu Oct 28 09:07:18 2021 (serrano)                */
 /*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Output bench log                                                 */
@@ -82,13 +82,7 @@ function main() {
       config.log = false;
    }
 
-   if (args.o || args.output) {
-      config.fd = fs.openSync(args.o || args.output, "w");
-   } else {
-      config.fd = process.stdout.fd;
-   }
-   
-   
+   config.output = (args.o || args.output);
    config.engine = args.E || args.engine || config.engine || "./engine";
 							     
    // load the engine plugins
@@ -120,8 +114,6 @@ function main() {
       require(plugin)(logs, engines, args, config);
    } catch(e) {
       require("./plugins/" + plugin)(logs, engines, args, config);
-   } finally {
-      fs.closeSync(config.fd);
    }
 }
 
