@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:16:47 2017                          */
-/*    Last change :  Thu Oct 28 08:20:51 2021 (serrano)                */
+/*    Last change :  Thu Oct 28 08:41:10 2021 (serrano)                */
 /*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Output bench log                                                 */
@@ -37,16 +37,16 @@ function main() {
       console.log("usage: logbench [options] plugin path1 path2 ...");
       console.log("");
       console.log("Options:");
-      console.log("  -h|--help       This message");
-      console.log("  -q              No configuration file");
-      console.log("  -c|--config     Configuration file");
-      console.log("  -e              Execution engine");
-      console.log("  -E,-enginedir   Engines directory");
-      console.log("  -o|--output     output file");
-      console.log("  -v[int]         Verbose");
-      console.log("  --acceptmissing Accept missing engines");
-      console.log("  --nosort        Don't sort benchmarks");
-      console.log("  --sortalias     Use alias name when sorting");
+      console.log("  -h|--help           This message");
+      console.log("  -q                  No configuration file");
+      console.log("  -c|--config         Configuration file");
+      console.log("  -e                  Execution engine");
+      console.log("  -E,-enginedir dir   Engines directory");
+      console.log("  -o|--output         output file");
+      console.log("  -v[int]             Verbose");
+      console.log("  --acceptmissing     Accept missing engines");
+      console.log("  --nosort            Don't sort benchmarks");
+      console.log("  --sortalias         Use alias name when sorting");
       console.log("");
       console.log("Examples: ");
       console.log("  hop -g --no-server -- logbench.js xgraph.js ../micro/poly.log.json | xgraph");

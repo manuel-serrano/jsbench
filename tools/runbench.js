@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Thu Oct 28 08:29:40 2021 (serrano)                */
+/*    Last change :  Thu Oct 28 08:40:41 2021 (serrano)                */
 /*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -468,12 +468,12 @@ function main() {
       console.log("  -h|--help            This message");
       console.log("  -q                   No configuration file");
       console.log("  -c|--config path     Configuration file");
-      console.log("  -D,--dir directory   Directory to store log files");
-      console.log("  -T,--tmp directory   Tmp directory");
+      console.log("  -D,--dir dir         Directory to store log files");
+      console.log("  -T,--tmp dir         Tmp directory");
       console.log("  -v[level]            Verbosity");
       console.log("  -d,--dry             Do not log");
       console.log("  -e engine            Execution engine");
-      console.log("  -E,--enginedir       Engines directory");
+      console.log("  -E,--enginedir dir   Engines directory");
       console.log("  --name command       Execution command");
       console.log("  -m|--message message Log message");
       console.log("  -a|--arg             Benchmark argument");
