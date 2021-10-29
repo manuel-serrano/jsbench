@@ -2,7 +2,11 @@
 
 // Adapted by Manuel Serrano from Olin Shivers's maze.scm program
 // Copyright (c) 1993 by Olin Shivers.
+// @record
 class Cons {
+   car;
+   cdr;
+   
    constructor ( car, cdr ) {
       this.car = car;
       this.cdr = cdr;
@@ -19,7 +23,12 @@ function CONS( car, cdr ) {
    return new Cons( car, cdr );
 }
 
+// @record
 class Harr {
+   nrows;
+   ncols;
+   elts;
+   
    constructor(nrows, ncols, elts ) {
       this.nrows = nrows;
       this.ncols = ncols;
@@ -38,7 +47,12 @@ class Harr {
    }
 }
 
+// @record
 class Wall {
+   owner;
+   neighbor;
+   bit;
+   
    constructor( owner, neighbor, bit ) {
       this.owner = owner;       // Box that owns this wall.
       this.neighbor = neighbor; // The other box bordering this wall.
@@ -46,7 +60,14 @@ class Wall {
    }
 }
 
+// @record
 class Box {
+   reachable;
+   id;
+   walls;
+   parent;
+   mark;
+   
    constructor( reachable, id, walls = -1, parent = false, mark = false ) {
       this.reachable = reachable; // Union/find set -- all reachable boxs.
       this.id = id;               // Identifying info (e.g., the coords of the box)
@@ -130,7 +151,7 @@ const SOUTH = 2;
 const SOUTHEAST = 4;
 
 function genMazeArray( r, c ) {
-   return harrTabulate( r, c, (x, y) => new Box( baseSet( 1 ), CONS( x, y ) ) );
+   return harrTabulate( r, c, (x, y) => new Box( baseSet( 1 ), CONS( x, y ), -1, false, false ) );
 }
 
 // This could be made more efficient.

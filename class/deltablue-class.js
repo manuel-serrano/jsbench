@@ -44,7 +44,7 @@
  }
 
 /* --- O b j e c t   M o d e l --- */
-
+// @record 
 class OrderedCollection {
    #elms;
    
@@ -89,48 +89,51 @@ class OrderedCollection {
  * disrupting current constraints.  Strengths cannot be created outside
  * this class, so pointer comparison can be used for value comparison.
  */
+// @record
 class Strength {
-   constructor(strengthValue, name) {
-      this.strengthValue = strengthValue;
-      this.name = name;
-   }
+    strengthValue;
+    name; 
+    
+    constructor(strengthValue, name) {
+       this.strengthValue = strengthValue;
+       this.name = name;
+    }
 
-   static stronger(s1, s2) {
-      return s1.strengthValue < s2.strengthValue;
-   }
+    static stronger(s1, s2) {
+       return s1.strengthValue < s2.strengthValue;
+    }
 
-   static weaker(s1, s2) {
-      return s1.strengthValue > s2.strengthValue;
+    static weaker(s1, s2) {
+       return s1.strengthValue > s2.strengthValue;
+    }
+
+    static weakestOf(s1, s2) {
+       return Strength.weaker(s1, s2) ? s1 : s2;
+    }
+
+    static strongest(s1, s2) {
+       return Strength.stronger(s1, s2) ? s1 : s2;
+    }
+
+    nextWeaker() {
+       switch (this.strengthValue) {
+	  case 0: return Strength.WEAKEST;
+	  case 1: return Strength.WEAK_DEFAULT;
+	  case 2: return Strength.NORMAL;
+	  case 3: return Strength.STRONG_DEFAULT;
+	  case 4: return Strength.PREFERRED;
+	  case 5: return Strength.REQUIRED;
+       }
+    }
+    // Strength constants.
+    static REQUIRED = new Strength(0, "required");
+    static STRONG_PREFERRED = new Strength(1, "strongPreferred");
+    static PREFERRED = new Strength(2, "preferred");
+    static STRONG_DEFAULT = new Strength(3, "strongDefault");
+    static NORMAL = new Strength(4, "normal");
+    static WEAK_DEFAULT = new Strength(5, "weakDefault");
+    static WEAKEST = new Strength(6, "weakest");
 }
-
-   static weakestOf(s1, s2) {
-      return Strength.weaker(s1, s2) ? s1 : s2;
-   }
-
-   static strongest(s1, s2) {
-      return Strength.stronger(s1, s2) ? s1 : s2;
-}
-
-   nextWeaker() {
-      switch (this.strengthValue) {
-	 case 0: return Strength.WEAKEST;
-	 case 1: return Strength.WEAK_DEFAULT;
-	 case 2: return Strength.NORMAL;
-	 case 3: return Strength.STRONG_DEFAULT;
-	 case 4: return Strength.PREFERRED;
-	 case 5: return Strength.REQUIRED;
-      }
-   }
-}
-
-// Strength constants.
-Strength.REQUIRED        = new Strength(0, "required");
-Strength.STONG_PREFERRED = new Strength(1, "strongPreferred");
-Strength.PREFERRED       = new Strength(2, "preferred");
-Strength.STRONG_DEFAULT  = new Strength(3, "strongDefault");
-Strength.NORMAL          = new Strength(4, "normal");
-Strength.WEAK_DEFAULT    = new Strength(5, "weakDefault");
-Strength.WEAKEST         = new Strength(6, "weakest");
 
 /* --- *
  * C o n s t r a i n t
@@ -143,7 +146,10 @@ Strength.WEAKEST         = new Strength(6, "weakest");
  * of storing the constrained variables and other information required
  * to represent a constraint.
  */
+// @record
 class Constraint {
+   strength;
+   
    constructor(strength) {
       this.strength = strength;
    }
@@ -220,10 +226,11 @@ class Constraint {
  * Abstract superclass for constraints having a single possible output
  * variable.
  */
+// @record
 class UnaryConstraint extends Constraint {
-   #satisfied;
    #myOutput;
-   
+   #satisfied;
+
    constructor(v, strength) {
       super(strength);
       this.#myOutput = v;
@@ -304,6 +311,7 @@ class UnaryConstraint extends Constraint {
  * change their output during plan execution.  This is called "stay
  * optimization".
  */
+// @record
 class StayConstraint extends UnaryConstraint {
    constructor(v, str) {
       super(v, str);
@@ -322,6 +330,7 @@ class StayConstraint extends UnaryConstraint {
  * A unary input constraint used to mark a variable that the client
  * wishes to change.
  */
+// @record
 class EditConstraint extends UnaryConstraint {
    constructor(v, str) {
       super(v, str);
@@ -351,7 +360,12 @@ Direction.BACKWARD = -1;
  * Abstract superclass for constraints having two possible output
  * variables.
  */
+// @record
 class BinaryConstraint extends Constraint {
+   v1;
+   v2;
+   direction;
+      
    constructor (var1, var2, strength, init) {
       super( strength );
       this.v1 = var1;
@@ -467,7 +481,11 @@ class BinaryConstraint extends Constraint {
  * this relationship but the scale factor and offset are considered
  * read-only.
  */
+// @record 
 class ScaleConstraint extends BinaryConstraint {
+   scale;
+   offset;
+   
    constructor(src, scale, offset, dest, strength) {
       super( src,dest,strength, true );
       this.direction = Direction.NONE;
@@ -527,6 +545,7 @@ class ScaleConstraint extends BinaryConstraint {
 /**
  * Constrains two variables to have the same value.
  */
+// @record
 class EqualityConstraint extends BinaryConstraint {
    constructor(var1, var2, strength)  {
       super(var1, var2, strength);
@@ -550,7 +569,16 @@ class EqualityConstraint extends BinaryConstraint {
  * various parameters of interest to the DeltaBlue incremental
  * constraint solver.
  **/
+// @record
 class Variable {
+   value;
+   constraints;
+   determinedBy;
+   mark;
+   walkStrength;
+   stay;
+   name;
+   
    constructor(name, initialValue) {
       this.value = initialValue || 0;
       this.constraints = new OrderedCollection();
@@ -585,9 +613,12 @@ class Variable {
 /**
  * The DeltaBlue planner
  */
+// @record
 class Planner {
+   #currentMark;
+
    constructor() {
-      this.currentMark = 0;
+      this.#currentMark = 0;
    }
 
 /**
@@ -642,7 +673,7 @@ class Planner {
  * Select a previously unused mark value.
  */
    newMark() {
-      return ++this.currentMark;
+      return ++this.#currentMark;
    }
 
 /**
@@ -774,6 +805,7 @@ class Planner {
  * to resatisfy all currently satisfiable constraints in the face of
  * one or more changing inputs.
  */
+// @record
 class Plan {
    #v;
    
@@ -920,13 +952,12 @@ function BenchmarkSuite( name, val, benchs ) {
    }
 }  
 
-const N = (process.argv[ 1 ] === "fprofile") 
+const NNN = (process.argv[ 1 ] === "fprofile") 
       ? 200
       : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 10000;
 
 var DeltaBlue = new BenchmarkSuite('DeltaBlue', [66118], [
-  new Benchmark('DeltaBlue', true, false, N, deltaBlue)
+  new Benchmark('DeltaBlue', true, false, NNN, deltaBlue)
 ]);
 
 go();
-

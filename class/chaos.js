@@ -3,11 +3,6 @@
 // Copyright (c) 2021 Manuel Serrano for the JavaScript port
 "use strict";
 
-let M = 0;
-function log(m) {
-   //console.log(M++ + " " + m);
-}
-
 const rnd = [0.8770995586538219, 0.7467351610524278, 0.23249549103551334,
              0.8231245166729784, 0.318460008277772, 0.2765477273038345,
              0.15513674037304556, 0.5188230101572456, 0.8788570276828749,
@@ -57,12 +52,11 @@ function Math_random() {
 }
 
 function random_randrange(rng) {
-   const r = Math.floor(Math_random() * rng);
-   log( "madrange r=" + r + " rng="+ rng);
-   return r;
+   return Math.floor(Math_random() * rng);
 }
 
 function random_seed(seed) {
+   rndi = seed;
 }
 
 // @record
@@ -73,8 +67,7 @@ class Runner {
    }
    
    bench_func(name, proc, ...args) {
-      
-      return proc.apply(undefined, args);
+      return proc(...args);
    }
 }
    
@@ -181,7 +174,6 @@ class Spline {
    __call__(u) {
       // Calculates a point of the B-Spline using de Boors Algorithm
       const dom = this.GetDomain();
-	 log("u=" + u + " " + dom);
 
       if (u < dom[0] || u > dom[1]) {
 	 throw new TypeError("Function value not in domain");
@@ -190,7 +182,7 @@ class Spline {
 	 return this.#points[0];
       }
       if (u === dom[1]) {
-	 return this.#points[this.#points.length - 1 ];
+	 return this.#points[this.#points.length - 1];
       }
       const I = this.GetIndex(u);
 
@@ -278,14 +270,15 @@ function write_ppm(im, filename) {
    const fp = new open(filename);
    
    fp.write(magic);
-   fp.write(`${w} ${h}\n${maxval}\n`);
+   fp.write(`${w} ${h}`);
+   fp.write("\n");
+   fp.write(`${maxval}`);
+   fp.write("\n");
    
    for (let j = 0; j < h; j++) {
       for (let i = 0; i < w; i++) {
 	 const val = im[i][j];
-	 const c = val * 255;
-	 const s = String.fromCharCode((c % 52) + 41);
-	 fp.write(s);
+	 fp.write(val ? "*" : " ");
       }
       fp.write("\n");
    }
@@ -309,10 +302,10 @@ class Chaosgame {
    constructor(splines, thickness) {
       this.#splines = splines;
       this.#thickness = thickness;
-      this.#minx = Chaosgame.min(splines, "x");
-      this.#miny = Chaosgame.min(splines, "y");
-      this.#maxx = Chaosgame.max(splines, "x");
-      this.#maxy = Chaosgame.max(splines, "y");
+      this.#minx = Chaosgame.#min(splines, "x");
+      this.#miny = Chaosgame.#min(splines, "y");
+      this.#maxx = Chaosgame.#max(splines, "x");
+      this.#maxy = Chaosgame.#max(splines, "y");
       this.#height = this.#maxy - this.#miny;
       this.#width = this.#maxx - this.#minx;
       this.#num_trafos = [];
@@ -329,10 +322,9 @@ class Chaosgame {
 	 this.#num_trafos.push(Math.max(1, Math.floor(length / maxlength * 1.5)));
       }
       this.#num_total = this.#num_trafos.reduce((p,c) => p + c, 0);
-      log( "NUMTOTAL=" + this.#num_total + " " + this.#num_trafos);
    }
    
-   static min(splines, prop) {
+   static #min(splines, prop) {
       let min = splines[0].min(prop);
       for (let i = splines.length - 1; i > 0; i--) {
 	 const aux = splines[i].min(prop);
@@ -341,7 +333,7 @@ class Chaosgame {
       return min;
    }
 
-   static max(splines, prop) {
+   static #max(splines, prop) {
       let max = splines[0].max(prop);
       for (let i = splines.length - 1; i > 0; i--) {
 	 const aux = splines[i].max(prop);
@@ -350,7 +342,7 @@ class Chaosgame {
       return max;
    }
 
-   get_random_trafo() {
+   #get_random_trafo() {
       const r = random_randrange(this.#num_total+1);
       let l = 0;
       for (let i = 0; i < this.#num_trafos.length; i++) {
@@ -362,10 +354,10 @@ class Chaosgame {
       return [this.#num_trafos.length - 1, random_randrange(this.#num_trafos[this.#num_trafos.length-1])];
    }
    
-   transform_point(point) {
+   #transform_point(point) {
       const x = (point.x - this.#minx) / this.#width;
       const y = (point.y - this.#miny) / this.#height;
-      const trafo = this.get_random_trafo();
+      const trafo = this.#get_random_trafo();
       let [start, end] = this.#splines[trafo[0]].GetDomain();
       let length = end - start;
       let seg_length = length / this.#num_trafos[trafo[0]];
@@ -384,11 +376,11 @@ class Chaosgame {
 	 basepoint.x += derivative.y / derivative.Mag() * (y - 0.5) * this.#thickness;
 	 basepoint.y += -derivative.x / derivative.Mag() * (y - 0.5) * this.#thickness;
       }
-      this.truncate(basepoint);
+      this.#truncate(basepoint);
       return basepoint;
    }
    
-   truncate(point) {
+   #truncate(point) {
       if (point.x >= this.#maxx) 
 	 point.x = this.#maxx;
       if (point.y >= this.#maxy)
@@ -405,15 +397,14 @@ class Chaosgame {
       random_seed(rng_seed);
       const im = new Array(w);
       for (let i = 0; i < w; i++) {
-	 im[i] = new Array(h).fill(1);
+	 im[i] = new Array(h).fill(true);
       }
       let point = new GVector((this.#maxx + this.#minx) / 2,
 	 (this.#maxy + this.#miny) / 2, 
 	 0);
       
       for (let _ = 0; _ < iterations; _++) {
-	 log(point);
-	 point = this.transform_point(point);
+	 point = this.#transform_point(point);
          let x = (point.x - this.#minx) / this.#width * w;
          let y = (point.y - this.#miny) / this.#height * h;
 	 x = Math.floor(x);
@@ -422,11 +413,11 @@ class Chaosgame {
 	    x -= 1;
 	 if (y === h) 
 	    y -= 1;
-	 im[x][h - y - 1] = 0;
+	 im[x][h - y - 1] = false;
+      }
 
-         if (filename) {
-            write_ppm(im, filename);
-	 }
+      if (filename) {
+	 write_ppm(im, filename);
       }
    }
 }
@@ -463,6 +454,7 @@ function main(runner, args) {
    runner.metadata['chaos_rng_seed'] = args.rng_seed;
    
    const chaos = new Chaosgame(splines, args.thickness);
+
    runner.bench_func('chaos', chaos.create_image_chaos.bind(chaos),
       args.width, args.height, args.iterations,
       args.filename, args.rng_seed);
@@ -471,19 +463,21 @@ function main(runner, args) {
 const N = 
    (process.argv[1] === "fprofile") 
    ? 2
-   : process.argv[2] ? parseInt(process.argv[2]) : 500000;
+   : process.argv[2] ? parseInt(process.argv[2]) : 10;
 
 const runner = new Runner();
-main( runner, {iterations: N, 
-	       thickness: DEFAULT_THICKNESS, 
-	       width: DEFAULT_WIDTH,
-	       height: DEFAULT_HEIGHT,
-	       rng_seed: DEFAULT_RNG_SEED,
-});   
-main( runner, {iterations: 1, 
+for (let i = 0; i < N; i++) {
+   main( runner, {iterations: 50000, 
+	       	  thickness: DEFAULT_THICKNESS, 
+	       	  width: DEFAULT_WIDTH,
+	       	  height: DEFAULT_HEIGHT,
+	       	  rng_seed: DEFAULT_RNG_SEED,
+   });   
+}
+main( runner, {iterations: 50000, 
 	       filename: "yes",
 	       thickness: DEFAULT_THICKNESS, 
-	       width: DEFAULT_WIDTH,
-	       height: DEFAULT_HEIGHT,
+	       width: 60,
+	       height: 40,
 	       rng_seed: DEFAULT_RNG_SEED,
 });    
