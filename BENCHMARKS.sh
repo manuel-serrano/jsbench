@@ -10,7 +10,7 @@ BENCHMARKS_MICRO="micro/assigop.js micro/charat.js micro/ctor.js micro/ctor2.js 
 BENCHMARKS_PROXY="proxy/crypto-proxy.js proxy/boyer-proxy.js proxy/deltablue-proxy.js proxy/richards-proxy.js proxy/splay-proxy.js proxy/maze-proxy.js proxy/hash-map-proxy.js proxy/earley-proxy.js proxy/bague-proxy.js proxy/puzzle-proxy.js proxy/crypto-aes-proxy.js proxy/crypto-md5-proxy.js proxy/crypto-sha1-proxy.js proxy/sieve-proxy.js proxy/qsort-proxy.js proxy/splay-proxy.js proxy/binary-tree-proxy.js proxy/fannkuch-proxy.js proxy/base64-proxy.js"
 BENCHMARKS_CONTRACT="contract/abbrev.js contract/abs.js contract/app-root-path.js contract/archy.js contract/argv.js"
 BENCHMARKS_OTHER="other/rho.js other/moment.js other/qrcode.js other/basic.js other/uuid.js other/z80.js other/minimist.js other/minimatch.js other/jpeg.js other/js-of-ocaml.js other/marked.js"
-BENCHMARKS_CLASS="class/deltablue-class.js class/richards-class.js class/maze-class.js"
+BENCHMARKS_CLASS="class/deltablue-class.js class/richards-class.js class/maze-class.js class/chaos.js class/go.js"
 
 BENCHMARKS="$BENCHMARKS_OCTANE $BENCHMARKS_SUNSPIDER $BENCHMARKS_JETSTREAM $BENCHMARKS_SHOOTOUT $BENCHMARKS_BGLSTONE $BENCHMARKS_MICRO $BENCHMARKS_PROXY $BENCHMARKS_OTHER BENCHMARKS_CLASS"
 
