@@ -800,9 +800,11 @@ function decode_huffman_block(b, out) {
 	 const tmp = nearly_there[i + 4];
 	 /* log("tmp=" + tmp); */
 	 const len = ord(tmp) + 4;
-	 const buf = new Array(len).fill(nearly_there.slice(i,i + 1));
-	 /* log("buf=" + str(buf)); */
-	 out = out.concat(buf);
+	 const v = nearly_there[i];
+	 for (let j = 0; j < len; j++) {
+	    out.push(v);
+	 }
+/* 	 {* log("buf=" + str(buf)); *}                                 */
 	 i += 5;
       } else {
 	 out = out.concat(nearly_there.slice(i,i + 1));
@@ -810,7 +812,7 @@ function decode_huffman_block(b, out) {
       }
    }
    /* log("decode_huffman_block out=" + str(out.length)); */
-   return Array.prototype.concat.apply([],out);
+   return out;
 }
 
 // Sixteen bits of magic have been removed by the time we start decoding
