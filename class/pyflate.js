@@ -193,34 +193,35 @@ function open(filename, mode) {
 //////////////////////////////////////////////////////////////////////////////
 let R = 0;
 
+// @record
 class BitfieldBase {
-   f;
+   #f;
    bits;
    bitfield;
-   count;
+   #count;
    
    constructor(x) {
       if (x instanceof BitfieldBase) {
-	 this.f = x.f;
+	 this.#f = x.#f;
 	 this.bits = x.bits;
 	 this.bitfield = x.bitfield;
-	 this.count = x.count;
+	 this.#count = x.#count;
       } else {
-	 this.f = x;
+	 this.#f = x;
 	 this.bits = 0;
 	 this.bitfield = 0n;
-	 this.count = 0;
+	 this.#count = 0;
       }
    }
 
    _read(n) {
       /* log("_read.0 n=" + n + " " + R++); */
-      const s = this.f.read(n);
+      const s = this.#f.read(n);
       /* log("_read.1 n=" + n + " s=" + bytes(s)); */
       if (!s) {
 	 throw new TypeError("Length Error");
       }
-      this.count += s.length;
+      this.#count += s.length;
       return s;
    }
 
@@ -250,7 +251,7 @@ class BitfieldBase {
       while (n >= this.bits && n > 7) {
 	 n -= this.bits;
 	 this.bits = 0;
-	 n -= (this.f._read(n >> 3)).length << 3;
+	 n -= (this.#f._read(n >> 3)).length << 3;
       }
       if (n) {
 	 this.readbits(n);
@@ -263,7 +264,7 @@ class BitfieldBase {
    }
 
    tell() {
-      return [this.count - ((this.bits + 7) >> 3), 7 - ((this.bits - 1) & 0x7)];
+      return [this.#count - ((this.bits + 7) >> 3), 7 - ((this.bits - 1) & 0x7)];
    }
 
    tellbits() {
@@ -272,6 +273,7 @@ class BitfieldBase {
    }
 }
 
+// @record
 class Bitfield extends BitfieldBase {
 
    _more() {
@@ -303,6 +305,7 @@ class Bitfield extends BitfieldBase {
    }
 }
 
+// @record
 class RBitfield extends BitfieldBase {
 
    _more() {
@@ -354,6 +357,7 @@ function printbits(v, n) {
    return o;
 }
 
+// @record
 class HuffmanLength {
    code;
    bits;
@@ -411,9 +415,10 @@ function reverse_bytes(v, n) {
    return z;
 }
 
+// @record
 class HuffmanTable {
-   min_bits;
-   max_bits;
+   #min_bits;
+   #max_bits;
    #table;
    
    constructor(bootstrap) {
@@ -469,14 +474,14 @@ class HuffmanTable {
    }
 
    min_max_bits() {
-      this.min_bits = 16;
-      this.max_bits = -1;
+      this.#min_bits = 16;
+      this.#max_bits = -1;
       for (let x of this.#table) {
-	 if (x.bits < this.min_bits) {
-	    this.min_bits = x.bits;
+	 if (x.bits < this.#min_bits) {
+	    this.#min_bits = x.bits;
 	 }
-	 if (x.bits > this.max_bits) {
-	    this.max_bits = x.bits;
+	 if (x.bits > this.#max_bits) {
+	    this.#max_bits = x.bits;
 	 }
       }
    }
@@ -510,7 +515,7 @@ class HuffmanTable {
       }
       throw new TypeError(`unfound symbol, even after end of table ${field.tell()}`);
 
-      for (let bits = this.min_bits; bits < this.max_bits + 1; bits++) {
+      for (let bits = this.#min_bits; bits < this.#max_bits + 1; bits++) {
 	 /* log("find_next_symbol.2 " + bits); */
 	 let r = this._find_symbol(bits, field.snoopbits(bits, 8), this.#table);
 	 if (0 <= r) {
@@ -523,6 +528,7 @@ class HuffmanTable {
    }
 }
 
+// @record
 class OrderedHuffmanTable extends HuffmanTable {
    
    constructor(lengths) {
