@@ -463,6 +463,7 @@ class HuffmanTable {
    }
 
    tables_by_bits() {
+      /* never called! */
       let d = {};
       for (let x in this.#table) {
 	 try {
