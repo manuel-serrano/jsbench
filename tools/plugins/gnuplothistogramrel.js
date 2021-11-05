@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Tue Jan  7 07:47:55 2020 (serrano)                */
-/*    Copyright   :  2017-20 Manuel Serrano                            */
+/*    Last change :  Fri Nov  5 14:39:57 2021 (serrano)                */
+/*    Copyright   :  2017-21 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a relative gnuplot histogram, each bar is a benchmark.  */
 /*    This plugin was implemented for the jsdynprop paper.             */
@@ -287,6 +287,11 @@ module.exports = function( logfiles, engines, args, config ) {
 	    plotport.write( ", \\\n" );
       	 }
       }
+   }
+   
+   if (args.extraplot) {
+      plotport.write(", \\\n");
+      plotport.write(args.extraplot);
    }
    
    plotport.write( "\n\n" );
