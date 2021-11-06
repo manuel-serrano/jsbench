@@ -105,6 +105,7 @@ function to_xy(pos) {
    return [x, y];
 }
 
+// @record
 class Square {
    #board;
    pos;
@@ -219,6 +220,7 @@ class Square {
 }
 
 
+// @record
 class EmptySet {
    #board;
    empties;
@@ -274,6 +276,7 @@ class EmptySet {
    }
 }
 
+// @record
 class ZobristHash {
    #board;
    #hash_set;
@@ -312,6 +315,7 @@ class ZobristHash {
    }
 }
 
+// @record
 class Board {
    squares;
    emptyset;
@@ -473,6 +477,7 @@ class Board {
    }
 }
 
+// @record
 class UCTNode {
    #bestchild;
    #pos;
