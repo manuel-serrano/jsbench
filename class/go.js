@@ -109,11 +109,12 @@ function to_xy(pos) {
 class Square {
    #board;
    pos;
-   #timestamp;
+   timestamp;
    #removestamp;
    zobrist_strings;
    neighbours;
    color;
+   temp_ledges;
    ledges;
    used;
    #reference;
@@ -121,7 +122,7 @@ class Square {
    constructor(board, pos) {
       this.#board = board;
       this.pos = pos;
-      this.#timestamp = TIMESTAMP;
+      this.timestamp = TIMESTAMP;
       this.#removestamp = TIMESTAMP;
       this.zobrist_strings = [random_randrange(2147483647),
 			      random_randrange(2147483647),
@@ -281,6 +282,7 @@ class ZobristHash {
    #board;
    #hash_set;
    hash;
+   zobrist;
    
    constructor(board) {
       this.#board = board;
@@ -325,6 +327,7 @@ class Board {
    history;
    #white_dead;
    #black_dead;
+   zobrist;
    
    constructor() {
       this.squares = new Array(SIZE * SIZE);
