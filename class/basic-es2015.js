@@ -1442,7 +1442,7 @@ class BasicBenchmark {
 function runBenchmark()
 {
     const verbose = 0;
-    const numIterations = 150;
+    const numIterations = 500;
     //const numIterations = 2;
     
     let before = currentTime();
