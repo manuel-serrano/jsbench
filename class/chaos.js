@@ -463,7 +463,7 @@ function main(runner, args) {
 const N = 
    (process.argv[1] === "fprofile") 
    ? 2
-   : process.argv[2] ? parseInt(process.argv[2]) : 10;
+   : process.argv[2] ? parseInt(process.argv[2]) : 40;
 
 const runner = new Runner();
 for (let i = 0; i < N; i++) {
