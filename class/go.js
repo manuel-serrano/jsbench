@@ -668,7 +668,7 @@ function versus_cpu() {
 const N = 
    (process.argv[1] === "fprofile") 
    ? 2
-   : process.argv[2] ? parseInt(process.argv[2]) : 5000;
+   : process.argv[2] ? parseInt(process.argv[2]) : 25000;
 
 const runner = new Runner();
 
