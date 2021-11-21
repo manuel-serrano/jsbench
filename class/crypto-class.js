@@ -30,6 +30,59 @@
  */
 "use strict";
  
+let K = 0;
+
+// random
+const rnd = [0.8770995586538219, 0.7467351610524278, 0.23249549103551334,
+             0.8231245166729784, 0.318460008277772, 0.2765477273038345,
+             0.15513674037304556, 0.5188230101572456, 0.8788570276828749,
+             0.2771601105468162, 0.9700492755370445, 0.8001550435089296,
+             0.7591487382348389, 0.7128849223781772, 0.2847622862480405,
+             0.3495062563333224, 0.350737326476135, 0.37827307050035947,
+             0.40377484699886984, 0.7561712012422137, 0.05001545140986119,
+             0.19141191672133837, 0.7972550777705643, 0.7261414251877654,
+             0.49509481270569133, 0.3870731798871761, 0.3420524761742225,
+             0.614596488706114, 0.06691072791205287, 0.8160151489153575,
+             0.2524686736299045, 0.9440102865658748, 0.562750309502124,
+             0.4849641646654178, 0.767134802773192, 0.881210317779896,
+             0.7615118924349136, 0.9222715431462375, 0.4000333274714804,
+             0.6403689196521272, 0.19943165322739242, 0.3700826030085248,
+             0.44052396269539557, 0.9585803914622313, 0.08296752492104076,
+             0.7252862489434361, 0.3080866477955536, 0.43370485139717574,
+             0.10355931897813422, 0.7118614947944235, 0.18987605217372816,
+             0.1535747708536567, 0.9032734115157618, 0.9871311299442924,
+             0.879716196041422, 0.3983682242214532, 0.37420430936580723,
+             0.2217686717499833, 0.012964712461905887, 0.4411150372778601,
+             0.0377838201996795, 0.2654333860918104, 0.38512532337807365,
+             0.6005341297018035, 0.7503975512228894, 0.15226012615126563,
+             0.4817444474816995, 0.5119094431921418, 0.07453166883184187,
+             0.8817777749531799, 0.15227836237860767, 0.2739633225248956,
+             0.2518603774960434, 0.5928023250740032, 0.23254371352146552,
+             0.33482790241708416, 0.3180885740174393, 0.5406303613170191,
+             0.7685327538142599, 0.42164789299557354, 0.2524918556457813,
+             0.9584088059879881, 0.5752226638492303, 0.15576526716154315,
+             0.9455399359322805, 0.454938859424991, 0.5541334913829963,
+             0.3197442448324264, 0.6767075316406356, 0.5670982038449022,
+             0.7608592825759478, 0.7144913518403151, 0.8325315899367126,
+             0.1459846054883602, 0.31502548154211857, 0.5829291406939408,
+             0.29824473163962584, 0.796769929023818, 0.09483858342042127,
+             0.372776400937129, 0.6785477035113366, 0.24711694579902893,
+             0.6467397234620246, 0.9304080814730413, 0.8399192713386935,
+             0.8792834369834901, 0.26523598342446425, 0.15800784489047148,
+             0.41991379830050923, 0.03376873723872413, 0.579655737886045,
+             0.6724056539462906, 0.9921775432267121, 0.15487840173527523,
+             0.8281709211078337, 0.9377174786933313, 0.6098172611602662,
+             0.38230441202516874, 0.25746172352575775, 0.28652479233524053,
+             0.9494026158700709, 0.018321005636044316, 0.0010161441755556241,
+             0.7819342058067835, 0.16430561112440453, 0.3160416257176742,
+             0.364863346035063, 0.4625503432296917]; 
+let rndi = 0;
+function Math_random() {
+   const r = rnd[rndi++];
+   if (rndi === rnd.length) rndi = 0;
+   return r;
+}
+
 // Bits per digit
 let dbits ;
 let BI_DB ;
@@ -120,11 +173,11 @@ class BigInteger {
    // am1: use a single mult and divide to get the high bits,
    // max digit bits should be 26 because
    // max internal value = 2*dvalue^2-2*dvalue (< 2^53)
-   am1(i,x,w,j,c,n) {
-      var this_array = this.array;
-      var w_array    = w.array;
+   #am1(i,x,w,j,c,n) {
+      const this_array = this.array;
+      const w_array    = w.array;
       while(--n >= 0) {
-	 var v = x*this_array[i++]+w_array[j]+c;
+	 const v = x*this_array[i++]+w_array[j]+c;
 	 c = Math.floor(v/0x4000000);
 	 w_array[j++] = v&0x3ffffff;
       }
@@ -134,73 +187,74 @@ class BigInteger {
    // am2 avoids a big mult-and-extract completely.
    // Max digit bits should be <= 30 because we do bitwise ops
    // on values up to 2*hdvalue^2-hdvalue-1 (< 2^31)
-   am2(i ,x ,w ,j ,c ,n) {
-      var this_array = this.array;
-      var w_array    = w.array;
-      var xl = x&0x7fff, xh = x>>15;
-            			 while(--n >= 0) {
-                		    var l = this_array[i]&0x7fff;
-                		    var h = this_array[i++]>>15;
-                					     var m = xh*l+h*xl;
-                					     l = xl*l+((m&0x7fff)<<15)+w_array[j]+(c&0x3fffffff);
-                					     c = (l>>>30)+(m>>>15)+xh*h+(c>>>30);
-                					     w_array[j++] = l&0x3fffffff;
-            			 }
-            			 return c;
+   #am2(i ,x ,w ,j ,c ,n) {
+      const this_array = this.array;
+      const w_array    = w.array;
+      const xl = x&0x7fff, xh = x>>15;
+      while(--n >= 0) {
+	 let l = this_array[i]&0x7fff;
+	 const h = this_array[i++]>>15;
+         const m = xh*l+h*xl;
+ 	 l = xl*l+((m&0x7fff)<<15)+w_array[j]+(c&0x3fffffff);
+	 c = (l>>>30)+(m>>>15)+xh*h+(c>>>30);
+	 w_array[j++] = l&0x3fffffff;
+      }
+      return c;
    }
    
    // Alternately, set max digit bits to 28 since some
    // browsers slow down when dealing with 32-bit numbers.
-   am3(i,x,w,j,c,n) {
-      var this_array = this.array;
-      var w_array    = w.array;
+   #am3(i,x,w,j,c,n) {
+      const this_array = this.array;
+      const w_array    = w.array;
       
-      var xl = x&0x3fff, xh = x>>14;
-            			 while(--n >= 0) {
-                		    var l = this_array[i]&0x3fff;
-                		    var h = this_array[i++]>>14;
-                					     var m = xh*l+h*xl;
-                					     l = xl*l+((m&0x3fff)<<14)+w_array[j]+c;
-                					     c = (l>>28)+(m>>14)+xh*h;
-                					     w_array[j++] = l&0xfffffff;
-            			 }
-            			 return c;
+      const xl = x&0x3fff, xh = x>>14;
+      while(--n >= 0) {
+	 let l = this_array[i]&0x3fff;
+	 const h = this_array[i++]>>14;
+         const m = xh*l+h*xl;
+	 l = xl*l+((m&0x3fff)<<14)+w_array[j]+c;
+	 c = (l>>28)+(m>>14)+xh*h;
+	 w_array[j++] = l&0xfffffff;
+      }
+      return c;
    }
    
    // This is tailored to VMs with 2-bit tagging. It makes sure
    // that all the computations stay within the 29 bits available.
-   am4(i,x,w,j,c,n) {
-      var this_array = this.array;
-      var w_array    = w.array;
+   #am4(i,x,w,j,c,n) {
+      const this_array = this.array;
+      const w_array    = w.array;
       
-      var xl = x&0x1fff, xh = x>>13;
-            			 while(--n >= 0) {
-                		    var l = this_array[i]&0x1fff;
-                		    var h = this_array[i++]>>13;
-                					     var m = xh*l+h*xl;
-                					     l = xl*l+((m&0x1fff)<<13)+w_array[j]+c;
-                					     c = (l>>26)+(m>>13)+xh*h;
-                					     w_array[j++] = l&0x3ffffff;
-            			 }
-            			 return c;
+      const xl = x&0x1fff, xh = x>>13;
+      while(--n >= 0) {
+	 let l = this_array[i]&0x1fff;
+	 const h = this_array[i++]>>13;
+         const m = xh*l+h*xl;
+	 l = xl*l+((m&0x1fff)<<13)+w_array[j]+c;
+	 c = (l>>26)+(m>>13)+xh*h;
+	 w_array[j++] = l&0x3ffffff;
+      }
+      return c;
    }
    
-   static setup = 3;
+   static #setup = 3;
    
    am(i,x,w,j,c,n) {
-      switch (BigInteger.setup) {
-	 case 1: return this.am1(i,x,w,j,c,n);
-	 case 2: return this.am2(i,x,w,j,c,n);
-	 case 3: return this.am3(i,x,w,j,c,n);
-	 case 4: return this.am4(i,x,w,j,c,n);
-	 default: return this.am3(i,x,w,j,c,n);
+      K++;
+      switch (BigInteger.#setup) {
+	 case 1: return this.#am1(i,x,w,j,c,n);
+	 case 2: return this.#am2(i,x,w,j,c,n);
+	 case 3: return this.#am3(i,x,w,j,c,n);
+	 case 4: return this.#am4(i,x,w,j,c,n);
+	 default: return this.#am3(i,x,w,j,c,n);
       }
    }
    
    // (protected) copy this to r
    copyTo(r) {
-      var this_array = this.array;
-      var r_array    = r.array;
+      const this_array = this.array;
+      const r_array    = r.array;
       
       for(var i = this.t-1; i >= 0; --i) r_array[i] = this_array[i];
       r.t = this.t;
@@ -209,7 +263,7 @@ class BigInteger {
    
    // (protected) set from integer value x, -DV <= x < DV
    fromInt(x) { //needs to be accessed by nbv
-      var this_array = this.array;
+      const this_array = this.array;
       this.t = 1;
       this.s = (x<0)?-1:0;
       if(x > 0) this_array[0] = x;
@@ -219,7 +273,7 @@ class BigInteger {
    
    // (protected) set from string and radix
    fromString(s,b) {
-      var this_array = this.array;
+      const this_array = this.array;
       var k;
       if(b == 16) k = 4;
       else if(b == 8) k = 3;
@@ -260,14 +314,14 @@ class BigInteger {
    
    // (protected) clamp off excess high words
    clamp() {
-      var this_array = this.array;
+      const this_array = this.array;
       var c = this.s&BI_DM;
       while(this.t > 0 && this_array[this.t-1] == c) --this.t;
    }
    
    // (public) return string representation in given radix
    toString(b) {
-      var this_array = this.array;
+      const this_array = this.array;
       if(this.s < 0) return "-"+this.negate().toString(b);
       var k;
       if(b == 16) k = 4;
@@ -304,7 +358,7 @@ class BigInteger {
    
    // (public) return + if this > a, - if this < a, 0 if equal
    compareTo(a) {
-      var this_array = this.array;
+      const this_array = this.array;
       var a_array = a.array;
       
       var r = this.s-a.s;
@@ -318,14 +372,14 @@ class BigInteger {
    
    // (public) return the number of bits in "this"
    bitLength() {
-      var this_array = this.array;
+      const this_array = this.array;
       if(this.t <= 0) return 0;
       return BI_DB*(this.t-1)+nbits(this_array[this.t-1]^(this.s&BI_DM));
    }
    
    // (protected) r = this << n*DB
    dlShiftTo(n,r) { //NS:needs to be public
-      var this_array = this.array;
+      const this_array = this.array;
       var r_array = r.array;
       var i;
       for(i = this.t-1; i >= 0; --i) r_array[i+n] = this_array[i];
@@ -336,7 +390,7 @@ class BigInteger {
    
    // (protected) r = this >> n*DB
    drShiftTo(n,r) {
-      var this_array = this.array;
+      const this_array = this.array;
       var r_array = r.array;
       for(var i = n; i < this.t; ++i) r_array[i-n] = this_array[i];
       r.t = Math.max(this.t-n,0);
@@ -345,7 +399,7 @@ class BigInteger {
    
    // (protected) r = this << n
    lShiftTo(n,r) {
-      var this_array = this.array;
+      const this_array = this.array;
       var r_array = r.array;
       var bs = n%BI_DB;
       var cbs = BI_DB-bs;
@@ -364,7 +418,7 @@ class BigInteger {
    
    // (protected) r = this >> n
    rShiftTo(n,r) {
-      var this_array = this.array;
+      const this_array = this.array;
       var r_array = r.array;
       r.s = this.s;
       var ds = Math.floor(n/BI_DB);
@@ -384,7 +438,7 @@ class BigInteger {
    
    // (protected) r = this - a
    subTo(a,r) {
-      var this_array = this.array;
+      const this_array = this.array;
       var r_array = r.array;
       var a_array = a.array;
       var i = 0, c = 0, m = Math.min(a.t,this.t);
@@ -421,7 +475,7 @@ class BigInteger {
    // (protected) r = this * a, r != this,a (HAC 14.12)
    // "this" should be the larger one if appropriate.
    multiplyTo(a,r) {
-      var this_array = this.array;
+      const this_array = this.array;
       var r_array = r.array;
       var x = this.abs(), y = a.abs();
       var y_array = y.array;
@@ -531,7 +585,7 @@ class BigInteger {
    // should reduce x and y(2-xy) by m^2 at each step to keep size bounded.
    // JS multiply "overflows" differently from C/C++, so care is needed here.
    invDigit() {
-      var this_array = this.array;
+      const this_array = this.array;
       if(this.t < 1) return 0;
       var x = this_array[0];
       if((x&1) == 0) return 0;
@@ -548,7 +602,7 @@ class BigInteger {
    
    // (protected) true iff this is even
    isEven() {
-      var this_array = this.array;
+      const this_array = this.array;
       return ((this.t>0)?(this_array[0]&1):this.s) == 0;
    }
    
@@ -583,7 +637,7 @@ class BigInteger {
    
    // (public) return value as integer
    intValue() {
-      var this_array = this.array;
+      const this_array = this.array;
       if(this.s < 0) {
 	 if(this.t == 1) return this_array[0]-BI_DV;
 	 else if(this.t == 0) return -1;
@@ -596,13 +650,13 @@ class BigInteger {
    
    // (public) return value as byte
    byteValue() {
-      var this_array = this.array;
+      const this_array = this.array;
       return (this.t==0)?this.s:(this_array[0]<<24)>>24;
    }
    
    // (public) return value as short (assumes DB>=16)
    shortValue() {
-      var this_array = this.array;
+      const this_array = this.array;
       return (this.t==0)?this.s:(this_array[0]<<16)>>16;
    }
    
@@ -611,7 +665,7 @@ class BigInteger {
    
    // (public) 0 if this == 0, 1 if this > 0
    signum() {
-      var this_array = this.array;
+      const this_array = this.array;
       if(this.s < 0) return -1;
       else if(this.t <= 0 || (this.t == 1 && this_array[0] <= 0)) return 0;
       else return 1;
@@ -687,7 +741,7 @@ class BigInteger {
    
    // (public) convert to bigendian byte array
    toByteArray() {
-      var this_array = this.array;
+      const this_array = this.array;
       var i = this.t, r = new Array();
       r[0] = this.s;
       var p = BI_DB-(i*BI_DB)%8; var d = 0; var k = 0;
@@ -717,7 +771,7 @@ class BigInteger {
    
    // (protected) r = this op a (bitwise)
    bitwiseTo(a, op , r) {
-      var this_array = this.array;
+      const this_array = this.array;
       var a_array    = a.array;
       var r_array    = r.array;
       var i = 0, f = 0, m = Math.min(a.t,this.t);
@@ -744,7 +798,7 @@ class BigInteger {
    
    // (public) ~this
    not() {
-      var this_array = this.array;
+      const this_array = this.array;
       var r = nbi();
       var r_array = r.array;
       
@@ -770,7 +824,7 @@ class BigInteger {
    
    // (public) returns index of lowest 1-bit (or -1 if none)
    getLowestSetBit() {
-      var this_array = this.array;
+      const this_array = this.array;
       for(var i = 0; i < this.t; ++i)
 	    if(this_array[i] != 0) return i*BI_DB+lbit(this_array[i]);
             if(this.s < 0) return this.t*BI_DB;
@@ -779,7 +833,7 @@ class BigInteger {
    
    // (public) return number of set bits
    bitCount() {
-      var this_array = this.array; //NS: fix--was missing
+      const this_array = this.array; //NS: fix--was missing
       var r = 0, x = this.s&BI_DM;
       for(var i = 0; i < this.t; ++i) r += cbit(this_array[i]^x);
       return r;
@@ -787,7 +841,7 @@ class BigInteger {
    
    // (public) true iff nth bit is set
    testBit(n) {
-      var this_array = this.array;
+      const this_array = this.array;
       var j = Math.floor(n/BI_DB);
       if(j >= this.t) return(this.s!=0);
       return((this_array[j]&(1<<(n%BI_DB)))!=0);
@@ -811,7 +865,7 @@ class BigInteger {
    
    // (protected) r = this + a
    addTo(a,r) {
-      var this_array = this.array;
+      const this_array = this.array;
       var a_array = a.array;
       var r_array = r.array;
       var i = 0, c = 0, m = Math.min(a.t,this.t);
@@ -869,7 +923,7 @@ class BigInteger {
    
    // (protected) this *= n, this >= 0, 1 < n < DV
    dMultiply(n) {
-      var this_array = this.array;
+      const this_array = this.array;
       this_array[this.t] = this.am(0,n-1,this,0,0,this.t);
 ++this.t;
   this.clamp();
@@ -877,7 +931,7 @@ class BigInteger {
    
    // (protected) this += n << w words, this >= 0
    dAddOffset(n,w) {
-      var this_array = this.array;
+      const this_array = this.array;
       while(this.t <= w) this_array[this.t++] = 0;
       this_array[w] += n;
       while(this_array[w] >= BI_DV) {
@@ -1011,7 +1065,7 @@ class BigInteger {
    
    // (protected) this % n, n < 2^26
    modInt(n ) {
-      var this_array = this.array;
+      const this_array = this.array;
       if(n <= 0) return 0;
       var d = BI_DV%n, r = (this.s<0)?n-1:0;
       if(this.t > 0)
@@ -1134,8 +1188,8 @@ var setupEngine = function(setup, bits) {
 function nbi() { return new BigInteger(null); }
 
 // Digit conversions
-var BI_RM = "0123456789abcdefghijklmnopqrstuvwxyz";
-var BI_RC = new Array();
+const BI_RM = "0123456789abcdefghijklmnopqrstuvwxyz";
+const BI_RC = new Array();
 var rr,vv;
 rr = "0".charCodeAt(0);
 for(vv = 0; vv <= 9; ++vv) BI_RC[rr++] = vv;
@@ -1225,19 +1279,20 @@ class Montgomery {
       var x_array = x.array;
       while(x.t <= this.mt2)	// pad x so am has enough room later
 	      x_array[x.t++] = 0;
-              for(var i = 0; i < this.m.t; ++i) {
-                 // faster way of calculating u0 = x[i]*mp mod DV
-                 var j = x_array[i]&0x7fff;
-                 var u0 = (j*this.mpl+(((j*this.mph+(x_array[i]>>15)*this.mpl)&this.um)<<15))&BI_DM;
-                 // use am to combine the multiply-shift-add into one call
-                 j = i+this.m.t;
-                 x_array[j] += this.m.am(0,u0,x,i,0,this.m.t);
-                 // propagate carry
-                 while(x_array[j] >= BI_DV) { x_array[j] -= BI_DV; x_array[++j]++; }
-              }
-              x.clamp();
-              x.drShiftTo(this.m.t,x);
-              if(x.compareTo(this.m) >= 0) x.subTo(this.m,x);
+	      
+      for(var i = 0; i < this.m.t; ++i) {
+	 // faster way of calculating u0 = x[i]*mp mod DV
+	 var j = x_array[i]&0x7fff;
+	 var u0 = (j*this.mpl+(((j*this.mph+(x_array[i]>>15)*this.mpl)&this.um)<<15))&BI_DM;
+	 // use am to combine the multiply-shift-add into one call
+	 j = i+this.m.t;
+	 x_array[j] += this.m.am(0,u0,x,i,0,this.m.t);
+	 // propagate carry
+	 while(x_array[j] >= BI_DV) { x_array[j] -= BI_DV; x_array[++j]++; }
+      }
+      x.clamp();
+      x.drShiftTo(this.m.t,x);
+      if(x.compareTo(this.m) >= 0) x.subTo(this.m,x);
    }
    
    // r = "x^2/R mod m"; x != r
@@ -1310,35 +1365,35 @@ class Barrett {
 
 // @record
 class Arcfour {
-   i = 0;
-   j = 0;
-   S = new Array();
+   #i = 0;
+   #j = 0;
+   #S = new Array();
    constructor() {}
    
    // Initialize arcfour context from key, an array of ints, each from [0..255]
    init(key) {
       var i, j, t;
       for(i = 0; i < 256; ++i)
-	    this.S[i] = i;
+	    this.#S[i] = i;
       j = 0;
       for(i = 0; i < 256; ++i) {
-	 j = (j + this.S[i] + key[i % key.length]) & 255;
-	 t = this.S[i];
-	 this.S[i] = this.S[j];
-	 this.S[j] = t;
+	 j = (j + this.#S[i] + key[i % key.length]) & 255;
+	 t = this.#S[i];
+	 this.#S[i] = this.#S[j];
+	 this.#S[j] = t;
       }
-      this.i = 0;
-      this.j = 0;
+      this.#i = 0;
+      this.#j = 0;
    }
    
    next() {
       var t;
-      this.i = (this.i + 1) & 255;
-      this.j = (this.j + this.S[this.i]) & 255;
-      t = this.S[this.i];
-      this.S[this.i] = this.S[this.j];
-      this.S[this.j] = t;
-      return this.S[(t + this.S[this.i]) & 255];
+      this.#i = (this.#i + 1) & 255;
+      this.#j = (this.#j + this.#S[this.#i]) & 255;
+      t = this.#S[this.#i];
+      this.#S[this.#i] = this.#S[this.#j];
+      this.#S[this.#j] = t;
+      return this.#S[(t + this.#S[this.#i]) & 255];
    }
 }
 
@@ -1382,9 +1437,9 @@ if(rng_pool == null) {
    rng_pptr = 0;
    var t;
    while(rng_pptr < rng_psize) {  // extract some randomness from Math.random()
-      t = Math.floor(65536 * Math.random());
+      t = Math.floor(65536 * Math_random());
       rng_pool[rng_pptr++] = t >>> 8;
-            			   rng_pool[rng_pptr++] = t & 255;
+      rng_pool[rng_pptr++] = t & 255;
    }
    rng_pptr = 0;
    rng_seed_time();
@@ -1660,7 +1715,7 @@ function BenchmarkSuite( name, val, benchs ) {
 
 const NNN = (process.argv[ 1 ] === "fprofile") 
       ? 200
-      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 2000;
+      : process.argv[ 2 ] ? parseInt( process.argv[ 2 ] ) : 200;
 
 var DeltaBlue = new BenchmarkSuite('crypto', [66118], [
   new Benchmark('crypto', true, false, NNN, benchmark_fn)
@@ -1668,3 +1723,4 @@ var DeltaBlue = new BenchmarkSuite('crypto', [66118], [
 
 go();
 
+console.log("K=", K);
