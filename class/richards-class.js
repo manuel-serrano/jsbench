@@ -327,6 +327,23 @@ toString() {
 }
 }
  
+// @record
+class Task {
+   scheduler;
+   
+   constructor(scheduler) {
+      this.scheduler = scheduler;
+   }
+   
+   run(packet) {
+      throw "Abstract method";
+   }
+   
+   toString() {
+      return "Task";
+   }
+}
+
 /**
  * An idle task doesn't do any work itself but cycles control between the two
  * device tasks.
@@ -336,30 +353,29 @@ toString() {
  * @constructor
  */
 // @record 
-class IdleTask {
-    #scheduler;
+class IdleTask extends Task {
     #v1;
     #count;
     
     constructor(scheduler, v1, count) {
-       this.#scheduler = scheduler;
+       super(scheduler);
        this.#v1 = v1;
        this.#count = count;
     }
 
     run(packet) {
        this.#count--;
-       if (this.#count == 0) return this.#scheduler.holdCurrent();
+       if (this.#count == 0) return this.scheduler.holdCurrent();
        if ((this.#v1 & 1) == 0) {
     	  this.#v1 = this.#v1 >> 1;
-    			       return this.#scheduler.release(ID_DEVICE_A);
+    			       return this.scheduler.release(ID_DEVICE_A);
        } else {
     	  this.#v1 = (this.#v1 >> 1) ^ 0xD008;
-    	  return this.#scheduler.release(ID_DEVICE_B);
+    	  return this.scheduler.release(ID_DEVICE_B);
        }
     }
 
-    toString = function () {
+    toString() {
        return "IdleTask"
     }
  }
@@ -371,24 +387,23 @@ class IdleTask {
  * @constructor
  */
 // @record
-class DeviceTask {
-    #scheduler;
+class DeviceTask extends Task {
     #v1;
     
-    constructor (scheduler) {
-       this.#scheduler = scheduler;
+    constructor(scheduler) {
+       super(scheduler);
        this.#v1 = null;
     }
 
     run(packet) {
        if (packet == null) {
-    	  if (this.#v1 == null) return this.#scheduler.suspendCurrent();
+    	  if (this.#v1 == null) return this.scheduler.suspendCurrent();
     	  var v = this.#v1;
     	  this.#v1 = null;
-    	  return this.#scheduler.queue(v);
+    	  return this.scheduler.queue(v);
        } else {
     	  this.#v1 = packet;
-    	  return this.#scheduler.holdCurrent();
+    	  return this.scheduler.holdCurrent();
        }
     }
 
@@ -405,20 +420,19 @@ class DeviceTask {
  * @constructor
  */
 // @record 
-class WorkerTask {
-    #scheduler;
+class WorkerTask extends Task {
     #v1;
     #v2;
     
     constructor(scheduler, v1, v2) {
-       this.#scheduler = scheduler;
+       super(scheduler);
        this.#v1 = v1;
        this.#v2 = v2;
     }
 
     run(packet) {
        if (packet == null) {
-    	  return this.#scheduler.suspendCurrent();
+    	  return this.scheduler.suspendCurrent();
        } else {
     	  if (this.#v1 == ID_HANDLER_A) {
       	     this.#v1 = ID_HANDLER_B;
@@ -432,7 +446,7 @@ class WorkerTask {
       	     if (this.#v2 > 26) this.#v2 = 1;
       	     packet.a2[i] = this.#v2;
     	  }
-    	  return this.#scheduler.queue(packet);
+    	  return this.scheduler.queue(packet);
        }
     }
 
@@ -447,13 +461,12 @@ class WorkerTask {
  * @constructor
  */
 // @record 
-class HandlerTask {
-   #scheduler;
+class HandlerTask extends Task {
    #v1 = null;
    #v2 = null;
    
-   constructor (scheduler) {
-      this.#scheduler = scheduler;
+   constructor(scheduler) {
+      super(scheduler);
    }
 
    run(packet) {
@@ -473,15 +486,15 @@ class HandlerTask {
 	       this.#v2 = this.#v2.link;
 	       v.a1 = this.#v1.a2[count];
 	       this.#v1.a1 = count + 1;
-	       return this.#scheduler.queue(v);
+	       return this.scheduler.queue(v);
 	    }
 	 } else {
 	    v = this.#v1;
 	    this.#v1 = this.#v1.link;
-	    return this.#scheduler.queue(v);
+	    return this.scheduler.queue(v);
 	 }
       }
-      return this.#scheduler.suspendCurrent();
+      return this.scheduler.suspendCurrent();
    }
    
    toString() {
