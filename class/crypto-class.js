@@ -30,8 +30,6 @@
  */
 "use strict";
  
-let K = 0;
-
 // random
 const rnd = [0.8770995586538219, 0.7467351610524278, 0.23249549103551334,
              0.8231245166729784, 0.318460008277772, 0.2765477273038345,
@@ -241,7 +239,6 @@ class BigInteger {
    static #setup = 3;
    
    am(i,x,w,j,c,n) {
-      K++;
       switch (BigInteger.#setup) {
 	 case 1: return this.#am1(i,x,w,j,c,n);
 	 case 2: return this.#am2(i,x,w,j,c,n);
@@ -1722,5 +1719,3 @@ var DeltaBlue = new BenchmarkSuite('crypto', [66118], [
 ]);
 
 go();
-
-console.log("K=", K);
