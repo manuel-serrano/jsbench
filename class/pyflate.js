@@ -122,7 +122,8 @@ class Runner {
 }
 
 const files = {
-   "./sample.tar.bz2" : { bytes: "425a68393141592653592335680000007aff84c210030040017f80004000a067059e40000400082000741a9a18a0c80d00d34d0494269a34d0000037fbb8b9c8413bc04893e4cb064c4989206ead1dd3623af8405ba0690216cb57264917aa93890a44d26bd10dc76560a301a4f8a0e0e673140dde9e9a87a884feac7eae6ac6300fc5dc914e142408cd5a0000", hash: "b4d67e3d882bb71400a4c768be09759f" }
+   "./sample.bz2" : { bytes: "425a68393141592653592335680000007aff84c210030040017f80004000a067059e40000400082000741a9a18a0c80d00d34d0494269a34d0000037fbb8b9c8413bc04893e4cb064c4989206ead1dd3623af8405ba0690216cb57264917aa93890a44d26bd10dc76560a301a4f8a0e0e673140dde9e9a87a884feac7eae6ac6300fc5dc914e142408cd5a0000", hash: 6457 },
+   "./sample2.bz2" : { bytes: "425a683931415926535943dc26990000065180001040002005ce0020003100302006d42ac1815c769de2ee48a70a12087b84d320", hash: 1283 }
 }
 
 // @record
@@ -1061,15 +1062,17 @@ const N =
    (process.argv[1] === "fprofile") 
    ? 2
    //: process.argv[2] ? parseInt(process.argv[2]) : 100;
-   : process.argv[2] ? parseInt(process.argv[2]) : 40;
+   : process.argv[2] ? parseInt(process.argv[2]) : 20;
 
 const runner = new Runner();
 
 function main(runner,args) {
    for (let i = 0; i < N; i++) {
-      runner.bench_func('pyflate', bench_pyflake, 300, "./sample.tar.bz2");
+      runner.bench_func('pyflate', bench_pyflake, 300, "./sample.bz2");
+      runner.bench_func('pyflate', bench_pyflake, 350, "./sample2.bz2");
    }
-   console.log(runner.bench_func('flyflate', bench_pyflake, 1, "./sample.tar.bz2"));
+   console.log(runner.bench_func('flyflate', bench_pyflake, 1, "./sample.bz2"));
+   console.log(runner.bench_func('flyflate', bench_pyflake, 1, "./sample2.bz2"));
 }
 
 main(runner, {});
