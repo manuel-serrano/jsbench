@@ -79,6 +79,7 @@ coolperiod=3
 mkdir -p $dir
 
 for p in $BENCHMARKS; do
+  echo "$p..."
   if [ "$msg " != " " ]; then
     hop --no-server -- tools/runbench.js -v3 $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc
   else
