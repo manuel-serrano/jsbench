@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Oct 27 14:00:39 2019                          */
-/*    Last change :  Wed Jan 19 11:24:42 2022 (serrano)                */
+/*    Last change :  Wed Jan 19 11:25:59 2022 (serrano)                */
 /*    Copyright   :  2019-22 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Display the mean of real executions time for one benchmark       */
@@ -35,7 +35,7 @@ function mean(times) {
 /*---------------------------------------------------------------------*/
 /*    logRTime ...                                                     */
 /*---------------------------------------------------------------------*/
-function logRTime(logs, enames, config) {
+function logRTime(logs, enames, config, fd) {
    
    logs.forEach(log => {
       	 let len = 0;
@@ -60,8 +60,8 @@ function logRTime(logs, enames, config) {
 	       let l = e.logs[ 0 ];
 	       
 	       if (l && l.times.rtimes) {
-		  fs.writeSync(config.fd, (mean(l.times.rtimes) / 1000).toFixed(2) + "\n");
-		  fs.fsyncSync(config.fd);
+		  fs.writeSync(fd, (mean(l.times.rtimes) / 1000).toFixed(2) + "\n");
+		  fs.fsyncSync(fd);
 	       } });
       });
 }
