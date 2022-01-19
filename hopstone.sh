@@ -4,7 +4,7 @@
 . ./BENCHMARKS.sh
 
 hopc=hopc
-engines="-e hop -e nodejs -e jsc js78 -e chakra -e graal"
+engines="-e hop -e nodejs -e jsc -e js78 -e chakra -e graal"
 
 resetengines=""
 
