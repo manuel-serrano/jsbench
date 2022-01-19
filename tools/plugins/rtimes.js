@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Oct 27 14:00:39 2019                          */
-/*    Last change :  Wed Jan 19 11:25:59 2022 (serrano)                */
+/*    Last change :  Wed Jan 19 11:27:03 2022 (serrano)                */
 /*    Copyright   :  2019-22 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Display the mean of real executions time for one benchmark       */
@@ -88,7 +88,8 @@ module.exports = function(logfiles, engines, args, config) {
       console.error("rtimes engines=" + engines + "\n");
    }
    
-   const fd = (config.output || process.stdout.fd);
+   #:tprint("CFG=", config.output);
+   const fd = (config.output ? config.fd : process.stdout.fd);
 	
    try {
       logRTime(logs, engines.map(e => e.name), config, fd);
