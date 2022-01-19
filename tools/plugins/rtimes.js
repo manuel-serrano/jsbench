@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Oct 27 14:00:39 2019                          */
-/*    Last change :  Thu Oct 28 09:11:26 2021 (serrano)                */
-/*    Copyright   :  2019-21 Manuel Serrano                            */
+/*    Last change :  Wed Jan 19 11:24:42 2022 (serrano)                */
+/*    Copyright   :  2019-22 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Display the mean of real executions time for one benchmark       */
 /*    and one engine.                                                  */
@@ -96,4 +96,5 @@ module.exports = function(logfiles, engines, args, config) {
       if (config.output) {
 	 fs.closeSync(fd);
       }
+   }
 }
