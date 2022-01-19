@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:16:47 2017                          */
-/*    Last change :  Thu Oct 28 09:07:18 2021 (serrano)                */
-/*    Copyright   :  2017-21 Manuel Serrano                            */
+/*    Last change :  Wed Jan 19 11:19:30 2022 (serrano)                */
+/*    Copyright   :  2017-22 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Output bench log                                                 */
 /*=====================================================================*/
@@ -83,7 +83,7 @@ function main() {
    }
 
    config.output = (args.o || args.output);
-   config.engine = args.E || args.engine || config.engine || "./engine";
+   config.engine = args.E || args.engine || config.engine || "./engines";
 							     
    // load the engine plugins
    if (args._.length < 2) {
