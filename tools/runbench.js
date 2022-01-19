@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Thu Oct 28 08:40:41 2021 (serrano)                */
-/*    Copyright   :  2017-21 Manuel Serrano                            */
+/*    Last change :  Wed Jan 19 11:11:46 2022 (serrano)                */
+/*    Copyright   :  2017-22 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
 /*=====================================================================*/
@@ -532,7 +532,7 @@ function main() {
 
    config.argsfile = !args.noargsfile;
 
-   config.engine = args.E || args.engine || config.engine || "./engine";
+   config.engine = args.E || args.engine || config.engine || "./engines";
    config.directory = args.D || args.dir;
    config.recompile = args.recompile;
    
