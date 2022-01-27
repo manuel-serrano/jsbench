@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Wed Jan 19 11:11:46 2022 (serrano)                */
+/*    Last change :  Thu Jan 27 12:52:19 2022 (serrano)                */
 /*    Copyright   :  2017-22 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -331,12 +331,15 @@ function runBench(bench, engine) {
 	    .replace(/@NAME@/g, bench.name)
 	    .replace(/@INTERPRETER@/g, engine.interpreter || "")
    	    .replace(/@ENGINE@/g, engine.name || "")
-	 + (config.arg ? " " + argsToString(config.arg) : "");
+	 + (config.arg ? " " + argsToString(config.arg) : "")
+	 + (args ? " " + argsToString(args) : "");
+
       return benchLog(bench, engine, cmd, chrono(cmd), subtitle, args);
    }
 
    function runInterpret(subtitle, args) {
-      const cmd = benchCmd((config.arg ? " " + argsToString(config.arg) : ""));
+      const cmd = benchCmd((config.arg ? " " + argsToString(config.arg) : ""))
+	 + (args ? " " + argsToString(args) : "");
 
       return benchLog(bench, engine, cmd, chrono(cmd), subtitle, args);
    }
@@ -398,7 +401,7 @@ function runBench(bench, engine) {
       
       if (config.argsfile && fs.existsSync(argspath)) {
 	 const args = require(normalizeCwd(argspath));
-	 
+
 	 if (engine.compiler) {
 	    return compile(false)
 	       .then(_ => Promise.all(
