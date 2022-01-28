@@ -59,7 +59,7 @@ function random_seed(seed) {
    rndi = seed;
 }
 
-// @record
+// @sealed
 class Runner {
    metadata = {};
    
@@ -79,7 +79,7 @@ const DEFAULT_ITERATIONS = 5000;
 const DEFAULT_RNG_SEED = 1234;
 
 
-// @record
+// @sealed
 class GVector {
    x;
    y;
@@ -135,7 +135,7 @@ class GVector {
    }
 }
 
-// @record
+// @sealed
 class Spline {
    // Class for representing B-Splines and NURBS of arbitrary degree
    #knots;
@@ -246,7 +246,7 @@ class Spline {
    }
 }
 
-// @record
+// @sealed
 class open {
    #buffer = "";
    
@@ -286,7 +286,7 @@ function write_ppm(im, filename) {
    return console.log(fp.close());
 }
 
-// @record
+// @sealed
 class Chaosgame {
    #splines;
    #thickness;

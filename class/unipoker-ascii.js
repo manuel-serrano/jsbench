@@ -72,7 +72,7 @@ function Mathrandom() {
    return rnd[ rndi++ % rnd.length ];
 }
 
-// @record
+// @sealed
 class CardDeck {
    #cards;
    
@@ -152,7 +152,7 @@ static #newDeck = [
 
 }
 
-// @record
+// @sealed
 class Hand {
    #cards;
    #rank = 0;
@@ -288,7 +288,7 @@ static #TwoPair = 0x200000;
 static #Pair = 0x100000;
 }
 
-// @record
+// @sealed
 class Player extends Hand {
    #name;
    #wins;
@@ -372,7 +372,7 @@ function playHands(players)
     } while (handsPlayed < 2000);
 }
 
-// @record
+// @sealed
 class PlayerExpectation
 {
    #wins;
@@ -423,7 +423,7 @@ playerExpectations.push(new PlayerExpectation(60065, [ 120262, 101345, 11473, 50
 playerExpectations.push(new PlayerExpectation(60064, [ 120463, 101218, 11445, 5065, 938, 446, 364, 58, 3, 0]));
 
 
-// @record
+// @sealed
 class Benchmark {
    #players;
     constructor()

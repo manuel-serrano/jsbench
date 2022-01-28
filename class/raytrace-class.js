@@ -18,7 +18,7 @@
 
 let checkNumber=0;
 
-// @record
+// @sealed
 class Color {
    #red;
    #green;
@@ -131,7 +131,7 @@ class Color {
    }
 }
 
-// @record
+// @sealed
 class Light {
    position;
    color;
@@ -148,7 +148,7 @@ class Light {
 	  }
 }
 
-// @record
+// @sealed
 class Vector {
    x;
    y;
@@ -208,7 +208,7 @@ class Vector {
    }
 }
 
-// @record
+// @sealed
 class Ray {
    position;
    direction;
@@ -223,7 +223,7 @@ class Ray {
    }
 }
 
-// @record
+// @sealed
 class Scene {
    camera = null;
    shapes = [];
@@ -240,7 +240,7 @@ class Scene {
    }
 }
 
-// @record
+// @sealed
 class BaseMaterial {
    reflection;
    refraction;
@@ -270,7 +270,7 @@ class BaseMaterial {
    }
 }
 
-// @record
+// @sealed
 class Solid extends BaseMaterial {
    color;
    
@@ -288,7 +288,7 @@ class Solid extends BaseMaterial {
    }
 }
 
-// @record
+// @sealed
 class Chessboard extends BaseMaterial {
    colorEven;
    colorOdd;
@@ -317,7 +317,7 @@ class Chessboard extends BaseMaterial {
    }
 }
 
-// @record
+// @sealed
 class Shape {
    position;
    material;
@@ -332,7 +332,7 @@ class Shape {
    }
 }
 
-// @record
+// @sealed
 class Sphere extends Shape {
    constructor(position, radius, material) {
       super(position, material);
@@ -375,7 +375,7 @@ class Sphere extends Shape {
    }
 }
 
-// @record
+// @sealed
 class Plane extends Shape {
    constructor(position, d, material) {
       super(position, material);
@@ -420,7 +420,7 @@ class Plane extends Shape {
    }
 }
 
-// @record
+// @sealed
 class IntersectionInfo {
    isHit;
    hitCount;
@@ -450,7 +450,7 @@ class IntersectionInfo {
    }
 }
 
-// @record
+// @sealed
 class Camera {
    equator = null;
    screen = null;
@@ -490,7 +490,7 @@ class Camera {
    }
 }
 
-// @record
+// @sealed
 class Background {
    color;
    ambience;
@@ -501,7 +501,7 @@ class Background {
    }
 }
 
-// @record
+// @sealed
 class Options {
    canvasWidth;
    canvasHeight;
@@ -534,7 +534,7 @@ class Options {
    }
 }
 
-// @record
+// @sealed
 class Engine {
    canvas = null; /* 2d context we can render to */
    options = null;

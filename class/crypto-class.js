@@ -144,7 +144,7 @@ function pkcs1unpad2(d,n) {
 
 
 // Basic JavaScript BN library - subset useful for RSA encryption.
-// @record
+// @sealed
 class BigInteger {
    array = undefined; //AR: null;
    t = 0;
@@ -1217,7 +1217,7 @@ function nbits(x) {
 }
 
 
-// @record
+// @sealed
 class Classic {
    m;
    
@@ -1236,7 +1236,7 @@ class Classic {
 
 
 // Montgomery reduction
-// @record
+// @sealed
 class Montgomery {
    m;
    mp;
@@ -1301,7 +1301,7 @@ class Montgomery {
 
 
 // A "null" reducer
-// @record
+// @sealed
 class NullExp {
    constructor() {}
    nop(x) { return x; }
@@ -1310,7 +1310,7 @@ class NullExp {
 }
 
 // Barrett modular reduction
-// @record
+// @sealed
 class Barrett {
    r2;
    q3;
@@ -1360,7 +1360,7 @@ class Barrett {
 // static BigInteger valueOf(long val)
 // prng4.js - uses Arcfour as a PRNG
 
-// @record
+// @sealed
 class Arcfour {
    #i = 0;
    #j = 0;
@@ -1463,7 +1463,7 @@ function rng_get_bytes(ba) {
    for(i = 0; i < ba.length; ++i) ba[i] = rng_get_byte();
 }
 
-// @record
+// @sealed
 class SecureRandom {
    constructor() {}
    nextBytes(ba) { 
@@ -1519,7 +1519,7 @@ function pkcs1pad2(s,n) {
 }
 
 // "empty" RSA key constructor
-// @record
+// @sealed
 class RSAKey {
    n = null;
    e = 0;

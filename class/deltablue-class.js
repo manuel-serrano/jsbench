@@ -44,7 +44,7 @@
  }
 
 /* --- O b j e c t   M o d e l --- */
-// @record 
+// @sealed 
 class OrderedCollection {
    #elms;
    
@@ -89,7 +89,7 @@ class OrderedCollection {
  * disrupting current constraints.  Strengths cannot be created outside
  * this class, so pointer comparison can be used for value comparison.
  */
-// @record
+// @sealed
 class Strength {
     strengthValue;
     name; 
@@ -146,7 +146,7 @@ class Strength {
  * of storing the constrained variables and other information required
  * to represent a constraint.
  */
-// @record
+// @sealed
 class Constraint {
    strength;
    
@@ -226,7 +226,7 @@ class Constraint {
  * Abstract superclass for constraints having a single possible output
  * variable.
  */
-// @record
+// @sealed
 class UnaryConstraint extends Constraint {
    #myOutput;
    #satisfied;
@@ -311,7 +311,7 @@ class UnaryConstraint extends Constraint {
  * change their output during plan execution.  This is called "stay
  * optimization".
  */
-// @record
+// @sealed
 class StayConstraint extends UnaryConstraint {
    constructor(v, str) {
       super(v, str);
@@ -330,7 +330,7 @@ class StayConstraint extends UnaryConstraint {
  * A unary input constraint used to mark a variable that the client
  * wishes to change.
  */
-// @record
+// @sealed
 class EditConstraint extends UnaryConstraint {
    constructor(v, str) {
       super(v, str);
@@ -360,7 +360,7 @@ Direction.BACKWARD = -1;
  * Abstract superclass for constraints having two possible output
  * variables.
  */
-// @record
+// @sealed
 class BinaryConstraint extends Constraint {
    v1;
    v2;
@@ -481,7 +481,7 @@ class BinaryConstraint extends Constraint {
  * this relationship but the scale factor and offset are considered
  * read-only.
  */
-// @record 
+// @sealed 
 class ScaleConstraint extends BinaryConstraint {
    scale;
    offset;
@@ -545,7 +545,7 @@ class ScaleConstraint extends BinaryConstraint {
 /**
  * Constrains two variables to have the same value.
  */
-// @record
+// @sealed
 class EqualityConstraint extends BinaryConstraint {
    constructor(var1, var2, strength)  {
       super(var1, var2, strength);
@@ -569,7 +569,7 @@ class EqualityConstraint extends BinaryConstraint {
  * various parameters of interest to the DeltaBlue incremental
  * constraint solver.
  **/
-// @record
+// @sealed
 class Variable {
    value;
    constraints;
@@ -613,7 +613,7 @@ class Variable {
 /**
  * The DeltaBlue planner
  */
-// @record
+// @sealed
 class Planner {
    #currentMark;
 
@@ -805,7 +805,7 @@ class Planner {
  * to resatisfy all currently satisfiable constraints in the face of
  * one or more changing inputs.
  */
-// @record
+// @sealed
 class Plan {
    #v;
    

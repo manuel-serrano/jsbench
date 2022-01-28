@@ -87,7 +87,7 @@ function str(tiles) {
    return "[" + tiles.join(", ") + "]";
 }
 
-// @record
+// @sealed
 class Runner {
    metadata = {};
    
@@ -104,7 +104,7 @@ class Runner {
 const DEFAULT_LEVEL = 25;
 
 //##################################
-// @record
+// @sealed
 class Dir {
    x;
    y;
@@ -127,7 +127,7 @@ const EMPTY = 7;
 //##################################
 
 
-// @record
+// @sealed
 class Done {
    count;
    cells;
@@ -349,7 +349,7 @@ function newDone(count, empty) {
 //##################################
 
 
-// @record
+// @sealed
 class Node {
    pos;
    id;
@@ -364,7 +364,7 @@ class Node {
 
 // ##################################
 
-// @record
+// @sealed
 class Matrix {
    #values;
    
@@ -381,7 +381,7 @@ class Matrix {
    }
 }
 
-// @record
+// @sealed
 class Hex {
    size;
    count;
@@ -448,7 +448,7 @@ class Hex {
 
 
 // ##################################
-// @record
+// @sealed
 class Pos {
    hex;
    tiles;

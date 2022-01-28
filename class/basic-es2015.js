@@ -352,7 +352,7 @@ function simulate(program, inputs = [])
  */
 "use strict";
 
-// @record
+// @sealed
 class CaselessMap {
    #map;
    
@@ -513,7 +513,7 @@ function* lex(string)
  */
 "use strict";
 
-// @record
+// @sealed
 class NumberValue {
    #value;
     constructor(value = 0)
@@ -541,7 +541,7 @@ class NumberValue {
     }
 }
 
-// @record
+// @sealed
 class NumberArray {
    #array;
    #dim;
@@ -585,7 +585,7 @@ class NumberArray {
     }
 }
 
-// @record
+// @sealed
 class NumberFunction {
    #parameters;
    #code;
@@ -614,7 +614,7 @@ class NumberFunction {
     }
 }
 
-// @record
+// @sealed
 class NativeFunction {
    #callback;
    
@@ -1275,7 +1275,7 @@ function createRNGWithRandomSeed()
  */
 "use strict";
 
-// @record
+// @sealed
 class State {
    values;
    stringValues;
@@ -1412,7 +1412,7 @@ let currentTime = function() { return +new Date(); };
  */
 "use strict";
 
-// @record
+// @sealed
 class BasicBenchmark {
    #verbose;
    

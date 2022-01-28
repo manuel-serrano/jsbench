@@ -2,7 +2,7 @@
 
 // Adapted by Manuel Serrano from Olin Shivers's maze.scm program
 // Copyright (c) 1993 by Olin Shivers.
-// @record
+// @sealed
 class Cons {
    car;
    cdr;
@@ -23,7 +23,7 @@ function CONS( car, cdr ) {
    return new Cons( car, cdr );
 }
 
-// @record
+// @sealed
 class Harr {
    nrows;
    ncols;
@@ -47,7 +47,7 @@ class Harr {
    }
 }
 
-// @record
+// @sealed
 class Wall {
    owner;
    neighbor;
@@ -60,7 +60,7 @@ class Wall {
    }
 }
 
-// @record
+// @sealed
 class Box {
    reachable;
    id;

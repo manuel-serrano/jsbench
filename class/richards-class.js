@@ -65,7 +65,7 @@ var NUMBER_OF_IDS = 6;
 var KIND_DEVICE   = 0;
 var KIND_WORK     = 1;
 
-// @record
+// @sealed
 class Scheduler {
    queueCount = 0;
    holdCount = 0;
@@ -240,7 +240,7 @@ var STATE_HELD = 4;
 var STATE_SUSPENDED_RUNNABLE = STATE_SUSPENDED | STATE_RUNNABLE;
 var STATE_NOT_HELD = ~STATE_HELD;
 
-// @record
+// @sealed
 class TaskControlBlock {
     link;
     id;
@@ -327,7 +327,7 @@ toString() {
 }
 }
  
-// @record
+// @sealed
 class Task {
    scheduler;
    
@@ -352,7 +352,7 @@ class Task {
  * @param {int} count the number of times this task should be scheduled
  * @constructor
  */
-// @record 
+// @sealed 
 class IdleTask extends Task {
     #v1;
     #count;
@@ -386,7 +386,7 @@ class IdleTask extends Task {
  * @param {Scheduler} scheduler the scheduler that manages this task
  * @constructor
  */
-// @record
+// @sealed
 class DeviceTask extends Task {
     #v1;
     
@@ -419,7 +419,7 @@ class DeviceTask extends Task {
  * @param {int} v2 another seed used to specify how work packets are manipulated
  * @constructor
  */
-// @record 
+// @sealed 
 class WorkerTask extends Task {
     #v1;
     #v2;
@@ -460,7 +460,7 @@ class WorkerTask extends Task {
  * @param {Scheduler} scheduler the scheduler that manages this task
  * @constructor
  */
-// @record 
+// @sealed 
 class HandlerTask extends Task {
    #v1 = null;
    #v2 = null;
@@ -520,7 +520,7 @@ var DATA_SIZE = 4;
  * @param {int} kind the type of this packet
  * @constructor
  */
-// @record 
+// @sealed 
 class Packet {
     link;
     id;

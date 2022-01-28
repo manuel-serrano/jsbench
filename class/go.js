@@ -67,7 +67,7 @@ function random_seed(seed) {
    rndi = seed;
 }
 
-// @record
+// @sealed
 class Runner {
    metadata = {};
    
@@ -105,7 +105,7 @@ function to_xy(pos) {
    return [x, y];
 }
 
-// @record
+// @sealed
 class Square {
    #board;
    pos;
@@ -221,7 +221,7 @@ class Square {
 }
 
 
-// @record
+// @sealed
 class EmptySet {
    #board;
    empties;
@@ -277,7 +277,7 @@ class EmptySet {
    }
 }
 
-// @record
+// @sealed
 class ZobristHash {
    #board;
    #hash_set;
@@ -317,7 +317,7 @@ class ZobristHash {
    }
 }
 
-// @record
+// @sealed
 class Board {
    squares;
    emptyset;
@@ -480,7 +480,7 @@ class Board {
    }
 }
 
-// @record
+// @sealed
 class UCTNode {
    #bestchild;
    #pos;

@@ -108,7 +108,7 @@ function rep(o) {
    }
 }
    
-// @record
+// @sealed
 class Runner {
    metadata = {};
    
@@ -126,7 +126,7 @@ const files = {
    "./sample2.bz2" : { bytes: "425a683931415926535943dc26990000065180001040002005ce0020003100302006d42ac1815c769de2ee48a70a12087b84d320", hash: 1283 }
 }
 
-// @record
+// @sealed
 class FD {
    #array;
    #offset = 0;
@@ -194,7 +194,7 @@ function open(filename, mode) {
 //////////////////////////////////////////////////////////////////////////////
 let R = 0;
 
-// @record
+// @sealed
 class BitfieldBase {
    #f;
    bits;
@@ -274,7 +274,7 @@ class BitfieldBase {
    }
 }
 
-// @record
+// @sealed
 class Bitfield extends BitfieldBase {
 
    _more() {
@@ -296,17 +296,17 @@ class Bitfield extends BitfieldBase {
    readbits(n) {
       if (n > this.bits)
 	 this.needbits(n);
-      const r = this.bitfield % this._maskM(n);
+      const r = Number(this.bitfield % this._maskM(n));
       //const r = this.bitfield & this._mask(n);
       /* log("readbits r.1=" + str(r) + " " + str(n) + " " + str(this.bitfield)); */
       this.bits -= n;
       this.bitfield /= (2n ** BigInt(n));
       /* log("readbits r.2=" + str(r) + " " + str(this.bitfield)); */
-      return Number(r);
+      return r;
    }
 }
 
-// @record
+// @sealed
 class RBitfield extends BitfieldBase {
 
    _more() {
@@ -333,7 +333,7 @@ class RBitfield extends BitfieldBase {
 	 this.needbits(n);
       }
 
-      const r = (this.bitfield / (2n ** BigInt(this.bits - n))) % this._maskM(n);
+      const r = Number((this.bitfield / (2n ** BigInt(this.bits - n))) % this._maskM(n));
       // const r = (this.bitfield >> BigInt(this.bits - n)) & this._mask(n);
       /* log("rreadbits r.1=" + str(r) + " " + str(n) + " this.bits=" + this.bits); */
       this.bits -= n;
@@ -341,7 +341,7 @@ class RBitfield extends BitfieldBase {
       //const b = this.bitfield & ~(this._mask(n) << BigInt(this.bits));
       this.bitfield = b;
       /* log("rreadbits r.2=" + str(r)); */
-      return Number(r);
+      return r;
    }
 }
 
@@ -358,7 +358,7 @@ function printbits(v, n) {
    return o;
 }
 
-// @record
+// @sealed
 class HuffmanLength {
    code;
    bits;
@@ -416,7 +416,7 @@ function reverse_bytes(v, n) {
    return z;
 }
 
-// @record
+// @sealed
 class HuffmanTable {
    #min_bits;
    #max_bits;
@@ -530,7 +530,7 @@ class HuffmanTable {
    }
 }
 
-// @record
+// @sealed
 class OrderedHuffmanTable extends HuffmanTable {
    
    constructor(lengths) {
