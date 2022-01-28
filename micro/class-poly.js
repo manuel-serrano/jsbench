@@ -110,15 +110,15 @@ function classpoly(CNT, nbobj) {
 	       new class9(9,9,9,9,9,9,9,9,9,9)];
    const indexes = [0,0,0,0,0,0,0,0,0,0];
    
-   for (let k = 0, n = nbobj; k < 10; k++) {
+   for (let k = 0, n = 0; k < 10; k++) {
+      indexes[k] = n;
+      
+      n++;
       if (n === nbobj) {
 	 n = 0;
-      } else {
-	 n++;
       }
-      indexes[k] = n;
    }
-   
+
    for (let j = 0, i = 0; j < CNT; j++, i++) {
       if (i === K) { 
 	 console.log(j);
@@ -137,6 +137,7 @@ function classpoly(CNT, nbobj) {
    return res;
 }
 
+console.log(process.argv);
 const N = ((process.argv[2] === "fprofile") ? 100 : ((process.argv[2] === "nbobj") ? 10000 : (process.argv[2] ? parseInt(process.argv[2]) : 10000)));
 const nbobj = (process.argv[2] === "nbobj") ? parseInt(process.argv[3]) : 4;
 
