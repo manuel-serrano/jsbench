@@ -98,7 +98,7 @@ function classpoly(CNT, nbobj) {
    const K = CNT / 10;
    let res = 0;
    
-   const os = [new class0(0),
+   const os = [new class0(10),
 	       new class1(1,1),
 	       new class2(2,2,2),
 	       new class3(3,3,3,3),
