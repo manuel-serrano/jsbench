@@ -128,7 +128,7 @@ function classpoly(CNT, nbobj) {
       for (let i = 0; i < 5000; i++) {
 	 for (let k = 0; k < 10; k++) {
 	    const i = indexes[k];
-	    const o = o[i];
+	    const o = os[i];
 	    res += (o.x - o.y);
       	 }
       }
