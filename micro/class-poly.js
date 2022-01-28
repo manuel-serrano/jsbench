@@ -1,7 +1,7 @@
 "use strict";
 
 // @sealed
-class class0 {
+class baseclass {
    x; y; a0;
    constructor(a0) {
       this.a0 = a0;
@@ -14,7 +14,7 @@ class class0 {
 }
    
 // @sealed
-class class1 extends class0 {
+class subclass1 extends baseclass {
    a1;
    constructor(a0, a1) {
       super(a0);
@@ -23,7 +23,7 @@ class class1 extends class0 {
 }
    
 // @sealed
-class class2 extends class1 {
+class subclass2 extends subclass1 {
    a2;
    constructor(a0, a1, a2) {
       super(a0, a1);
@@ -32,7 +32,7 @@ class class2 extends class1 {
 }
    
 // @sealed
-class class3 extends class2 {
+class subclass3 extends subclass2 {
    a3;
    constructor(a0, a1, a2, a3) {
       super(a0, a1, a2);
@@ -41,7 +41,7 @@ class class3 extends class2 {
 }
    
 // @sealed
-class class4 extends class3 {
+class subclass4 extends subclass3 {
    a4;
    constructor(a0, a1, a2, a3, a4) {
       super(a0, a1, a2, a3);
@@ -50,7 +50,7 @@ class class4 extends class3 {
 }
    
 // @sealed
-class class5 extends class4 {
+class subclass5 extends subclass4 {
    a5;
    constructor(a0, a1, a2, a3, a4, a5) {
       super(a0, a1, a2, a3, a4);
@@ -59,7 +59,7 @@ class class5 extends class4 {
 }
    
 // @sealed
-class class6 extends class5 {
+class subclass6 extends subclass5 {
    a6;
    constructor(a0, a1, a2, a3, a4, a5, a6) {
       super(a0, a1, a2, a3, a4, a5);
@@ -68,7 +68,7 @@ class class6 extends class5 {
 }
    
 // @sealed
-class class7 extends class6 {
+class subclass7 extends subclass6 {
    a7;
    constructor(a0, a1, a2, a3, a4, a5, a6, a7) {
       super(a0, a1, a2, a3, a4, a5, a6);
@@ -77,7 +77,7 @@ class class7 extends class6 {
 }
    
 // @sealed
-class class8 extends class7 {
+class subclass8 extends subclass7 {
    a8;
    constructor(a0, a1, a2, a3, a4, a5, a6, a7, a8) {
       super(a0, a1, a2, a3, a4, a5, a6, a7, a8);
@@ -86,7 +86,7 @@ class class8 extends class7 {
 }
    
 // @sealed
-class class9 extends class8 {
+class subclass9 extends subclass8 {
    a9;
    constructor(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
       super(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
@@ -98,16 +98,16 @@ function classpoly(CNT, nbobj) {
    const K = CNT / 10;
    let res = 0;
    
-   const os = [new class0(10),
-	       new class1(1,1),
-	       new class2(2,2,2),
-	       new class3(3,3,3,3),
-	       new class4(4,4,4,4,4),
-	       new class5(5,5,5,5,5,5),
-	       new class6(6,6,6,6,6,6,6),
-	       new class7(7,7,7,7,7,7,7,7),
-	       new class8(8,8,8,8,8,8,8,8,8),
-	       new class9(9,9,9,9,9,9,9,9,9,9)];
+   const os = [new baseclass(10),
+	       new subclass1(1,1),
+	       new subclass2(2,2,2),
+	       new subclass3(3,3,3,3),
+	       new subclass4(4,4,4,4,4),
+	       new subclass5(5,5,5,5,5,5),
+	       new subclass6(6,6,6,6,6,6,6),
+	       new subclass7(7,7,7,7,7,7,7,7),
+	       new subclass8(8,8,8,8,8,8,8,8,8),
+	       new subclass9(9,9,9,9,9,9,9,9,9,9)];
    
    for (let j = 0, i = 0; j < CNT; j++, i++) {
       if (i === K) { 
@@ -115,11 +115,11 @@ function classpoly(CNT, nbobj) {
 	 i = 0;
       }
       
-      for (let m = 0, k = 0; m < 50000; m++) {
-	 const o = os[k];
+      for (let m = 0, n = 0; m < 50000; m++) {
+	 const o = os[n];
 	 res += (o.x - o.y);
-	 k++;
-	 if (k === nbobj) k = 0;
+	 n++;
+	 if (n === nbobj) n = 0;
       }
    }
 
