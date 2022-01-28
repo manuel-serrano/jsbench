@@ -108,29 +108,18 @@ function classpoly(CNT, nbobj) {
 	       new class7(7,7,7,7,7,7,7,7),
 	       new class8(8,8,8,8,8,8,8,8,8),
 	       new class9(9,9,9,9,9,9,9,9,9,9)];
-   const indexes = [0,0,0,0,0,0,0,0,0,0];
    
-   for (let k = 0, n = 0; k < 10; k++) {
-      indexes[k] = n;
-      
-      n++;
-      if (n === nbobj) {
-	 n = 0;
-      }
-   }
-
    for (let j = 0, i = 0; j < CNT; j++, i++) {
       if (i === K) { 
 	 console.log(j);
 	 i = 0;
       }
       
-      for (let i = 0; i < 5000; i++) {
-	 for (let k = 0; k < 10; k++) {
-	    const i = indexes[k];
-	    const o = os[i];
-	    res += (o.x - o.y);
-      	 }
+      for (let m = 0, k = 0; m < 50000; m++) {
+	 const o = os[k];
+	 res += (o.x - o.y);
+	 k++;
+	 if (k === nbobj) k = 0;
       }
    }
 
