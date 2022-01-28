@@ -10,7 +10,7 @@ class baseclass {
       this.y = -a0;
    }
    sum() {
-      return this.x + this.y;
+      return this.a0;
    }
 }
    
@@ -120,6 +120,7 @@ function classpoly(CNT, nbobj) {
 	 const o = os[n];
 	 res += o.sum();
 	 n++;
+	 res -= o.sum();
 	 if (n === nbobj) n = 0;
       }
    }
