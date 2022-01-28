@@ -126,7 +126,6 @@ function classpoly(CNT, nbobj) {
    return res;
 }
 
-console.log(process.argv);
 const N = ((process.argv[2] === "fprofile") ? 100 : ((process.argv[2] === "nbobj") ? 10000 : (process.argv[2] ? parseInt(process.argv[2]) : 10000)));
 const nbobj = (process.argv[2] === "nbobj") ? parseInt(process.argv[3]) : 4;
 
