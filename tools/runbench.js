@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Thu Jan 27 12:52:19 2022 (serrano)                */
+/*    Last change :  Sat Jan 29 08:40:08 2022 (serrano)                */
 /*    Copyright   :  2017-22 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -397,7 +397,7 @@ function runBench(bench, engine) {
       const argspath = 
 	    path.join(path.dirname(bench.path), 
 		       path.basename(bench.path, ".js"))
-	    + ".args.json";
+	    + config.argsjson;
       
       if (config.argsfile && fs.existsSync(argspath)) {
 	 const args = require(normalizeCwd(argspath));
@@ -540,6 +540,7 @@ function main() {
    config.recompile = args.recompile;
    
    config.arg = args.a || args.arg;
+   config.argsjson = args.argsfile || ".args.json";
 			  
    // load the engine plugins
    config.engines = loadEngines(args.e, args, config);
