@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Sat Jan 29 08:40:08 2022 (serrano)                */
+/*    Last change :  Sat Jan 29 08:49:48 2022 (serrano)                */
 /*    Copyright   :  2017-22 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -540,7 +540,7 @@ function main() {
    config.recompile = args.recompile;
    
    config.arg = args.a || args.arg;
-   config.argsjson = args.argsfile || ".args.json";
+   config.argsjson = args.argsjson || ".args.json";
 			  
    // load the engine plugins
    config.engines = loadEngines(args.e, args, config);
