@@ -8,8 +8,17 @@ class baseclass {
       this.x = a0;
       this.y = -a0;
    }
-   getSUM() {
-      return this.x + this.y;
+   test() {
+      let res = 0;
+      
+      for (let i = 0; i < 1000; i++) {
+	 const x = this.x;
+	 const y = this.y;
+	 res += (x - y);
+	 this.y = x;
+	 this.x = y;
+      }
+      return res;
    }
 }
    
@@ -115,9 +124,9 @@ function classpoly(CNT, nbobj) {
 	 i = 0;
       }
       
-      for (let m = 0, n = 0; m < 50000; m++) {
+      for (let m = 0, n = 0; m < 200; m++) {
 	 const o = os[n];
-	 res += (o.x - o.y);
+	 res += o.test();
 	 n++;
 	 if (n === nbobj) n = 0;
       }
