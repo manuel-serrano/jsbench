@@ -14,10 +14,10 @@ class baseclass {
       for (let i = 0; i < 1000; i++) {
 	 const x = this.x;
 	 const y = this.y;
-	 res += (x - y);
 	 this.y = x;
 	 this.x = y;
       }
+      res += (this.x - this.y);
       return res;
    }
 }
