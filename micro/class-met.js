@@ -1,5 +1,7 @@
 "use strict";
 
+let glob = 0;
+
 // @sealed
 class baseclass {
    x; y;
@@ -10,7 +12,7 @@ class baseclass {
       this.y = -a0;
    }
    sum() {
-      return this.a0;
+      return glob;
    }
 }
    
@@ -60,7 +62,7 @@ class subclass5 extends subclass4 {
 }
    
 // @sealed
-class subclass6 extends subclass5 {
+class subclass6 extends baseclass {
    a6;
    constructor(a0, a1, a2, a3, a4, a5, a6) {
       super(a0, a1, a2, a3, a4, a5);
@@ -116,8 +118,11 @@ function classpoly(CNT, nbobj) {
 	 i = 0;
       }
       
+      glob = i;
+      
       for (let m = 0, n = 0; m < 50000; m++) {
 	 const o = os[n];
+	 glob = -glob;
 	 res += o.sum();
 	 n++;
 	 res -= o.sum();

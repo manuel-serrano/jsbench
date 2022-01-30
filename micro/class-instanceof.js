@@ -65,7 +65,7 @@ class subclass5 extends subclass4 {
 }
    
 // @sealed
-class subclass6 extends subclass5 {
+class subclass6 extends baseclass {
    a6;
    constructor(a0, a1, a2, a3, a4, a5, a6) {
       super(a0, a1, a2, a3, a4, a5);
