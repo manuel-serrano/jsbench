@@ -137,7 +137,7 @@ function classpoly(CNT, nbobj, base) {
 }
 
 // run with: ./a.out - nbobj [1..10] {true|false}
-const N = ((process.argv[2] === "fprofile") ? 100 : ((process.argv[2] === "nbobj") ? 10000 : (process.argv[2] ? parseInt(process.argv[2]) : 10000)));
+const N = ((process.argv[2] === "fprofile") ? 100 : ((process.argv[2] === "nbobj") ? 20000 : (process.argv[2] ? parseInt(process.argv[2]) : 20000)));
 const nbobj = (process.argv[2] === "nbobj") ? parseInt(process.argv[3]) : 4;
 const base = (process.argv[4] !== "false");
 console.log("class-poly(", N, ",", nbobj, base, ")..." );
