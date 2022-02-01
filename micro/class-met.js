@@ -14,6 +14,15 @@ class baseclass {
    sum() {
       return glob;
    }
+   test() {
+      let res = 0;
+      for (let m = 0; m < 1000; m++) {
+	 res += this.sum();
+	 glob = -glob;
+	 res -= this.sum();
+      }
+      return res;
+   }
 }
    
 // @sealed
@@ -97,7 +106,7 @@ class subclass9 extends subclass8 {
    }
 }
 
-function classpoly(CNT, nbobj) {
+function classmet(CNT, nbobj) {
    const K = CNT / 10;
    let res = 0;
    
@@ -120,12 +129,10 @@ function classpoly(CNT, nbobj) {
       
       glob = i;
       
-      for (let m = 0, n = 0; m < 50000; m++) {
+      for (let m = 0, n = 0; m < 100; m++) {
 	 const o = os[n];
-	 glob = -glob;
-	 res += o.sum();
+	 res += o.test();
 	 n++;
-	 res -= o.sum();
 	 if (n === nbobj) n = 0;
       }
    }
@@ -136,6 +143,6 @@ function classpoly(CNT, nbobj) {
 const N = ((process.argv[2] === "fprofile") ? 100 : ((process.argv[2] === "nbobj") ? 10000 : (process.argv[2] ? parseInt(process.argv[2]) : 10000)));
 const nbobj = (process.argv[2] === "nbobj") ? parseInt(process.argv[3]) : 4;
 
-console.log("class-poly(", N, ",", nbobj, ")..." );
-console.log(classpoly(N, nbobj));
+console.log("classmet(", N, ",", nbobj, ")..." );
+console.log(classmet(N, nbobj));
 
