@@ -15,13 +15,13 @@ class baseclass {
       return glob;
    }
    test() {
-      let res = 0;
+      let res1 = 0, res2 = 0;
       for (let m = 0; m < 1000; m++) {
-	 res += this.sum();
+	 res1 = this.sum();
 	 glob = -glob;
-	 res -= this.sum();
+	 res2 = this.sum();
       }
-      return res;
+      return res1 - res2;
    }
 }
    
