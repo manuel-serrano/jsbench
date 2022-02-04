@@ -14,10 +14,10 @@ class baseclass {
       for (let i = 0; i < 1000; i++) {
 	 const x = this.x;
 	 const y = this.y;
+	 res = (x - y);
 	 this.y = x;
 	 this.x = y;
       }
-      res += (this.x - this.y);
       return res;
    }
 }
@@ -68,7 +68,7 @@ class subclass5 extends subclass4 {
 }
    
 // @sealed
-class subclass6 extends baseclass {
+class subclass6 extends subclass5 {
    a6;
    constructor(a0, a1, a2, a3, a4, a5, a6) {
       super(a0, a1, a2, a3, a4, a5);
@@ -126,7 +126,7 @@ function classpoly(CNT, nbobj) {
       
       for (let m = 0, n = 0; m < 200; m++) {
 	 const o = os[n];
-	 res += o.test();
+	 res = o.test();
 	 n++;
 	 if (n === nbobj) n = 0;
       }
