@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Fri Feb  4 09:27:52 2022 (serrano)                */
+/*    Last change :  Fri Feb  4 19:07:59 2022 (serrano)                */
 /*    Copyright   :  2017-22 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot line, each horizontal tick is a benchmark.    */
@@ -37,9 +37,9 @@ function collectEngines(logs) {
 }
 
 /*---------------------------------------------------------------------*/
-/*    colors ...                                                       */
+/*    defaultColors ...                                                */
 /*---------------------------------------------------------------------*/
-const colors = ['#3264c8', '#d83812', '#fa9600', '#109318', '#960096', '#0096c2'];
+const defaultColors = ['#3264c8', '#d83812', '#fa9600', '#109318', '#960096', '#0096c2'];
    
 /*---------------------------------------------------------------------*/
 /*    plugin                                                           */
@@ -64,6 +64,7 @@ module.exports = function(logfiles, engines, args, config) {
    const size = args.size || "1024,768";
    const start = args.start ? parseInt(args.start) : 0;
    const deviation = args.deviation ? parseFloat(args.deviation) : 0;
+   const colors = config.colors || defaultColors;
    
    enames.forEach(n => { if (n.length > enginepad) enginepad = n.length });
    enginepad += (deviation > 0 ? 8 : 4);
