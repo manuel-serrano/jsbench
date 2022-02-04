@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Fri Nov  5 14:39:57 2021 (serrano)                */
-/*    Copyright   :  2017-21 Manuel Serrano                            */
+/*    Last change :  Fri Feb  4 20:08:27 2022 (serrano)                */
+/*    Copyright   :  2017-22 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a relative gnuplot histogram, each bar is a benchmark.  */
 /*    This plugin was implemented for the jsdynprop paper.             */
@@ -39,7 +39,7 @@ function collectEngines( logs ) {
 /*---------------------------------------------------------------------*/
 /*    colors ...                                                       */
 /*---------------------------------------------------------------------*/
-const colors = [ '#3264c8', '#d83812', '#fa9600', '#109318', '#960096' ];
+const defaultColors = [ '#3264c8', '#d83812', '#fa9600', '#109318', '#960096' ];
 const defaultBoxwidth = 0.9;
 const defaultFont = "Verdana,18";
 const unitRatio = 1000;
@@ -75,7 +75,8 @@ module.exports = function( logfiles, engines, args, config ) {
    const start = args.start ? parseInt( args.start ) : 0;
    const errorbars = args.errorbars;
    const uratio = args.unitRatio || unitRatio;
-   
+   const colors = config.colors || defaultColors; 
+  
    enames.forEach( n => { if( n.length > enginepad ) enginepad = n.length } );
    enginepad += (errorbars ? 8 : 4);
    
