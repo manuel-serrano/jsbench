@@ -35,7 +35,7 @@ class baseclass {
    }
    test() {
       let res1 = 0, res2 = 0;
-      for (let m = 0; m < 1000; m++) {
+      for (let m = 0; m < 500; m++) {
 	 res1 = this.sum();
 	 glob = -glob;
 	 res2 = this.sum();
