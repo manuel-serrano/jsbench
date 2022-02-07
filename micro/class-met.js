@@ -1,6 +1,7 @@
 "use strict";
 
-let glob = 0;
+// see init at the bottom of the file
+let glob = 3.4;
 
 // @sealed
 class baseclass {
@@ -12,6 +13,24 @@ class baseclass {
       this.y = -a0;
    }
    sum() {
+      // long useless prelude to avoid method inlining
+      if (glob > 1) {
+	 if (this.a0 > 0) {
+	    glob += 1;
+	 }
+	 if (this.x > this.y) { 
+	    glob = 23;
+	 }
+	 if (this.a0 + this.x + this.y > 32) {
+	    glob *= 2.1;
+	 }
+	 if (this.y & 3 === 45) {
+	    glob = 4.5
+	 }
+	 if (glob < 100000) {
+	    glob = 0;
+	 }
+      }
       return glob;
    }
    test() {
@@ -121,6 +140,10 @@ function classmet(CNT, nbobj) {
 	       new subclass8(8,8,8,8,8,8,8,8,8),
 	       new subclass9(9,9,9,9,9,9,9,9,9,9)];
 
+   for (let o of os) {
+      o.sum();
+   }
+      
    for (let j = 0, i = 0; j < CNT; j++, i++) {
       if (i === K) { 
 	 console.log(j);
@@ -142,6 +165,10 @@ function classmet(CNT, nbobj) {
 
 const N = ((process.argv[2] === "fprofile") ? 100 : ((process.argv[2] === "nbobj") ? 10000 : (process.argv[2] ? parseInt(process.argv[2]) : 10000)));
 const nbobj = (process.argv[2] === "nbobj") ? parseInt(process.argv[3]) : 4;
+
+if (nbobj >= 0) {
+   glob = 1;
+}
 
 console.log("classmet(", N, ",", nbobj, ")..." );
 console.log(classmet(N, nbobj));
