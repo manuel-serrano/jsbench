@@ -14,7 +14,7 @@ class baseclass {
    }
    sum() {
       // long useless prelude to avoid method inlining
-      if (glob > 1) {
+      if (glob !== 0) {
 	 if (this.a0 > 0) {
 	    glob += 1;
 	 }
@@ -149,8 +149,6 @@ function classmet(CNT, nbobj) {
 	 console.log(j);
 	 i = 0;
       }
-      
-      glob = i;
       
       for (let m = 0, n = 0; m < 100; m++) {
 	 const o = os[n];
