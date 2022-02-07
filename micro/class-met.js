@@ -27,6 +27,14 @@ class baseclass {
 	 if (this.y & 3 === 45) {
 	    glob = 4.5
 	 }
+	 if (this.x + this.y & 127 !== 0) {
+	    glob = 3.22;
+	 }
+	 if (this.a0 & 65535 !== 3) {
+	    glob = 2.22;
+	 } else {
+	    glob = 5.5;
+	 }
 	 if (glob < 100000) {
 	    glob = 0;
 	 }
@@ -51,6 +59,17 @@ class subclass1 extends baseclass {
       super(a0);
       this.a1 = a1;
    }
+   sum() {
+     if (glob !== 0) {
+	 if (this.a0 > 0) {
+	    glob += 1;
+	 }
+	 if (glob < 100000) {
+	    glob = 0;
+	 }
+     }
+     return glob;
+   }
 }
    
 // @sealed
@@ -59,6 +78,17 @@ class subclass2 extends subclass1 {
    constructor(a0, a1, a2) {
       super(a0, a1);
       this.a2 = a2;
+   }
+   sum() {
+     if (glob !== 0) {
+	 if (this.x > 0) {
+	    glob += 1;
+	 }
+	 if (glob < 100000) {
+	    glob = 0;
+	 }
+     }
+     return glob;
    }
 }
    
@@ -69,6 +99,17 @@ class subclass3 extends subclass2 {
       super(a0, a1, a2);
       this.a3 = a3;
    }
+   sum() {
+     if (glob !== 0) {
+	 if (this.y > 0) {
+	    glob = 4.5;
+	 }
+	 if (glob < 100000) {
+	    glob = 0;
+	 }
+     }
+     return glob;
+   }
 }
    
 // @sealed
@@ -77,6 +118,17 @@ class subclass4 extends subclass3 {
    constructor(a0, a1, a2, a3, a4) {
       super(a0, a1, a2, a3);
       this.a4 = a4;
+   }
+   sum() {
+     if (glob !== 0) {
+	 if (this.a0 > 1000) {
+	    glob = "foo";
+	 }
+	 if (glob < 100000) {
+	    glob = 0;
+	 }
+     }
+     return glob;
    }
 }
    
@@ -87,6 +139,17 @@ class subclass5 extends subclass4 {
       super(a0, a1, a2, a3, a4);
       this.a5 = a5;
    }
+   sum() {
+     if (glob !== 0) {
+	 if (this.x + this.y > 10000) {
+	    glob = [];
+	 }
+	 if (glob < 100000) {
+	    glob = 0;
+	 }
+     }
+     return glob;
+   }
 }
    
 // @sealed
@@ -95,6 +158,17 @@ class subclass6 extends baseclass {
    constructor(a0, a1, a2, a3, a4, a5, a6) {
       super(a0, a1, a2, a3, a4, a5);
       this.a6 = a6;
+   }
+   sum() {
+     if (glob !== 0) {
+	 if (this.x + this.y > 999) {
+	    glob = [];
+	 }
+	 if (glob < 100000) {
+	    glob = 0;
+	 }
+     }
+     return glob;
    }
 }
    
@@ -105,6 +179,17 @@ class subclass7 extends subclass6 {
       super(a0, a1, a2, a3, a4, a5, a6);
       this.a7 = a7;
    }
+   sum() {
+     if (glob !== 0) {
+	if (this.x !== this.y) {
+	    glob = 234;
+	 }
+	 if (glob < 100000) {
+	    glob = 0;
+	 }
+     }
+     return glob;
+   }
 }
    
 // @sealed
@@ -114,6 +199,17 @@ class subclass8 extends subclass7 {
       super(a0, a1, a2, a3, a4, a5, a6, a7, a8);
       this.a8 = a8;
    }
+   sum() {
+     if (glob !== 0) {
+	if (this.x > this.y) {
+	    glob = 4.4;
+	 }
+	 if (glob < 100000) {
+	    glob = 0;
+	 }
+     }
+     return glob;
+   }
 }
    
 // @sealed
@@ -122,6 +218,17 @@ class subclass9 extends subclass8 {
    constructor(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
       super(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
       this.a9 = a9;
+   }
+   sum() {
+     if (glob !== 0) {
+	 if (this.x + this.y & 45 !== 0) {
+	    glob = 1.0;
+	 }
+	 if (glob < 100000) {
+	    glob = 0;
+	 }
+     }
+     return glob;
    }
 }
 
