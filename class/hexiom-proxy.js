@@ -153,7 +153,7 @@ class Done {
    }
 
    clone() {
-      const ret = new Done(this.count, true);
+      const ret = newDone(this.count, true);
       ret.cells = new Array(this.count);
       for (let i = 0; i < this.count; i++) {
 	 ret.cells[i] = this.cells[i].concat();
@@ -162,15 +162,10 @@ class Done {
    }
 
    __getitem__(i) {
-      console.log(i);
       /* log("__getitem__ " + i); */
       return this.cells[i];
    }
 
-   get_done(i) {
-      return this.cells[i];
-   }
-   
    set_done(i, v) {
       /* log("set_done i=" + i + " v=" + v); */
       this.cells[i] = [v];
@@ -344,6 +339,13 @@ class Done {
    }
 }
 
+function newDone(count, empty) {
+   var o = new Done(count, empty);
+   return new Proxy(o, {
+      get: (target, prop) => prop in target ? target[prop] : target.__getitem__(prop)
+   });
+}
+
 //##################################
 
 
@@ -455,7 +457,7 @@ class Pos {
    constructor(hex, tiles, done) {
       this.hex = hex;
       this.tiles = tiles;
-      this.done = done || new Done(hex.count);
+      this.done = done || newDone(hex.count);
       /* log("new pos " + str(tiles)); */
    }
 
@@ -489,7 +491,7 @@ function constraint_pass(pos, last_move) {
 	  for (let nid of cells_around) {
 	     /* log("constraint_pass nid=" + nid); */
 	     if (done.already_done(nid)) {
-		if (done.get_done(nid)[0] !== EMPTY) {
+		if (done[nid][0] !== EMPTY) {
 		   vmin += 1;
 		   vmax += 1;
 		}
@@ -554,7 +556,7 @@ function constraint_pass(pos, last_move) {
     let filled_cells = last_move === None ? iota(done.count) : [last_move];
     for (let i of filled_cells) {
        if (done.already_done(i)) {
-	  let num = done.get_done(i)[0];
+	  let num = done[i][0];
 	  let empties = 0;
 	  let filled = 0;
 	  let unknown = [];
@@ -562,7 +564,7 @@ function constraint_pass(pos, last_move) {
 	  /* log("constraint_pass num=" + num); */
 	  for (let nid of cells_around) {
 	     if (done.already_done(nid)) {
-		if (done.get_done(nid)[0] === EMPTY) {
+		if (done[nid][0] === EMPTY) {
 		   empties += 1;
 		} else { 
 		   filled += 1;
@@ -575,7 +577,7 @@ function constraint_pass(pos, last_move) {
  */	  if (unknown.length > 0) {
 	     if (num === filled) {
 		for (let u of unknown) {
-		   if (done.get_done(u).indexOf(EMPTY) >= 0) {
+		   if (done[u].indexOf(EMPTY) >= 0) {
 		      done.set_done(u, EMPTY);
 		      changed = true;
 		      // else:
@@ -611,15 +613,15 @@ function find_moves(pos, strategy, order) {
    }
 
    if (order === ASCENDING) {
-      return done.get_done(cell_id).map(v => [cell_id, v]);
+      return done[cell_id].map(v => [cell_id, v]);
    } else { 
         // Try higher values first and EMPTY last
-	let moves = done.get_done(cell_id)
+	let moves = done[cell_id]
 	   .filter(v => v !== EMPTY)
 	   .map(v => [cell_id, v])
 	   .reverse();
 	/* log("--- find_move " + moves.length); */
-	if (done.get_done(cell_id).indexOf(EMPTY) >= 0) {
+	if (done[cell_id].indexOf(EMPTY) >= 0) {
 	   moves = moves.concat([[cell_id, EMPTY]]);
 	}
 	/* log("<<< find_move " + moves.length); */
@@ -650,7 +652,7 @@ function print_pos(pos, output) {
 	 const pos2 = [x, y];
 	 const id = hex.get_by_pos(pos2).id;
 	 if (done.already_done(id)) {
-	    c = (done.get_done(id)[0] !== EMPTY) ? CHAR[done.get_done(id)[0]] : ".";
+	    c = (done[id][0] !== EMPTY) ? CHAR[done[id][0]] : ".";
 	 } else {
 	    c = "?";
 	 }
@@ -666,7 +668,7 @@ function print_pos(pos, output) {
 	 const pos2 = [x, ry];
 	 const id = hex.get_by_pos(pos2).id;
 	 if (done.already_done(id)) {
-	    c = done.get_done(id)[0] !== EMPTY ? CHAR[done.get_done(id)[0]] : ".";
+	    c = done[id][0] !== EMPTY ? CHAR[done[id][0]] : ".";
 	 } else {
 	    c = "?";
 	 }
@@ -695,11 +697,11 @@ function solved(pos, output, verbose) {
    /* log("solved hex=" + hex.count); */
    /* log("solved tiles=" + str(tiles)); */
    for (let i = 0; i < hex.count; i++) {
-      if (done.get_done(i).length === 0) {
+      if (done[i].length === 0) {
 	 /* log("solve.1"); */
 	 return IMPOSSIBLE;
       } else if (done.already_done(i)) {
-	 const num = done.get_done(i)[0];
+	 const num = done[i][0];
 	 tiles[num] -= 1;
 	 /* log("solve.2 " + num + " " + tiles[num]); */
 	 if (tiles[num] < 0) {
@@ -714,7 +716,7 @@ function solved(pos, output, verbose) {
 	    for (let nid of cells_around) {
 	       if (done.already_done(nid)) {
 	 /* log("solve.5"); */
-		  if (done.get_done(nid)[0] !== EMPTY) {
+		  if (done[nid][0] !== EMPTY) {
 	 /* log("solve.6"); */
 		     vmin += 1;
 		     vmax += 1;
@@ -839,7 +841,7 @@ function read_file(file) {
    let hex = new Hex(size);
    let linei = 1;
    let tiles = new Array(8).fill(0);
-   let done = new Done(hex.count);
+   let done = newDone(hex.count);
    let inctile;
    /* log("read_file size=" + size); */
    for (let y = 0; y < size; y++) {
@@ -1029,7 +1031,7 @@ const N =
    (process.argv[1] === "fprofile") 
    ? 2
    //: process.argv[2] ? parseInt(process.argv[2]) : 100;
-   : process.argv[2] ? parseInt(process.argv[2]) : 600;
+   : process.argv[2] ? parseInt(process.argv[2]) : 200;
 
 const runner = new Runner();
 
