@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Sat Feb 12 19:10:39 2022 (serrano)                */
+/*    Last change :  Sat Feb 12 19:23:00 2022 (serrano)                */
 /*    Copyright   :  2017-22 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a textual summary of the comparison of two engines      */
@@ -96,7 +96,7 @@ module.exports = function( logfiles, engines, args, config ) {
 	 if (val > max) max = val;
 	 sum += val;
 	 
-	 port.write(util.format(format, log.name, val));
+	 port.write(util.format(format, log.name.replace('-'.''), val));
       }
       port.write( "\n" );
    }
