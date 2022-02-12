@@ -505,7 +505,7 @@ class HuffmanTable {
  	 /* log("cached_length=" + cached_length + " x.bits=" + str(x.bits)); */
 	 if (cached_length !== x.bits) {
 	    /* log("find_next_symbol.1 " + x.bits); */
-	    cached = field.snoopbits(x.bits, 8);
+	    cached = field.snoopbits(x.bits);
 	    cached_length = x.bits;
 	 }
 	 /* log("reversed=" + str(reversed) + " " + str(x.reverse_symbol) + " symbol=" + str(x.symbol)+ " cache=" + str(cached)); */
@@ -519,7 +519,7 @@ class HuffmanTable {
 
       for (let bits = this.#min_bits; bits < this.#max_bits + 1; bits++) {
 	 /* log("find_next_symbol.2 " + bits); */
-	 let r = this._find_symbol(bits, field.snoopbits(bits, 8), this.#table);
+	 let r = this._find_symbol(bits, field.snoopbits(bits), this.#table);
 	 if (0 <= r) {
 	    field.readbits(bits);
 	    return r;
