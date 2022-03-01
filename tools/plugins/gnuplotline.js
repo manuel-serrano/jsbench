@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Tue Mar  1 07:14:49 2022 (serrano)                */
+/*    Last change :  Tue Mar  1 07:16:14 2022 (serrano)                */
 /*    Copyright   :  2017-22 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot line, each horizontal tick is a benchmark.    */
@@ -176,9 +176,9 @@ module.exports = function(logfiles, engines, args, config) {
       process.stderr.write("\n\n");
    }
 
-   if( args.yrange ) {
-      plotport.write( `set yrange ${args.yrange}` );
-      plotport.write( "\n" );
+   if (args.yrange) {
+      process.stderr.write(`set yrange ${args.yrange}`);
+      process.stderr.write("\n");
    }
    
    process.stderr.write(`plot`);
