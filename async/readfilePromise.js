@@ -3,7 +3,7 @@
 const fs = require("fs");
 
 const file = module.filename;
-const SIZE = 2000;
+const SIZE = 1000;
    
 function test() {
    return new Promise((res, rej) => {
