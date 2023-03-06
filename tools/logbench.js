@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    serrano/prgm/project/hop/bench/jsbench/tools/logbench.js         */
+/*    .../article/jsasync/bench/jsbench/tools/logbench.js              */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:16:47 2017                          */
-/*    Last change :  Mon Mar  6 09:11:13 2023 (serrano)                */
+/*    Last change :  Mon Mar  6 09:19:40 2023 (serrano)                */
 /*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Output bench log                                                 */
@@ -43,7 +43,7 @@ function main() {
       console.log("  -e                  Execution engine");
       console.log("  -E,-enginedir dir   Engines directory");
       console.log("  -o|--output         output file (deprecated, use -t)");
-      console.log("  -t|--target         target file");
+      console.log("  -T|--target         target file");
       console.log("  -v[int]             Verbose");
       console.log("  --acceptmissing     Accept missing engines");
       console.log("  --nosort            Don't sort benchmarks");
@@ -83,9 +83,9 @@ function main() {
       config.log = false;
    }
 
-   config.output = (args.t || args.target || args.o || args.output);
+   config.output = (args.T || args.target || args.o || args.output);
    config.engine = args.E || args.engine || config.engine || "./engines";
-							     
+					
    // load the engine plugins
    if (args._.length < 2) {
       usage();

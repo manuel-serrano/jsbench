@@ -1,10 +1,10 @@
 /*=====================================================================*/
-/*    .../project/hop/jsbench/tools/plugins/gnuplothistogram.js        */
+/*    .../jsasync/bench/jsbench/tools/plugins/gnuplothistogram.js      */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Fri Feb  4 20:09:10 2022 (serrano)                */
-/*    Copyright   :  2017-22 Manuel Serrano                            */
+/*    Last change :  Mon Mar  6 09:27:58 2023 (serrano)                */
+/*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
 /*    This plugin was implemented for the jsdynprop paper.             */
@@ -70,7 +70,7 @@ module.exports = function( logfiles, engines, args, config ) {
    const title = args.t || args.title || 
       ((!"title" in args) ? logs[ 0 ].name : "");
    const format = args.format || args.f || "svg";
-   const output = args.o || args.output || (logs[ 0 ].name + "." + format);
+   const output = config.output || args.o || args.output || (logs[ 0 ].name + "." + format);
    const base = output.replace( /.[^.]+$/, '' );
    const start = args.start ? parseInt( args.start ) : 0;
    const deviation = args.deviation ? parseFloat( args.deviation ) : 0;
