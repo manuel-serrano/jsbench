@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    .../jsasync/bench/jsbench/tools/plugins/gnuplothistogram.js      */
+/*    .../hop/bench/jsbench/tools/plugins/gnuplothistogram.js          */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Mon Mar  6 11:35:12 2023 (serrano)                */
+/*    Last change :  Mon Mar  6 20:11:28 2023 (serrano)                */
 /*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -335,12 +335,20 @@ module.exports = function(logfiles, engines, args, config) {
 	 plotport.write("set key top right" + lh + "\n");
 	 break;
 	 
+      case "top-rightmargin":
+	 plotport.write("set key top rm" + lh + "\n");
+	 break;
+	 
       case "bottom-right":
 	 plotport.write("set key bottom right" + lh + "\n");
 	 break;
 	 
       case "bottom-left":
 	 plotport.write("set key bottom left" + lh + "\n");
+	 break;
+	 
+      case "bottom-leftmargin":
+	 plotport.write("set key bottom lm" + lh + "\n");
 	 break;
 	 
       case "top-left":
