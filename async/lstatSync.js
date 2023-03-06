@@ -3,20 +3,15 @@
 const fs = require("fs");
 
 const file = process.env.HOME;
-const SIZE = 5000;
+const SIZE = 50000;
    
 function test() {
    return new Promise((res, rej) => {
-      function loop(i) {
-	 const s = fs.lstatSync(file).size;
-
-	 if (i < SIZE) {
-	    loop(i+1);
-	 } else {
-	    res(s);
-	 }
+      let s;
+      for (let i = 0; i < SIZE; i++) {
+	 s = fs.lstatSync(file).size;
       }
-      loop(0);
+      return res(s);
    });
 }
 
