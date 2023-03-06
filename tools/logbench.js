@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:16:47 2017                          */
-/*    Last change :  Mon Mar  6 09:19:40 2023 (serrano)                */
+/*    Last change :  Mon Mar  6 10:19:30 2023 (serrano)                */
 /*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Output bench log                                                 */
@@ -43,7 +43,7 @@ function main() {
       console.log("  -e                  Execution engine");
       console.log("  -E,-enginedir dir   Engines directory");
       console.log("  -o|--output         output file (deprecated, use -t)");
-      console.log("  -T|--target         target file");
+      console.log("  -T|--target         target files (*)");
       console.log("  -v[int]             Verbose");
       console.log("  --acceptmissing     Accept missing engines");
       console.log("  --nosort            Don't sort benchmarks");
@@ -51,6 +51,9 @@ function main() {
       console.log("");
       console.log("Examples: ");
       console.log("  hop -g --no-server -- logbench.js xgraph.js ../micro/poly.log.json | xgraph");
+      console.log("");
+      console.log("(*) ");
+      console.log("  As of March 2023, --target is only supported by gnuplothistogram plugin");
       process.exit(1);
    }
 
@@ -83,6 +86,7 @@ function main() {
       config.log = false;
    }
 
+   config.target = (args.T || args.target);
    config.output = (args.T || args.target || args.o || args.output);
    config.engine = args.E || args.engine || config.engine || "./engines";
 					
