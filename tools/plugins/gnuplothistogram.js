@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    .../hop/bench/jsbench/tools/plugins/gnuplothistogram.js          */
+/*    .../jsasync/bench/jsbench/tools/plugins/gnuplothistogram.js      */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Mon Mar  6 20:11:28 2023 (serrano)                */
+/*    Last change :  Tue Mar  7 14:57:28 2023 (serrano)                */
 /*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -203,12 +203,12 @@ module.exports = function(logfiles, engines, args, config) {
       const len = subhistos.length;
       const num = logs.length / subhistos.length;
 
-      for (let i = 0; i < logs.length; i += subhistos.length) {
+      for (let i = 0, j = 0; i < subhistos.length; i++, j += num) {
 	 if (config.target) {
-	    const name = base + i + ".csv";
+	    const name = base + j + ".csv";
 	    const port = new Port(fs.openSync(name, "w"));
 	    try {
-	       const l = logs.slice(i, i + subhistos.length);
+	       const l = logs.slice(j, j + num);
 	       csv(port, start, enames, l, enginepad, uratio, deviation, args);
 	    } finally {
 	       port.close();
@@ -394,14 +394,14 @@ module.exports = function(logfiles, engines, args, config) {
       const len = subhistos.length;
       const num = logs.length / subhistos.length;
 
-      for (let i = 0, j = 0; i < logs.length; i += subhistos.length, j++) {
+      for (let i = 0, j = 0; i < subhistos.length; i++, j += num) {
 	 if (args.nosubhistogramnames) {
 	    plotport.write(` newhistogram lt 1, `);
 	 } else {
-	    plotport.write(` newhistogram "${subhistos[j]}" lt 1, `);
+	    plotport.write(` newhistogram "${subhistos[i]}" lt 1, `);
 	 }
 	 plotport.write("\\\n");
-	 plot(plotport, base + i + ".csv", deviation, errorbars, enames, j === 0 ? "title" : "notitle", j < subhistos.length - 1);
+	 plot(plotport, base + j + ".csv", deviation, errorbars, enames, i === 0 ? "title" : "notitle", i < subhistos.length - 1);
       }
    } else {
       plot(plotport, base + ".csv", deviation, errorbars, enames, "title", false);
