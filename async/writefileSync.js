@@ -3,7 +3,7 @@
 const fs = require("fs");
 
 const file = "/tmp/writefileSync.out";
-const buf = fs.readfileSync(module.filename);
+const buf = fs.readFileSync(module.filename);
 const SIZE = 1000;
 
 function test() {

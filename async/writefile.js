@@ -3,23 +3,22 @@
 const fs = require("fs");
 
 const file = "/tmp/writefileSync.out";
-const buf = fs.readfileSync(module.filename);
+const buf = fs.readFileSync(module.filename);
 const SIZE = 1000;
 
 function test() {
    let i = 0;
    return new Promise((res, rej) => {
-      function cb(err, buf) {
-	 const s = buf.length;
+      function cb(err) {
 	 if (i < SIZE) {
 	    i++;
 	    loop();
 	 } else {
-	    res(s);
+	    res(err);
 	 }
       }
       function loop() {
-	 fs.writeFile(file, cb);
+	 fs.writeFile(file, buf, cb);
       }
       loop();
    });
