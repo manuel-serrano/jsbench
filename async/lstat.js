@@ -3,7 +3,7 @@
 const fs = require("fs");
 
 const file = process.env.HOME;
-const SIZE = 5000;
+const SIZE = 50000;
    
 function test() {
    let i = 0;
