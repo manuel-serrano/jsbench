@@ -40,6 +40,6 @@ async function main(bench, n) {
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
-   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 100;
+   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 150;
 
 main("readfileSync", N); 

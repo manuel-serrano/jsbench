@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    serrano/prgm/project/hop/bench/js/async/lsSync.js                */
+/*    .../diffusion/article/jsasync/bench/jsbench/async/lsSync.js      */
 /*    -------------------------------------------------------------    */
 /*    Author      :  manuel serrano                                    */
 /*    Creation    :  Sun Jan  8 13:54:48 2023                          */
-/*    Last change :  Sun Mar  5 07:31:13 2023 (serrano)                */
+/*    Last change :  Thu Mar  9 16:28:03 2023 (serrano)                */
 /*    Copyright   :  2023 manuel serrano                               */
 /*    -------------------------------------------------------------    */
 /*    LS implementation using the Node fs api.                         */
@@ -240,6 +240,6 @@ async function main(bench, n) {
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
-   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 200;
+   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 300;
 
 main("lsSync", N); 
