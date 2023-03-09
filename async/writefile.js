@@ -44,4 +44,4 @@ const N =
    ? 2
    : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 150;
 
-main("readfile", N); 
+main("writefile", N); 
