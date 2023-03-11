@@ -11,7 +11,7 @@ function test() {
    return new Promise((res, rej) => {
       let s;
       for (let i = 0; i < SIZE; i++) {
-	 s = fs.writeSync(fd, buf, 0);
+	 s = fs.writeSync(fd, buf, 0, 1024);
       }
       res(s);
    });

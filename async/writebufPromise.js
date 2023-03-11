@@ -11,7 +11,7 @@ function test() {
    return new Promise((res, rej) => {
       function loop(i) {
 	 new Promise((res, rej) => {
-	    fs.write(fd, buf, 0, (err, s, buf) => res(s));
+	    fs.write(fd, buf, 0, 1024, 0, (err, s, buf) => res(s));
 	 }).then(s => {
 	    if (i < SIZE) {
 	       loop(i+1);

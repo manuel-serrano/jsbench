@@ -19,7 +19,7 @@ function test() {
 	 }
       }
       function loop() {
-	 fs.write(fd, buf, 0, cb);
+	 fs.write(fd, buf, 0, 1024, 0, cb);
       }
       loop();
    });
