@@ -2,16 +2,16 @@
 
 const fs = require("fs");
 
-const file = "/dev/null";
+const file = "/dev/zero";
 const SIZE = 50000;
 const buf = Buffer.alloc(1024);
-const fd = fs.openSync(file, "w");
+const fd = fs.openSync(file, "r");
    
 function test() {
    return new Promise((res, rej) => {
       function loop(i) {
 	 new Promise((res, rej) => {
-	    fs.write(fd, buf, 0, 1024, 0, (err, s, buf) => res(s));
+	    fs.read(fd, buf, 0, 1024, -1, (err, s, buf) => res(s));
 	 }).then(s => {
 	    if (i < SIZE) {
 	       loop(i+1);
@@ -44,4 +44,4 @@ const N =
    ? 2
    : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || 15 : 15;
 
-main("writebufPromise", N); 
+main("readbufPromise", N); 
