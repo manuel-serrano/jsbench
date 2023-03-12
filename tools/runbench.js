@@ -1,10 +1,10 @@
 /*=====================================================================*/
-/*    serrano/prgm/project/hop/jsbench/tools/runbench.js               */
+/*    serrano/prgm/project/hop/bench/jsbench/tools/runbench.js         */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Sat Jan 29 08:49:48 2022 (serrano)                */
-/*    Copyright   :  2017-22 Manuel Serrano                            */
+/*    Last change :  Sun Mar 12 19:15:45 2023 (serrano)                */
+/*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
 /*=====================================================================*/
@@ -345,6 +345,15 @@ function runBench(bench, engine) {
    }
    
    function run(k = false, args = false) {
+      const hook = path.join(bench.path, "prehook." + engine.name);
+      if (fs.existsSync(hook)) {
+	 const cmd = `(cd ${bench.path}; prehook.${engine.name})`;
+	 if (system.system(cmd) !== 0) {
+	    console.log(`pre-hook "${hook}" failed.`);
+	    process.exit(1);
+	 }
+      }
+      
       if (engine.compiler) {
 	 return compile(args).then(_ => runCompile(k, args));
       } else {

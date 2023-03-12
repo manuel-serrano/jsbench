@@ -1,5 +1,5 @@
 'use strict';
-const addon = require("./build/Release/2_function_arguments.node");
+const addon = require("./build/Release/2_function_arguments");
 
 function test(N) {
    let r = true;
