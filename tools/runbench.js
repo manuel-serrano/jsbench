@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Sun Mar 12 19:15:45 2023 (serrano)                */
+/*    Last change :  Mon Mar 13 05:13:23 2023 (serrano)                */
 /*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -92,7 +92,7 @@ function execPromise(cmd, action) {
    return new Promise((resolve, reject) => {
       const proc = exec(cmd, (error, stdout, stderr) => {
 	 if (error) {
-	    reject(error);
+	    reject(`error (${error}): ${stderr.toString()}`);
 	 }
       });
 
@@ -100,12 +100,14 @@ function execPromise(cmd, action) {
 	 if (code === 0) {
 	    resolve(code);
 	 } else {
-	    reject(code);
+	    console.error(signal);
+	    reject(`error: exit with ${code}`);
 	 }
       });
       
       proc.on("error", (code, signal) => {
-	 reject(code);
+	 console.error(signal);
+	 reject(`error: error with ${code}`);
       });
    });
 }
@@ -345,19 +347,22 @@ function runBench(bench, engine) {
    }
    
    function run(k = false, args = false) {
-      const hook = path.join(bench.path, "prehook." + engine.name);
-      if (fs.existsSync(hook)) {
-	 const cmd = `(cd ${bench.path}; prehook.${engine.name})`;
-	 if (system.system(cmd) !== 0) {
-	    console.log(`pre-hook "${hook}" failed.`);
-	    process.exit(1);
+      function compileOrInterprete(v) {
+	 if (engine.compiler) {
+	    return compile(args).then(_ => runCompile(k, args));
+	 } else {
+	    return runInterpret(k, args);
 	 }
       }
-      
-      if (engine.compiler) {
-	 return compile(args).then(_ => runCompile(k, args));
+      const dir = path.dirname(bench.path);
+      const hook = path.join(dir, "prehook." + engine.name);
+      if (fs.existsSync(hook)) {
+	 const cmd = `(cd ${dir}; TMP=${config.tmp} prehook.${engine.name})`;
+	 return execPromise(cmd, "prehook")
+	    .then(compileOrInterprete)
+	    .catch(err => console.error(bench.name, "prehook failed with message", err));
       } else {
-	 return runInterpret(k, args);
+	 return compileOrInterprete(undefined);
       }
    }
 

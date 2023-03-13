@@ -43,6 +43,10 @@ while : ; do
       fi
       ;;
 
+    -g)
+      hopopt=-g;
+      ;;
+
     -*)
       echo "Usage: hopstone.sh [options]" >&2;
       echo "" >&2;
@@ -52,6 +56,7 @@ while : ; do
       echo "  --hopc=path                        hopc compiler" >&2;
       echo "  --benchmarks=prog1 prog2 prog3...  bencharks" >&2;
       echo "  -e engine                          execution engine" >&2;
+      echo "  -g                                 Hop hopstone debug " >&2;
       exit 1;;
 
     *)
@@ -81,16 +86,16 @@ mkdir -p $dir
 for p in $BENCHMARKS; do
   echo "$p..."
   if [ "$msg " != " " ]; then
-    hop --no-server -- tools/runbench.js -v3 $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc
+    hop $hopopt --no-server -- tools/runbench.js -v3 $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc
   else
-    hop --no-server -- tools/runbench.js -v3 $engines -D $dir $p --date "$dt" --hopc $hopc
+    hop $hopopt --no-server -- tools/runbench.js -v3 $engines -D $dir $p --date "$dt" --hopc $hopc
   fi
   sleep $coolperiod
 done
 
-hop --no-server -- tools/logbench.js text.js $dir >> $dir/RESULTS.txt
+hop $hopopt --no-server -- tools/logbench.js text.js $dir >> $dir/RESULTS.txt
 
-hop --no-server -- tools/logbench.js summary.js $dir > $dir/SUMMARY.txt
+hop $hopopt --no-server -- tools/logbench.js summary.js $dir > $dir/SUMMARY.txt
 cat $dir/SUMMARY.txt
 
 echo "For details, run \"hop --no-server -- tools/logbench.js text.js $dir\""
