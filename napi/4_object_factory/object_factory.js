@@ -2,11 +2,12 @@
 const addon = require("./build/Release/4_object_factory");
 
 function test(N) {
-   const obj1 = addon('hello');
-   const obj2 = addon('world');
    let res = true;
    
    for (let i = 0; i < N; i++) {
+      const obj1 = addon('hello');
+      const obj2 = addon('world');
+      
       res &= (obj1.msg === "hello") && (obj2.msg === "world");
    }
    return res;
@@ -21,7 +22,7 @@ async function main(bench, n) {
    
    while (n-- > 0) {
       if (n % k === 0) { console.log( i++ ); }
-      res = await test(5000000);
+      res = await test(150000);
    }
 
    console.log("res=", res);
@@ -30,6 +31,6 @@ async function main(bench, n) {
 const N = 
    (process.argv[1] === "fprofile") 
    ? 2
-   : process.argv[2] ? parseInt(process.argv[2]) : 1000;
+   : process.argv[2] ? parseInt(process.argv[2]) : 100;
 
 main("4_object_factory", N); 

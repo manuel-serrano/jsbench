@@ -18,4 +18,4 @@ BENCHMARKS_ICFP21="bglstone/almabench.js bglstone/bague.js other/basic.js bglsto
 
 BENCHMARKS_ASYNC="async/lstat.js async/lstatSync.js async/lstatPromise.js async/readfile.js async/readfileSync.js async/readfilePromise.js async/readfile.js async/readfileSync.js async/readfilePromise.js async/writefile.js async/writefileSync.js async/writefilePromise.js async/ls.js async/lsSync.js async/lsPromise.js async/writebuf.js async/writebufSync.js async/writebufPromise.js "
 
-BENCHMARKS_NAPI="napi/2_function_arguments/function_arguments.js napi/3_callbacks/callbacks.js"
+BENCHMARKS_NAPI="napi/2_function_arguments/function_arguments.js napi/3_callbacks/callbacks.js napi/4_object_factory"
