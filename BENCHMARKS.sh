@@ -17,3 +17,5 @@ BENCHMARKS="$BENCHMARKS_OCTANE $BENCHMARKS_SUNSPIDER $BENCHMARKS_JETSTREAM $BENC
 BENCHMARKS_ICFP21="bglstone/almabench.js bglstone/bague.js other/basic.js bglstone/boyer-scm.js bglstone/earley-scm.js other/jpeg.js other/js-of-ocaml.js bglstone/leval.js other/marked.js bglstone/maze.js other/minimatch.js other/minimist.js other/moment.js other/qrcode.js other/rho.js proxy/richards-proxy.js other/uuid.js other/z80.js"
 
 BENCHMARKS_ASYNC="async/lstat.js async/lstatSync.js async/lstatPromise.js async/readfile.js async/readfileSync.js async/readfilePromise.js async/readfile.js async/readfileSync.js async/readfilePromise.js async/writefile.js async/writefileSync.js async/writefilePromise.js async/ls.js async/lsSync.js async/lsPromise.js async/writebuf.js async/writebufSync.js async/writebufPromise.js "
+
+BENCHMARKS_NAPI="napi/2_function_arguments/function_arguments.js napi/3_callbacks/callbacks.js"
