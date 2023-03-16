@@ -50,9 +50,6 @@ function test(N) {
 	 }
 
 	 assert.strictEqual(num, TestWords(num));
-	 if (!res) {
-	    process.exit(0);
-	 }
       });
 
       assert.throws(() => CreateTooBigBigInt(), {
