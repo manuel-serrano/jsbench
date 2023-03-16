@@ -86,4 +86,4 @@ const N =
    ? 2
    : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || 15: 15;
 
-main("test_array", N); 
+main("test_bigint", N); 
