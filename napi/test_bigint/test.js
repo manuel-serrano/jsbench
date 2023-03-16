@@ -23,7 +23,7 @@ const {
   98765432213456789876546896323445679887645323232436587988766545658n,
   -4350987086545760976737453646576078997096876957864353245245769809n,
 ].forEach((num) => {
-  if (num > -(2n ** 63n) && num < 2n ** 63n) {
+   if (num > -(2n ** 63n) && num < 2n ** 63n) {
     assert.strictEqual(TestInt64(num), num);
     assert.strictEqual(IsLossless(num, true), true);
   } else {
@@ -37,6 +37,7 @@ const {
     assert.strictEqual(IsLossless(num, false), false);
   }
 
+   console.log("num=", num);
   assert.strictEqual(num, TestWords(num));
 });
 

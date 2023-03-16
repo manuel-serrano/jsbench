@@ -14,12 +14,13 @@ let res = true;
 const assert = {
    ok: v => res &= v,
    throws: proc => { try { proc(); res = false; } catch(e) { ; } },
-   strictEqual: (a, b) => { res &= a === b },
-   notStrictEqual: (a, b) => { res &= a !== b },
-   deepStrictEqual: (a, b) => { a.forEach((e, i, a) => { res &= e === b[i] }) }
+   strictEqual: (a, b) => { res = res && (a === b); },
+   notStrictEqual: (a, b) => { res = res && (a !== b); },
+   deepStrictEqual: (a, b) => { a.forEach((e, i, a) => { res = res && (e === b[i]); }) }
 }
 
 function test(N) {
+   res = true;
    for (let i = 0; i < N; i++) {
       [
 	 0n,
@@ -49,6 +50,9 @@ function test(N) {
 	 }
 
 	 assert.strictEqual(num, TestWords(num));
+	 if (!res) {
+	    process.exit(0);
+	 }
       });
 
       assert.throws(() => CreateTooBigBigInt(), {
@@ -66,8 +70,7 @@ function test(N) {
    return res;
 }
 
-async function main(bench, n) {
-   let res = 0;
+function main(bench, n) {
    const k = Math.round(n / 10);
    let i = 1;
    
@@ -75,7 +78,7 @@ async function main(bench, n) {
    
    while (n-- > 0) {
       if (n % k === 0) { console.log( i++ ); }
-      res = await test(30000);
+      test(30000);
    }
 
    console.log("res=", res);

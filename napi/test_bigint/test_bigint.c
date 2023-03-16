@@ -21,7 +21,6 @@ static napi_value IsLossless(napi_env env, napi_callback_info info) {
     uint64_t input;
     NODE_API_CALL(env, napi_get_value_bigint_uint64(env, args[0], &input, &lossless));
   }
-
   napi_value output;
   NODE_API_CALL(env, napi_get_boolean(env, lossless, &output));
 
@@ -44,7 +43,6 @@ static napi_value TestInt64(napi_env env, napi_callback_info info) {
   int64_t input;
   bool lossless;
   NODE_API_CALL(env, napi_get_value_bigint_int64(env, args[0], &input, &lossless));
-
   napi_value output;
   NODE_API_CALL(env, napi_create_bigint_int64(env, input, &output));
 
@@ -88,7 +86,7 @@ static napi_value TestWords(napi_env env, napi_callback_info info) {
   NODE_API_ASSERT(env, valuetype0 == napi_bigint,
       "Wrong type of arguments. Expects a bigint as first argument.");
 
-  size_t expected_word_count;
+  size_t expected_word_count = 0;
   NODE_API_CALL(env, napi_get_value_bigint_words(
         env, args[0], NULL, &expected_word_count, NULL));
 
