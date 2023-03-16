@@ -37,7 +37,6 @@ const {
     assert.strictEqual(IsLossless(num, false), false);
   }
 
-   console.log("num=", num);
   assert.strictEqual(num, TestWords(num));
 });
 
