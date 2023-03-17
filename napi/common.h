@@ -70,6 +70,7 @@ void add_returned_status(napi_env env,
 
 void add_last_status(napi_env env, const char* key, napi_value return_value);
 
+#if defined(HOP_NODE_API_H_)
 void add_returned_status(napi_env env,
                          const char* key,
                          napi_value object,
@@ -113,3 +114,4 @@ void add_last_status(napi_env env, const char* key, napi_value return_value) {
     NODE_API_CALL_RETURN_VOID(env,
 			      napi_set_named_property(env, return_value, (char *)key, prop_value));
 }
+#endif

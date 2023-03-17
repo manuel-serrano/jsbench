@@ -39,12 +39,10 @@ function test1() {
    assert.ok(propertyNames.includes('readwriteValue'));
    assert.ok(propertyNames.includes('readonlyValue'));
    assert.ok(!propertyNames.includes('hiddenValue'));
-   if (!res) { hop.log("c"); process.exit(1); }
    assert.ok(!propertyNames.includes('readwriteAccessor1'));
    assert.ok(!propertyNames.includes('readwriteAccessor2'));
    assert.ok(!propertyNames.includes('readonlyAccessor1'));
    assert.ok(!propertyNames.includes('readonlyAccessor2'));
-   if (!res) { hop.log("d"); process.exit(1); }
 
    // The napi_writable attribute should be ignored for accessors.
    test_object.readwriteAccessor1 = 1;
@@ -55,16 +53,11 @@ function test1() {
    assert.strictEqual(test_object.readwriteAccessor2, 2);
    assert.strictEqual(test_object.readonlyAccessor2, 2);
    assert.throws(() => { test_object.readonlyAccessor2 = 3; }, getterOnlyErrorRE);
-   if (!res) { hop.log("e"); process.exit(1); }
 
    // Validate that static properties are on the class as opposed
    // to the instance
    assert.strictEqual(TestConstructor.staticReadonlyAccessor1, 10);
-   hop.log(TestConstructor.staticReadonlyAccessor1, "/", 10);
-   if (!res) { hop.log("f"); process.exit(1); }
-   hop.log(test_object.staticReadonlyAccessor1, "/", undefined);
    assert.strictEqual(test_object.staticReadonlyAccessor1, undefined);
-   if (!res) { hop.log("g"); process.exit(1); }
 
    // Verify that passing NULL to napi_define_class() results in the correct
    // error.
@@ -76,7 +69,6 @@ function test1() {
       propertiesIsNull: 'Invalid argument',
       resultIsNull: 'Invalid argument'
    });
-   if (!res) { hop.log("g"); process.exit(1); }
 }
 
 function test2() {
