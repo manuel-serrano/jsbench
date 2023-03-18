@@ -1,5 +1,7 @@
 #include <js_native_api.h>
 
+#if !defined(COMMON_H_)
+#define COMMON_H_
 // Empty value so that macros here are able to return NULL or void
 #define NODE_API_RETVAL_NOTHING  // Intentionally blank #define
 
@@ -114,4 +116,5 @@ void add_last_status(napi_env env, const char* key, napi_value return_value) {
     NODE_API_CALL_RETURN_VOID(env,
 			      napi_set_named_property(env, return_value, (char *)key, prop_value));
 }
+#endif
 #endif
