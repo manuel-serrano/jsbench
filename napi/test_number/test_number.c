@@ -1,5 +1,6 @@
 #include <js_native_api.h>
 #include "../common.h"
+#include <stdio.h>
 
 static napi_value Test(napi_env env, napi_callback_info info) {
   size_t argc = 1;
@@ -16,7 +17,6 @@ static napi_value Test(napi_env env, napi_callback_info info) {
 
   double input;
   NODE_API_CALL(env, napi_get_value_double(env, args[0], &input));
-
   napi_value output;
   NODE_API_CALL(env, napi_create_double(env, input, &output));
 
@@ -82,9 +82,11 @@ static napi_value TestInt64Truncation(napi_env env, napi_callback_info info) {
 
   int64_t input;
   NODE_API_CALL(env, napi_get_value_int64(env, args[0], &input));
-
+  fprintf(stderr, ">>> GET %ld\n", input);
+  //fprintf(stderr, ">>> GET I64=%f %ld\n", REAL_TO_DOUBLE(args[0]), input);
   napi_value output;
   NODE_API_CALL(env, napi_create_int64(env, input, &output));
+  //fprintf(stderr, "<<< GET I64=%ld\n", CINT(output));
 
   return output;
 }

@@ -8,6 +8,9 @@ const stringExpected = /string was expected/;
 
 const testSym = Symbol('test');
 
+const nodejsp = process.versions.v8 !== '-';
+const nodejsnull = nodejsp ? 'Invalid argument' : 'napi_ok';
+
 let res = true;
 
 const assert = {
@@ -181,7 +184,6 @@ function _test(N) {
 	 inputTypeCheck: 'A number was expected'
       });
 
-
       assert.deepStrictEqual(test.testNull.getValueDouble(), {
 	 envIsNull: 'Invalid argument',
 	 valueIsNull: 'Invalid argument',
@@ -191,21 +193,21 @@ function _test(N) {
 
       assert.deepStrictEqual(test.testNull.coerceToBool(), {
 	 envIsNull: 'Invalid argument',
-	 valueIsNull: 'Invalid argument',
+	 valueIsNull: nodejsnull,
 	 resultIsNull: 'Invalid argument',
 	 inputTypeCheck: 'napi_ok'
       });
 
       assert.deepStrictEqual(test.testNull.coerceToObject(), {
 	 envIsNull: 'Invalid argument',
-	 valueIsNull: 'Invalid argument',
+	 valueIsNull: nodejsnull,
 	 resultIsNull: 'Invalid argument',
 	 inputTypeCheck: 'napi_ok'
       });
 
       assert.deepStrictEqual(test.testNull.coerceToString(), {
 	 envIsNull: 'Invalid argument',
-	 valueIsNull: 'Invalid argument',
+	 valueIsNull: nodejsnull,
 	 resultIsNull: 'Invalid argument',
 	 inputTypeCheck: 'napi_ok'
       });
@@ -254,4 +256,4 @@ const N =
    ? 2
    : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 100;
 
-main("test_conversion", N); 
+main("test_conversions", N); 
