@@ -82,7 +82,6 @@ static napi_value TestInt64Truncation(napi_env env, napi_callback_info info) {
 
   int64_t input;
   NODE_API_CALL(env, napi_get_value_int64(env, args[0], &input));
-  fprintf(stderr, ">>> GET %ld\n", input);
   //fprintf(stderr, ">>> GET I64=%f %ld\n", REAL_TO_DOUBLE(args[0]), input);
   napi_value output;
   NODE_API_CALL(env, napi_create_int64(env, input, &output));

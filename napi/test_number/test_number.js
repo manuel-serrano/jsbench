@@ -13,13 +13,6 @@ const assert = {
    notDeepStrictEqual: (a, b) => !assert.deepStrictEqual(a, b)
 }
 
-function check(msg,val) {
-   if (!res) {
-      console.log(msg, val);
-      process.exit(0);
-   }
-}
-
 // Testing api calls for number
 function testNumber(num) {
   assert.strictEqual(num, test_number.Test(num));
@@ -135,34 +128,21 @@ function test(N) {
       testInt64(-Math.pow(2, 63) + (Math.pow(2, 9) + 1));
       testInt64(Math.pow(2, 63) - (Math.pow(2, 9) + 1));
       const n = (-Math.pow(2, 63) + (Math.pow(2, 9) + 1));
-      check("d-2");
 
       // Test min/max double value
       testInt64(-Number.MIN_VALUE, 0);
-      console.log("_______________________");
-      check("d-4");
       testInt64(Number.MIN_VALUE, 0);
-      check("d-3");
       testInt64(-Number.MAX_VALUE, RANGEERROR_NEGATIVE);
-      check("d-2");
       testInt64(Number.MAX_VALUE, RANGEERROR_POSITIVE);
-      check("d-1");
 
       // Test outside int64_t range
       testInt64(-Math.pow(2, 63) + (Math.pow(2, 9)), RANGEERROR_NEGATIVE);
-      check("d-0");
-      hop.log("res1=", res);
       testInt64(Math.pow(2, 63) - (Math.pow(2, 9)), RANGEERROR_POSITIVE);
-      hop.log(Math.pow(2, 63) - (Math.pow(2, 9)), " ", RANGEERROR_POSITIVE);
-      hop.log("res2=", res);
-      check("d+1");
 
       // Test non-finite numbers
       testInt64(Number.POSITIVE_INFINITY, 0);
       testInt64(Number.NEGATIVE_INFINITY, 0);
       testInt64(Number.NaN, 0);
-      check("e");
-      console.log("ICI");
    }
    
    return res;
@@ -176,7 +156,7 @@ function main(bench, n) {
    
    while (n-- > 0) {
       if (n % k === 0) { console.log( i++ ); }
-      test(2000);
+      test(10000);
    }
 
    console.log("res=", res);
