@@ -13,11 +13,6 @@ const assert = {
    notDeepStrictEqual: (a, b) => !assert.deepStrictEqual(a, b)
 }
 
-// Testing api calls for number
-function testNumber(num) {
-  assert.strictEqual(num, test_number.Test(num));
-}
-
 function test(N) {
    res = true;
 
