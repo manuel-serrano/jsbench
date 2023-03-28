@@ -89,7 +89,6 @@ function test(N) {
       // Test within int64_t range (with precision loss)
       testInt32(-Math.pow(2, 63) + (Math.pow(2, 9) + 1), 1024);
       testInt32(Math.pow(2, 63) - (Math.pow(2, 9) + 1), -1024);
-
       // Test min/max double value
       testInt32(-Number.MIN_VALUE, 0);
       testInt32(Number.MIN_VALUE, 0);
@@ -143,6 +142,7 @@ function test(N) {
       testInt64(Number.POSITIVE_INFINITY, 0);
       testInt64(Number.NEGATIVE_INFINITY, 0);
       testInt64(Number.NaN, 0);
+
    }
    
    return res;
