@@ -8,19 +8,22 @@ const buf = Buffer.alloc(1024);
 const fd = fs.openSync(file, "w");
    
 function test() {
+   let i = 0;
    return new Promise((res, rej) => {
-      function loop(i) {
-	 new Promise((res, rej) => {
-	    fs.write(fd, buf, 0, 1024, 0, (err, s, buf) => res(s));
-	 }).then(s => {
+      function loop() {
+	 function thencb(s) {
 	    if (i < SIZE) {
-	       loop(i+1);
+	       i++;
+	       loop();
 	    } else {
 	       res(s);
 	    }
-	 });
+	 }
+	 new Promise((res, rej) => {
+	    fs.write(fd, buf, 0, 1024, 0, (err, s, buf) => res(s));
+	 }).then(thencb);
       }
-      loop(0);
+      loop();
    });
 }
 

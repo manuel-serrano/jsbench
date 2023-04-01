@@ -6,19 +6,24 @@ const file = process.env.HOME;
 const SIZE = 50000;
    
 function test() {
+   let i = 0;
    return new Promise((res, rej) => {
-      function loop(i) {
+      function thencb(stat) {
+	 const s = stat.size;
+	 
+	 if (i < SIZE) {
+	    i++;
+	    loop();
+	 } else {
+	    res(s);
+	 }
+      }
+      function loop() {
 	 new Promise((res, rej) => {
 	    fs.lstat(file, (err, stat) => res(stat));
-	 }).then(stat => {
-	    if (i < SIZE) {
-	       loop(i+1);
-	    } else {
-	       res(stat.size);
-	    }
-	 });
+	 }).then(thencb);
       }
-      loop(0);
+      loop();
    });
 }
 

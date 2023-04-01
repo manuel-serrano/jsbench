@@ -6,19 +6,22 @@ const file = module.filename;
 const SIZE = 1000;
    
 function test() {
+   let i = 0;
    return new Promise((res, rej) => {
-      function loop(i) {
+      function thencb(buf) {
+	 if (i < SIZE) {
+	    i++;
+	    loop();
+	 } else {
+	    res(buf.length);
+	 }
+      }
+      function loop() {
 	 new Promise((res, rej) => {
 	    fs.readFile(file, (err, buf) => res(buf));
-	 }).then(buf => {
-	    if (i < SIZE) {
-	       loop(i+1);
-	    } else {
-	       res(buf.length);
-	    }
-	 });
+	 }).then(thencb);
       }
-      loop(0);
+      loop();
    });
 }
 
