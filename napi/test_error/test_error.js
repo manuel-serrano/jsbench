@@ -139,6 +139,7 @@ function test(N) {
       assert.strictEqual(error.message, 'TypeError [type error]');
       assert.strictEqual(error.code, 'ERR_TEST_CODE');
       assert.strictEqual(error.name, 'TypeError');
+      
       return res;
    }
 }
@@ -162,4 +163,4 @@ const N =
    ? 2
    : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 100000;
 
-main("test_number", N); 
+main("test_error", N); 
