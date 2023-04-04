@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Tue Mar  7 14:57:28 2023 (serrano)                */
+/*    Last change :  Tue Apr  4 12:04:07 2023 (serrano)                */
 /*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -82,7 +82,7 @@ function csv(port, start, enames, logs, enginepad, uratio, deviation, args) {
    
    for (let i = start; i < logs.length; i++) {
       const log = logs[i];
-      port.write(utils.padding(log.name + ",", 19));
+      port.write(utils.padding(log.name.replace(/_/, "-") + ",", 19));
       port.write(" ");
       
       for (let j = 0; j < enames.length; j++) {

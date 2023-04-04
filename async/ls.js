@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  manuel serrano                                    */
 /*    Creation    :  Sun Jan  8 13:54:48 2023                          */
-/*    Last change :  Thu Mar  9 16:27:58 2023 (serrano)                */
+/*    Last change :  Tue Apr  4 10:41:24 2023 (serrano)                */
 /*    Copyright   :  2023 manuel serrano                               */
 /*    -------------------------------------------------------------    */
 /*    LS implementation using the Node fs api.                         */
@@ -281,6 +281,6 @@ async function main(bench, n) {
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
-   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 300;
+   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 1000;
 
 main("ls", N); 
