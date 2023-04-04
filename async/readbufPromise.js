@@ -8,19 +8,22 @@ const buf = Buffer.alloc(1024);
 const fd = fs.openSync(file, "r");
    
 function test() {
+   let i = 0;
    return new Promise((res, rej) => {
-      function loop(i) {
+      function thencb(s) {
+	 if (i < SIZE) {
+	    i++;
+	    loop();
+	 } else {
+	    res(s);
+	 }
+      }
+      function loop() {
 	 new Promise((res, rej) => {
 	    fs.read(fd, buf, 0, 1024, -1, (err, s, buf) => res(s));
-	 }).then(s => {
-	    if (i < SIZE) {
-	       loop(i+1);
-	    } else {
-	       res(s);
-	    }
-	 });
+	 }).then(thencb);
       }
-      loop(0);
+      loop();
    });
 }
 
