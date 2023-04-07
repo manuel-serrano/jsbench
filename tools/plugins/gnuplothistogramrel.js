@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Mon Mar  6 09:25:12 2023 (serrano)                */
+/*    Last change :  Wed Apr  5 06:04:19 2023 (serrano)                */
 /*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a relative gnuplot histogram, each bar is a benchmark.  */
@@ -92,7 +92,7 @@ module.exports = function(logfiles, engines, args, config) {
    
    for (let i = start; i < logs.length; i++) {
       const log = logs[ i ];
-      csvport.write(utils.padding(log.name + ",", 19));
+      csvport.write(utils.padding(log.name.replace(/_/g, "-") + ",", 19));
       csvport.write(" ");
       
       for (let j = (args.includebase ? 0 : 1); j < enames.length; j++) {

@@ -7,19 +7,22 @@ const buf = fs.readFileSync(module.filename);
 const SIZE = 1000;
    
 function test() {
+   let i = 0;
    return new Promise((res, rej) => {
-      function loop(i) {
-	 new Promise((res, rej) => {
-	    fs.writeFile(file, buf, err => res(err));
-	 }).then(err => {
+      function loop() {
+	 function thencb(err) {
 	    if (i < SIZE) {
-	       loop(i+1);
+	       i++;
+	       loop();
 	    } else {
 	       res(err);
 	    }
-	 });
+	 }
+	 new Promise((res, rej) => {
+	    fs.writeFile(file, buf, err => res(err));
+	 }).then(thencb);
       }
-      loop(0);
+      loop();
    });
 }
 
