@@ -3,6 +3,6 @@
    "version": "@INTERPRETER@ -e \"console.log( process.version )\"",
    "cmd": "@INTERPRETER@ @PATH@",
    "interpreterxxx": "/opt/JS/graal/graalvm-ce-java17-22.3.1/bin/node",
-   "interpreter": "/opt/JS/GRAAL/graalvm-ce-19.1.1/bin/node",
+   "interpreter": "/opt/JS/graal/graalvm-ce-java17-22.3.1/bin/nod",
    "iteration": 3
 }
