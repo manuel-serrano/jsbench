@@ -78,6 +78,6 @@ function main(bench, n) {
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
-   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 2000;
+   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 700;
 
 main("test_function", N); 
