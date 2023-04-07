@@ -36,7 +36,10 @@ async function main(bench, n) {
       res = await test();
    }
 
+   fs.unlinkSync(file);
+
    console.log("res=", res);
+   
 }
 
 const N = 
