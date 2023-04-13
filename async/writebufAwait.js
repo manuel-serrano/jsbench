@@ -7,14 +7,14 @@ const SIZE = 50000;
 const buf = Buffer.alloc(1024);
 const fd = fs.openSync(file, "w");
 
-fs.writePromise = (fd, buf, offset, len) =>
-   new Promise((res, rej) => fs.write(fd, buf, offset, len, (err, s, buf) => res(s)));
+fs.writePromise = (fd, buf, offset, len, pos) =>
+   new Promise((res, rej) => fs.write(fd, buf, offset, len, pos, (err, s, buf) => res(s)));
 
 function test() {
    return new Promise(async (res, rej) => {
       let s;
       for (let i = 0; i < SIZE; i++) {
-	 const w = await fs.writePromise(fd, buf, 0, 1024);
+	 const w = await fs.writePromise(fd, buf, 0, 1024, 0);
 	 s = w;
       }
       res(s);
