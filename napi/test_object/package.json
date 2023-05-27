@@ -1,0 +1,13 @@
+{
+  "name": "test_object",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test_object.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node-gyp rebuild"
+  },
+  "author": "",
+  "license": "ISC",
+  "gypfile": true
+}
