@@ -53,4 +53,4 @@ const N =
    ? 2
    : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 2000;
 
-main("test_number", N); 
+main("test_date", N); 
