@@ -17,7 +17,7 @@ const assert = {
    notDeepStrictEqual: (a, b) => !assert.deepStrictEqual(a, b)
 }
 
-function do_test_null() {
+function run_null() {
    const expectedResult = {
       envIsNull: 'Invalid argument',
       stringIsNullNonZeroLength: 'Invalid argument',
@@ -30,7 +30,7 @@ function do_test_null() {
    assert.deepStrictEqual(expectedResult, testNull.test_create_utf16());
 }
 
-function do_test_string() {
+function run_string() {
    {
       const empty = '';
       assert.strictEqual(test_string.TestLatin1(empty), empty);
@@ -117,8 +117,8 @@ function test(N) {
    res = true;
 
    for (let i = 0; i < N; i++) {
-      do_test_string();
-      do_test_null();
+      run_string();
+      run_null();
    }
    
    return res;
