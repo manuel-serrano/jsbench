@@ -267,6 +267,10 @@ static napi_value TestMemoryCorruption(napi_env env, napi_callback_info info) {
   return NULL;
 }
 
+#if defined(HOP_NODE_API_H_)
+#  include "./test_null.c"
+#endif
+
 EXTERN_C_START
 napi_value Init(napi_env env, napi_value exports) {
   napi_property_descriptor properties[] = {
@@ -284,7 +288,7 @@ napi_value Init(napi_env env, napi_value exports) {
     DECLARE_NODE_API_PROPERTY("TestMemoryCorruption", TestMemoryCorruption),
   };
 
-  // init_test_null(env, exports);
+  init_test_null(env, exports);
 
   NODE_API_CALL(env, napi_define_properties(
       env, exports, sizeof(properties) / sizeof(*properties), properties));

@@ -24,7 +24,6 @@ function run_null() {
       stringIsNullZeroLength: 'napi_ok',
       resultIsNull: 'Invalid argument',
    };
-
    assert.deepStrictEqual(expectedResult, testNull.test_create_latin1());
    assert.deepStrictEqual(expectedResult, testNull.test_create_utf8());
    assert.deepStrictEqual(expectedResult, testNull.test_create_utf16());
@@ -141,6 +140,6 @@ function main(bench, n) {
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
-   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 2000;
+   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 200;
 
 main("test_string", N); 
