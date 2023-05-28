@@ -3,6 +3,7 @@
 #include <js_native_api.h>
 #include "../common.h"
 #include "test_null.h"
+#include <stdio.h>
 
 static napi_value TestLatin1(napi_env env, napi_callback_info info) {
   size_t argc = 1;
@@ -23,7 +24,6 @@ static napi_value TestLatin1(napi_env env, napi_callback_info info) {
 
   NODE_API_CALL(env,
       napi_get_value_string_latin1(env, args[0], buffer, buffer_size, &copied));
-
   napi_value output;
   NODE_API_CALL(env, napi_create_string_latin1(env, buffer, copied, &output));
 
@@ -81,7 +81,7 @@ static napi_value TestUtf16(napi_env env, napi_callback_info info) {
 
   return output;
 }
-
+#include <stdio.h>
 static napi_value
 TestLatin1Insufficient(napi_env env, napi_callback_info info) {
   size_t argc = 1;
@@ -128,7 +128,6 @@ static napi_value TestUtf8Insufficient(napi_env env, napi_callback_info info) {
 
   NODE_API_CALL(env,
       napi_get_value_string_utf8(env, args[0], buffer, buffer_size, &copied));
-
   napi_value output;
   NODE_API_CALL(env, napi_create_string_utf8(env, buffer, copied, &output));
 

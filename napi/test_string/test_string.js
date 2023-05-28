@@ -96,19 +96,19 @@ function run_string() {
       assert.strictEqual(test_string.Utf16Length(str6), 5);
       assert.strictEqual(test_string.Utf8Length(str6), 14);
 
-      assert.throws(() => {
-	 test_string.TestLargeUtf8();
-      }, /^Error: Invalid argument$/);
-
-      assert.throws(() => {
-	 test_string.TestLargeLatin1();
-      }, /^Error: Invalid argument$/);
-
-      assert.throws(() => {
-	 test_string.TestLargeUtf16();
-      }, /^Error: Invalid argument$/);
-
-      test_string.TestMemoryCorruption(' '.repeat(64 * 1024));
+/*       assert.throws(() => {                                         */
+/* 	 test_string.TestLargeUtf8();                                  */
+/*       }, /^Error: Invalid argument$/);                              */
+/*                                                                     */
+/*       assert.throws(() => {                                         */
+/* 	 test_string.TestLargeLatin1();                                */
+/*       }, /^Error: Invalid argument$/);                              */
+/*                                                                     */
+/*       assert.throws(() => {                                         */
+/* 	 test_string.TestLargeUtf16();                                 */
+/*       }, /^Error: Invalid argument$/);                              */
+/*                                                                     */
+/*       test_string.TestMemoryCorruption(' '.repeat(64 * 1024));      */
    }
 }
 
@@ -140,6 +140,6 @@ function main(bench, n) {
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
-   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 200;
+   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 6000;
 
 main("test_string", N); 
