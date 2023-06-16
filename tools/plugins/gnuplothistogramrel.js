@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    .../bench/jsbench/tools/plugins/gnuplothistogramrel.js           */
+/*    .../hop/bench/jsbench/tools/plugins/gnuplothistogramrel.js       */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Wed Apr  5 06:04:19 2023 (serrano)                */
+/*    Last change :  Fri May 12 07:19:42 2023 (serrano)                */
 /*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a relative gnuplot histogram, each bar is a benchmark.  */
@@ -124,6 +124,10 @@ module.exports = function(logfiles, engines, args, config) {
       csvport.write("\n");
    }
    csvport.write("\n");
+   
+   // generated file
+   plotport.write(`# generated file gnuplotthistogramrel.js (${new Date()})`);
+   plotport.write("\n");
    
    // output format
    switch(format) {

@@ -7,11 +7,15 @@ const SIZE = 50000;
 const buf = Buffer.alloc(1024);
 const fd = fs.openSync(file, "w");
 
+fs.writePromise = (fd, buf, offset, len, pos) =>
+   new Promise((res, rej) => fs.write(fd, buf, offset, len, pos, (err, s, buf) => res(s)));
+
 function test() {
-   return new Promise((res, rej) => {
+   return new Promise(async (res, rej) => {
       let s;
       for (let i = 0; i < SIZE; i++) {
-	 s = fs.writeSync(fd, buf, 0, 1024);
+	 const w = await fs.writePromise(fd, buf, 0, 1024, 0);
+	 s = w;
       }
       res(s);
    });
@@ -37,4 +41,4 @@ const N =
    ? 2
    : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || 15: 15;
 
-main("writebufSync", N); 
+main("writebufAsync", N); 

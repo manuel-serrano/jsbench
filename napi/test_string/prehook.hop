@@ -1,0 +1,12 @@
+#!/bin/sh
+
+BENCHS="test_string test_null"
+
+BIGLOOVERSION=4.5b
+HOPVERSION=3.6.0
+
+mkdir -p build/Release
+
+for BENCH in $BENCHS; do
+  gcc $EFLAGS -O3 -I$HOME/prgm/project/hop/hop/nodejs -I$HOME/prgm/project/bigloo/bigloo/lib/bigloo/$BIGLOOVERSION -shared ../entry_point.c $BENCH.c -o build/Release/$BENCH.node -Wl,-soname=$BENCH.so -fPIC -Wl,--enable-new-dtags,-rpath=/usr/local/lib/hop/$HOPVERSION -Wl,--enable-new-dtags,-rpath=/home/serrano/prgm/project/bigloo/bigloo/lib/bigloo/$BIGLOOVERSION -L/home/serrano/prgm/project/bigloo/bigloo/lib/bigloo/$BIGLOOVERSION -L/home/serrano/prgm/project/hop/hop/lib/hop/$HOPVERSION -L/home/serrano/prgm/project/bigloo/bigloo/lib/bigloo/$BIGLOOVERSION  -rdynamic -ldl -lresolv -lunistring -lpcre2-8 -lgmp -lm -lc -lbigloo_s_mt-$BIGLOOVERSION -lbiglooweb_s_mt-$BIGLOOVERSION -lbigloomultimedia_s_mt-$BIGLOOVERSION -lbiglooopenpgp_s_mt-$BIGLOOVERSION -lbigloossl_s_mt-$BIGLOOVERSION -lbigloopthread_s_mt-$BIGLOOVERSION -lbiglooavahi_s_mt-$BIGLOOVERSION -lbiglooupnp_s_mt-$BIGLOOVERSION -lbigloolibuv_s_mt-$BIGLOOVERSION -ljs2scheme_s_mt-$HOPVERSION -lhop_s_mt-$HOPVERSION -lhopscript_s_mt-$HOPVERSION -lnodejs_s_mt-$HOPVERSION -lhopwidget_s_mt-$HOPVERSION -lbigloogc_mt-$BIGLOOVERSION
+done

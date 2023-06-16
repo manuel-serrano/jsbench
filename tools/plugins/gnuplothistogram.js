@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    .../jsasync/bench/jsbench/tools/plugins/gnuplothistogram.js      */
+/*    .../hop/bench/jsbench/tools/plugins/gnuplothistogram.js          */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Wed Apr  5 06:04:02 2023 (serrano)                */
+/*    Last change :  Fri May 12 07:18:06 2023 (serrano)                */
 /*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -220,6 +220,10 @@ module.exports = function(logfiles, engines, args, config) {
    } else {
       csv(csvport, start, enames, logs, enginepad, uratio, deviation, args);
    }
+
+   // generated file
+   plotport.write(`# generated file gnuplotthistogram.js (${new Date()})`);
+   plotport.write("\n");
    
    // output format
    switch(format) {

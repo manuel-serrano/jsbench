@@ -2,16 +2,18 @@
 
 const fs = require("fs");
 
-const file = "/dev/null";
+const file = process.env.HOME;
 const SIZE = 50000;
-const buf = Buffer.alloc(1024);
-const fd = fs.openSync(file, "w");
+
+fs.lstatPromise = file =>
+   new Promise((res, rej) => fs.lstat(file, (err, stat) => res(stat)));
 
 function test() {
-   return new Promise((res, rej) => {
+   return new Promise(async (res, rej) => {
       let s;
       for (let i = 0; i < SIZE; i++) {
-	 s = fs.writeSync(fd, buf, 0, 1024);
+	 const w = await fs.lstatPromise(file);
+	 s = w.size;
       }
       res(s);
    });
@@ -37,4 +39,4 @@ const N =
    ? 2
    : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || 15: 15;
 
-main("writebufSync", N); 
+main("lstatAsync", N); 
