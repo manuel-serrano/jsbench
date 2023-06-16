@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    serrano/prgm/project/hop/bench/jsbench/async/lsPromise.js        */
+/*    .../article/jsasync/bench/jsbench/async/lsPromise.js             */
 /*    -------------------------------------------------------------    */
 /*    Author      :  manuel serrano                                    */
 /*    Creation    :  Sun Jan  8 13:54:48 2023                          */
-/*    Last change :  Fri Apr  7 14:43:28 2023 (serrano)                */
+/*    Last change :  Fri Jun 16 11:48:20 2023 (serrano)                */
 /*    Copyright   :  2023 manuel serrano                               */
 /*    -------------------------------------------------------------    */
 /*    LS implementation using the Node fs api.                         */
@@ -258,6 +258,6 @@ async function main(bench, n) {
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
-   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 400;
+   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) : 200;
 
 main("ls", N); 
