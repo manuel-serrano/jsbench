@@ -10,10 +10,8 @@ function test() {
    return new Promise((res, rej) => {
       function cb(err, stat) {
 	 const s = stat.size;
-
 	 if (i < SIZE) {
-	    i++;
-	    loop();
+	    i++; loop();
 	 } else {
 	    res(s);
 	 }
