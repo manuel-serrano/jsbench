@@ -35,6 +35,6 @@ async function main(bench, n) {
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
-   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || 15: 15;
+   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || 13: 13;
 
 main("writebufSync", N); 
