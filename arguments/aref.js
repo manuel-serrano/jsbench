@@ -5,6 +5,14 @@ function test() {
    for (let l = arguments.length, i = 0; i < l; i++) {
       res += arguments[i];
    }
+   if (res < 0) {
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+   }
    return res;
 }
 
@@ -18,7 +26,7 @@ function main(bench, n) {
    while (n-- > 0) {
       if (j === k) { console.log( i++ ); j = 0; } else { j++; }
       res = test();
-      res += test(1);
+      res += test(102938080988);
       res += test(1, 2);
       res += test(1, 2, 3);
       res += test(1, 2, 3, 4);
