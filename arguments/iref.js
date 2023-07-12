@@ -13,6 +13,11 @@ function test() {
       console.log("do", "not", "inline", "this", "function");
       console.log("do", "not", "inline", "this", "function");
    }
+
+   if (arguments.length === 1000) {
+      return arguments[1001];
+   }
+   
    return res;
 }
 

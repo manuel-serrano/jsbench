@@ -1,6 +1,6 @@
 "use strict";
 
-function test() {
+function test2() {
    let res = 0;
    for (let l = arguments.length, i = 0; i < l; i++) {
       res += arguments[i];
@@ -13,7 +13,18 @@ function test() {
       console.log("do", "not", "inline", "this", "function");
       console.log("do", "not", "inline", "this", "function");
    }
+
    return res;
+}
+
+function test(v) {
+   if (arguments.length === 0) {
+      return 0;
+   } else if (arguments.length === 0) {
+      return v;
+   } else {
+      return test2.apply(undefined, arguments);
+   }
 }
 
 function main(bench, n) {
