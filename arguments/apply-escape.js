@@ -13,20 +13,31 @@ function test2() {
       console.log("do", "not", "inline", "this", "function");
       console.log("do", "not", "inline", "this", "function");
    }
-
    return res;
 }
 
 function test(v) {
    if (arguments.length === 0) {
       return 0;
-   } else if (arguments.length === 1) {
+   } else if (arguments.length === 0) {
       return v;
    } else {
       return test2.apply(undefined, arguments);
    }
 }
 
+const proto = {
+   __proto__: Function.prototype
+}
+
+test2.__proto__ = proto;
+
+let g = undefined;
+proto.apply = function(self, args) {
+   g = args;
+   return test2(...args);
+
+}
 function main(bench, n) {
    let res = 0;
    const k = Math.round(n / 10);
@@ -59,7 +70,7 @@ function main(bench, n) {
    console.log("res=", res);
 }
 
-const DEFAULT = 10000000;
+const DEFAULT = 1000000;
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2

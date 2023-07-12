@@ -23,7 +23,7 @@ function test(v) {
    } else if (arguments.length === 1) {
       return v;
    } else {
-      return test2.apply(undefined, arguments);
+      return test2(...Array.prototype.slice.call(arguments,1));
    }
 }
 
