@@ -1,11 +1,12 @@
 "use strict";
 
 function test() {
-   let res = 0;
+   let z = 0;
+   
    for (let l = arguments.length, i = 0; i < l; i++) {
-      res += arguments[i];
+      z |= arguments[i];
    }
-   if (res < 0) {
+   if (z == 4) {
       console.log("do", "not", "inline", "this", "function");
       console.log("do", "not", "inline", "this", "function");
       console.log("do", "not", "inline", "this", "function");
@@ -13,7 +14,7 @@ function test() {
       console.log("do", "not", "inline", "this", "function");
       console.log("do", "not", "inline", "this", "function");
    }
-   return res;
+   return z;
 }
 
 function main(bench, n) {
