@@ -13,7 +13,7 @@ function test() {
       console.log("from", "inlining", "this", "function");
       g[0] = [ "prevent", "nodejs", "from", "inlining" ];
    }
-   return g;
+   return arguments.length;
 }
 
 function main(bench, n) {
@@ -48,9 +48,10 @@ function main(bench, n) {
    console.log("res=", res);
 }
 
+const DEFAULT = 100000000;
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
-   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || 95000000: 95000000;
+   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || DEFAULT: DEFAULT;
 
 main("length", N); 

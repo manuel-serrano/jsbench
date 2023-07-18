@@ -15,6 +15,7 @@ function test() {
    }
 
    if (arguments.length === 1000) {
+      // out of range access to force an iref compilation
       return arguments[1001];
    }
    
@@ -50,13 +51,13 @@ function main(bench, n) {
       res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17);
    }
 
-   console.log("res=", res);
+   console.log("res=", res, "/", -141134113);
 }
 
-const DEFAULT = 10000000;
+const DEFAULT = 30000000;
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
    : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || DEFAULT : DEFAULT;
 
-main("aref", N); 
+main("iref", N); 

@@ -18,9 +18,17 @@ function test2() {
 }
 
 function test(v) {
+   if (v === -1) {
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+   }
    if (arguments.length === 0) {
       return 0;
-   } else if (arguments.length === 1) {
+   } else if (arguments.length === 0) {
       return v;
    } else {
       return test2.apply(undefined, arguments);
@@ -56,10 +64,10 @@ function main(bench, n) {
       res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17);
    }
 
-   console.log("res=", res);
+   console.log("res=", res, "/", -141134113);
 }
 
-const DEFAULT = 800000;
+const DEFAULT = 20000000;
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
