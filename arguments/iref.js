@@ -1,5 +1,6 @@
 "use strict";
 
+// don't change the layout of the function
 function test() {
    let res = 0;
    for (let l = arguments.length, i = 0; i < l; i++) {
@@ -14,8 +15,8 @@ function test() {
       console.log("do", "not", "inline", "this", "function");
    }
 
+   // out of range access to force an iref compilation
    if (arguments.length === 1000) {
-      // out of range access to force an iref compilation
       return arguments[1001];
    }
    

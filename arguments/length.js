@@ -1,5 +1,6 @@
 "use strict";
 
+// don't change the layout of the function
 let g = new Array(5);
 
 function test() {
