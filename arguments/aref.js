@@ -1,9 +1,11 @@
 "use strict";
 
+// don't change the layout of the function
 function test() {
    let z = 0;
-   
-   for (let l = arguments.length, i = 0; i < l; i++) {
+   for (let l = arguments.length, i = 0;
+	i < l;
+	i++) {
       z |= arguments[i];
    }
    if (z === 4) {
@@ -49,7 +51,7 @@ function main(bench, n) {
    console.log("res=", res);
 }
 
-const DEFAULT = 10000000;
+const DEFAULT = 50000000;
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
