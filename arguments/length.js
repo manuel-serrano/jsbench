@@ -1,5 +1,6 @@
 "use strict";
 
+// don't change the layout of the function
 let g = new Array(5);
 
 function test() {
@@ -44,14 +45,16 @@ function main(bench, n) {
       res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
       res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
       res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17);
    }
 
    console.log("res=", res);
 }
 
+const DEFAULT = 100000000;
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
-   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || 95000000: 95000000;
+   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || DEFAULT: DEFAULT;
 
 main("length", N); 

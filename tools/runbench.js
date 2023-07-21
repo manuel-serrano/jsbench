@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    serrano/prgm/project/hop/bench/jsbench/tools/runbench.js         */
+/*    .../article/arguments/bench/jsbench/tools/runbench.js            */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Mon Mar 13 05:13:23 2023 (serrano)                */
+/*    Last change :  Tue Jul 18 11:06:33 2023 (serrano)                */
 /*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -463,7 +463,6 @@ function runBenchmark(p) {
 			    (config.arg ? "(" + config.arg + ")" : "") +
 	    		    "...\n");
    }
-
    return config.engines.forEachAsync(e => runBench(bench, e))
       .then(_ => {
 	 if (config.verbose >= 2) {

@@ -1,10 +1,10 @@
 /*=====================================================================*/
-/*    serrano/prgm/project/hop/jsbench/tools/engine.js                 */
+/*    .../article/arguments/bench/jsbench/tools/engine.js              */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:55:49 2017                          */
-/*    Last change :  Thu Oct 28 08:26:06 2021 (serrano)                */
-/*    Copyright   :  2017-21 Manuel Serrano                            */
+/*    Last change :  Tue Jul 18 10:41:48 2023 (serrano)                */
+/*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Engine management                                                */
 /*=====================================================================*/
@@ -73,8 +73,14 @@ export function loadEngines(arr, args, config) {
 	    }
 	 } else {
 	    try {
-	       const pe = config.engine + "/" + e + ".json";
-	       engines.push(loadEngine(e, pe));
+	       const path = config.engine.split(":");
+	       for (const dir of path) {
+		  const pe = dir + "/" + e + ".json";
+		  if (fs.existsSync(pe)) {
+		     engines.push(loadEngine(e, pe));
+		     break;
+		  }
+	       }
 	    } catch(_) {
 	       if (args.acceptmissing) {
 		  engines.push({ name: e });

@@ -3,7 +3,7 @@
 function test2() {
    let res = 0;
    for (let l = arguments.length, i = 0; i < l; i++) {
-      res += arguments[i];
+      res |= arguments[i];
    }
    if (res < 0) {
       console.log("do", "not", "inline", "this", "function");
@@ -18,6 +18,14 @@ function test2() {
 }
 
 function test(v) {
+   if (v === -1) {
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+   }
    if (arguments.length === 0) {
       return 0;
    } else if (arguments.length === 1) {
@@ -37,32 +45,32 @@ function main(bench, n) {
    while (n-- > 0) {
       if (j === k) { console.log( m++ ); j = 0; } else { j++; }
       res = test();
-      res += test(102938080988);
-      res += test(1, 2);
-      res += test(1, 2, 3);
-      res += test(1, 2, 3, 4);
-      res += test(1, 2, 3, 4, 5);
-      res += test(1, 2, 3, 4, 5, 6);
-      res += test(1, 2, 3, 4, 5, 6, 7);
-      res += test(1, 2, 3, 4, 5, 6, 7, 8);
-      res += test(1, 2, 3, 4, 5, 6, 7, 8, 9);
-      res += test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-      res += test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
-      res += test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-      res += test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
-      res += test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
-      res += test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
-      res += test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-      res += test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17);
+      res |= test(102938080988);
+      res |= test(1, 2);
+      res |= test(1, 2, 3);
+      res |= test(1, 2, 3, 4);
+      res |= test(1, 2, 3, 4, 5);
+      res |= test(1, 2, 3, 4, 5, 6);
+      res |= test(1, 2, 3, 4, 5, 6, 7);
+      res |= test(1, 2, 3, 4, 5, 6, 7, 8);
+      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9);
+      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
+      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
+      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17);
    }
 
-   console.log("res=", res);
+   console.log("res=", res, "/", -141134113);
 }
 
-const DEFAULT = 10000000;
+const DEFAULT = 25000000;
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
    : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || DEFAULT : DEFAULT;
 
-main("aref", N); 
+main("spread", N); 
