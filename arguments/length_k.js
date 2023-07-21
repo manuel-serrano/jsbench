@@ -23,10 +23,18 @@ function main(bench, n) {
    const k = Math.round(n / 10);
    let m = 1, j = 0;
    
+   const funs = new Array(k + 2);
+   for (let i = 0; i <= k; i++) {
+      funs[i] = test;
+   }
+   funs[k + 1] = 0; /* avoid too smaart analysis of funs */
+   
    console.log(bench + "(" + n + ")...");
    
    while (n-- > 0) {
+      const test = funs[j];
       if (j === k) { console.log( m++ ); j = 0; } else { j++; }
+      
       res = test();
       res |= test(102938080988);
       res |= test(1, 2);
@@ -46,7 +54,7 @@ function main(bench, n) {
       res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
    }
 
-   console.log("res=", res);
+   console.log("res=", res + g.length);
 }
 
 const N = 

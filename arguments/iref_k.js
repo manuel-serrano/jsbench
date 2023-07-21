@@ -12,7 +12,13 @@ function test() {
       console.log("do", "not", "inline", "this", "function");
       console.log("do", "not", "inline", "this", "function");
       console.log("do", "not", "inline", "this", "function");
+      return 0;
+   } 
+
+   if (arguments.length === 1000) {
+      return arguments[1001];
    }
+   
    return res;
 }
 
@@ -21,10 +27,17 @@ function main(bench, n) {
    const k = Math.round(n / 10);
    let m = 1, j = 0;
    
+   const funs = new Array(k + 1);
+   for (let i = 0; i < k; i++) {
+      funs[i] = test;
+   }
+   funs[k] = 0; /* avoid too smaart analysis of funs */
+   
    console.log(bench + "(" + n + ")...");
    
    while (n-- > 0) {
       if (j === k) { console.log( m++ ); j = 0; } else { j++; }
+      const test = funs[j];
       res = test();
       res += test(102938080988);
       res += test(1, 2);
@@ -42,6 +55,7 @@ function main(bench, n) {
       res += test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
       res += test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
       res += test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+      res += test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17);
    }
 
    console.log("res=", res);

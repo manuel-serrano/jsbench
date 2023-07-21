@@ -1,32 +1,42 @@
 "use strict";
 
-let g = new Array(5);
-
+// don't change the layout of the function
 function test() {
-   g[arguments.length] = arguments.length;
-   if (arguments.length > 100) {
-      console.log(g, "prevent", "nodejs");
-      console.log("from", "inlining", "this", "function");
-      console.log(g, "prevent", "nodejs");
-      console.log("from", "inlining", "this", "function");
-      console.log(g, "prevent", "nodejs");
-      console.log("from", "inlining", "this", "function");
-      g[0] = [ "prevent", "nodejs", "from", "inlining" ];
-      return g[0].length;
+   let z = 0;
+   for (let l = arguments.length, i = 0;
+	i < l;
+	i++) {
+      z |= arguments[i];
+   }
+   if (z === 4) {
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      console.log("do", "not", "inline", "this", "function");
+      return 0;
    } else {
-      return arguments.length;
+      return z;
    }
 }
 
 function main(bench, n) {
    let res = 0;
    const k = Math.round(n / 10);
-   let m = 1, j = 0;
+   let m = 1,j = 0;
+   
+   const funs = new Array(k + 1);
+   for (let i = 0; i < k; i++) {
+      funs[i] = test;
+   }
+   funs[k] = 0; /* avoid too smaart analysis of funs */
    
    console.log(bench + "(" + n + ")...");
    
    while (n-- > 0) {
       if (j === k) { console.log( m++ ); j = 0; } else { j++; }
+      const test = funs[j];
       res = test();
       res |= test(102938080988);
       res |= test(1, 2);
@@ -49,9 +59,10 @@ function main(bench, n) {
    console.log("res=", res);
 }
 
+const DEFAULT = 50000000;
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
-   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || 95000000: 95000000;
+   : process.argv[ 2 ] ? parseInt(process.argv[ 2 ]) || DEFAULT : DEFAULT;
 
-main("length", N); 
+main("aref", N); 

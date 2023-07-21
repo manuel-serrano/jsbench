@@ -12,6 +12,7 @@ function test() {
       console.log("do", "not", "inline", "this", "function");
       console.log("do", "not", "inline", "this", "function");
       console.log("do", "not", "inline", "this", "function");
+      return 0;
    }
 
    if (arguments.length === 1000) {
