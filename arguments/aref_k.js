@@ -26,11 +26,11 @@ function main(bench, n) {
    const k = Math.round(n / 10);
    let m = 1,j = 0;
    
-   const funs = new Array(k + 1);
-   for (let i = 0; i < k; i++) {
+   const funs = new Array(k + 2);
+   for (let i = 0; i <= k; i++) {
       funs[i] = test;
    }
-   funs[k] = 0; /* avoid too smaart analysis of funs */
+   funs[k + 1] = 0; /* avoid too smaart analysis of funs */
    
    console.log(bench + "(" + n + ")...");
    
