@@ -65,7 +65,7 @@ function main(bench, n) {
    console.log("res=", res);
 }
 
-const DEFAULT = 10000000;
+const DEFAULT = 12000000;
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
