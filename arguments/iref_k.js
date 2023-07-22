@@ -22,16 +22,20 @@ function test() {
    return res;
 }
 
+function id() {
+   return 0;
+}
+
 function main(bench, n) {
    let res = 0;
    const k = Math.round(n / 10);
    let m = 1, j = 0;
    
-   const funs = new Array(k + 2);
+   const funs = new Array(k + 1);
    for (let i = 0; i <= k; i++) {
       funs[i] = test;
    }
-   funs[k + 1] = 0; /* avoid too smaart analysis of funs */
+   funs[k] = id; /* prevent function inlining */
    
    console.log(bench + "(" + n + ")...");
    

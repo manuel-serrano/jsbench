@@ -2,7 +2,14 @@
 
 let g = new Array(5);
 
-function test() {
+function test(a, b, c, d, e) {
+   switch (arguments.length) {
+      case 0: a = 34, b = 1, c = 3, d = 4, e = 5; break;
+      case 1: b = a, c = 2, d = 43, e = 53; break;
+      case 2: c = a, d = b, e = 353; break;
+      case 3: d = a, e = b; break;
+      case 4: e = a; break;
+   }
    g[arguments.length] = arguments.length;
    if (arguments.length > 100) {
       console.log(g, "prevent", "nodejs");
@@ -14,8 +21,12 @@ function test() {
       g[0] = [ "prevent", "nodejs", "from", "inlining" ];
       return g[0].length;
    } else {
-      return arguments.length;
+      return a;
    }
+}
+
+function id() {
+   return 0;
 }
 
 function main(bench, n) {
@@ -23,11 +34,11 @@ function main(bench, n) {
    const k = Math.round(n / 10);
    let m = 1, j = 0;
    
-   const funs = new Array(k + 2);
-   for (let i = 0; i <= k; i++) {
+   const funs = new Array(k + 1);
+   for (let i = 0; i < k; i++) {
       funs[i] = test;
    }
-   funs[k + 1] = 0; /* avoid too smaart analysis of funs */
+   funs[k] = id; /* prevent function inlining */
    
    console.log(bench + "(" + n + ")...");
    
@@ -42,16 +53,6 @@ function main(bench, n) {
       res |= test(1, 2, 3, 4);
       res |= test(1, 2, 3, 4, 5);
       res |= test(1, 2, 3, 4, 5, 6);
-      res |= test(1, 2, 3, 4, 5, 6, 7);
-      res |= test(1, 2, 3, 4, 5, 6, 7, 8);
-      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9);
-      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
-      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
-      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
-      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
-      res |= test(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
    }
 
    console.log("res=", res + g.length);
