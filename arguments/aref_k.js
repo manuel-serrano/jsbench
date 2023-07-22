@@ -31,7 +31,7 @@ function main(bench, n) {
    let m = 1,j = 0;
    
    const funs = new Array(k + 1);
-   for (let i = 0; i <= k; i++) {
+   for (let i = 0; i < k; i++) {
       funs[i] = test;
    }
    funs[k] = id; /* prevent function inlining */
