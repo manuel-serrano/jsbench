@@ -1,14 +1,14 @@
 "use strict";
 
-let g = new Array(5);
+let g = new Array(17);
 
 function test(a, b, c, d, e) {
    switch (arguments.length) {
-      case 0: a = 34, b = 1, c = 3, d = 4, e = 5; break;
-      case 1: b = a, c = 2, d = 43, e = 53; break;
-      case 2: c = a, d = b, e = 353; break;
-      case 3: d = a, e = b; break;
-      case 4: e = a; break;
+      case 0: a = 34;
+      case 1: b = a;
+      case 2: c = a;
+      case 3: d = a;
+      case 4: e = b;
    }
    g[arguments.length] = arguments.length;
    if (arguments.length > 100) {
@@ -20,9 +20,8 @@ function test(a, b, c, d, e) {
       console.log("from", "inlining", "this", "function");
       g[0] = [ "prevent", "nodejs", "from", "inlining" ];
       return g[0].length;
-   } else {
-      return a;
    }
+   return a;
 }
 
 function id() {
