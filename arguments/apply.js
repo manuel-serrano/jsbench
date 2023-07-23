@@ -1,5 +1,6 @@
 "use strict";
 
+// don't change the layout of the function
 function test2() {
    let res = 0;
    for (let l = arguments.length, i = 0; i < l; i++) {
