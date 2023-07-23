@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    .../article/arguments/bench/jsbench/tools/engine.js              */
+/*    serrano/prgm/project/hop/bench/jsbench/tools/engine.js           */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:55:49 2017                          */
-/*    Last change :  Tue Jul 18 10:41:48 2023 (serrano)                */
+/*    Last change :  Sun Jul 23 07:17:10 2023 (serrano)                */
 /*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Engine management                                                */
@@ -22,8 +22,8 @@ const common = require("./common.js");
 /*---------------------------------------------------------------------*/
 export function loadEngines(arr, args, config) {
    
-   function loadEngine(name, path) {
-      const o = require(path);
+   function loadEngine(name, file) {
+      const o = require(file);
       if (!("name" in o)) o.name = name;
 
       if (o.compiler in args)
@@ -43,7 +43,7 @@ export function loadEngines(arr, args, config) {
       }
 
       if (o.prelude) {
-	 o.prelude = fs.readFileSync(dir + "/engines/" + o.prelude).toString()
+	 o.prelude = fs.readFileSync(path.dirname(file) + "/" + o.prelude).toString()
 	    .replace(/@INTERPRETER@/g, o.interpreter || "")
 	    .replace(/@COMPILER@/g, o.compiler || "");
       }
@@ -51,8 +51,6 @@ export function loadEngines(arr, args, config) {
       return o;
    }
 
-   const dir = path.dirname(module.filename);
-   
    let engines = [];
 
    if (arr) {

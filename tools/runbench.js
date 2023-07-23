@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    .../article/arguments/bench/jsbench/tools/runbench.js            */
+/*    serrano/prgm/project/hop/bench/jsbench/tools/runbench.js         */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Tue Jul 18 11:06:33 2023 (serrano)                */
+/*    Last change :  Sun Jul 23 07:17:53 2023 (serrano)                */
 /*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
@@ -548,7 +548,7 @@ function main() {
 
    config.argsfile = !args.noargsfile;
 
-   config.engine = args.E || args.engine || config.engine || "./engines";
+   config.engine = args.E || args.engine || config.engine || path.dirname(module.filename) + "/engines";
    config.directory = args.D || args.dir;
    config.recompile = args.recompile;
    
