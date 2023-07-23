@@ -20,4 +20,4 @@ BENCHMARKS_ASYNC="async/lstat.js async/lstatSync.js async/lstatPromise.js async/
 
 BENCHMARKS_NAPI="napi/2_function_arguments/2_function_arguments.js napi/3_callbacks/3_callbacks.js napi/4_object_factory/4_object_factory.js napi/5_function_factory/5_function_factory.js napi/test_array/test_array.js napi/test_bigint/test_bigint.js napi/test_constructor/test_constructor.js napi/test_conversion/test_conversion.js napi/test_date/test_date.js napi/test_number/test_number.js"
 
-BENCHMARKS_ARGUMENTS="arguments/unopt.js arguments/aref.js"
+BENCHMARKS_ARGUMENTS="arguments/apply-escape.js arguments/aref.js arguments/iref.js arguments/length.js arguments/slice.js arguments/spread-slice.js arguments/apply.js arguments/aref_k.js arguments/iref_k.js arguments/length_k.js arguments/spread.js"
