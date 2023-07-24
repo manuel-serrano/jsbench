@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    .../hop/bench/jsbench/tools/plugins/gnuplothistogram.js          */
+/*    .../bench/jsbench/tools/plugins/gnuplothistogram.js              */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Fri May 12 07:18:06 2023 (serrano)                */
+/*    Last change :  Mon Jul 24 07:08:05 2023 (serrano)                */
 /*    Copyright   :  2017-23 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -39,7 +39,7 @@ function collectEngines(logs) {
 /*---------------------------------------------------------------------*/
 /*    colors ...                                                       */
 /*---------------------------------------------------------------------*/
-const defaultColors = ['#3264c8', '#d83812', '#fa9600', '#109318', '#960096'];
+const defaultColors = ['#3264c8', '#d83812', '#fa9600', '#109318', '#960096', '#93ade2', '#e9f322', '#00a0bf', '#72bf00'];
 const defaultBoxwidth = 0.9;
 const defaultFont = "Verdana,18";
 const unitRatio = 1000;
