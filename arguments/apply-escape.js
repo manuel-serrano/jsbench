@@ -34,18 +34,16 @@ function test(v) {
    }
 }
 
-const proto = {
-   __proto__: Function.prototype
-}
-
-test2.__proto__ = proto;
-
+// must be at line 38
 let g = undefined;
-proto.apply = function(self, args) {
-   g = args;
-   return test2(...args);
-
+test2.__proto__ = {
+   __proto__: Function.prototype,
+   apply: function(self, args) {
+      g = args;
+      return test2(...args);
+   }
 }
+
 function main(bench, n) {
    let res = 0;
    const k = Math.round(n / 10);
