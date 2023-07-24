@@ -1,7 +1,7 @@
 "use strict";
 
 // don't change the layout of the function
-let g = new Array(5);
+let g = new Array(17);
 
 function test(a, b, c, d, e) {
    switch (arguments.length) {
@@ -46,7 +46,7 @@ function main(bench, n) {
    console.log("res=", res);
 }
 
-const DEFAULT = 400000000;
+const DEFAULT = 300000000;
 const N = 
    (process.argv[ 1 ] === "fprofile") 
    ? 2
