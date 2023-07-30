@@ -16,7 +16,7 @@ function test() {
       return 0;
    }
 
-   // out of range access to force an iref compilation
+   // out of range access to force a geti compilation
    if (arguments.length === 1000) {
       return arguments[1001];
    }
