@@ -20,10 +20,10 @@ function *iter( n ) {
 
 
 function test( n ) {
-   var sum = 0;
+   let sum = 0;
 
    for( let i = 0; i < n; i++ ) {
-      var g = iter( i );
+      let g = iter( i );
       let m = 0;
 
       while( !(m = g.next( m.value ), m.done) ) {

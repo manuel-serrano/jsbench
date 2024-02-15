@@ -27,8 +27,8 @@ function bar( n, a, i ) {
 
 function foo( N ) {
    let k = N / 10;
-   var R;
-   var a = new Array( 11 );
+   let R;
+   let a = new Array( 11 );
    
    for( let i = 0; i < 11; i++ ) {
       a[ i ] = 0;

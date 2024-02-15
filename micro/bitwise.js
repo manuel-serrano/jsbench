@@ -1,8 +1,8 @@
 "use strict";
 
 function safe_add(x, y) {
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+  let lsw = (x & 0xFFFF) + (y & 0xFFFF);
+  let msw = (x >> 16) + (y >> 16) + (lsw >> 16);
   return (msw << 16) | (lsw & 0xFFFF);
 }
 
@@ -17,7 +17,7 @@ function bar( n ) {
 
 function foo( N ) {
    let k = N / 10;
-   var R;
+   let R;
    
    for( let iii = 0; iii < N; iii++ ) {
       if( iii % k == 0 ) console.log( iii );
