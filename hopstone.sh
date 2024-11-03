@@ -7,6 +7,7 @@ hopc=hopc
 engines="-e hop -e nodejs -e jsc -e js78 -e chakra -e graal"
 
 resetengines=""
+compileonly=""
 
 while : ; do
   case $1 in
@@ -33,6 +34,9 @@ while : ; do
     --benchmarks=*)
       BENCHMARKS="`echo $1 | sed 's/^[-a-z]*=//'`";;
 
+    --compileonly)
+      compileonly=--compileonly;;
+      
     -e)
       shift;
       if [ "$resetengines " = "no " ]; then
@@ -86,9 +90,9 @@ mkdir -p $dir
 for p in $BENCHMARKS; do
   echo "$p..."
   if [ "$msg " != " " ]; then
-    hop $hopopt --no-server -- tools/runbench.js -v3 $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc
+    hop $hopopt --no-server -- tools/runbench.js -v3 $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc $compileonly
   else
-    hop $hopopt --no-server -- tools/runbench.js -v3 $engines -D $dir $p --date "$dt" --hopc $hopc
+    hop $hopopt --no-server -- tools/runbench.js -v3 $engines -D $dir $p --date "$dt" --hopc $hopc $compileonly
   fi
   sleep $coolperiod
 done
