@@ -39,7 +39,7 @@ function gee( CNT ) {
       }
       
       for( let iii = 0; iii < 80000; iii++ ) {
-	 var d;
+	 let d;
    	 if( d = Object.getOwnPropertyDescriptor( obj1, "ctor1" ) ) ddd += d.value;
    	 if( d = Object.getOwnPropertyDescriptor( obj2, "ctor1" ) ) ddd += d.value;
    	 if( d = Object.getOwnPropertyDescriptor( obj3, "ctor1" ) ) ddd += d.value;
