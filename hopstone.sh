@@ -101,6 +101,5 @@ hop $hopopt --no-server -- tools/logbench.js text.js $dir >> $dir/RESULTS.txt
 
 hop $hopopt --no-server -- tools/logbench.js summary.js $dir > $dir/SUMMARY.txt
 cat $dir/SUMMARY.txt
-cp $dir/SUMMARY.txt LOGS/last.txt 
 
 echo "For details, run \"hop --no-server -- tools/logbench.js text.js $dir\""

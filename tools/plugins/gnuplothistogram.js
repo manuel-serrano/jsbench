@@ -1,10 +1,10 @@
 /*=====================================================================*/
-/*    .../bench/jsbench/tools/plugins/gnuplothistogram.js              */
+/*    .../hop/bench/jsbench/tools/plugins/gnuplothistogram.js          */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Mon Jul 24 07:11:55 2023 (serrano)                */
-/*    Copyright   :  2017-23 Manuel Serrano                            */
+/*    Last change :  Mon Nov  4 03:52:58 2024 (serrano)                */
+/*    Copyright   :  2017-24 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
 /*    This plugin was implemented for the jsdynprop paper.             */
@@ -184,7 +184,6 @@ module.exports = function(logfiles, engines, args, config) {
    const uratio = args.unitRatio || unitRatio;
    const colors = config.colors || defaultColors; 
    const subhistos = args.subhistograms ? args.subhistograms.split(" ") : false;
-   
 
    enames.forEach(n => { if (n.length > enginepad) enginepad = n.length });
    enginepad += ((deviation > 0 || errorbars) ? 8 : 4);
@@ -285,10 +284,10 @@ module.exports = function(logfiles, engines, args, config) {
       plotport.write("set xtics rotate by 45 scale 0\n\n");
    } else if (args.xtics === "rotater") {
       plotport.write("set xtics rotate by 45 right\n\n");
-   } else {
+   } else if (args.xtics) {
       plotport.write(`set xtics ${args.xtics}`);
       plotport.write("\n");
-   }
+   }      
    
    if (args.xticsFont) {
       plotport.write(`set xtics font "${args.xticsFont}"`);
