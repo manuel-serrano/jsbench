@@ -8,6 +8,7 @@ engines="-e hop -e nodejs -e jsc -e js78 -e chakra -e graal"
 
 resetengines=""
 compileonly=""
+reset=true
 
 while : ; do
   case $1 in
@@ -64,7 +65,13 @@ while : ; do
       exit 1;;
 
     *)
-      BENCHMARKS="`echo $1 | sed 's/^[-a-z]*=//'`";;
+      if [ "$reset " = "true " ]; then
+	reset=false
+        BENCHMARKS="`echo $1 | sed 's/^[-a-z]*=//'`"
+      else
+        BENCHMARKS="$BENCHMARKS `echo $1 | sed 's/^[-a-z]*=//'`"
+      fi
+      ;;
   esac
   shift
 done
