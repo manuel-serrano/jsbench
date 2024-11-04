@@ -261,7 +261,22 @@ Date.prototype.formatDate = function (input,time) {
         var diff = self.getTime() - t.getTime();
         return Math.floor(diff/1000/60/60/24);
     }
-        
+
+   function ewal(x) {
+      switch(x) {
+	 case "A": return A();
+	 case "d": return d();
+	 case "F": return F();
+	 case "g": return g();
+	 case "i": return i();
+	 case "l": return l();
+	 case "m": return m();
+	 case "s": return s();
+	 case "Y": return Y();
+	 default: console.error("x=", x);
+      }
+   }
+   
     var self = this;
     if (time) {
         // save time
@@ -277,7 +292,7 @@ Date.prototype.formatDate = function (input,time) {
             ia.splice(ij,1);
         } else {
             if (arrayExists(switches,ia[ij])) {
-                ia[ij] = eval(ia[ij] + "()");
+                ia[ij] = ewal(ia[ij]);
             }
         }
         ij++;

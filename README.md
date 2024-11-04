@@ -96,6 +96,7 @@ Gnuplot
 
  hop --no-server -- tools/logbench.js gnuplothistogram.js *.log.json
  hop --no-server -- tools/logbench.js gnuplothistogram.js --logscale=y *.log.json
+ hop --no-server -- tools/logbench.js gnuplothistogram.js --format=pdf --logscale=y *.log.json
  
  
 CPU Shield under Linux

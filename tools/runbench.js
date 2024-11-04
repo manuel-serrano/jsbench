@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Fri Apr 14 05:59:26 2017                          */
-/*    Last change :  Sun Jul 23 07:17:53 2023 (serrano)                */
-/*    Copyright   :  2017-23 Manuel Serrano                            */
+/*    Last change :  Sun Nov  3 21:29:00 2024 (serrano)                */
+/*    Copyright   :  2017-24 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Run benchmarks                                                   */
 /*=====================================================================*/
@@ -328,6 +328,7 @@ function runBench(bench, engine) {
    }
 	
    function runCompile(subtitle, args) {
+      if (config.compileonly) return;
       const cmd = engine.run
 	    .replace(/@TMP@/g, config.tmp)
 	    .replace(/@NAME@/g, bench.name)
@@ -340,6 +341,7 @@ function runBench(bench, engine) {
    }
 
    function runInterpret(subtitle, args) {
+      if (config.compileonly) return;
       const cmd = benchCmd((config.arg ? " " + argsToString(config.arg) : ""))
 	 + (args ? " " + argsToString(args) : "");
 
@@ -498,6 +500,7 @@ function main() {
       console.log("  --date string        Set the log date");
       console.log("  --iteration n        Forced iteration number");
       console.log("  --recompile          Forced recompilation");
+      console.log("  --compileonly        Don't run, compile only");
       console.log("  --noargsfile         Disable args file");
       console.log("");
       console.log("Examples: ");
@@ -546,6 +549,8 @@ function main() {
       config.log = false;
    }
 
+   config.compileonly = args.compileonly;
+   
    config.argsfile = !args.noargsfile;
 
    config.engine = args.E || args.engine || config.engine || path.dirname(module.filename) + "/engines";
