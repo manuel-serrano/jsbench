@@ -15,7 +15,7 @@ function bar( n ) {
 
 function foo( N ) {
    let k = N / 10;
-   var R;
+   let R;
    
    for( let iii = 0; iii < N; iii++ ) {
       if( iii % k == 0 ) console.log( iii );

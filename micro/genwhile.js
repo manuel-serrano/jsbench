@@ -12,8 +12,8 @@ function test( n ) {
    let S;
    
    for( let j = 0; j < 10; j++ ) {
-      var g = iter( n );
-      var sum = 0;
+      let g = iter( n );
+      let sum = 0;
       let m = 0;
       console.log( j );
       while( !(m = g.next(), m.done) ) {

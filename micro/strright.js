@@ -2,9 +2,9 @@
 "use hopscript";
 
 function build( num, j ) {
-   var s = "aaabbb" + num;
+   let s = "aaabbb" + num;
 
-   for( var i = 0; i < num; i++ ) {
+   for( let i = 0; i < num; i++ ) {
       s = "right" + s;
       s = j + s;
       s = ("b" + j) + s;
@@ -14,14 +14,14 @@ function build( num, j ) {
 }
 
 function str( num ) {
-   var j = 0;
-   var l = 0;
+   let j = 0;
+   let l = 0;
    const k = Math.round( num / 10 );
-   var res = new Array( k );;
+   let res = new Array( k );;
    
-   for( var j = 0; j < 10; j++ ) {
-      for( var i = 0; i < k; i++ ) {
-      	 var s = build( 5000, j );
+   for( let j = 0; j < 10; j++ ) {
+      for( let i = 0; i < k; i++ ) {
+      	 let s = build( 5000, j );
 
       	 res[ j ] = s.length + 1;
       }

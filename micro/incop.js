@@ -1,6 +1,6 @@
 "use strict";
 
-var g;
+let g;
 
 function SET1( o ) {
    o.x++;

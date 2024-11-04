@@ -14,7 +14,7 @@ function CTOR( a, b, c, d ) {
 function test( n ) {
    let k = n / 10;
    let m = 0;
-   var r = 0;
+   let r = 0;
    let j = 0;
    let l = arr.length;
   
@@ -29,10 +29,10 @@ function test( n ) {
    return m;
 }
 
-var p = {};
+let p = {};
 CTOR.prototype = { __proto__: { __proto__: { __proto__: p } } };
 
-var o1 = new CTOR( 1, 2, 3, 4 );
+let o1 = new CTOR( 1, 2, 3, 4 );
 
 const K = 40000;
 
@@ -45,7 +45,7 @@ let arr = new Array( Math.min( N, 10000 ) );
 console.log( "ctor2(", N, ")..." );
 
 console.log( "test=", test( N ) );
-var o2 = new CTOR( 10, 20, 30, 40 );
+let o2 = new CTOR( 10, 20, 30, 40 );
 
 let s = 0;
 for( let i = arr.length - 1; i >= 0; i-- ) {

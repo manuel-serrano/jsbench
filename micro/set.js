@@ -5,8 +5,8 @@ function Ctr() {
 }
 
 function gee( CNT ) {
-   var ddd = 0;
-   var obj = new Ctr();
+   let ddd = 0;
+   let obj = new Ctr();
    let profstart = Date.now();
    for( let jjj = 0; jjj < CNT; jjj++ ) {
       if( jjj % 1000 == 0 ) {

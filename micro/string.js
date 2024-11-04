@@ -2,9 +2,9 @@
 "use hopscript";
 
 function build( num ) {
-   var s = "aaabbb" + num;
+   let s = "aaabbb" + num;
 
-   for( var i = 0; i < num; i++ ) {
+   for( let i = 0; i < num; i++ ) {
       s = "left" + s + "right";
    }
 
@@ -12,13 +12,13 @@ function build( num ) {
 }
 
 function str( num ) {
-   var res = 0;
-   var s = build( 100000 );
-   var j = 0;
+   let res = 0;
+   let s = build( 100000 );
+   let j = 0;
 
    console.log( "s=" + s.length );
 
-   for( var i = 0; i < num; i++ ) {
+   for( let i = 0; i < num; i++ ) {
       if( i % 1000 == 0 ) console.log( "i=" + i );
 
       res += s.indexOf( "taaabbb" );

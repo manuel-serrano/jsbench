@@ -25,7 +25,7 @@ function gee( CNT, m ) {
       if( j % 1000 == 0 ) console.log( j );
       for( let i = 0; i < 300000; i++ ) {
          let o = os[ i % M ];
-	 var g = o.f;
+	 let g = o.f;
          s = g( i );
       }
    }

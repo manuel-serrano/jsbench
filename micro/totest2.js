@@ -26,7 +26,7 @@ function test( N ) {
 }
 	 
 function main( bench, n ) {
-   var res;
+   let res;
    let N = Math.round( n / 10 );
    
    for( let i = 0, j = 0; i < n; i++, j++ ) {

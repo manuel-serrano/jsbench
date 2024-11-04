@@ -8,8 +8,8 @@ function *iter( n ) {
 }
 
 function test( n ) {
-   var g = iter( n );
-   var sum = 0;
+   let g = iter( n );
+   let sum = 0;
 
    while( !(n = g.next(), n.done) ) {
       sum += n.value;

@@ -35,7 +35,7 @@ function gee( n ) {
 function test( n ) {
    const k = n / 10;
    for( let i = 0; i < n; i++ ) {
-      var r = gee( 100000 );
+      let r = gee( 100000 );
       if( i % k == 0 ) console.log( i, r );
    }
 }

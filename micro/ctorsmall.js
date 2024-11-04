@@ -8,7 +8,7 @@ function CTOR( a, b ) {
 function test( n ) {
    let k = n / 10;
    let m = 0;
-   var r = 0;
+   let r = 0;
    let j = 0;
    let l = arr.length;
    
@@ -23,10 +23,10 @@ function test( n ) {
    return m;
 }
 
-var p = {};
+let p = {};
 CTOR.prototype = { __proto__: { __proto__: { __proto__: p } } };
 
-var o1 = new CTOR( 1, 2 );
+let o1 = new CTOR( 1, 2 );
 
 const K = 80000;
 const N = (process.argv[ 1 ] === "fprofile") 
