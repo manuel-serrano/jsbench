@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Mon Nov  4 03:52:58 2024 (serrano)                */
+/*    Last change :  Wed Nov  6 10:56:30 2024 (serrano)                */
 /*    Copyright   :  2017-24 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -87,37 +87,43 @@ function csv(port, start, enames, logs, enginepad, uratio, deviation, args) {
       
       for (let j = 0; j < enames.length; j++) {
 	 const entry = log.engines.find(e => e.name === enames[j]);
-	 const times = entry.logs[0].times;
-	 const { tm, min, max } = utils.median(times.rtimes)
-	 const mn = utils.mean(times.rtimes);
-	 const val = (tm/uratio);
-	 let str = (isNaN(val) ? 0 : val).toFixed(2);
-	 
-	 if (deviation > 0) {
-	    str += ", ";
+	 try {
+	    const times = entry.logs[0].times;
+	    const { tm, min, max } = utils.median(times.rtimes)
+	    const mn = utils.mean(times.rtimes);
+	    const val = (tm/uratio);
+	    let str = (isNaN(val) ? 0 : val).toFixed(2);
 	    
-	    const dev = (utils.deviation(times.rtimes) * 10 / mn);
-	    
-	    if (dev > deviation) {
-	       str += dev.toFixed(2);
-	    } else {
-	       str += "0.0";
-	    }
-	 } else if (args.errorbars) {
-	    const minval = min/uratio;
-	    const maxval = max/uratio;
+	    if (deviation > 0) {
+	       str += ", ";
+	       
+	       const dev = (utils.deviation(times.rtimes) * 10 / mn);
+	       
+	       if (dev > deviation) {
+		  str += dev.toFixed(2);
+	       } else {
+		  str += "0.0";
+	       }
+	    } else if (args.errorbars) {
+	       const minval = min/uratio;
+	       const maxval = max/uratio;
 
-	    str += ",";
-	    str += (isNaN(minval) ? val : minval).toFixed(2);
-	    str += ",";
-	    str += (isNaN(maxval) ? val : maxval).toFixed(2);
+	       str += ",";
+	       str += (isNaN(minval) ? val : minval).toFixed(2);
+	       str += ",";
+	       str += (isNaN(maxval) ? val : maxval).toFixed(2);
+	    }
+	    
+	    if (j < enames.length - 1) {
+	       str += ",  ";
+	    }
+	    
+	    port.write(utils.padding(str, enginepad));
+	 } catch (e) {
+	    console.error("\n***ERROR: Illegal entry for",
+			  '"' + enames[j] + "@" + log.name + '"');
+	    throw e;
 	 }
-	 
-	 if (j < enames.length - 1) {
-	    str += ",  ";
-	 }
-	 
-	 port.write(utils.padding(str, enginepad));
       }
       port.write("\n");
    }
