@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:55:49 2017                          */
-/*    Last change :  Sun Jul 23 07:17:10 2023 (serrano)                */
-/*    Copyright   :  2017-23 Manuel Serrano                            */
+/*    Last change :  Thu Nov  7 16:23:54 2024 (serrano)                */
+/*    Copyright   :  2017-24 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Engine management                                                */
 /*=====================================================================*/
@@ -90,7 +90,6 @@ export function loadEngines(arr, args, config) {
       });
    }
    
-
    return engines;
 }
 

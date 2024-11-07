@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Wed Nov  6 10:56:30 2024 (serrano)                */
+/*    Last change :  Thu Nov  7 16:02:10 2024 (serrano)                */
 /*    Copyright   :  2017-24 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -39,9 +39,9 @@ function collectEngines(logs) {
 /*---------------------------------------------------------------------*/
 /*    colors ...                                                       */
 /*---------------------------------------------------------------------*/
-const defaultColors = ['#3264c8', '#d83812', '#fa9600', '#109318', '#960096', '#93ade2', '#edd20b', '#00a0bf', '#72bf00'];
+const defaultColors = ['#3264c8', '#fa9600', '#d83812', '#109318', '#960096', '#93ade2', '#edd20b', '#00a0bf', '#72bf00'];
 const defaultBoxwidth = 0.9;
-const defaultFont = "Verdana,18";
+const defaultFont = "Verdana,12";
 const unitRatio = 1000;
 
 /*---------------------------------------------------------------------*/
@@ -75,7 +75,7 @@ class Port {
 /*    -------------------------------------------------------------    */
 /*    Generate the CSV data file.                                      */
 /*---------------------------------------------------------------------*/
-function csv(port, start, enames, logs, enginepad, uratio, deviation, args) {
+function csv(port, start, enames, logs, enginepad, uratio, deviation, relative, args) {
    port.write('#                  ');
    enames.forEach(n => port.write(utils.padding(n, enginepad)));
    port.write("\n");
@@ -84,6 +84,7 @@ function csv(port, start, enames, logs, enginepad, uratio, deviation, args) {
       const log = logs[i];
       port.write(utils.padding(log.name.replace(/_/g, "-") + ",", 19));
       port.write(" ");
+      let base = 0;
       
       for (let j = 0; j < enames.length; j++) {
 	 const entry = log.engines.find(e => e.name === enames[j]);
@@ -91,7 +92,19 @@ function csv(port, start, enames, logs, enginepad, uratio, deviation, args) {
 	    const times = entry.logs[0].times;
 	    const { tm, min, max } = utils.median(times.rtimes)
 	    const mn = utils.mean(times.rtimes);
-	    const val = (tm/uratio);
+	    let val = (tm/uratio);
+
+	    if (relative) {
+	       if (!base) {
+		  base = val;
+		  val = 1;
+		  //console.error("base=", base);
+	       } else {
+		  val = val / base;
+		  //console.error("val=", val);
+	       }
+	    }
+	    
 	    let str = (isNaN(val) ? 0 : val).toFixed(2);
 	    
 	    if (deviation > 0) {
@@ -174,7 +187,7 @@ module.exports = function(logfiles, engines, args, config) {
 	 : collectEngines(logs);
    let enginepad = 6;
    const linestyle = args.lineStyle || 1;
-   
+
    if (logs.length === 0) {
       throw TypeError("no logs found");
    }
@@ -183,19 +196,20 @@ module.exports = function(logfiles, engines, args, config) {
       ((!"title" in args) ? logs[0].name : "");
    const format = args.format || args.f || "svg";
    const output = config.target || config.T || config.output || args.o || args.output || (logs[0].name + "." + format);
-   const base = output.replace(/.[^.]+$/, '');
+   const base = output.replace(/[.][^.]+$/, '');
    const start = args.start ? parseInt(args.start) : 0;
    const deviation = args.deviation ? parseFloat(args.deviation) : 0;
    const errorbars = args.errorbars;
    const uratio = args.unitRatio || unitRatio;
    const colors = config.colors || defaultColors; 
    const subhistos = args.subhistograms ? args.subhistograms.split(" ") : false;
-
+   const relative = args.relative;
+      
    enames.forEach(n => { if (n.length > enginepad) enginepad = n.length });
    enginepad += ((deviation > 0 || errorbars) ? 8 : 4);
 
    // config target
-   if (config.target) {
+   if (config.target && base) {
       csvport = new Port(fs.openSync(base + ".csv", "w"));
       plotport = new Port(fs.openSync(base + ".plot", "w"));
    }
@@ -214,16 +228,16 @@ module.exports = function(logfiles, engines, args, config) {
 	    const port = new Port(fs.openSync(name, "w"));
 	    try {
 	       const l = logs.slice(j, j + num);
-	       csv(port, start, enames, l, enginepad, uratio, deviation, args);
+	       csv(port, start, enames, l, enginepad, uratio, deviation, relative, args);
 	    } finally {
 	       port.close();
 	    }
 	 } else {
-	    csv(csvport, start, enames, logs, enginepad, uratio, deviation, args);
+	    csv(csvport, start, enames, logs, enginepad, uratio, deviation, relative, args);
 	 }
       }
    } else {
-      csv(csvport, start, enames, logs, enginepad, uratio, deviation, args);
+      csv(csvport, start, enames, logs, enginepad, uratio, deviation, relative, args);
    }
 
    // generated file
@@ -298,6 +312,17 @@ module.exports = function(logfiles, engines, args, config) {
    if (args.xticsFont) {
       plotport.write(`set xtics font "${args.xticsFont}"`);
       plotport.write("\n");
+   } else {
+      plotport.write(`set xtics font 'Verdana,8'`);
+      plotport.write("\n");
+   }
+   
+   if (args.yticsFont) {
+      plotport.write(`set ytics font "${args.yticsFont}"`);
+      plotport.write("\n\n");
+   } else {
+      plotport.write(`set ytics font 'Verdana,9'`);
+      plotport.write("\n\n");
    }
    
    plotport.write(`set boxwidth ${args.boxwidth || defaultBoxwidth}`);
