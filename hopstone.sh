@@ -84,10 +84,6 @@ elif [ "$dir " = " " ]; then
   tags=`$hopc --buildtag`
   dir=$base/`date '+%Y-%m-%d-%Hh%M'`-`hostname`-$tags
   dt=`date -R`
-else
-  tags=`$hopc --buildtag`
-  dir=LOGS/`date '+%Y-%m-%d-%Hh%M'`-`hostname`-$tags
-  dt=`date -R`
 fi
 
 coolperiod=3
