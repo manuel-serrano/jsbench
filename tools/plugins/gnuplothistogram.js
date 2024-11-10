@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Thu Nov  7 16:02:10 2024 (serrano)                */
+/*    Last change :  Sun Nov 10 07:39:49 2024 (serrano)                */
 /*    Copyright   :  2017-24 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -92,16 +92,15 @@ function csv(port, start, enames, logs, enginepad, uratio, deviation, relative, 
 	    const times = entry.logs[0].times;
 	    const { tm, min, max } = utils.median(times.rtimes)
 	    const mn = utils.mean(times.rtimes);
+
 	    let val = (tm/uratio);
 
 	    if (relative) {
 	       if (!base) {
 		  base = val;
 		  val = 1;
-		  //console.error("base=", base);
 	       } else {
 		  val = val / base;
-		  //console.error("val=", val);
 	       }
 	    }
 	    
