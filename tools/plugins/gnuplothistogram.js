@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Sun Nov 10 07:39:49 2024 (serrano)                */
+/*    Last change :  Tue Nov 12 18:48:37 2024 (serrano)                */
 /*    Copyright   :  2017-24 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -39,7 +39,7 @@ function collectEngines(logs) {
 /*---------------------------------------------------------------------*/
 /*    colors ...                                                       */
 /*---------------------------------------------------------------------*/
-const defaultColors = ['#3264c8', '#fa9600', '#d83812', '#109318', '#960096', '#93ade2', '#edd20b', '#00a0bf', '#72bf00'];
+const defaultColors = ['#3264c8', '#109318', '#d83812', '#fa9600', '#960096', '#93ade2', '#edd20b', '#00a0bf', '#72bf00'];
 const defaultBoxwidth = 0.9;
 const defaultFont = "Verdana,12";
 const unitRatio = 1000;
@@ -96,7 +96,7 @@ function csv(port, start, enames, logs, enginepad, uratio, deviation, relative, 
 	    let val = (tm/uratio);
 
 	    if (relative) {
-	       if (!base) {
+	       if (j === 0) {
 		  base = val;
 		  val = 1;
 	       } else {
@@ -129,8 +129,10 @@ function csv(port, start, enames, logs, enginepad, uratio, deviation, relative, 
 	    if (j < enames.length - 1) {
 	       str += ",  ";
 	    }
-	    
-	    port.write(utils.padding(str, enginepad));
+
+	    if (j > 0 || relative !== "sans") {
+	       port.write(utils.padding(str, enginepad));
+	    }
 	 } catch (e) {
 	    console.error("\n***ERROR: Illegal entry for",
 			  '"' + enames[j] + "@" + log.name + '"');
@@ -143,12 +145,28 @@ function csv(port, start, enames, logs, enginepad, uratio, deviation, relative, 
 }
 
 /*---------------------------------------------------------------------*/
+/*    engineName ...                                                   */
+/*---------------------------------------------------------------------*/
+function engineName(name, aliases) {
+   const n = name.trim();
+   for (let i = 0; i < aliases.length; i++) {
+      if (n === aliases[i][0]) {
+	 return aliases[i][1];
+      }
+   }
+
+   return n;
+}
+
+/*---------------------------------------------------------------------*/
 /*    plot ...                                                         */
 /*---------------------------------------------------------------------*/
-function plot(port, csv, deviation, errorbars, enames, title, lastslash) {
+function plot(port, csv, deviation, errorbars, enames, title, lastslash, relative, alias) {
+   const start = relative === "sans" ? 1 : 0;
+   
    if (deviation > 0) {
-      for (let i = 0; i < enames.length; i++) {
-      	 plotport.write(`  '${csv}' u ${(i*2)+2}:${(i*2)+3}:xtic(1) ${title} '${enames[i]}' ls ${i + 1} `);
+      for (let i = start; i < enames.length; i++) {
+      	 plotport.write(`  '${csv}' u ${((i-start)*2)+2}:${(i*2)+3}:xtic(1) ${title} '${engineName(enames[i], alias)}' ls ${i + 1} `);
       	 if (lastslash || i < enames.length - 1) {
 	    plotport.write(", \\\n");
       	 } else {
@@ -156,8 +174,8 @@ function plot(port, csv, deviation, errorbars, enames, title, lastslash) {
       	 }
       }
    } else if (errorbars) {
-      for (let i = 0; i < enames.length; i++) {
-      	 plotport.write(`  '${csv}' u ${(i*3)+2}:${(i*3)+3}:${(i*3)+4}:xtic(1) ${title} '${enames[i]}' ls ${i + 1} `);
+      for (let i = start; i < enames.length; i++) {
+      	 plotport.write(`  '${csv}' u ${((i-start)*3)+2}:${(i*3)+3}:${(i*3)+4}:xtic(1) ${title} '${engineName(enames[i], alias)}' ls ${i + 1} `);
       	 if (lastslash || i < enames.length - 1) {
 	    plotport.write(", \\\n");
       	 } else {
@@ -165,8 +183,8 @@ function plot(port, csv, deviation, errorbars, enames, title, lastslash) {
       	 }
       }
    } else {
-      for (let i = 0; i < enames.length; i++) {
-      	 plotport.write(`  '${csv}' u ${i+2}:xtic(1) ${title} '${enames[i]}' ls ${i + 1}`);
+      for (let i = start; i < enames.length; i++) {
+      	 plotport.write(`  '${csv}' u ${(i-start)+2}:xtic(1) ${title} '${engineName(enames[i], alias)}' ls ${i + 1}`);
       	 if (lastslash || i < enames.length - 1) {
 	    plotport.write(", \\\n");
       	 }
@@ -202,8 +220,9 @@ module.exports = function(logfiles, engines, args, config) {
    const uratio = args.unitRatio || unitRatio;
    const colors = config.colors || defaultColors; 
    const subhistos = args.subhistograms ? args.subhistograms.split(" ") : false;
-   const relative = args.relative;
-      
+   const relative = args.relativesans ? "sans" : (args.relative ? "avec" : false);
+   const alias = args.alias.map(s => s.split('='));
+
    enames.forEach(n => { if (n.length > enginepad) enginepad = n.length });
    enginepad += ((deviation > 0 || errorbars) ? 8 : 4);
 
@@ -418,6 +437,12 @@ module.exports = function(logfiles, engines, args, config) {
    }
    
    plotport.write("\n");
+
+
+   if (relative === "sans") {
+      plotport.write("set arrow 1 from graph 0, first 1 to graph 1, first 1 nohead lc 'black' lw 2 dt '---' front\n");
+      plotport.write("set label 1 '" + enames[0] + " ' font 'Verdana,10' at " + (logs.length - 1) + ",1 offset -0.5,0.5 tc 'black' front\n\n");
+   }
    
    plotport.write(`plot`);
    plotport.write(" \\\n");
@@ -434,10 +459,10 @@ module.exports = function(logfiles, engines, args, config) {
 	    plotport.write(` newhistogram "${subhistos[i]}" lt 1, `);
 	 }
 	 plotport.write("\\\n");
-	 plot(plotport, base + j + ".csv", deviation, errorbars, enames, i === 0 ? "title" : "notitle", i < subhistos.length - 1);
+	 plot(plotport, base + j + ".csv", deviation, errorbars, enames, i === 0 ? "title" : "notitle", i < subhistos.length - 1, relative, alias);
       }
    } else {
-      plot(plotport, base + ".csv", deviation, errorbars, enames, "title", false);
+      plot(plotport, base + ".csv", deviation, errorbars, enames, "title", false, relative, alias);
    }
    
    plotport.write("\n\n");
