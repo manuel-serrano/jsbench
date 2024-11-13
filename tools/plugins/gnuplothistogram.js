@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Wed Nov 13 18:27:54 2024 (serrano)                */
+/*    Last change :  Wed Nov 13 19:15:10 2024 (serrano)                */
 /*    Copyright   :  2017-24 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -502,7 +502,7 @@ module.exports = function(logfiles, engines, args, config) {
 
    if (relative === "sans") {
       plotport.write("set arrow 1 from graph 0, first 1 to graph 1, first 1 nohead lc '" + colors[config.colorShift] + "' lw 2 dt '---' front\n");
-      plotport.write("set label 1 '" + enames[0] + " ' font 'Verdana,10' at " + (logs.length - 1) + ",1 offset -0.5,0.5 tc '" + colors[config.colorShift] + "' front\n\n");
+      plotport.write("set label 1 '" + engineName(enames[0], alias) + " ' font 'Verdana,10' at " + (logs.length - 1) + ",1 offset -0.5,0.5 tc '" + colors[config.colorShift] + "' front\n\n");
    }
 
    if (separator) {
