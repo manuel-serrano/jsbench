@@ -3,7 +3,7 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Tue Nov 12 18:48:37 2024 (serrano)                */
+/*    Last change :  Wed Nov 13 18:27:54 2024 (serrano)                */
 /*    Copyright   :  2017-24 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -39,10 +39,19 @@ function collectEngines(logs) {
 /*---------------------------------------------------------------------*/
 /*    colors ...                                                       */
 /*---------------------------------------------------------------------*/
-const defaultColors = ['#3264c8', '#109318', '#d83812', '#fa9600', '#960096', '#93ade2', '#edd20b', '#00a0bf', '#72bf00'];
+const defaultColors = ['#3264c8', '#109318', '#d83812', '#fa9600', '#960096', '#93ade2', '#edd20b', '#00a0bf', '#72bf00', '#db4125', '#a947b9', '#c3db25' ];
 const defaultBoxwidth = 0.9;
 const defaultFont = "Verdana,12";
 const unitRatio = 1000;
+
+const offsetTable = [
+   undefined, undefined,
+   [0],
+   [-1/6, 1/6],
+   [-1/6, 0, 1/6],
+   [-2/6, -1/6, 0, 1/6, 2/6],
+   [-3/6, -2/6, -1/6, 0, 1/6, 2/6, 3/6]
+];
 
 /*---------------------------------------------------------------------*/
 /*    ports                                                            */
@@ -193,6 +202,19 @@ function plot(port, csv, deviation, errorbars, enames, title, lastslash, relativ
 }
 
 /*---------------------------------------------------------------------*/
+/*    plotValues ...                                                   */
+/*---------------------------------------------------------------------*/
+function plotValues(port, csv, enames, relative) {
+   const start = relative === "sans" ? 1 : 0;
+   const table = offsetTable[enames.length];
+   
+   for (let i = start; i < enames.length; i++) {
+      plotport.write(",\\\n  ");
+      plotport.write(`'${csv}' u ($0+${table[i - start]}):($${i+1}+.1):(sprintf("%3.2f",$${i+1})) with labels font 'Verdana,6' rotate by 90 notitle`);
+   }
+}
+
+/*---------------------------------------------------------------------*/
 /*    plugin                                                           */
 /*---------------------------------------------------------------------*/
 module.exports = function(logfiles, engines, args, config) {
@@ -218,10 +240,12 @@ module.exports = function(logfiles, engines, args, config) {
    const deviation = args.deviation ? parseFloat(args.deviation) : 0;
    const errorbars = args.errorbars;
    const uratio = args.unitRatio || unitRatio;
-   const colors = config.colors || defaultColors; 
+   const colors = config.colors || defaultColors;
    const subhistos = args.subhistograms ? args.subhistograms.split(" ") : false;
    const relative = args.relativesans ? "sans" : (args.relative ? "avec" : false);
    const alias = args.alias.map(s => s.split('='));
+   const separator = args.separator;
+   const values = args.values;
 
    enames.forEach(n => { if (n.length > enginepad) enginepad = n.length });
    enginepad += ((deviation > 0 || errorbars) ? 8 : 4);
@@ -261,6 +285,40 @@ module.exports = function(logfiles, engines, args, config) {
    // generated file
    plotport.write(`# generated file gnuplotthistogram.js (${new Date()})`);
    plotport.write("\n");
+
+   // for separator only
+   if (separator) {
+      plotport.write("set output '/dev/null'\n");
+      plotport.write("set terminal dumb\n");
+      
+      plotport.write(`plot`);
+      plotport.write(" \\\n");
+      
+      // plot data
+      if (subhistos) {
+	 const len = subhistos.length;
+	 const num = logs.length / subhistos.length;
+
+	 for (let i = 0, j = 0; i < subhistos.length; i++, j += num) {
+	    if (args.nosubhistogramnames) {
+	       plotport.write(` newhistogram lt 1, `);
+	    } else {
+	       plotport.write(` newhistogram "${subhistos[i]}" lt 1, `);
+	    }
+	    plotport.write("\\\n");
+	    plot(plotport, base + j + ".csv", deviation, errorbars, enames, i === 0 ? "title" : "notitle", i < subhistos.length - 1, relative, alias);
+	 }
+      } else {
+	 plot(plotport, base + ".csv", deviation, errorbars, enames, "title", false, relative, alias);
+      }
+
+      // values
+      if (values) {
+	 plotValues(plotport, base + ".csv", enames, relative);
+      }
+
+      plotport.write("\nreset\n\n");
+   }
    
    // output format
    switch(format) {
@@ -347,7 +405,7 @@ module.exports = function(logfiles, engines, args, config) {
    plotport.write("\n");
    plotport.write("set style fill solid\n");
    for (let i = 0; i < enames.length; i++) {
-      plotport.write(`set style line ${i+1} linecolor rgb '${colors[(i + linestyle - 1) % colors.length]}' linetype 1 linewidth 1`);
+      plotport.write(`set style line ${i+1} linecolor rgb '${colors[(config.colorShift + i + linestyle - 1) % colors.length]}' linetype 1 linewidth 1`);
       plotport.write("\n");
    }
    
@@ -356,6 +414,9 @@ module.exports = function(logfiles, engines, args, config) {
    }
    if (errorbars) {
       plotport.write("set style line 100 linecolor rgb '#000000' linetype 1 linewidth 1\n");
+   }
+   if (separator) {
+      plotport.write("set style line 1000 linecolor rgb '#555555 linewidth 20");
    }
    
    plotport.write("\n");
@@ -440,8 +501,13 @@ module.exports = function(logfiles, engines, args, config) {
 
 
    if (relative === "sans") {
-      plotport.write("set arrow 1 from graph 0, first 1 to graph 1, first 1 nohead lc 'black' lw 2 dt '---' front\n");
-      plotport.write("set label 1 '" + enames[0] + " ' font 'Verdana,10' at " + (logs.length - 1) + ",1 offset -0.5,0.5 tc 'black' front\n\n");
+      plotport.write("set arrow 1 from graph 0, first 1 to graph 1, first 1 nohead lc '" + colors[config.colorShift] + "' lw 2 dt '---' front\n");
+      plotport.write("set label 1 '" + enames[0] + " ' font 'Verdana,10' at " + (logs.length - 1) + ",1 offset -0.5,0.5 tc '" + colors[config.colorShift] + "' front\n\n");
+   }
+
+   if (separator) {
+      plotport.write(`set arrow from ${separator}.5,0 to ${separator}.5,GPVAL_Y_MAX nohead ls 1000 dashtype 2`);
+      plotport.write("\n");
    }
    
    plotport.write(`plot`);
@@ -464,6 +530,11 @@ module.exports = function(logfiles, engines, args, config) {
    } else {
       plot(plotport, base + ".csv", deviation, errorbars, enames, "title", false, relative, alias);
    }
+
+   // values
+   if (values) {
+      plotValues(plotport, base + ".csv", enames, relative);
+   }
    
    plotport.write("\n\n");
    
@@ -474,5 +545,4 @@ module.exports = function(logfiles, engines, args, config) {
       csvport.close();
    }
 }
-
 

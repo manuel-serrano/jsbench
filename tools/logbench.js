@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    .../article/jsasync/bench/jsbench/tools/logbench.js              */
+/*    serrano/prgm/project/hop/bench/jsbench/tools/logbench.js         */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:16:47 2017                          */
-/*    Last change :  Mon Mar  6 10:19:30 2023 (serrano)                */
+/*    Last change :  Wed Nov 13 18:27:21 2024 (serrano)                */
 /*    Copyright   :  2017-24 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Output bench log                                                 */
@@ -48,6 +48,7 @@ function main() {
       console.log("  --acceptmissing     Accept missing engines");
       console.log("  --nosort            Don't sort benchmarks");
       console.log("  --sortalias         Use alias name when sorting");
+      console.log("  --colorshift        Shift color indexes");
       console.log("");
       console.log("Examples: ");
       console.log("  hop -g --no-server -- logbench.js xgraph.js ../micro/poly.log.json | xgraph");
@@ -89,6 +90,7 @@ function main() {
    config.target = (args.T || args.target);
    config.output = (args.T || args.target || args.o || args.output);
    config.engine = args.E || args.engine || config.engine || "./engines";
+   config.colorShift = args.colorshift || 0;
 					
    // load the engine plugins
    if (args._.length < 2) {
