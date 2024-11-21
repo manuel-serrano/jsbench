@@ -4,6 +4,7 @@
 . ./BENCHMARKS.sh
 
 hopc=hopc
+hop=hop
 engines="-e hop -e nodejs -e jsc -e js78 -e chakra -e graal"
 
 resetengines=""
@@ -28,6 +29,9 @@ while : ; do
 
     --hopc=*)
       hopc="`echo $1 | sed 's/^[-a-z]*=//'`";;
+
+    --hop=*)
+      hop="`echo $1 | sed 's/^[-a-z]*=//'`";;
 
     --shield=*)
       shield="`echo $1 | sed 's/^[-a-z]*=//'`";;
@@ -59,6 +63,7 @@ while : ; do
       echo "  -m message                         log message (tag)" >&2;
       echo "  --dir=path                         log output directory" >&2;
       echo "  --hopc=path                        hopc compiler" >&2;
+      echo "  --hop=path                         hop interpreter" >&2;
       echo "  --benchmarks=prog1 prog2 prog3...  bencharks" >&2;
       echo "  -e engine                          execution engine" >&2;
       echo "  -g                                 Hop hopstone debug " >&2;
@@ -93,16 +98,16 @@ mkdir -p $dir
 for p in $BENCHMARKS; do
   echo "$p..."
   if [ "$msg " != " " ]; then
-    hop $hopopt --no-server -- tools/runbench.js -v3 $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc $compileonly
+    $hop $hopopt --no-server -- tools/runbench.js -v3 $engines -D $dir $p -m "$msg" --date "$dt" --hopc $hopc $compileonly
   else
-    hop $hopopt --no-server -- tools/runbench.js -v3 $engines -D $dir $p --date "$dt" --hopc $hopc $compileonly
+    $hop $hopopt --no-server -- tools/runbench.js -v3 $engines -D $dir $p --date "$dt" --hopc $hopc $compileonly
   fi
   sleep $coolperiod
 done
 
-hop $hopopt --no-server -- tools/logbench.js text.js $dir >> $dir/RESULTS.txt
+$hop $hopopt --no-server -- tools/logbench.js text.js $dir >> $dir/RESULTS.txt
 
-hop $hopopt --no-server -- tools/logbench.js summary.js $dir > $dir/SUMMARY.txt
+$hop $hopopt --no-server -- tools/logbench.js summary.js $dir > $dir/SUMMARY.txt
 cat $dir/SUMMARY.txt
 
 echo "For details, run \"hop --no-server -- tools/logbench.js text.js $dir\""
