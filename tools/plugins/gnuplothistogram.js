@@ -1,10 +1,10 @@
 /*=====================================================================*/
-/*    .../hop/bench/jsbench/tools/plugins/gnuplothistogram.js          */
+/*    .../download/jsbench/tools/plugins/gnuplothistogram.js           */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Wed Nov 13 19:15:10 2024 (serrano)                */
-/*    Copyright   :  2017-24 Manuel Serrano                            */
+/*    Last change :  Mon Mar 17 09:04:24 2025 (serrano)                */
+/*    Copyright   :  2017-25 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
 /*    This plugin was implemented for the jsdynprop paper.             */
@@ -85,8 +85,14 @@ class Port {
 /*    Generate the CSV data file.                                      */
 /*---------------------------------------------------------------------*/
 function csv(port, start, enames, logs, enginepad, uratio, deviation, relative, args) {
-   port.write('#                  ');
-   enames.forEach(n => port.write(utils.padding(n, enginepad)));
+   if (relative) {
+      port.write('#     ');
+      port.write(utils.padding("/" + enames[0], enginepad));
+      enames.slice(1).forEach(n => port.write(utils.padding(n, enginepad)));
+   } else {
+      port.write('#                  ');
+      enames.forEach(n => port.write(utils.padding(n, enginepad)));
+   }
    port.write("\n");
    
    for (let i = start; i < logs.length; i++) {
