@@ -1,9 +1,9 @@
 /*=====================================================================*/
-/*    .../download/jsbench/tools/plugins/gnuplothistogram.js           */
+/*    .../hop/bench/jsbench/tools/plugins/gnuplothistogram.js          */
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sun Apr 16 06:53:11 2017                          */
-/*    Last change :  Mon Mar 17 09:04:24 2025 (serrano)                */
+/*    Last change :  Tue Mar 18 17:55:16 2025 (serrano)                */
 /*    Copyright   :  2017-25 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Generate a gnuplot histogram, each bar is a benchmark.           */
@@ -249,7 +249,7 @@ module.exports = function(logfiles, engines, args, config) {
    const colors = config.colors || defaultColors;
    const subhistos = args.subhistograms ? args.subhistograms.split(" ") : false;
    const relative = args.relativesans ? "sans" : (args.relative ? "avec" : false);
-   const alias = args.alias.map(s => s.split('='));
+   const alias = args.alias ? args.alias.map(s => s.split('=')) : [];
    const separator = args.separator;
    const values = args.values;
 
@@ -411,7 +411,10 @@ module.exports = function(logfiles, engines, args, config) {
    plotport.write("\n");
    plotport.write("set style fill solid\n");
    for (let i = 0; i < enames.length; i++) {
-      plotport.write(`set style line ${i+1} linecolor rgb '${colors[(config.colorShift + i + linestyle - 1) % colors.length]}' linetype 1 linewidth 1`);
+      const color = config.colors.length > i
+	 ? config.colors[i]
+	 : colors[(config.colorShift + i + linestyle - 1) % colors.length];
+      plotport.write(`set style line ${i+1} linecolor rgb '${color}' linetype 1 linewidth 1`);
       plotport.write("\n");
    }
    

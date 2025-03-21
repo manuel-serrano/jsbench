@@ -3,8 +3,8 @@
 /*    -------------------------------------------------------------    */
 /*    Author      :  Manuel Serrano                                    */
 /*    Creation    :  Sat Apr 15 10:16:47 2017                          */
-/*    Last change :  Wed Nov 13 18:27:21 2024 (serrano)                */
-/*    Copyright   :  2017-24 Manuel Serrano                            */
+/*    Last change :  Fri Mar 21 09:21:55 2025 (serrano)                */
+/*    Copyright   :  2017-25 Manuel Serrano                            */
 /*    -------------------------------------------------------------    */
 /*    Output bench log                                                 */
 /*=====================================================================*/
@@ -49,6 +49,7 @@ function main() {
       console.log("  --nosort            Don't sort benchmarks");
       console.log("  --sortalias         Use alias name when sorting");
       console.log("  --colorshift        Shift color indexes");
+      console.log("  --colors            User dfined colors");
       console.log("");
       console.log("Examples: ");
       console.log("  hop -g --no-server -- logbench.js xgraph.js ../micro/poly.log.json | xgraph");
@@ -91,6 +92,7 @@ function main() {
    config.output = (args.T || args.target || args.o || args.output);
    config.engine = args.E || args.engine || config.engine || "./engines";
    config.colorShift = args.colorshift || 0;
+   config.colors = args.colors ? args.colors.split(",") : [];
 					
    // load the engine plugins
    if (args._.length < 2) {
